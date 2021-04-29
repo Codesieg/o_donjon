@@ -150,6 +150,7 @@
 | id                                | INT           | PRIMARY KEY, NOT NULL, UNSIGNED, AUTO_INCREMENT | Identifiant                                                              |
 | name                              | VARCHAR(64)   | NOT NULL                                        | Nom de la campagne                                                       |
 | description                       | LONGTEXT      | NOT NULL                                        | Histoire de la campagne                                                  |
+| memo                 | LONGTEXT      | NOT NULL                                        | Prise de note rapide                                                |
 | is_archived                       | BOOL          | NOT NULL, DEFAULT FALSE                         | L'histoire est terminée ?                                                |
 | dm_id                             | INT           | NOT NULL                                        | Le DM créateur de la campagne                                            |
 | created_at                        | TIMESTAMP     | NOT NULL, DEFAULT CURRENT_TIMESTAMP             | La date de création de la campagne                                       |
