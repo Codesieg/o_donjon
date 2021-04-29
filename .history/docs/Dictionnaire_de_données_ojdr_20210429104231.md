@@ -6,7 +6,7 @@
 | --------------------------------- | ------------- | ----------------------------------------------- | ------------------------------------------------ |
 | id                                | INT           | PRIMARY KEY, NOT NULL, UNSIGNED, AUTO_INCREMENT | L'identifiant de notre personnage                |
 | name                              | VARCHAR(64)   | NULL                                            | Le nom du personnage                             |
-| avatar_path                       | VARCHAR(255)  | NULL                                            | Chemin vers l'avatar du personnage               |
+| avatar                            | VARCHAR(64)   | NULL                                            | L'avatar du personnage                           |
 | age                               | INT           | NULL                                            | L'age du personnage                              |
 | height                            | INT           | NULL                                            | La taille du personange                          |
 | weight                            | INT           | NULL                                            | Le poids du personange                           |
@@ -172,7 +172,7 @@
 | email                              | VARCHAR(64)                              | NOT NULL, UNIQUE                                | L'email de l'utilisateur                                       |
 | password                           | VARCHAR(64)                              | NOT NULL                                        | Le mot de passe de l'utilisateur                               |
 | pseudo                             | VARCHAR(64)                              | NOT NULL                                        | Le pseudo de l'utilisateur                                     |
-| avatar_path                        | VARCHAR(255)                             | NULL                                            | La chemin vers l'image d'avatar de l'utilisateur               |
+| avatar                             | VARCHAR(64)                              | NULL                                            | La photo d'avatar de l'utilisateur                             |
 | role                               | ENUM('admin', 'user',)                   | NOT NULL, DEFAULT 'user'                        | Le rôle de l'utilisateur                                       |
 | status                             | TINYINT(3)                               | NOT NULL, DEFAULT 0                             | Le statut de l'utilisateur (1=actif, 2=désactivé/bloqué)       |
 | created_at                         | TIMESTAMP                                | NOT NULL, DEFAULT CURRENT_TIMESTAMP             | La date de création du compte utilisateur                      |

@@ -6,7 +6,7 @@
 | --------------------------------- | ------------- | ----------------------------------------------- | ------------------------------------------------ |
 | id                                | INT           | PRIMARY KEY, NOT NULL, UNSIGNED, AUTO_INCREMENT | L'identifiant de notre personnage                |
 | name                              | VARCHAR(64)   | NULL                                            | Le nom du personnage                             |
-| avatar_path                       | VARCHAR(255)  | NULL                                            | Chemin vers l'avatar du personnage               |
+| avatar                            | VARCHAR(64)   | NULL                                            | L'avatar du personnage                           |
 | age                               | INT           | NULL                                            | L'age du personnage                              |
 | height                            | INT           | NULL                                            | La taille du personange                          |
 | weight                            | INT           | NULL                                            | Le poids du personange                           |
@@ -26,15 +26,15 @@
 | equipment                         | LONGTEXT      | NULL                                            | Inventaires du personnage                        |
 | other_proficiencies_and_languages | LONGTEXT      | NULL                                            | Compétences et langages du personnage            |
 | features_and_traits               | LONGTEXT      | NULL                                            | Caractéristiques et particularitées              |
-| class_id                          | ENTITY        | NULL                                            | La class du personnage                           |
-| stats_id                          | ENTITY        | NULL                                            | Le status du personnage                          |
-| saving_throws_id                  | ENTITY        | NULL                                            | Le dés de sauvegarde du personnage               |
-| skill_id                          | ENTITY        | NULL                                            | Les compétences du personnage                    |
-| race_id                           | ENTITY        | NULL                                            | La race du personnage                            |
+| class_id                          | entity        | NULL                                            | La class du personnage                           |
+| stats_id                          | entity        | NULL                                            | Le status du personnage                          |
+| saving_throws_id                  | entity        | NULL                                            | Le dés de sauvegarde du personnage               |
+| skill_id                          | entity        | NULL                                            | Les compétences du personnage                    |
+| race_id                           | entity        | NULL                                            | La race du personnage                            |
 | created_at                        | TIMESTAMP     | NOT NULL, DEFAULT CURRENT_TIMESTAMP             | La date de création du personnage                |
 | updated_at                        | TIMESTAMP     | NULL                                            | La date de la dernière mise à jour du personnage |
 
-## Statistiques (`character_stats`)
+## Statistiques (`stats`)
 
 | Champ                             | Type          | Spécificités                                    | Description                                   |
 | --------------------------------- | ------------- | ----------------------------------------------- | --------------------------------------------- |
@@ -49,11 +49,9 @@
 | hit_dice                          | VARCHAR(64)   | NULL                                            | Nombre de dés de vie du personnage            |
 | death_saves_success               | INT           | NOT NULL, DEFAULT 0                             | Succés jets sauvegarde de mort                |
 | death_saves_failures              | INT           | NOT NULL, DEFAULT 0                             | Échecs jets sauvegarde de mort                |
-| character_id                      | ENTITY        | NOT NULL                                        | Identifiant du personnage correspondant       |
 
 
-
-## Sort (`character_spell`)
+## Sorts (`spells`)
 
 | Champ                             | Type          | Spécificités                                    | Description                                                              |
 | --------------------------------- | ------------- | ----------------------------------------------- | ------------------------------------------------------------------------ |
@@ -63,10 +61,8 @@
 | spellcasting_ability              | INT           | NOT NULL, DEFAULT 0                             | Caractéristique principale liée au sort                                  |
 | spell_save_dc                     | INT           | NOT NULL, DEFAULT 0                             | Résistance à la magie                                                    |
 | spells_list                       | LONGTEXT      | NOT NULL                                        | Liste des sorts du personnage                                            |
-| character_id                      | ENTITY        | NOT NULL                                        | Identifiant du personnage correspondant       |
 
-
-## Jets de sauvegarde  (`character_saving_throw `)
+## Jets de sauvegardes  (`saving_throws `)
 
 | Champ                             | Type          | Spécificités                                    | Description                                   |
 | --------------------------------- | ------------- | ----------------------------------------------- | --------------------------------------------- |
@@ -77,10 +73,8 @@
 | intelligence                      | BOOL          | NOT NULL, DEFAULT FALSE                         | Jet de sauvegarde de intelligence             |
 | wisdom                            | BOOL          | NOT NULL, DEFAULT FALSE                         | Jet de sauvegarde de sagesse                  |
 | charisma                          | BOOL          | NOT NULL, DEFAULT FALSE                         | Jet de sauvegarde de charisme                 |
-| character_id                      | ENTITY        | NOT NULL                                        | Identifiant du personnage correspondant       |
 
-
-## Compétence  (`character_skill `)
+## Compétences  (`skill `)
 
 | Champ                             | Type          | Spécificités                                    | Description                                   |
 | --------------------------------- | ------------- | ----------------------------------------------- | --------------------------------------------- |
@@ -103,28 +97,24 @@
 | sleight_of_hand                   | BOOL          | NOT NULL, DEFAULT FALSE                         | Compétence de tour de passe passe             |
 | stealth                           | BOOL          | NOT NULL, DEFAULT FALSE                         | Compétence de furtivité                       |
 | survival                          | BOOL          | NOT NULL, DEFAULT FALSE                         | Compétence de survie                          |
-| character_id                      | ENTITY        | NOT NULL                                        | Identifiant du personnage correspondant       |
 
-
-## Race  (`character_race`)
+## Race  (`race`)
 
 | Champ                             | Type          | Spécificités                                    | Description                                   |
 | --------------------------------- | ------------- | ----------------------------------------------- | --------------------------------------------- |
 | id                                | INT           | PRIMARY KEY, NOT NULL, UNSIGNED, AUTO_INCREMENT | Identifiant                                   |
 | nom                               | VARCHAR(64)   | NOT NULL                                        | Nom de la race                                |
-| informations                      | LONGTEXT      | NOT NULL                                        | Déscriptif de la race                         |
-| character_id                      | ENTITY        | NOT NULL                                        | Identifiant du personnage correspodant        |
+| informations                      | VARCHAR(64)   | NOT NULL                                        | Déscriptif de la race                         |
 
-## Classe  (`character_class`)
+## Classe  (`class`)
 
 | Champ                             | Type          | Spécificités                                    | Description                                   |
 | --------------------------------- | ------------- | ----------------------------------------------- | --------------------------------------------- |
 | id                                | INT           | PRIMARY KEY, NOT NULL, UNSIGNED, AUTO_INCREMENT | Identifiant                                   |
 | nom                               | VARCHAR(64)   | NOT NULL                                        | Nom de la class                               |
-| informations                      | LONGTEXT      | NOT NULL                                        | Déscriptif de la class                        |
-| character_id                      | ENTITY        | NOT NULL                                        | Identifiant du personnage correspondant       |  
+| informations                      | VARCHAR(64)   | NOT NULL                                        | Déscriptif de la class                        |
 
-## Modifier (`character_modifier`)
+## Modifiers (`modifiers`)
 
 | Champ                             | Type          | Spécificités                                    | Description                                   |
 | --------------------------------- | ------------- | ----------------------------------------------- | --------------------------------------------- |
@@ -137,34 +127,25 @@
 | charisma                          | INT           | NOT NULL, DEFAULT 0                             | Bonus determinant l'ordre d'action            |
 | passive_wisdom                    | INT           | NOT NULL, DEFAULT 0                             | Maitrise de soi                               | 
 | proficiency_bonus                 | INT           | NOT NULL, DEFAULT 0                             | Bonus de maitrise                             |
-| character_id                      | ENTITY        | NOT NULL                                        | Identifiant du personnage correspondant       |
 
 
-
-## Campagne (`campaign`)
+## Campagnes (`Campaigns`)
 
 | Champ                             | Type          | Spécificités                                    | Description                                                              |
 | --------------------------------- | ------------- | ----------------------------------------------- | ------------------------------------------------------------------------ |
 | id                                | INT           | PRIMARY KEY, NOT NULL, UNSIGNED, AUTO_INCREMENT | Identifiant                                                              |
 | name                              | INT           | NOT NULL                                        | Nom de la campagne                                                       |
-| description                       | LONGTEXT      | NOT NULL                                        | Histoire de la campagne                                                  |
-| dm_id                             | INT           | NOT NULL                                        | Le DM créateur de la campagne                                            |
-| created_at                        | TIMESTAMP     | NOT NULL, DEFAULT CURRENT_TIMESTAMP             | La date de création de la campagne                                       |
-| updated_at                        | TIMESTAMP     | NULL                                            | La date de la dernière mise à jour de la campagne                        |
+| Description                       | INT           | NOT NULL                                        | Histoire de la campagne                                                  |
 
-## Carte (`campaign_map`)
+## Cartes (`Maps`)
 
 | Champ                             | Type          | Spécificités                                    | Description                                                              |
 | --------------------------------- | ------------- | ----------------------------------------------- | ------------------------------------------------------------------------ |
 | id                                | INT           | PRIMARY KEY, NOT NULL, UNSIGNED, AUTO_INCREMENT | Identifiant                                                              |
-| file_path                         | VARCHAR(255)  | NULL                                            | Chemin vers l'image                                                      |
-| name                              | VARCHAR(64)   | NOT NULL                                        | Nom de la carte                                                          |
-| description                       | LONGTEXT      | NOT NULL                                        | Description de la carte                                                  |
-| campaign_id                       | ENTITY        | NOT NULL                                        | Identifiant de la campagne correspondante                                |
-| created_at                        | TIMESTAMP     | NOT NULL, DEFAULT CURRENT_TIMESTAMP             | La date de création de la carte                                          |
-| updated_at                        | TIMESTAMP     | NULL                                            | La date de la dernière mise à jour de la carte                           |
+| name                              | INT           | NOT NULL                                        | Nom de la campagne                                                       |
+| Description                       | INT           | NOT NULL                                        | Histoire de la campagne                                                  |
 
-## Utilisateur (`user`)
+## Utilisateurs (`user`)
 
 | Champ                              | Type                                     | Spécificités                                    | Description                                                    |
 | ---------------------------------- | ---------------------------------------- | ----------------------------------------------- | -------------------------------------------------------------- |
@@ -172,42 +153,24 @@
 | email                              | VARCHAR(64)                              | NOT NULL, UNIQUE                                | L'email de l'utilisateur                                       |
 | password                           | VARCHAR(64)                              | NOT NULL                                        | Le mot de passe de l'utilisateur                               |
 | pseudo                             | VARCHAR(64)                              | NOT NULL                                        | Le pseudo de l'utilisateur                                     |
-| avatar_path                        | VARCHAR(255)                             | NULL                                            | La chemin vers l'image d'avatar de l'utilisateur               |
-| role                               | ENUM('admin', 'user',)                   | NOT NULL, DEFAULT 'user'                        | Le rôle de l'utilisateur                                       |
+| avatar                             | VARCHAR(64)                              | NULL                                            | La photo d'avatar de l'utilisateur                             |
+| role                               | ENUM('admin', 'DM', 'Player',)           | NOT NULL, DEFAULT 'reader'                      | Le rôle de l'utilisateur                                       |
 | status                             | TINYINT(3)                               | NOT NULL, DEFAULT 0                             | Le statut de l'utilisateur (1=actif, 2=désactivé/bloqué)       |
 | created_at                         | TIMESTAMP                                | NOT NULL, DEFAULT CURRENT_TIMESTAMP             | La date de création du compte utilisateur                      |
 | updated_at                         | TIMESTAMP                                | NULL                                            | La date de la dernière mise à jour de l'utilisateur            |
 
-## Monstre (`campaign_monster`)
+## Monstres (`Monsters`)
 
 | Champ                             | Type          | Spécificités                                    | Description                                                              |
 | --------------------------------- | ------------- | ----------------------------------------------- | ------------------------------------------------------------------------ |
 | id                                | INT           | PRIMARY KEY, NOT NULL, UNSIGNED, AUTO_INCREMENT | Identifiant                                                              |
-| name                              | VARCHAR(64)   | NOT NULL                                        | Nom du monstre                                                           |
-| type                              | VARCHAR(64)   | NULL                                            | Nom du monstre                                                           |
-| description                       | LONGTEXT      | NULL                                            | Description du monstre                                                   |
-| campaign_id                       | ENTITY        | NOT NULL                                        | Identifiant de la campagne correspondante                                |
-| story_id                          | ENTITY        | NULL                                        | Identifiant de l'histoire correspondante                                 |
+| name                              | INT           | NOT NULL                                        | Nom du monstre                                                           |
+| Description                       | INT           | NOT NULL                                        | Description du monstre                                                   |
 
-## NPC (`campaign_npc`)
+## NPC (`npc`)
 
 | Champ                             | Type          | Spécificités                                    | Description                                                              |
 | --------------------------------- | ------------- | ----------------------------------------------- | ------------------------------------------------------------------------ |
 | id                                | INT           | PRIMARY KEY, NOT NULL, UNSIGNED, AUTO_INCREMENT | Identifiant                                                              |
-| name                              | VARCHAR(64)   | NOT NULL                                        | Nom du NPC                                                               |
-| description                       | LONGTEXT      | NOT NULL                                        | Description du NPC                                                       |
-| campaign_id                       | ENTITY        | NOT NULL                                        | Identifiant de la campagne correspondante                                |
-| story_id                          | ENTITY        | NULL                                        | Identifiant de l'histoire correspondante                                 |
-
-## Histoire (`campaign_story`)
-
-| Champ                             | Type          | Spécificités                                    | Description                                                              |
-| --------------------------------- | ------------- | ----------------------------------------------- | ------------------------------------------------------------------------ |
-| id                                | INT           | PRIMARY KEY, NOT NULL, UNSIGNED, AUTO_INCREMENT | Identifiant                                                              |
-| name                              | VARCHAR(64)   | NOT NULL                                        | Nom de l'histoire                                                        |
-| description                       | LONGTEXT      | NOT NULL                                        | Description de l'histoire                                                |
-| is_done                           | BOOL          | NOT NULL, DEFAULT FALSE                         | Es-ce que l'histoire à eu lieu ?                                         |
-| report                            | LONGTEXT      | NOT NULL                                        | Ce qui s'est déroulé quand l'histoire a été jouée                        |
-| campaign_id                       | ENTITY        | NOT NULL                                        | Identifiant de la campagne correspondante                                |
-| created_at                        | TIMESTAMP     | NOT NULL, DEFAULT CURRENT_TIMESTAMP             | La date de création de l'histoire                                        |
-| updated_at                        | TIMESTAMP     | NULL                                            | La date de la dernière mise à jour de l'histoire                         |
+| name                              | INT           | NOT NULL                                        | Nom du NPC                                                               |
+| Description                       | INT           | NOT NULL                                        | Description du NPC                                                       |
