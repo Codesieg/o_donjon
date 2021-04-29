@@ -178,17 +178,27 @@
 | created_at                         | TIMESTAMP                                | NOT NULL, DEFAULT CURRENT_TIMESTAMP             | La date de création du compte utilisateur                      |
 | updated_at                         | TIMESTAMP                                | NULL                                            | La date de la dernière mise à jour de l'utilisateur            |
 
+## Monstre (`campaign_monster`)
+
+| Champ                             | Type          | Spécificités                                    | Description                                                              |
+| --------------------------------- | ------------- | ----------------------------------------------- | ------------------------------------------------------------------------ |
+| id                                | INT           | PRIMARY KEY, NOT NULL, UNSIGNED, AUTO_INCREMENT | Identifiant                                                              |
+| name                              | VARCHAR(64)   | NOT NULL                                        | Nom du monstre                                                           |
+| type                              | VARCHAR(64)   | NULL                                            | Type de monstre                                                           |
+| description                       | LONGTEXT      | NULL                                            | Description du monstre                                                   |
+| campaign_id                       | ENTITY        | NOT NULL                                        | Identifiant de la campagne correspondante                                |
+| story_id                          | ENTITY        | NULL                                        | Identifiant de l'histoire correspondante                                 |
+
 ## NPC (`campaign_npc`)
 
 | Champ                             | Type          | Spécificités                                    | Description                                                              |
 | --------------------------------- | ------------- | ----------------------------------------------- | ------------------------------------------------------------------------ |
 | id                                | INT           | PRIMARY KEY, NOT NULL, UNSIGNED, AUTO_INCREMENT | Identifiant                                                              |
 | name                              | VARCHAR(64)   | NOT NULL                                        | Nom du NPC                                                               |
-| type                              | VARCHAR(64)   | NULL                                            | Type de NPC                                                           |
-| is_ally                           | ENUM          | DEFAULT NEUTRAL, (HOSTILE, NEUTRAL, ALLY)       | Es-ce que le NPC est hostile ou pas ?                                                          |
+| type                              | VARCHAR(64)   | NULL                                            | type de NPC                                                           |
 | description                       | LONGTEXT      | NOT NULL                                        | Description du NPC                                                       |
 | campaign_id                       | ENTITY        | NOT NULL                                        | Identifiant de la campagne correspondante                                |
-| story_id                          | ENTITY        | NULL                                            | Identifiant de l'histoire correspondante                                 |
+| story_id                          | ENTITY        | NULL                                        | Identifiant de l'histoire correspondante                                 |
 
 ## Histoire (`campaign_story`)
 

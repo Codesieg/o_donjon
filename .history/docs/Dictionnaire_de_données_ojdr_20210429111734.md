@@ -185,10 +185,10 @@
 | id                                | INT           | PRIMARY KEY, NOT NULL, UNSIGNED, AUTO_INCREMENT | Identifiant                                                              |
 | name                              | VARCHAR(64)   | NOT NULL                                        | Nom du NPC                                                               |
 | type                              | VARCHAR(64)   | NULL                                            | Type de NPC                                                           |
-| is_ally                           | ENUM          | DEFAULT NEUTRAL, (HOSTILE, NEUTRAL, ALLY)       | Es-ce que le NPC est hostile ou pas ?                                                          |
+| is_ally                            | BOOL   | NULL                                            | Type de NPC                                                           |
 | description                       | LONGTEXT      | NOT NULL                                        | Description du NPC                                                       |
 | campaign_id                       | ENTITY        | NOT NULL                                        | Identifiant de la campagne correspondante                                |
-| story_id                          | ENTITY        | NULL                                            | Identifiant de l'histoire correspondante                                 |
+| story_id                          | ENTITY        | NULL                                        | Identifiant de l'histoire correspondante                                 |
 
 ## Histoire (`campaign_story`)
 
