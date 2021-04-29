@@ -8,6 +8,7 @@
 | name                              | VARCHAR(64)   | NULL                                            | Le nom du personnage                             |
 | avatar_path                       | VARCHAR(255)  | NULL                                            | Chemin vers l'avatar du personnage               |
 | age                               | INT           | NULL                                            | L'age du personnage                              |
+| Initiative                        | INT           | NULL                                            | Détermine qui joue ou attaque en premier         |
 | height                            | INT           | NULL                                            | La taille du personange                          |
 | weight                            | INT           | NULL                                            | Le poids du personange                           |
 | eyes                              | VARCHAR(64)   | NULL                                            | La couleur des yeux du personnage                |
