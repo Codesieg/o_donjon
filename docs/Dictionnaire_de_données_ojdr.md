@@ -24,6 +24,7 @@
 | treasure                          | LONGTEXT      | NULL                                            | Objets précieux du personnage                    |
 | background                        | VARCHAR(64)   | NULL                                            | Passif du personnage (forgeron, voleur ...)      |
 | alignement                        | VARCHAR(64)   | NULL                                            | Aligement du personnage                          |
+| attacks_and_spellcasting          | LONGTEXT      | NULL                                            | attaques et sorts                                |
 | equipment                         | LONGTEXT      | NULL                                            | Inventaires du personnage                        |
 | other_proficiencies_and_languages | LONGTEXT      | NULL                                            | Compétences et langages du personnage            |
 | features_and_traits               | LONGTEXT      | NULL                                            | Caractéristiques et particularitées              |
