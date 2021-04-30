@@ -152,6 +152,7 @@
 | description                       | LONGTEXT      | NOT NULL                                        | Histoire de la campagne                                                  |
 | memo                 | LONGTEXT      | NOT NULL                                        | Prise de note rapide                                                |
 | is_archived                       | BOOL          | NOT NULL, DEFAULT FALSE                         | L'histoire est terminée ?                                                |
+| invitation_code                   | VARCHAR(64)          | NOT NULL, UNIQUE                         | Code d'invitation pour la campagne                                      |
 | dm_id                             | INT           | NOT NULL                                        | Le DM créateur de la campagne                                            |
 | created_at                        | TIMESTAMP     | NOT NULL, DEFAULT CURRENT_TIMESTAMP             | La date de création de la campagne                                       |
 | updated_at                        | TIMESTAMP     | NULL                                            | La date de la dernière mise à jour de la campagne                        |
