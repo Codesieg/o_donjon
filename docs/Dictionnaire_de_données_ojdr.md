@@ -28,6 +28,8 @@
 | equipment                         | LONGTEXT      | NULL                                            | Inventaires du personnage                        |
 | other_proficiencies_and_languages | LONGTEXT      | NULL                                            | Compétences et langages du personnage            |
 | features_and_traits               | LONGTEXT      | NULL                                            | Caractéristiques et particularitées              |
+| user_id                           | INT           | NOT NULL                                        | identifiant de l'utilisateur                     |
+| campagne_id                       | INT           | NULL, UNIQUE                                    | identifiant de la campagne                       |
 | class_id                          | ENTITY        | NULL                                            | La class du personnage                           |
 | stats_id                          | ENTITY        | NULL                                            | Le status du personnage                          |
 | saving_throws_id                  | ENTITY        | NULL                                            | Le dés de sauvegarde du personnage               |
@@ -146,16 +148,24 @@
 ## Campagne (`campaign`)
 
 | Champ                             | Type          | Spécificités                                    | Description                                                              |
-| --------------------------------- | ------------- | ----------------------------------------------- | ------------------------------------------------------------------------ |
-| id                                | INT           | PRIMARY KEY, NOT NULL, UNSIGNED, AUTO_INCREMENT | Identifiant                                                              |
-| name                              | VARCHAR(64)   | NOT NULL                                        | Nom de la campagne                                                       |
-| description                       | LONGTEXT      | NOT NULL                                        | Histoire de la campagne                                                  |
-| memo                 | LONGTEXT      | NOT NULL                                        | Prise de note rapide                                                |
-| is_archived                       | BOOL          | NOT NULL, DEFAULT FALSE                         | L'histoire est terminée ?                                                |
-| invitation_code                   | VARCHAR(64)          | NOT NULL, UNIQUE                         | Code d'invitation pour la campagne                                      |
-| dm_id                             | INT           | NOT NULL                                        | Le DM créateur de la campagne                                            |
-| created_at                        | TIMESTAMP     | NOT NULL, DEFAULT CURRENT_TIMESTAMP             | La date de création de la campagne                                       |
-| updated_at                        | TIMESTAMP     | NULL                                            | La date de la dernière mise à jour de la campagne                        |
+| --------------------------------- | ------------- | ----------------------------------------------- | ------------------------------------------------------------------------|
+| id                                | INT           | PRIMARY KEY, NOT NULL, UNSIGNED, AUTO_INCREMENT | Identifiant                                                             |
+| name                              | VARCHAR(64)   | NOT NULL                                        | Nom de la campagne                                                      |
+| description                       | LONGTEXT      | NOT NULL                                        | Histoire de la campagne                                                 |
+| memo                              | LONGTEXT      | NOT NULL                                        | Prise de note rapide                                                    |
+| is_archived                       | BOOL          | NOT NULL, DEFAULT FALSE                         | L'histoire est terminée ?                                               |
+| invitation_code                   | VARCHAR(64)   | NOT NULL, UNIQUE                                | Code d'invitation pour la campagne                                      |
+| dm_id                             | INT           | NOT NULL                                        | Le DM créateur de la campagne                                           |
+| created_at                        | TIMESTAMP     | NOT NULL, DEFAULT CURRENT_TIMESTAMP             | La date de création de la campagne                                      |
+| updated_at                        | TIMESTAMP     | NULL                                            | La date de la dernière mise à jour de la campagne                       |
+
+## Joueur-Campagne (`user_campagne`)
+
+| Champ                             | Type          | Spécificités                                    | Description                                                              |
+| --------------------------------- | ------------- | ----------------------------------------------- | ------------------------------------------------------------------------|
+| id                                | INT           | PRIMARY KEY, NOT NULL, UNSIGNED, AUTO_INCREMENT | Identifiant                                                             |
+| user_id                           | INT           | NOT NULL                                        | id du joueur                                                            |
+| campaign_id                       | INT           | NOT NULL                                        | id de la campagne                                                       |
 
 ## Carte (`campaign_map`)
 
