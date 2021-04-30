@@ -38,7 +38,7 @@
 | created_at                        | TIMESTAMP     | NOT NULL, DEFAULT CURRENT_TIMESTAMP             | La date de création du personnage                |
 | updated_at                        | TIMESTAMP     | NULL                                            | La date de la dernière mise à jour du personnage |
 
-## Caractéristiques (`character_characteristic`)
+## Caractéristiques (`character_caracteristic`)
 
 | Champ                             | Type          | Spécificités                                    | Description                                   |
 | --------------------------------- | ------------- | ----------------------------------------------- | --------------------------------------------- |
@@ -159,7 +159,7 @@
 | created_at                        | TIMESTAMP     | NOT NULL, DEFAULT CURRENT_TIMESTAMP             | La date de création de la campagne                                      |
 | updated_at                        | TIMESTAMP     | NULL                                            | La date de la dernière mise à jour de la campagne                       |
 
-## Joueur-Campagne (`user_campagne`)
+## Campagne-user (`campaign-user`)
 
 | Champ                             | Type          | Spécificités                                    | Description                                                              |
 | --------------------------------- | ------------- | ----------------------------------------------- | ------------------------------------------------------------------------|
