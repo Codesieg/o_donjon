@@ -38,7 +38,7 @@
 | created_at                        | TIMESTAMP     | NOT NULL, DEFAULT CURRENT_TIMESTAMP             | La date de création du personnage                |
 | updated_at                        | TIMESTAMP     | NULL                                            | La date de la dernière mise à jour du personnage |
 
-## Statistiques (`character_stats`)
+## Caractéristiques (`character_characteristic`)
 
 | Champ                             | Type          | Spécificités                                    | Description                                   |
 | --------------------------------- | ------------- | ----------------------------------------------- | --------------------------------------------- |
@@ -128,7 +128,7 @@
 | informations                      | LONGTEXT      | NOT NULL                                        | Déscriptif de la class                        |
 | character_id                      | ENTITY        | NOT NULL                                        | Identifiant du personnage correspondant       |  
 
-## Modifier (`character_modifier`)
+## Statistiques (`character_stats`)
 
 | Champ                             | Type          | Spécificités                                    | Description                                   |
 | --------------------------------- | ------------- | ----------------------------------------------- | --------------------------------------------- |
