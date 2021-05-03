@@ -42,6 +42,11 @@ class Map
      */
     private $updated_at;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Campaign::class, inversedBy="maps")
+     */
+    private $campaign;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -103,6 +108,18 @@ class Map
     public function setUpdatedAt(?\DateTimeInterface $updated_at): self
     {
         $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    public function getCampaign(): ?Campaign
+    {
+        return $this->campaign;
+    }
+
+    public function setCampaign(?Campaign $campaign): self
+    {
+        $this->campaign = $campaign;
 
         return $this;
     }

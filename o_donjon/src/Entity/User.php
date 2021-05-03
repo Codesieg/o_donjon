@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -51,6 +53,28 @@ class User
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updated_at;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Character::class, mappedBy="characterUser", orphanRemoval=true)
+     */
+    private $characters;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Campaign::class, mappedBy="dm")
+     */
+    private $campaigns;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Campaign::class, mappedBy="campaignUsers")
+     */
+    private $campaignsPlayed;
+
+    public function __construct()
+    {
+        $this->characters = new ArrayCollection();
+        $this->campaigns = new ArrayCollection();
+        $this->campaignsPlayed = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -137,6 +161,93 @@ class User
     public function setUpdatedAt(?\DateTimeInterface $updated_at): self
     {
         $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Character[]
+     */
+    public function getCharacters(): Collection
+    {
+        return $this->characters;
+    }
+
+    public function addCharacter(Character $character): self
+    {
+        if (!$this->characters->contains($character)) {
+            $this->characters[] = $character;
+            $character->setCharacterUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCharacter(Character $character): self
+    {
+        if ($this->characters->removeElement($character)) {
+            // set the owning side to null (unless already changed)
+            if ($character->getCharacterUser() === $this) {
+                $character->setCharacterUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Campaign[]
+     */
+    public function getCampaigns(): Collection
+    {
+        return $this->campaigns;
+    }
+
+    public function addCampaign(Campaign $campaign): self
+    {
+        if (!$this->campaigns->contains($campaign)) {
+            $this->campaigns[] = $campaign;
+            $campaign->setDm($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCampaign(Campaign $campaign): self
+    {
+        if ($this->campaigns->removeElement($campaign)) {
+            // set the owning side to null (unless already changed)
+            if ($campaign->getDm() === $this) {
+                $campaign->setDm(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Campaign[]
+     */
+    public function getCampaignsPlayed(): Collection
+    {
+        return $this->campaignsPlayed;
+    }
+
+    public function addCampaignsPlayed(Campaign $campaignsPlayed): self
+    {
+        if (!$this->campaignsPlayed->contains($campaignsPlayed)) {
+            $this->campaignsPlayed[] = $campaignsPlayed;
+            $campaignsPlayed->addCampaignUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCampaignsPlayed(Campaign $campaignsPlayed): self
+    {
+        if ($this->campaignsPlayed->removeElement($campaignsPlayed)) {
+            $campaignsPlayed->removeCampaignUser($this);
+        }
 
         return $this;
     }

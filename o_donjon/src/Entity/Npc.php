@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\NpcRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -36,6 +38,21 @@ class Npc
      * @ORM\Column(type="text", nullable=true)
      */
     private $description;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Campaign::class, inversedBy="npcs")
+     */
+    private $campaign;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Story::class, inversedBy="npcs")
+     */
+    private $story;
+
+    public function __construct()
+    {
+        $this->story = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -86,6 +103,42 @@ class Npc
     public function setDescription(?string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getCampaign(): ?Campaign
+    {
+        return $this->campaign;
+    }
+
+    public function setCampaign(?Campaign $campaign): self
+    {
+        $this->campaign = $campaign;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Story[]
+     */
+    public function getStory(): Collection
+    {
+        return $this->story;
+    }
+
+    public function addStory(Story $story): self
+    {
+        if (!$this->story->contains($story)) {
+            $this->story[] = $story;
+        }
+
+        return $this;
+    }
+
+    public function removeStory(Story $story): self
+    {
+        $this->story->removeElement($story);
 
         return $this;
     }

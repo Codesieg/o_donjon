@@ -67,6 +67,11 @@ class Caracteristic
      */
     private $death_saves_failures;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Character::class, inversedBy="caracteristics", cascade={"persist", "remove"})
+     */
+    private $character;
+
 
 
     public function getId(): ?int
@@ -190,6 +195,18 @@ class Caracteristic
     public function setDeathSavesFailures(int $death_saves_failures): self
     {
         $this->death_saves_failures = $death_saves_failures;
+
+        return $this;
+    }
+
+    public function getCharacter(): ?Character
+    {
+        return $this->character;
+    }
+
+    public function setCharacter(?Character $character): self
+    {
+        $this->character = $character;
 
         return $this;
     }

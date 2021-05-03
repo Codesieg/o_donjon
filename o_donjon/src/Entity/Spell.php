@@ -42,6 +42,11 @@ class Spell
      */
     private $spells_list;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Character::class, inversedBy="spells", cascade={"persist", "remove"})
+     */
+    private $character;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -103,6 +108,18 @@ class Spell
     public function setSpellsList(?string $spells_list): self
     {
         $this->spells_list = $spells_list;
+
+        return $this;
+    }
+
+    public function getCharacter(): ?Character
+    {
+        return $this->character;
+    }
+
+    public function setCharacter(?Character $character): self
+    {
+        $this->character = $character;
 
         return $this;
     }

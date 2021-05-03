@@ -102,6 +102,11 @@ class Skill
      */
     private $survival;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Character::class, inversedBy="skills", cascade={"persist", "remove"})
+     */
+    private $character;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -307,6 +312,18 @@ class Skill
     public function setSurvival(bool $survival): self
     {
         $this->survival = $survival;
+
+        return $this;
+    }
+
+    public function getCharacter(): ?Character
+    {
+        return $this->character;
+    }
+
+    public function setCharacter(?Character $character): self
+    {
+        $this->character = $character;
 
         return $this;
     }

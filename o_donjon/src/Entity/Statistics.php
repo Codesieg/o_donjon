@@ -57,6 +57,11 @@ class Statistics
      */
     private $proficiency_bonus;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Character::class, inversedBy="charactersStatistics", cascade={"persist", "remove"})
+     */
+    private $character;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -154,6 +159,18 @@ class Statistics
     public function setProficiencyBonus(int $proficiency_bonus): self
     {
         $this->proficiency_bonus = $proficiency_bonus;
+
+        return $this;
+    }
+
+    public function getCharacter(): ?Character
+    {
+        return $this->character;
+    }
+
+    public function setCharacter(?Character $character): self
+    {
+        $this->character = $character;
 
         return $this;
     }

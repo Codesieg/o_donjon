@@ -27,6 +27,11 @@ class CharacterClass
      */
     private $informations;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Character::class, inversedBy="charactersClass", cascade={"persist", "remove"})
+     */
+    private $character;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -52,6 +57,18 @@ class CharacterClass
     public function setInformations(?string $informations): self
     {
         $this->informations = $informations;
+
+        return $this;
+    }
+
+    public function getCharacter(): ?Character
+    {
+        return $this->character;
+    }
+
+    public function setCharacter(?Character $character): self
+    {
+        $this->character = $character;
 
         return $this;
     }
