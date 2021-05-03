@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20210503145346 extends AbstractMigration
+final class Version20210503152117 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,8 +20,6 @@ final class Version20210503145346 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('CREATE TABLE campaign (id INT AUTO_INCREMENT NOT NULL, dm_id INT DEFAULT NULL, name VARCHAR(64) NOT NULL, description LONGTEXT NOT NULL, memo LONGTEXT NOT NULL, is_archived TINYINT(1) NOT NULL, invitation_code VARCHAR(64) NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME DEFAULT NULL, UNIQUE INDEX UNIQ_1F1512DDBA14FCCC (invitation_code), INDEX IDX_1F1512DDFADC156C (dm_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE campaign_user (campaign_id INT NOT NULL, user_id INT NOT NULL, INDEX IDX_8C74EDABF639F774 (campaign_id), INDEX IDX_8C74EDABA76ED395 (user_id), PRIMARY KEY(campaign_id, user_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE caracteristic (id INT AUTO_INCREMENT NOT NULL, character_id INT DEFAULT NULL, level INT DEFAULT 1 NOT NULL, experience INT DEFAULT 0 NOT NULL, inspiration TINYINT(1) DEFAULT \'0\' NOT NULL, armor_class INT DEFAULT 0 NOT NULL, speed INT NOT NULL, current_hp INT DEFAULT 0 NOT NULL, total_hp INT DEFAULT 0 NOT NULL, hit_dice VARCHAR(64) DEFAULT NULL, death_saves_success INT DEFAULT 0 NOT NULL, death_saves_failures INT DEFAULT 0 NOT NULL, UNIQUE INDEX UNIQ_9B9583441136BE75 (character_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE `character` (id INT AUTO_INCREMENT NOT NULL, character_user_id INT NOT NULL, campaign_id INT DEFAULT NULL, class_id INT NOT NULL, stats_id INT DEFAULT NULL, saving_throws_id INT DEFAULT NULL, skill_id INT DEFAULT NULL, race_id INT DEFAULT NULL, name VARCHAR(64) DEFAULT NULL, avatar_path VARCHAR(255) DEFAULT NULL, age INT DEFAULT NULL, initiative INT DEFAULT NULL, height INT DEFAULT NULL, weight INT DEFAULT NULL, eyes VARCHAR(64) DEFAULT NULL, skin VARCHAR(64) DEFAULT NULL, hair VARCHAR(64) DEFAULT NULL, appearance LONGTEXT DEFAULT NULL, personnality_traits VARCHAR(255) NOT NULL, ideals LONGTEXT DEFAULT NULL, bonds LONGTEXT DEFAULT NULL, flaws VARCHAR(64) DEFAULT NULL, allies_and_organizations LONGTEXT DEFAULT NULL, backstory LONGTEXT DEFAULT NULL, treasure VARCHAR(255) DEFAULT NULL, background VARCHAR(64) DEFAULT NULL, alignement VARCHAR(64) DEFAULT NULL, attacks_and_spellcasting LONGTEXT DEFAULT NULL, equipment LONGTEXT DEFAULT NULL, other_proficiencies_and_languages LONGTEXT DEFAULT NULL, features_and_traits LONGTEXT DEFAULT NULL, created_at DATETIME NOT NULL, updated_at DATETIME DEFAULT NULL, INDEX IDX_937AB034CECB53A8 (character_user_id), INDEX IDX_937AB034F639F774 (campaign_id), UNIQUE INDEX UNIQ_937AB034EA000B10 (class_id), UNIQUE INDEX UNIQ_937AB03470AA3482 (stats_id), UNIQUE INDEX UNIQ_937AB034DE4614D (saving_throws_id), UNIQUE INDEX UNIQ_937AB0345585C142 (skill_id), UNIQUE INDEX UNIQ_937AB0346E59D40D (race_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE character_class (id INT AUTO_INCREMENT NOT NULL, character_id INT DEFAULT NULL, name VARCHAR(64) NOT NULL, informations LONGTEXT DEFAULT NULL, UNIQUE INDEX UNIQ_1388FEFD1136BE75 (character_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
@@ -35,9 +33,6 @@ final class Version20210503145346 extends AbstractMigration
         $this->addSql('CREATE TABLE statistics (id INT AUTO_INCREMENT NOT NULL, character_id INT DEFAULT NULL, strength INT DEFAULT 0 NOT NULL, dexterity INT DEFAULT 0 NOT NULL, constitution INT DEFAULT 0 NOT NULL, intelligence INT DEFAULT 0 NOT NULL, wisdom INT DEFAULT 0 NOT NULL, charisma INT DEFAULT 0 NOT NULL, passive_wisdom INT DEFAULT 0 NOT NULL, proficiency_bonus INT DEFAULT 0 NOT NULL, UNIQUE INDEX UNIQ_E2D38B221136BE75 (character_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE story (id INT AUTO_INCREMENT NOT NULL, campaign_id INT DEFAULT NULL, name VARCHAR(64) NOT NULL, description LONGTEXT DEFAULT NULL, is_done TINYINT(1) NOT NULL, report LONGTEXT DEFAULT NULL, created_at DATETIME NOT NULL, updated_at DATETIME DEFAULT NULL, INDEX IDX_EB560438F639F774 (campaign_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE user (id INT AUTO_INCREMENT NOT NULL, email VARCHAR(64) NOT NULL, password VARCHAR(64) NOT NULL, pseudo VARCHAR(64) NOT NULL, avatar_path VARCHAR(255) DEFAULT NULL, status SMALLINT DEFAULT 0 NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME DEFAULT NULL, UNIQUE INDEX UNIQ_8D93D649E7927C74 (email), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('ALTER TABLE campaign ADD CONSTRAINT FK_1F1512DDFADC156C FOREIGN KEY (dm_id) REFERENCES user (id)');
-        $this->addSql('ALTER TABLE campaign_user ADD CONSTRAINT FK_8C74EDABF639F774 FOREIGN KEY (campaign_id) REFERENCES campaign (id) ON DELETE CASCADE');
-        $this->addSql('ALTER TABLE campaign_user ADD CONSTRAINT FK_8C74EDABA76ED395 FOREIGN KEY (user_id) REFERENCES user (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE caracteristic ADD CONSTRAINT FK_9B9583441136BE75 FOREIGN KEY (character_id) REFERENCES `character` (id)');
         $this->addSql('ALTER TABLE `character` ADD CONSTRAINT FK_937AB034CECB53A8 FOREIGN KEY (character_user_id) REFERENCES user (id)');
         $this->addSql('ALTER TABLE `character` ADD CONSTRAINT FK_937AB034F639F774 FOREIGN KEY (campaign_id) REFERENCES campaign (id)');
@@ -57,16 +52,14 @@ final class Version20210503145346 extends AbstractMigration
         $this->addSql('ALTER TABLE spell ADD CONSTRAINT FK_D03FCD8D1136BE75 FOREIGN KEY (character_id) REFERENCES `character` (id)');
         $this->addSql('ALTER TABLE statistics ADD CONSTRAINT FK_E2D38B221136BE75 FOREIGN KEY (character_id) REFERENCES `character` (id)');
         $this->addSql('ALTER TABLE story ADD CONSTRAINT FK_EB560438F639F774 FOREIGN KEY (campaign_id) REFERENCES campaign (id)');
+        $this->addSql('ALTER TABLE campaign ADD CONSTRAINT FK_1F1512DDFADC156C FOREIGN KEY (dm_id) REFERENCES user (id)');
+        $this->addSql('ALTER TABLE campaign_user ADD CONSTRAINT FK_8C74EDABF639F774 FOREIGN KEY (campaign_id) REFERENCES campaign (id) ON DELETE CASCADE');
+        $this->addSql('ALTER TABLE campaign_user ADD CONSTRAINT FK_8C74EDABA76ED395 FOREIGN KEY (user_id) REFERENCES user (id) ON DELETE CASCADE');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE campaign_user DROP FOREIGN KEY FK_8C74EDABF639F774');
-        $this->addSql('ALTER TABLE `character` DROP FOREIGN KEY FK_937AB034F639F774');
-        $this->addSql('ALTER TABLE map DROP FOREIGN KEY FK_93ADAABBF639F774');
-        $this->addSql('ALTER TABLE npc DROP FOREIGN KEY FK_468C762CF639F774');
-        $this->addSql('ALTER TABLE story DROP FOREIGN KEY FK_EB560438F639F774');
         $this->addSql('ALTER TABLE caracteristic DROP FOREIGN KEY FK_9B9583441136BE75');
         $this->addSql('ALTER TABLE character_class DROP FOREIGN KEY FK_1388FEFD1136BE75');
         $this->addSql('ALTER TABLE race DROP FOREIGN KEY FK_DA6FBBAF1136BE75');
@@ -84,8 +77,6 @@ final class Version20210503145346 extends AbstractMigration
         $this->addSql('ALTER TABLE campaign DROP FOREIGN KEY FK_1F1512DDFADC156C');
         $this->addSql('ALTER TABLE campaign_user DROP FOREIGN KEY FK_8C74EDABA76ED395');
         $this->addSql('ALTER TABLE `character` DROP FOREIGN KEY FK_937AB034CECB53A8');
-        $this->addSql('DROP TABLE campaign');
-        $this->addSql('DROP TABLE campaign_user');
         $this->addSql('DROP TABLE caracteristic');
         $this->addSql('DROP TABLE `character`');
         $this->addSql('DROP TABLE character_class');
@@ -99,5 +90,6 @@ final class Version20210503145346 extends AbstractMigration
         $this->addSql('DROP TABLE statistics');
         $this->addSql('DROP TABLE story');
         $this->addSql('DROP TABLE user');
+        $this->addSql('ALTER TABLE campaign_user DROP FOREIGN KEY FK_8C74EDABF639F774');
     }
 }
