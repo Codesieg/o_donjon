@@ -143,6 +143,7 @@ class Character
      */
     private $updated_At;
 
+
     public function getId(): ?int
     {
         return $this->id;
