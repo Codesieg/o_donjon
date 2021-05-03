@@ -18,87 +18,87 @@ class Skill
     private $id;
 
     /**
-     * @ORM\Column(type="boolean", options={"default": "false"})
+     * @ORM\Column(type="boolean", options={"default": "0"})
      */
     private $acrobatics;
 
     /**
-     * @ORM\Column(type="boolean", options={"default": "false"})
+     * @ORM\Column(type="boolean", options={"default": "0"})
      */
     private $animal_handling;
 
     /**
-     * @ORM\Column(type="boolean", options={"default": "false"})
+     * @ORM\Column(type="boolean", options={"default": "0"})
      */
     private $arcana;
 
     /**
-     * @ORM\Column(type="boolean", options={"default": "false"})
+     * @ORM\Column(type="boolean", options={"default": "0"})
      */
     private $athletics;
 
     /**
-     * @ORM\Column(type="boolean", options={"default": "false"})
+     * @ORM\Column(type="boolean", options={"default": "0"})
      */
     private $deception;
 
     /**
-     * @ORM\Column(type="boolean", options={"default": "false"})
+     * @ORM\Column(type="boolean", options={"default": "0"})
      */
     private $history;
 
     /**
-     * @ORM\Column(type="boolean", options={"default": "false"})
+     * @ORM\Column(type="boolean", options={"default": "0"})
      */
     private $insight;
 
     /**
-     * @ORM\Column(type="boolean", options={"default": "false"})
+     * @ORM\Column(type="boolean", options={"default": "0"})
      */
     private $intimidation;
 
     /**
-     * @ORM\Column(type="boolean", options={"default": "false"})
+     * @ORM\Column(type="boolean", options={"default": "0"})
      */
     private $medecine;
 
     /**
-     * @ORM\Column(type="boolean", options={"default": "false"})
+     * @ORM\Column(type="boolean", options={"default": "0"})
      */
     private $nature;
 
     /**
-     * @ORM\Column(type="boolean", options={"default": "false"})
+     * @ORM\Column(type="boolean", options={"default": "0"})
      */
     private $perception;
 
     /**
-     * @ORM\Column(type="boolean", options={"default": "false"})
+     * @ORM\Column(type="boolean", options={"default": "0"})
      */
     private $performance;
 
     /**
-     * @ORM\Column(type="boolean", options={"default": "false"})
+     * @ORM\Column(type="boolean", options={"default": "0"})
      */
     private $persuasion;
 
     /**
-     * @ORM\Column(type="boolean", options={"default": "false"})
+     * @ORM\Column(type="boolean", options={"default": "0"})
      */
     private $religion;
 
     /**
-     * @ORM\Column(type="boolean", options={"default": "false"})
+     * @ORM\Column(type="boolean", options={"default": "0"})
      */
     private $sleight_of_hand;
 
     /**
-     * @ORM\Column(type="boolean", options={"default": "false"})
+     * @ORM\Column(type="boolean", options={"default": "0"})
      */
     private $stealth;
 
     /**
-     * @ORM\Column(type="boolean", options={"default": "false"})
+     * @ORM\Column(type="boolean", options={"default": "0"})
      */
     private $survival;
 

@@ -18,32 +18,32 @@ class SavingThrow
     private $id;
 
     /**
-     * @ORM\Column(type="boolean", options={"default": "false"})
+     * @ORM\Column(type="boolean", options={"default": "0"})
      */
     private $strength;
 
     /**
-     * @ORM\Column(type="boolean", options={"default": "false"})
+     * @ORM\Column(type="boolean", options={"default": "0"})
      */
     private $dexterity;
 
     /**
-     * @ORM\Column(type="boolean", options={"default": "false"})
+     * @ORM\Column(type="boolean", options={"default": "0"})
      */
     private $constitution;
 
     /**
-     * @ORM\Column(type="boolean", options={"default": "false"})
+     * @ORM\Column(type="boolean", options={"default": "0"})
      */
     private $intelligence;
 
     /**
-     * @ORM\Column(type="boolean", options={"default": "false"})
+     * @ORM\Column(type="boolean", options={"default": "0"})
      */
     private $wisdom;
 
     /**
-     * @ORM\Column(type="boolean", options={"default": "false"})
+     * @ORM\Column(type="boolean", options={"default": "0"})
      */
     private $charisma;
 
