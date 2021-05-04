@@ -156,7 +156,6 @@ class Character
 
     /**
      * @ORM\OneToOne(targetEntity=CharacterClass::class, cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
      */
     private $class;
 
