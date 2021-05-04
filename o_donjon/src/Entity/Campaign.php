@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\CampaignRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=CampaignRepository::class)
@@ -17,31 +18,37 @@ class Campaign
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"browse", "read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=64)
+     * @Groups({"browse", "read"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups({"browse", "read"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups({"browse", "read"})
      */
     private $memo;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"browse", "read"})
      */
     private $is_archived;
 
     /**
      * @ORM\Column(type="string", length=64, unique=true)
+     * @Groups({"browse", "read"})
      */
     private $invitation_code;
 
@@ -164,7 +171,7 @@ class Campaign
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    public function setCreatedAt(?\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
 
