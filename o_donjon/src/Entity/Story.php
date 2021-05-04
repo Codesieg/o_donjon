@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\StoryRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -30,9 +28,9 @@ class Story
     private $description;
 
     /**
-     * @ORM\Column(type="boolean", options={"default": "false"})
+     * @ORM\Column(type="boolean", nullable=true)
      */
-    private $is_done;
+    private $isDone;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -42,27 +40,17 @@ class Story
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $created_at;
+    private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $updated_at;
-
-    /**
-     * @ORM\ManyToMany(targetEntity=Npc::class, mappedBy="story")
-     */
-    private $npcs;
+    private $updatedAt;
 
     /**
      * @ORM\ManyToOne(targetEntity=Campaign::class, inversedBy="stories")
      */
     private $campaign;
-
-    public function __construct()
-    {
-        $this->npcs = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -74,7 +62,7 @@ class Story
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(?string $name): self
     {
         $this->name = $name;
 
@@ -95,12 +83,12 @@ class Story
 
     public function getIsDone(): ?bool
     {
-        return $this->is_done;
+        return $this->isDone;
     }
 
-    public function setIsDone(bool $is_done): self
+    public function setIsDone(?bool $isDone): self
     {
-        $this->is_done = $is_done;
+        $this->isDone = $isDone;
 
         return $this;
     }
@@ -119,51 +107,24 @@ class Story
 
     public function getCreatedAt(): ?\DateTimeInterface
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $created_at): self
+    public function setCreatedAt(?\DateTimeInterface $createdAt): self
     {
-        $this->created_at = $created_at;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
 
     public function getUpdatedAt(): ?\DateTimeInterface
     {
-        return $this->updated_at;
+        return $this->updatedAt;
     }
 
-    public function setUpdatedAt(?\DateTimeInterface $updated_at): self
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
-        $this->updated_at = $updated_at;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Npc[]
-     */
-    public function getNpcs(): Collection
-    {
-        return $this->npcs;
-    }
-
-    public function addNpc(Npc $npc): self
-    {
-        if (!$this->npcs->contains($npc)) {
-            $this->npcs[] = $npc;
-            $npc->addStory($this);
-        }
-
-        return $this;
-    }
-
-    public function removeNpc(Npc $npc): self
-    {
-        if ($this->npcs->removeElement($npc)) {
-            $npc->removeStory($this);
-        }
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }

@@ -6,11 +6,12 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  */
-class User
+class User implements UserInterface
 {
     /**
      * @ORM\Id
@@ -20,60 +21,66 @@ class User
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=64, unique=true)
+     * @ORM\Column(type="string", length=180, unique=true)
      */
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=64)
+     * @ORM\Column(type="json")
+     */
+    private $roles = [];
+
+    /**
+     * @var string The hashed password
+     * @ORM\Column(type="string")
      */
     private $password;
 
     /**
-     * @ORM\Column(type="string", length=64)
+     * @ORM\Column(type="string", length=64, nullable=true)
      */
-    private $pseudo;
+    private $name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $avatar_path;
+    private $avatarPath;
 
     /**
-     * @ORM\Column(type="smallint", options={"default": "0"})
+     * @ORM\Column(type="smallint", nullable=true)
      */
     private $status;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $created_at;
+    private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $updated_at;
+    private $updatedAt;
 
     /**
-     * @ORM\OneToMany(targetEntity=Character::class, mappedBy="characterUser", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Campaign::class, mappedBy="owner")
      */
-    private $characters;
+    private $OrganizedCampaigns;
 
     /**
-     * @ORM\OneToMany(targetEntity=Campaign::class, mappedBy="dm")
+     * @ORM\ManyToMany(targetEntity=Campaign::class, inversedBy="users")
      */
     private $campaigns;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Campaign::class, mappedBy="campaignUsers")
+     * @ORM\OneToMany(targetEntity=Character::class, mappedBy="user")
      */
-    private $campaignsPlayed;
+    private $characters;
 
     public function __construct()
     {
-        $this->characters = new ArrayCollection();
+        $this->OrganizedCampaigns = new ArrayCollection();
         $this->campaigns = new ArrayCollection();
-        $this->campaignsPlayed = new ArrayCollection();
+        $this->characters = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -93,9 +100,41 @@ class User
         return $this;
     }
 
-    public function getPassword(): ?string
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUsername(): string
     {
-        return $this->password;
+        return (string) $this->email;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getPassword(): string
+    {
+        return (string) $this->password;
     }
 
     public function setPassword(string $password): self
@@ -105,26 +144,46 @@ class User
         return $this;
     }
 
-    public function getPseudo(): ?string
+    /**
+     * Returning a salt is only needed, if you are not using a modern
+     * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
+     *
+     * @see UserInterface
+     */
+    public function getSalt(): ?string
     {
-        return $this->pseudo;
+        return null;
     }
 
-    public function setPseudo(string $pseudo): self
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials()
     {
-        $this->pseudo = $pseudo;
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(?string $name): self
+    {
+        $this->name = $name;
 
         return $this;
     }
 
     public function getAvatarPath(): ?string
     {
-        return $this->avatar_path;
+        return $this->avatarPath;
     }
 
-    public function setAvatarPath(?string $avatar_path): self
+    public function setAvatarPath(?string $avatarPath): self
     {
-        $this->avatar_path = $avatar_path;
+        $this->avatarPath = $avatarPath;
 
         return $this;
     }
@@ -134,7 +193,7 @@ class User
         return $this->status;
     }
 
-    public function setStatus(int $status): self
+    public function setStatus(?int $status): self
     {
         $this->status = $status;
 
@@ -143,52 +202,52 @@ class User
 
     public function getCreatedAt(): ?\DateTimeInterface
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $created_at): self
+    public function setCreatedAt(?\DateTimeInterface $createdAt): self
     {
-        $this->created_at = $created_at;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
 
     public function getUpdatedAt(): ?\DateTimeInterface
     {
-        return $this->updated_at;
+        return $this->updatedAt;
     }
 
-    public function setUpdatedAt(?\DateTimeInterface $updated_at): self
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
-        $this->updated_at = $updated_at;
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
 
     /**
-     * @return Collection|Character[]
+     * @return Collection|Campaign[]
      */
-    public function getCharacters(): Collection
+    public function getOrganizedCampaigns(): Collection
     {
-        return $this->characters;
+        return $this->OrganizedCampaigns;
     }
 
-    public function addCharacter(Character $character): self
+    public function addOrganizedCampaign(Campaign $organizedCampaign): self
     {
-        if (!$this->characters->contains($character)) {
-            $this->characters[] = $character;
-            $character->setCharacterUser($this);
+        if (!$this->OrganizedCampaigns->contains($organizedCampaign)) {
+            $this->OrganizedCampaigns[] = $organizedCampaign;
+            $organizedCampaign->setOwner($this);
         }
 
         return $this;
     }
 
-    public function removeCharacter(Character $character): self
+    public function removeOrganizedCampaign(Campaign $organizedCampaign): self
     {
-        if ($this->characters->removeElement($character)) {
+        if ($this->OrganizedCampaigns->removeElement($organizedCampaign)) {
             // set the owning side to null (unless already changed)
-            if ($character->getCharacterUser() === $this) {
-                $character->setCharacterUser(null);
+            if ($organizedCampaign->getOwner() === $this) {
+                $organizedCampaign->setOwner(null);
             }
         }
 
@@ -207,7 +266,6 @@ class User
     {
         if (!$this->campaigns->contains($campaign)) {
             $this->campaigns[] = $campaign;
-            $campaign->setDm($this);
         }
 
         return $this;
@@ -215,38 +273,36 @@ class User
 
     public function removeCampaign(Campaign $campaign): self
     {
-        if ($this->campaigns->removeElement($campaign)) {
-            // set the owning side to null (unless already changed)
-            if ($campaign->getDm() === $this) {
-                $campaign->setDm(null);
-            }
-        }
+        $this->campaigns->removeElement($campaign);
 
         return $this;
     }
 
     /**
-     * @return Collection|Campaign[]
+     * @return Collection|Character[]
      */
-    public function getCampaignsPlayed(): Collection
+    public function getCharacters(): Collection
     {
-        return $this->campaignsPlayed;
+        return $this->characters;
     }
 
-    public function addCampaignsPlayed(Campaign $campaignsPlayed): self
+    public function addCharacter(Character $character): self
     {
-        if (!$this->campaignsPlayed->contains($campaignsPlayed)) {
-            $this->campaignsPlayed[] = $campaignsPlayed;
-            $campaignsPlayed->addCampaignUser($this);
+        if (!$this->characters->contains($character)) {
+            $this->characters[] = $character;
+            $character->setUser($this);
         }
 
         return $this;
     }
 
-    public function removeCampaignsPlayed(Campaign $campaignsPlayed): self
+    public function removeCharacter(Character $character): self
     {
-        if ($this->campaignsPlayed->removeElement($campaignsPlayed)) {
-            $campaignsPlayed->removeCampaignUser($this);
+        if ($this->characters->removeElement($character)) {
+            // set the owning side to null (unless already changed)
+            if ($character->getUser() === $this) {
+                $character->setUser(null);
+            }
         }
 
         return $this;

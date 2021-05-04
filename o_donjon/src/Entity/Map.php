@@ -20,7 +20,7 @@ class Map
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $file_path;
+    private $filePath;
 
     /**
      * @ORM\Column(type="string", length=64, nullable=true)
@@ -35,12 +35,12 @@ class Map
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $created_at;
+    private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $updated_at;
+    private $updatedAt;
 
     /**
      * @ORM\ManyToOne(targetEntity=Campaign::class, inversedBy="maps")
@@ -54,12 +54,12 @@ class Map
 
     public function getFilePath(): ?string
     {
-        return $this->file_path;
+        return $this->filePath;
     }
 
-    public function setFilePath(?string $file_path): self
+    public function setFilePath(?string $filePath): self
     {
-        $this->file_path = $file_path;
+        $this->filePath = $filePath;
 
         return $this;
     }
@@ -69,7 +69,7 @@ class Map
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(?string $name): self
     {
         $this->name = $name;
 
@@ -81,7 +81,7 @@ class Map
         return $this->description;
     }
 
-    public function setDescription(string $description): self
+    public function setDescription(?string $description): self
     {
         $this->description = $description;
 
@@ -90,24 +90,24 @@ class Map
 
     public function getCreatedAt(): ?\DateTimeInterface
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $created_at): self
+    public function setCreatedAt(?\DateTimeInterface $createdAt): self
     {
-        $this->created_at = $created_at;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
 
     public function getUpdatedAt(): ?\DateTimeInterface
     {
-        return $this->updated_at;
+        return $this->updatedAt;
     }
 
-    public function setUpdatedAt(?\DateTimeInterface $updated_at): self
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
-        $this->updated_at = $updated_at;
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }

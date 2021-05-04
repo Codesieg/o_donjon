@@ -69,9 +69,9 @@ class Character
     private $appearance;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      */
-    private $personnality_traits;
+    private $personality_traits;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -84,7 +84,7 @@ class Character
     private $bonds;
 
     /**
-     * @ORM\Column(type="string", length=64, nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      */
     private $flaws;
 
@@ -99,7 +99,7 @@ class Character
     private $backstory;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      */
     private $treasure;
 
@@ -136,18 +136,17 @@ class Character
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $created_At;
+    private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $updated_At;
+    private $updatedAt;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="characters")
-     * @ORM\JoinColumn(nullable=true)
      */
-    private $characterUser;
+    private $user;
 
     /**
      * @ORM\ManyToOne(targetEntity=Campaign::class, inversedBy="characters")
@@ -155,66 +154,39 @@ class Character
     private $campaign;
 
     /**
-     * @ORM\OneToOne(targetEntity=CharacterClass::class, cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private $class;
-
-    /**
-     * @ORM\OneToOne(targetEntity=Statistics::class, cascade={"persist", "remove"})
-     */
-    private $stats;
-
-    /**
-     * @ORM\OneToOne(targetEntity=SavingThrow::class, cascade={"persist", "remove"})
-     */
-    private $savingThrows;
-
-    /**
-     * @ORM\OneToOne(targetEntity=Skill::class, cascade={"persist", "remove"})
-     */
-    private $skill;
-
-    /**
      * @ORM\OneToOne(targetEntity=Race::class, cascade={"persist", "remove"})
      */
     private $race;
 
     /**
-     * @ORM\OneToOne(targetEntity=Caracteristic::class, mappedBy="character", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=CharacterClass::class, cascade={"persist", "remove"})
+     */
+    private $class;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Caracteristic::class, cascade={"persist", "remove"})
      */
     private $caracteristics;
 
     /**
-     * @ORM\OneToOne(targetEntity=Spell::class, mappedBy="character", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Statistics::class, cascade={"persist", "remove"})
      */
-    private $spells;
+    private $statistics;
 
     /**
-     * @ORM\OneToOne(targetEntity=SavingThrow::class, mappedBy="character", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Spell::class, cascade={"persist", "remove"})
      */
-    private $savingTrows;
+    private $spell;
 
     /**
-     * @ORM\OneToOne(targetEntity=Skill::class, mappedBy="character", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=SavingThrow::class, cascade={"persist", "remove"})
      */
-    private $skills;
+    private $savingThrowspell;
 
     /**
-     * @ORM\OneToOne(targetEntity=Race::class, mappedBy="character", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Skill::class, cascade={"persist", "remove"})
      */
-    private $races;
-
-    /**
-     * @ORM\OneToOne(targetEntity=CharacterClass::class, mappedBy="character", cascade={"persist", "remove"})
-     */
-    private $charactersClass;
-
-    /**
-     * @ORM\OneToOne(targetEntity=Statistics::class, mappedBy="character", cascade={"persist", "remove"})
-     */
-    private $charactersStatistics;
-
+    private $skill;
 
     public function getId(): ?int
     {
@@ -341,14 +313,14 @@ class Character
         return $this;
     }
 
-    public function getPersonnalityTraits(): ?string
+    public function getPersonalityTraits(): ?string
     {
-        return $this->personnality_traits;
+        return $this->personality_traits;
     }
 
-    public function setPersonnalityTraits(string $personnality_traits): self
+    public function setPersonalityTraits(?string $personality_traits): self
     {
-        $this->personnality_traits = $personnality_traits;
+        $this->personality_traits = $personality_traits;
 
         return $this;
     }
@@ -499,36 +471,36 @@ class Character
 
     public function getCreatedAt(): ?\DateTimeInterface
     {
-        return $this->created_At;
+        return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $created_At): self
+    public function setCreatedAt(?\DateTimeInterface $createdAt): self
     {
-        $this->created_At = $created_At;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
 
     public function getUpdatedAt(): ?\DateTimeInterface
     {
-        return $this->updated_At;
+        return $this->updatedAt;
     }
 
-    public function setUpdatedAt(?\DateTimeInterface $updated_At): self
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
-        $this->updated_At = $updated_At;
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
 
-    public function getCharacterUser(): ?User
+    public function getUser(): ?User
     {
-        return $this->characterUser;
+        return $this->user;
     }
 
-    public function setCharacterUser(?User $characterUser): self
+    public function setUser(?User $user): self
     {
-        $this->characterUser = $characterUser;
+        $this->user = $user;
 
         return $this;
     }
@@ -545,54 +517,6 @@ class Character
         return $this;
     }
 
-    public function getClass(): ?CharacterClass
-    {
-        return $this->class;
-    }
-
-    public function setClass(CharacterClass $class): self
-    {
-        $this->class = $class;
-
-        return $this;
-    }
-
-    public function getStats(): ?Statistics
-    {
-        return $this->stats;
-    }
-
-    public function setStats(?Statistics $stats): self
-    {
-        $this->stats = $stats;
-
-        return $this;
-    }
-
-    public function getSavingThrows(): ?SavingThrow
-    {
-        return $this->savingThrows;
-    }
-
-    public function setSavingThrows(?SavingThrow $savingThrows): self
-    {
-        $this->savingThrows = $savingThrows;
-
-        return $this;
-    }
-
-    public function getSkill(): ?Skill
-    {
-        return $this->skill;
-    }
-
-    public function setSkill(?Skill $skill): self
-    {
-        $this->skill = $skill;
-
-        return $this;
-    }
-
     public function getRace(): ?Race
     {
         return $this->race;
@@ -605,6 +529,18 @@ class Character
         return $this;
     }
 
+    public function getClass(): ?CharacterClass
+    {
+        return $this->class;
+    }
+
+    public function setClass(?CharacterClass $class): self
+    {
+        $this->class = $class;
+
+        return $this;
+    }
+
     public function getCaracteristics(): ?Caracteristic
     {
         return $this->caracteristics;
@@ -612,149 +548,55 @@ class Character
 
     public function setCaracteristics(?Caracteristic $caracteristics): self
     {
-        // unset the owning side of the relation if necessary
-        if ($caracteristics === null && $this->caracteristics !== null) {
-            $this->caracteristics->setCharacter(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($caracteristics !== null && $caracteristics->getCharacter() !== $this) {
-            $caracteristics->setCharacter($this);
-        }
-
         $this->caracteristics = $caracteristics;
 
         return $this;
     }
 
-    public function getSpells(): ?Spell
+    public function getStatistics(): ?Statistics
     {
-        return $this->spells;
+        return $this->statistics;
     }
 
-    public function setSpells(?Spell $spells): self
+    public function setStatistics(?Statistics $statistics): self
     {
-        // unset the owning side of the relation if necessary
-        if ($spells === null && $this->spells !== null) {
-            $this->spells->setCharacter(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($spells !== null && $spells->getCharacter() !== $this) {
-            $spells->setCharacter($this);
-        }
-
-        $this->spells = $spells;
+        $this->statistics = $statistics;
 
         return $this;
     }
 
-    public function getSavingTrows(): ?SavingThrow
+    public function getSpell(): ?Spell
     {
-        return $this->savingTrows;
+        return $this->spell;
     }
 
-    public function setSavingTrows(?SavingThrow $savingTrows): self
+    public function setSpell(?Spell $spell): self
     {
-        // unset the owning side of the relation if necessary
-        if ($savingTrows === null && $this->savingTrows !== null) {
-            $this->savingTrows->setCharacter(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($savingTrows !== null && $savingTrows->getCharacter() !== $this) {
-            $savingTrows->setCharacter($this);
-        }
-
-        $this->savingTrows = $savingTrows;
+        $this->spell = $spell;
 
         return $this;
     }
 
-    public function getSkills(): ?Skill
+    public function getSavingThrowspell(): ?SavingThrow
     {
-        return $this->skills;
+        return $this->savingThrowspell;
     }
 
-    public function setSkills(?Skill $skills): self
+    public function setSavingThrowspell(?SavingThrow $savingThrowspell): self
     {
-        // unset the owning side of the relation if necessary
-        if ($skills === null && $this->skills !== null) {
-            $this->skills->setCharacter(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($skills !== null && $skills->getCharacter() !== $this) {
-            $skills->setCharacter($this);
-        }
-
-        $this->skills = $skills;
+        $this->savingThrowspell = $savingThrowspell;
 
         return $this;
     }
 
-    public function getRaces(): ?Race
+    public function getSkill(): ?Skill
     {
-        return $this->races;
+        return $this->skill;
     }
 
-    public function setRaces(?Race $races): self
+    public function setSkill(?Skill $skill): self
     {
-        // unset the owning side of the relation if necessary
-        if ($races === null && $this->races !== null) {
-            $this->races->setCharacter(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($races !== null && $races->getCharacter() !== $this) {
-            $races->setCharacter($this);
-        }
-
-        $this->races = $races;
-
-        return $this;
-    }
-
-    public function getCharactersClass(): ?CharacterClass
-    {
-        return $this->charactersClass;
-    }
-
-    public function setCharactersClass(?CharacterClass $charactersClass): self
-    {
-        // unset the owning side of the relation if necessary
-        if ($charactersClass === null && $this->charactersClass !== null) {
-            $this->charactersClass->setCharacter(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($charactersClass !== null && $charactersClass->getCharacter() !== $this) {
-            $charactersClass->setCharacter($this);
-        }
-
-        $this->charactersClass = $charactersClass;
-
-        return $this;
-    }
-
-    public function getCharactersStatistics(): ?Statistics
-    {
-        return $this->charactersStatistics;
-    }
-
-    public function setCharactersStatistics(?Statistics $charactersStatistics): self
-    {
-        // unset the owning side of the relation if necessary
-        if ($charactersStatistics === null && $this->charactersStatistics !== null) {
-            $this->charactersStatistics->setCharacter(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($charactersStatistics !== null && $charactersStatistics->getCharacter() !== $this) {
-            $charactersStatistics->setCharacter($this);
-        }
-
-        $this->charactersStatistics = $charactersStatistics;
+        $this->skill = $skill;
 
         return $this;
     }

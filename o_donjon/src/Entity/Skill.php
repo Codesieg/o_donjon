@@ -18,94 +18,94 @@ class Skill
     private $id;
 
     /**
-     * @ORM\Column(type="boolean", options={"default": "0"})
+     * @ORM\Column(type="boolean")
      */
     private $acrobatics;
 
     /**
-     * @ORM\Column(type="boolean", options={"default": "0"})
+     * @ORM\Column(type="boolean", nullable=true)
      */
-    private $animal_handling;
+    private $animalHandling;
 
     /**
-     * @ORM\Column(type="boolean", options={"default": "0"})
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $arcana;
 
     /**
-     * @ORM\Column(type="boolean", options={"default": "0"})
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $athletics;
 
     /**
-     * @ORM\Column(type="boolean", options={"default": "0"})
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $deception;
 
     /**
-     * @ORM\Column(type="boolean", options={"default": "0"})
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $history;
 
     /**
-     * @ORM\Column(type="boolean", options={"default": "0"})
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $insight;
 
     /**
-     * @ORM\Column(type="boolean", options={"default": "0"})
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $intimidation;
 
     /**
-     * @ORM\Column(type="boolean", options={"default": "0"})
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $investigation;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $medecine;
 
     /**
-     * @ORM\Column(type="boolean", options={"default": "0"})
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $nature;
 
     /**
-     * @ORM\Column(type="boolean", options={"default": "0"})
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $perception;
 
     /**
-     * @ORM\Column(type="boolean", options={"default": "0"})
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $performance;
 
     /**
-     * @ORM\Column(type="boolean", options={"default": "0"})
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $persuasion;
 
     /**
-     * @ORM\Column(type="boolean", options={"default": "0"})
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $religion;
 
     /**
-     * @ORM\Column(type="boolean", options={"default": "0"})
+     * @ORM\Column(type="boolean", nullable=true)
      */
-    private $sleight_of_hand;
+    private $sleightOfHand;
 
     /**
-     * @ORM\Column(type="boolean", options={"default": "0"})
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $stealth;
 
     /**
-     * @ORM\Column(type="boolean", options={"default": "0"})
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $survival;
-
-    /**
-     * @ORM\OneToOne(targetEntity=Character::class, inversedBy="skills", cascade={"persist", "remove"})
-     */
-    private $character;
 
     public function getId(): ?int
     {
@@ -126,12 +126,12 @@ class Skill
 
     public function getAnimalHandling(): ?bool
     {
-        return $this->animal_handling;
+        return $this->animalHandling;
     }
 
-    public function setAnimalHandling(bool $animal_handling): self
+    public function setAnimalHandling(?bool $animalHandling): self
     {
-        $this->animal_handling = $animal_handling;
+        $this->animalHandling = $animalHandling;
 
         return $this;
     }
@@ -141,7 +141,7 @@ class Skill
         return $this->arcana;
     }
 
-    public function setArcana(bool $arcana): self
+    public function setArcana(?bool $arcana): self
     {
         $this->arcana = $arcana;
 
@@ -153,7 +153,7 @@ class Skill
         return $this->athletics;
     }
 
-    public function setAthletics(bool $athletics): self
+    public function setAthletics(?bool $athletics): self
     {
         $this->athletics = $athletics;
 
@@ -165,7 +165,7 @@ class Skill
         return $this->deception;
     }
 
-    public function setDeception(bool $deception): self
+    public function setDeception(?bool $deception): self
     {
         $this->deception = $deception;
 
@@ -177,7 +177,7 @@ class Skill
         return $this->history;
     }
 
-    public function setHistory(bool $history): self
+    public function setHistory(?bool $history): self
     {
         $this->history = $history;
 
@@ -189,7 +189,7 @@ class Skill
         return $this->insight;
     }
 
-    public function setInsight(bool $insight): self
+    public function setInsight(?bool $insight): self
     {
         $this->insight = $insight;
 
@@ -201,9 +201,21 @@ class Skill
         return $this->intimidation;
     }
 
-    public function setIntimidation(bool $intimidation): self
+    public function setIntimidation(?bool $intimidation): self
     {
         $this->intimidation = $intimidation;
+
+        return $this;
+    }
+
+    public function getInvestigation(): ?bool
+    {
+        return $this->investigation;
+    }
+
+    public function setInvestigation(?bool $investigation): self
+    {
+        $this->investigation = $investigation;
 
         return $this;
     }
@@ -213,7 +225,7 @@ class Skill
         return $this->medecine;
     }
 
-    public function setMedecine(bool $medecine): self
+    public function setMedecine(?bool $medecine): self
     {
         $this->medecine = $medecine;
 
@@ -225,7 +237,7 @@ class Skill
         return $this->nature;
     }
 
-    public function setNature(bool $nature): self
+    public function setNature(?bool $nature): self
     {
         $this->nature = $nature;
 
@@ -237,7 +249,7 @@ class Skill
         return $this->perception;
     }
 
-    public function setPerception(bool $perception): self
+    public function setPerception(?bool $perception): self
     {
         $this->perception = $perception;
 
@@ -249,7 +261,7 @@ class Skill
         return $this->performance;
     }
 
-    public function setPerformance(bool $performance): self
+    public function setPerformance(?bool $performance): self
     {
         $this->performance = $performance;
 
@@ -261,7 +273,7 @@ class Skill
         return $this->persuasion;
     }
 
-    public function setPersuasion(bool $persuasion): self
+    public function setPersuasion(?bool $persuasion): self
     {
         $this->persuasion = $persuasion;
 
@@ -273,7 +285,7 @@ class Skill
         return $this->religion;
     }
 
-    public function setReligion(bool $religion): self
+    public function setReligion(?bool $religion): self
     {
         $this->religion = $religion;
 
@@ -282,12 +294,12 @@ class Skill
 
     public function getSleightOfHand(): ?bool
     {
-        return $this->sleight_of_hand;
+        return $this->sleightOfHand;
     }
 
-    public function setSleightOfHand(bool $sleight_of_hand): self
+    public function setSleightOfHand(?bool $sleightOfHand): self
     {
-        $this->sleight_of_hand = $sleight_of_hand;
+        $this->sleightOfHand = $sleightOfHand;
 
         return $this;
     }
@@ -297,7 +309,7 @@ class Skill
         return $this->stealth;
     }
 
-    public function setStealth(bool $stealth): self
+    public function setStealth(?bool $stealth): self
     {
         $this->stealth = $stealth;
 
@@ -309,21 +321,9 @@ class Skill
         return $this->survival;
     }
 
-    public function setSurvival(bool $survival): self
+    public function setSurvival(?bool $survival): self
     {
         $this->survival = $survival;
-
-        return $this;
-    }
-
-    public function getCharacter(): ?Character
-    {
-        return $this->character;
-    }
-
-    public function setCharacter(?Character $character): self
-    {
-        $this->character = $character;
 
         return $this;
     }

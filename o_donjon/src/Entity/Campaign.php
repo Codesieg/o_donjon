@@ -2,11 +2,10 @@
 
 namespace App\Entity;
 
-use App\Entity\Story;
-use Doctrine\ORM\Mapping as ORM;
 use App\Repository\CampaignRepository;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=CampaignRepository::class)
@@ -21,7 +20,7 @@ class Campaign
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=64)
+     * @ORM\Column(type="string", length=64, nullable=true)
      */
     private $name;
 
@@ -38,12 +37,12 @@ class Campaign
     /**
      * @ORM\Column(type="boolean", nullable=true)
      */
-    private $is_archived;
+    private $isArchived;
 
     /**
-     * @ORM\Column(type="string", length=64, unique=true)
+     * @ORM\Column(type="string", length=64, nullable=true)
      */
-    private $invitation_code;
+    private $invitationCode;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
@@ -56,42 +55,42 @@ class Campaign
     private $updatedAt;
 
     /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="OrganizedCampaigns")
+     */
+    private $owner;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="campaigns")
+     */
+    private $users;
+
+    /**
      * @ORM\OneToMany(targetEntity=Character::class, mappedBy="campaign")
      */
     private $characters;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="campaigns")
+     * @ORM\OneToMany(targetEntity=NPC::class, mappedBy="campaign")
      */
-    private $dm;
-
-    /**
-     * @ORM\ManyToMany(targetEntity=User::class, inversedBy="campaignsPlayed")
-     */
-    private $campaignUsers;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Map::class, mappedBy="campaign")
-     */
-    private $maps;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Npc::class, mappedBy="campaign")
-     */
-    private $npcs;
+    private $NPCs;
 
     /**
      * @ORM\OneToMany(targetEntity=Story::class, mappedBy="campaign")
      */
     private $stories;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Map::class, mappedBy="campaign")
+     */
+    private $maps;
+
     public function __construct()
     {
+        $this->users = new ArrayCollection();
         $this->characters = new ArrayCollection();
-        $this->campaignUsers = new ArrayCollection();
-        $this->maps = new ArrayCollection();
-        $this->npcs = new ArrayCollection();
+        $this->NPCs = new ArrayCollection();
         $this->stories = new ArrayCollection();
+        $this->maps = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -104,7 +103,7 @@ class Campaign
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(?string $name): self
     {
         $this->name = $name;
 
@@ -116,7 +115,7 @@ class Campaign
         return $this->description;
     }
 
-    public function setDescription(string $description): self
+    public function setDescription(?string $description): self
     {
         $this->description = $description;
 
@@ -128,7 +127,7 @@ class Campaign
         return $this->memo;
     }
 
-    public function setMemo(string $memo): self
+    public function setMemo(?string $memo): self
     {
         $this->memo = $memo;
 
@@ -137,24 +136,24 @@ class Campaign
 
     public function getIsArchived(): ?bool
     {
-        return $this->is_archived;
+        return $this->isArchived;
     }
 
-    public function setIsArchived(bool $is_archived): self
+    public function setIsArchived(?bool $isArchived): self
     {
-        $this->is_archived = $is_archived;
+        $this->isArchived = $isArchived;
 
         return $this;
     }
 
     public function getInvitationCode(): ?string
     {
-        return $this->invitation_code;
+        return $this->invitationCode;
     }
 
-    public function setInvitationCode(string $invitation_code): self
+    public function setInvitationCode(?string $invitationCode): self
     {
-        $this->invitation_code = $invitation_code;
+        $this->invitationCode = $invitationCode;
 
         return $this;
     }
@@ -164,7 +163,7 @@ class Campaign
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    public function setCreatedAt(?\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
 
@@ -179,6 +178,45 @@ class Campaign
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getOwner(): ?User
+    {
+        return $this->owner;
+    }
+
+    public function setOwner(?User $owner): self
+    {
+        $this->owner = $owner;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->addCampaign($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->removeElement($user)) {
+            $user->removeCampaign($this);
+        }
 
         return $this;
     }
@@ -213,96 +251,30 @@ class Campaign
         return $this;
     }
 
-    public function getDm(): ?User
-    {
-        return $this->dm;
-    }
-
-    public function setDm(?User $dm): self
-    {
-        $this->dm = $dm;
-
-        return $this;
-    }
-
     /**
-     * @return Collection|User[]
+     * @return Collection|NPC[]
      */
-    public function getCampaignUsers(): Collection
+    public function getNPCs(): Collection
     {
-        return $this->campaignUsers;
+        return $this->NPCs;
     }
 
-    public function addCampaignUser(User $campaignUser): self
+    public function addNPC(NPC $nPC): self
     {
-        if (!$this->campaignUsers->contains($campaignUser)) {
-            $this->campaignUsers[] = $campaignUser;
+        if (!$this->NPCs->contains($nPC)) {
+            $this->NPCs[] = $nPC;
+            $nPC->setCampaign($this);
         }
 
         return $this;
     }
 
-    public function removeCampaignUser(User $campaignUser): self
+    public function removeNPC(NPC $nPC): self
     {
-        $this->campaignUsers->removeElement($campaignUser);
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Map[]
-     */
-    public function getMaps(): Collection
-    {
-        return $this->maps;
-    }
-
-    public function addMap(Map $map): self
-    {
-        if (!$this->maps->contains($map)) {
-            $this->maps[] = $map;
-            $map->setCampaign($this);
-        }
-
-        return $this;
-    }
-
-    public function removeMap(Map $map): self
-    {
-        if ($this->maps->removeElement($map)) {
+        if ($this->NPCs->removeElement($nPC)) {
             // set the owning side to null (unless already changed)
-            if ($map->getCampaign() === $this) {
-                $map->setCampaign(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Npc[]
-     */
-    public function getNpcs(): Collection
-    {
-        return $this->npcs;
-    }
-
-    public function addNpc(Npc $npc): self
-    {
-        if (!$this->npcs->contains($npc)) {
-            $this->npcs[] = $npc;
-            $npc->setCampaign($this);
-        }
-
-        return $this;
-    }
-
-    public function removeNpc(Npc $npc): self
-    {
-        if ($this->npcs->removeElement($npc)) {
-            // set the owning side to null (unless already changed)
-            if ($npc->getCampaign() === $this) {
-                $npc->setCampaign(null);
+            if ($nPC->getCampaign() === $this) {
+                $nPC->setCampaign(null);
             }
         }
 
@@ -333,6 +305,36 @@ class Campaign
             // set the owning side to null (unless already changed)
             if ($story->getCampaign() === $this) {
                 $story->setCampaign(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Map[]
+     */
+    public function getMaps(): Collection
+    {
+        return $this->maps;
+    }
+
+    public function addMap(Map $map): self
+    {
+        if (!$this->maps->contains($map)) {
+            $this->maps[] = $map;
+            $map->setCampaign($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMap(Map $map): self
+    {
+        if ($this->maps->removeElement($map)) {
+            // set the owning side to null (unless already changed)
+            if ($map->getCampaign() === $this) {
+                $map->setCampaign(null);
             }
         }
 
