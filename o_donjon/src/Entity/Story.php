@@ -20,7 +20,7 @@ class Story
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=64)
+     * @ORM\Column(type="string", length=64, nullable=true)
      */
     private $name;
 
@@ -30,17 +30,17 @@ class Story
     private $description;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", options={"default": "false"})
      */
     private $is_done;
 
     /**
-     * @ORM\Column(type="text", nullable=true, options={"default": "false"})
+     * @ORM\Column(type="text", nullable=true)
      */
     private $report;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $created_at;
 
