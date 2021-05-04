@@ -18,49 +18,44 @@ class Statistics
     private $id;
 
     /**
-     * @ORM\Column(type="integer", options={"default": "0"})
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $strength;
 
     /**
-     * @ORM\Column(type="integer", options={"default": "0"})
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $dexterity;
 
     /**
-     * @ORM\Column(type="integer", options={"default": "0"})
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $constitution;
 
     /**
-     * @ORM\Column(type="integer", options={"default": "0"})
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $intelligence;
 
     /**
-     * @ORM\Column(type="integer", options={"default": "0"})
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $wisdom;
 
     /**
-     * @ORM\Column(type="integer", options={"default": "0"})
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $charisma;
 
     /**
-     * @ORM\Column(type="integer", options={"default": "0"})
+     * @ORM\Column(type="integer", nullable=true)
      */
-    private $passive_wisdom;
+    private $passiveWisdom;
 
     /**
-     * @ORM\Column(type="integer", options={"default": "0"})
+     * @ORM\Column(type="integer", nullable=true)
      */
-    private $proficiency_bonus;
-
-    /**
-     * @ORM\OneToOne(targetEntity=Character::class, inversedBy="charactersStatistics", cascade={"persist", "remove"})
-     */
-    private $character;
+    private $proficiencyBonus;
 
     public function getId(): ?int
     {
@@ -72,7 +67,7 @@ class Statistics
         return $this->strength;
     }
 
-    public function setStrength(int $strength): self
+    public function setStrength(?int $strength): self
     {
         $this->strength = $strength;
 
@@ -84,7 +79,7 @@ class Statistics
         return $this->dexterity;
     }
 
-    public function setDexterity(int $dexterity): self
+    public function setDexterity(?int $dexterity): self
     {
         $this->dexterity = $dexterity;
 
@@ -96,7 +91,7 @@ class Statistics
         return $this->constitution;
     }
 
-    public function setConstitution(int $constitution): self
+    public function setConstitution(?int $constitution): self
     {
         $this->constitution = $constitution;
 
@@ -108,7 +103,7 @@ class Statistics
         return $this->intelligence;
     }
 
-    public function setIntelligence(int $intelligence): self
+    public function setIntelligence(?int $intelligence): self
     {
         $this->intelligence = $intelligence;
 
@@ -120,7 +115,7 @@ class Statistics
         return $this->wisdom;
     }
 
-    public function setWisdom(int $wisdom): self
+    public function setWisdom(?int $wisdom): self
     {
         $this->wisdom = $wisdom;
 
@@ -132,7 +127,7 @@ class Statistics
         return $this->charisma;
     }
 
-    public function setCharisma(int $charisma): self
+    public function setCharisma(?int $charisma): self
     {
         $this->charisma = $charisma;
 
@@ -141,36 +136,24 @@ class Statistics
 
     public function getPassiveWisdom(): ?int
     {
-        return $this->passive_wisdom;
+        return $this->passiveWisdom;
     }
 
-    public function setPassiveWisdom(int $passive_wisdom): self
+    public function setPassiveWisdom(?int $passiveWisdom): self
     {
-        $this->passive_wisdom = $passive_wisdom;
+        $this->passiveWisdom = $passiveWisdom;
 
         return $this;
     }
 
     public function getProficiencyBonus(): ?int
     {
-        return $this->proficiency_bonus;
+        return $this->proficiencyBonus;
     }
 
-    public function setProficiencyBonus(int $proficiency_bonus): self
+    public function setProficiencyBonus(?int $proficiencyBonus): self
     {
-        $this->proficiency_bonus = $proficiency_bonus;
-
-        return $this;
-    }
-
-    public function getCharacter(): ?Character
-    {
-        return $this->character;
-    }
-
-    public function setCharacter(?Character $character): self
-    {
-        $this->character = $character;
+        $this->proficiencyBonus = $proficiencyBonus;
 
         return $this;
     }

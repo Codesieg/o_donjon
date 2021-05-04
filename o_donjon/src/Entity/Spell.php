@@ -23,17 +23,17 @@ class Spell
     private $spellcasting_class;
 
     /**
-     * @ORM\Column(type="integer", options={"default": "0"}))
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $spell_attack_bonus;
 
     /**
-     * @ORM\Column(type="integer", options={"default": "0"}))
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $spellcasting_ability;
 
     /**
-     * @ORM\Column(type="integer", options={"default": "0"})
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $spell_save_dc;
 
@@ -41,11 +41,6 @@ class Spell
      * @ORM\Column(type="text", nullable=true)
      */
     private $spells_list;
-
-    /**
-     * @ORM\OneToOne(targetEntity=Character::class, inversedBy="spells", cascade={"persist", "remove"})
-     */
-    private $character;
 
     public function getId(): ?int
     {
@@ -57,7 +52,7 @@ class Spell
         return $this->spellcasting_class;
     }
 
-    public function setSpellcastingClass(string $spellcasting_class): self
+    public function setSpellcastingClass(?string $spellcasting_class): self
     {
         $this->spellcasting_class = $spellcasting_class;
 
@@ -69,7 +64,7 @@ class Spell
         return $this->spell_attack_bonus;
     }
 
-    public function setSpellAttackBonus(int $spell_attack_bonus): self
+    public function setSpellAttackBonus(?int $spell_attack_bonus): self
     {
         $this->spell_attack_bonus = $spell_attack_bonus;
 
@@ -81,7 +76,7 @@ class Spell
         return $this->spellcasting_ability;
     }
 
-    public function setSpellcastingAbility(int $spellcasting_ability): self
+    public function setSpellcastingAbility(?int $spellcasting_ability): self
     {
         $this->spellcasting_ability = $spellcasting_ability;
 
@@ -93,7 +88,7 @@ class Spell
         return $this->spell_save_dc;
     }
 
-    public function setSpellSaveDc(int $spell_save_dc): self
+    public function setSpellSaveDc(?int $spell_save_dc): self
     {
         $this->spell_save_dc = $spell_save_dc;
 
@@ -108,18 +103,6 @@ class Spell
     public function setSpellsList(?string $spells_list): self
     {
         $this->spells_list = $spells_list;
-
-        return $this;
-    }
-
-    public function getCharacter(): ?Character
-    {
-        return $this->character;
-    }
-
-    public function setCharacter(?Character $character): self
-    {
-        $this->character = $character;
 
         return $this;
     }
