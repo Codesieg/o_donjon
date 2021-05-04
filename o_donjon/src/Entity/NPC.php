@@ -37,6 +37,11 @@ class NPC
      */
     private $isAlly;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Campaign::class, inversedBy="NPCs")
+     */
+    private $campaign;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -86,6 +91,18 @@ class NPC
     public function setIsAlly(?int $isAlly): self
     {
         $this->isAlly = $isAlly;
+
+        return $this;
+    }
+
+    public function getCampaign(): ?Campaign
+    {
+        return $this->campaign;
+    }
+
+    public function setCampaign(?Campaign $campaign): self
+    {
+        $this->campaign = $campaign;
 
         return $this;
     }

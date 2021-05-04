@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -58,6 +60,28 @@ class User implements UserInterface
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updatedAt;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Campaign::class, mappedBy="owner")
+     */
+    private $OrganizedCampaigns;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Campaign::class, inversedBy="users")
+     */
+    private $campaigns;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Character::class, mappedBy="user")
+     */
+    private $characters;
+
+    public function __construct()
+    {
+        $this->OrganizedCampaigns = new ArrayCollection();
+        $this->campaigns = new ArrayCollection();
+        $this->characters = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -196,6 +220,90 @@ class User implements UserInterface
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Campaign[]
+     */
+    public function getOrganizedCampaigns(): Collection
+    {
+        return $this->OrganizedCampaigns;
+    }
+
+    public function addOrganizedCampaign(Campaign $organizedCampaign): self
+    {
+        if (!$this->OrganizedCampaigns->contains($organizedCampaign)) {
+            $this->OrganizedCampaigns[] = $organizedCampaign;
+            $organizedCampaign->setOwner($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrganizedCampaign(Campaign $organizedCampaign): self
+    {
+        if ($this->OrganizedCampaigns->removeElement($organizedCampaign)) {
+            // set the owning side to null (unless already changed)
+            if ($organizedCampaign->getOwner() === $this) {
+                $organizedCampaign->setOwner(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Campaign[]
+     */
+    public function getCampaigns(): Collection
+    {
+        return $this->campaigns;
+    }
+
+    public function addCampaign(Campaign $campaign): self
+    {
+        if (!$this->campaigns->contains($campaign)) {
+            $this->campaigns[] = $campaign;
+        }
+
+        return $this;
+    }
+
+    public function removeCampaign(Campaign $campaign): self
+    {
+        $this->campaigns->removeElement($campaign);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Character[]
+     */
+    public function getCharacters(): Collection
+    {
+        return $this->characters;
+    }
+
+    public function addCharacter(Character $character): self
+    {
+        if (!$this->characters->contains($character)) {
+            $this->characters[] = $character;
+            $character->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCharacter(Character $character): self
+    {
+        if ($this->characters->removeElement($character)) {
+            // set the owning side to null (unless already changed)
+            if ($character->getUser() === $this) {
+                $character->setUser(null);
+            }
+        }
 
         return $this;
     }

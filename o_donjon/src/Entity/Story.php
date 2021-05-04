@@ -47,6 +47,11 @@ class Story
      */
     private $updatedAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Campaign::class, inversedBy="stories")
+     */
+    private $campaign;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -120,6 +125,18 @@ class Story
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getCampaign(): ?Campaign
+    {
+        return $this->campaign;
+    }
+
+    public function setCampaign(?Campaign $campaign): self
+    {
+        $this->campaign = $campaign;
 
         return $this;
     }

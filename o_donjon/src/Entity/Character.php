@@ -143,6 +143,51 @@ class Character
      */
     private $updatedAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="characters")
+     */
+    private $user;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Campaign::class, inversedBy="characters")
+     */
+    private $campaign;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Race::class, cascade={"persist", "remove"})
+     */
+    private $race;
+
+    /**
+     * @ORM\OneToOne(targetEntity=CharacterClass::class, cascade={"persist", "remove"})
+     */
+    private $class;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Caracteristic::class, cascade={"persist", "remove"})
+     */
+    private $caracteristics;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Statistics::class, cascade={"persist", "remove"})
+     */
+    private $statistics;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Spell::class, cascade={"persist", "remove"})
+     */
+    private $spell;
+
+    /**
+     * @ORM\OneToOne(targetEntity=SavingThrow::class, cascade={"persist", "remove"})
+     */
+    private $savingThrowspell;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Skill::class, cascade={"persist", "remove"})
+     */
+    private $skill;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -444,6 +489,114 @@ class Character
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function getCampaign(): ?Campaign
+    {
+        return $this->campaign;
+    }
+
+    public function setCampaign(?Campaign $campaign): self
+    {
+        $this->campaign = $campaign;
+
+        return $this;
+    }
+
+    public function getRace(): ?Race
+    {
+        return $this->race;
+    }
+
+    public function setRace(?Race $race): self
+    {
+        $this->race = $race;
+
+        return $this;
+    }
+
+    public function getClass(): ?CharacterClass
+    {
+        return $this->class;
+    }
+
+    public function setClass(?CharacterClass $class): self
+    {
+        $this->class = $class;
+
+        return $this;
+    }
+
+    public function getCaracteristics(): ?Caracteristic
+    {
+        return $this->caracteristics;
+    }
+
+    public function setCaracteristics(?Caracteristic $caracteristics): self
+    {
+        $this->caracteristics = $caracteristics;
+
+        return $this;
+    }
+
+    public function getStatistics(): ?Statistics
+    {
+        return $this->statistics;
+    }
+
+    public function setStatistics(?Statistics $statistics): self
+    {
+        $this->statistics = $statistics;
+
+        return $this;
+    }
+
+    public function getSpell(): ?Spell
+    {
+        return $this->spell;
+    }
+
+    public function setSpell(?Spell $spell): self
+    {
+        $this->spell = $spell;
+
+        return $this;
+    }
+
+    public function getSavingThrowspell(): ?SavingThrow
+    {
+        return $this->savingThrowspell;
+    }
+
+    public function setSavingThrowspell(?SavingThrow $savingThrowspell): self
+    {
+        $this->savingThrowspell = $savingThrowspell;
+
+        return $this;
+    }
+
+    public function getSkill(): ?Skill
+    {
+        return $this->skill;
+    }
+
+    public function setSkill(?Skill $skill): self
+    {
+        $this->skill = $skill;
 
         return $this;
     }
