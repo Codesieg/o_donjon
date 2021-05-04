@@ -69,7 +69,7 @@ class Character
     private $appearance;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $personnality_traits;
 
@@ -134,7 +134,7 @@ class Character
     private $features_and_traits;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $created_At;
 
@@ -145,7 +145,7 @@ class Character
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="characters")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $characterUser;
 
@@ -156,6 +156,7 @@ class Character
 
     /**
      * @ORM\OneToOne(targetEntity=CharacterClass::class, cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=true)
      */
     private $class;
 
