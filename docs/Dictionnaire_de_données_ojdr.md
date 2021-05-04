@@ -17,7 +17,7 @@
 | appearance                        | LONGTEXT      | NULL                                            | Description physique du personnage               |
 | personality_traits                | LONGTEXT      | NULL                                            | Traits de personnalités du personnage            |
 | ideals                            | LONGTEXT      | NULL                                            | L'objectif ultime du personnage                  |
-| bonds                             | VARCHAR(64)   | NULL                                            | Relations proche du personnage                   |
+| bonds                             | LONGTEXT         | NULL                                            | Relations proche du personnage                   |
 | flaws                             | VARCHAR(64)   | NULL                                            | Défauts du personnage                            |
 | allies_and_organizations          | LONGTEXT      | NULL                                            | Alliés, organisations, guildes du personnage     |
 | backstory                         | LONGTEXT      | NULL                                            | L'histoire du personnage                         |
@@ -66,7 +66,7 @@
 | spell_attack_bonus                | INT           | NOT NULL, DEFAULT 0                             | Bonus d'attaque d'un sort                                                |
 | spellcasting_ability              | INT           | NOT NULL, DEFAULT 0                             | Caractéristique principale liée au sort                                  |
 | spell_save_dc                     | INT           | NOT NULL, DEFAULT 0                             | Résistance à la magie                                                    |
-| spells_list                       | LONGTEXT      | NOT NULL                                        | Liste des sorts du personnage                                            |
+| spells_list                       | LONGTEXT     | NULL                                        | Liste des sorts du personnage                                            |
 | character_id                      | ENTITY        | NOT NULL                                        | Identifiant du personnage correspondant       |
 
 
