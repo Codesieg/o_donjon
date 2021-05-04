@@ -3,14 +3,13 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  */
-class User
+class User implements UserInterface
 {
     /**
      * @ORM\Id
@@ -20,19 +19,14 @@ class User
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=64, unique=true)
+     * @ORM\Column(type="string", length=180, unique=true)
      */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=64)
      */
-    private $password;
-
-    /**
-     * @ORM\Column(type="string", length=64)
-     */
-    private $pseudo;
+    private $name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -45,36 +39,15 @@ class User
     private $status;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="json")
      */
-    private $created_at;
+    private $roles = [];
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @var string The hashed password
+     * @ORM\Column(type="string")
      */
-    private $updated_at;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Character::class, mappedBy="characterUser", orphanRemoval=true)
-     */
-    private $characters;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Campaign::class, mappedBy="dm")
-     */
-    private $campaigns;
-
-    /**
-     * @ORM\ManyToMany(targetEntity=Campaign::class, mappedBy="campaignUsers")
-     */
-    private $campaignsPlayed;
-
-    public function __construct()
-    {
-        $this->characters = new ArrayCollection();
-        $this->campaigns = new ArrayCollection();
-        $this->campaignsPlayed = new ArrayCollection();
-    }
+    private $password;
 
     public function getId(): ?int
     {
@@ -93,9 +66,41 @@ class User
         return $this;
     }
 
-    public function getPassword(): ?string
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUsername(): string
     {
-        return $this->password;
+        return (string) $this->email;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getPassword(): string
+    {
+        return (string) $this->password;
     }
 
     public function setPassword(string $password): self
@@ -105,149 +110,82 @@ class User
         return $this;
     }
 
-    public function getPseudo(): ?string
+    /**
+     * Returning a salt is only needed, if you are not using a modern
+     * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
+     *
+     * @see UserInterface
+     */
+    public function getSalt(): ?string
     {
-        return $this->pseudo;
+        return null;
     }
 
-    public function setPseudo(string $pseudo): self
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials()
     {
-        $this->pseudo = $pseudo;
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
+    }
+
+    /**
+     * Get the value of name
+     */ 
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set the value of name
+     *
+     * @return  self
+     */ 
+    public function setName($name)
+    {
+        $this->name = $name;
 
         return $this;
     }
 
-    public function getAvatarPath(): ?string
+    /**
+     * Get the value of avatar_path
+     */ 
+    public function getAvatar_path()
     {
         return $this->avatar_path;
     }
 
-    public function setAvatarPath(?string $avatar_path): self
+    /**
+     * Set the value of avatar_path
+     *
+     * @return  self
+     */ 
+    public function setAvatar_path($avatar_path)
     {
         $this->avatar_path = $avatar_path;
 
         return $this;
     }
 
-    public function getStatus(): ?int
+    /**
+     * Get the value of status
+     */ 
+    public function getStatus()
     {
         return $this->status;
     }
 
-    public function setStatus(int $status): self
+    /**
+     * Set the value of status
+     *
+     * @return  self
+     */ 
+    public function setStatus($status)
     {
         $this->status = $status;
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->created_at;
-    }
-
-    public function setCreatedAt(\DateTimeInterface $created_at): self
-    {
-        $this->created_at = $created_at;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeInterface
-    {
-        return $this->updated_at;
-    }
-
-    public function setUpdatedAt(?\DateTimeInterface $updated_at): self
-    {
-        $this->updated_at = $updated_at;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Character[]
-     */
-    public function getCharacters(): Collection
-    {
-        return $this->characters;
-    }
-
-    public function addCharacter(Character $character): self
-    {
-        if (!$this->characters->contains($character)) {
-            $this->characters[] = $character;
-            $character->setCharacterUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCharacter(Character $character): self
-    {
-        if ($this->characters->removeElement($character)) {
-            // set the owning side to null (unless already changed)
-            if ($character->getCharacterUser() === $this) {
-                $character->setCharacterUser(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Campaign[]
-     */
-    public function getCampaigns(): Collection
-    {
-        return $this->campaigns;
-    }
-
-    public function addCampaign(Campaign $campaign): self
-    {
-        if (!$this->campaigns->contains($campaign)) {
-            $this->campaigns[] = $campaign;
-            $campaign->setDm($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCampaign(Campaign $campaign): self
-    {
-        if ($this->campaigns->removeElement($campaign)) {
-            // set the owning side to null (unless already changed)
-            if ($campaign->getDm() === $this) {
-                $campaign->setDm(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Campaign[]
-     */
-    public function getCampaignsPlayed(): Collection
-    {
-        return $this->campaignsPlayed;
-    }
-
-    public function addCampaignsPlayed(Campaign $campaignsPlayed): self
-    {
-        if (!$this->campaignsPlayed->contains($campaignsPlayed)) {
-            $this->campaignsPlayed[] = $campaignsPlayed;
-            $campaignsPlayed->addCampaignUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCampaignsPlayed(Campaign $campaignsPlayed): self
-    {
-        if ($this->campaignsPlayed->removeElement($campaignsPlayed)) {
-            $campaignsPlayed->removeCampaignUser($this);
-        }
 
         return $this;
     }
