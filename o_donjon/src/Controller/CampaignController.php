@@ -50,7 +50,7 @@ class CampaignController extends AbstractController
         $sentData = json_decode($request->getContent(), true);
         // dd($sentData);
         $form->submit($sentData);
-        // dd($form);
+        // dd($form->isValid());
 
         if ($form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
@@ -74,10 +74,6 @@ class CampaignController extends AbstractController
         $sentData = json_decode($request->getcontent(), true);
         $form->submit($sentData);
         $form->getData();
-
-        // dd($form->getData());
-        // dd($sentData);
-        // dd($form->isValid());
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
