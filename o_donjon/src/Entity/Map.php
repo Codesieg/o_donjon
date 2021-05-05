@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\MapRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=MapRepository::class)
@@ -14,36 +15,43 @@ class Map
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"browse", "read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"read"})
      */
     private $filePath;
 
     /**
      * @ORM\Column(type="string", length=64, nullable=true)
+     * @Groups({"browse", "read"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"read"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"browse", "read"})
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"browse", "read"})
      */
     private $updatedAt;
 
     /**
      * @ORM\ManyToOne(targetEntity=Campaign::class, inversedBy="maps")
+     * @Groups({"browse", "read"})
      */
     private $campaign;
 
