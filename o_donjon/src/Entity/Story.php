@@ -15,43 +15,43 @@ class Story
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"browse", "read"})
+     * @Groups({"browse", "read", "storiesList"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=64, nullable=true)
-     * @Groups({"browse", "read"})
+     * @Groups({"browse", "read", "storiesList"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"read"})
+     * @Groups({"read", "storiesList"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
-     * @Groups({"browse", "read"})
+     * @Groups({"browse", "read", "storiesList"})
      */
     private $isDone;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"read"})
+     * @Groups({"browse", "read", "storiesList"})
      */
     private $report;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * @Groups({"browse", "read"})
+     * @Groups({"browse", "read", "storiesList"})
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * @Groups({"browse", "read"})
+     * @Groups({"browse", "read", "storiesList"})
      */
     private $updatedAt;
 

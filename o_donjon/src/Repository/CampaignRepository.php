@@ -19,6 +19,19 @@ class CampaignRepository extends ServiceEntityRepository
         parent::__construct($registry, Campaign::class);
     }
 
+    public function findWithStats($id)
+    {
+        return $this->createQueryBuilder('c')
+            ->leftJoin()
+            ->andWhere('c.exampleField = :val')
+            ->setParameter('val', $value)
+            ->orderBy('c.id', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Campaign[] Returns an array of Campaign objects
     //  */

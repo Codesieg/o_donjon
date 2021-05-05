@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use \DateTimeInterface;
 use App\Entity\Campaign;
+use App\Entity\Story;
 use App\Form\CampaignType;
 use App\Repository\CampaignRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -11,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-
+/*********************BREAD***************************************************/
 
 /**
  * @Route("/campaigns", name="campaign_")
@@ -21,9 +22,9 @@ class CampaignController extends AbstractController
     /**
      * @Route("", name="browse", methods={"GET"})
      */
-    public function browse(CampaignRepository $CampaignRepository): Response
+    public function browse(CampaignRepository $campaignRepository): Response
     {
-        $campaigns = $CampaignRepository->findAll();
+        $campaigns = $campaignRepository->findAll();
         return $this->json($campaigns, 200, [], [
             'groups' => ['browse'],
         ]);
@@ -48,9 +49,7 @@ class CampaignController extends AbstractController
             'csrf_protection' => false,
         ]);
         $sentData = json_decode($request->getContent(), true);
-        // dd($sentData);
         $form->submit($sentData);
-        // dd($form->isValid());
 
         if ($form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
@@ -102,4 +101,34 @@ class CampaignController extends AbstractController
         return $this->json(null, 204);
     }
 
+    /*********************ADVANCED-REQUESTS***************************************************/
+
+   /**
+    * READ WITH ASSOCIATED STATS (NB OF STORIES,..) => remplacera read ?
+    *
+     * @Route("/{id}/stats", name="stats_read", methods={"GET"}, requirements={"id": "\d+"})
+     */
+    public function statsRead(Campaign $campaign, CampaignRepository $campaignRepository): Response
+    {
+        
+        $campaigns = $campaignRepository->findWithStats($id);
+        
+        return $this->json($campaign, 200, [], [
+            'groups' => ['read'],
+        ]);
+    }
+
+    /**
+    * GET ALL STORIES OF A CAMPAIGN
+    *
+     * @Route("/{id}/stories", name="stories_read", methods={"GET"}, requirements={"id": "\d+"})
+     */
+    public function storiesRead(Campaign $campaign): Response
+    {    
+        return $this->json($campaign, 200, [], [
+            'groups' => ['storiesList'],
+        ]);
+    }
+
+    
 }

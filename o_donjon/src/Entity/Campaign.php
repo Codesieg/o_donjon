@@ -84,6 +84,7 @@ feature/campaign
 
     /**
      * @ORM\OneToMany(targetEntity=Story::class, mappedBy="campaign")
+     * @Groups({"storiesList"})
      */
     private $stories;
 
@@ -291,6 +292,7 @@ feature/campaign
 
     /**
      * @return Collection|Story[]
+     * 
      */
     public function getStories(): Collection
     {
