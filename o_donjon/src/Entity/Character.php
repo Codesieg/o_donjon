@@ -16,12 +16,13 @@ class Character
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"browse", "read", "list_character"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=64, nullable=true)
-     * @Groups({"browse", "read"})
+     * @Groups({"browse", "read", "list_character"})
      */
     private $name;
 

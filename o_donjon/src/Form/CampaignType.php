@@ -19,8 +19,8 @@ class CampaignType extends AbstractType
             ->add('invitation_code')
             ->add('createdAt')
             ->add('updatedAt')
-            ->add('dm')
-            ->add('campaignUsers')
+            ->add('owner')
+            ->add('users')
         ;
     }
 
