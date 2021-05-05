@@ -18,39 +18,34 @@ class SavingThrow
     private $id;
 
     /**
-     * @ORM\Column(type="boolean", options={"default": "0"})
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $strength;
 
     /**
-     * @ORM\Column(type="boolean", options={"default": "0"})
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $dexterity;
 
     /**
-     * @ORM\Column(type="boolean", options={"default": "0"})
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $constitution;
 
     /**
-     * @ORM\Column(type="boolean", options={"default": "0"})
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $intelligence;
 
     /**
-     * @ORM\Column(type="boolean", options={"default": "0"})
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $wisdom;
 
     /**
-     * @ORM\Column(type="boolean", options={"default": "0"})
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $charisma;
-
-    /**
-     * @ORM\OneToOne(targetEntity=Character::class, inversedBy="savingTrows", cascade={"persist", "remove"})
-     */
-    private $character;
 
     public function getId(): ?int
     {
@@ -62,9 +57,9 @@ class SavingThrow
         return $this->strength;
     }
 
-    public function setStrength(bool $strength): self
+    public function setStrength(?bool $strength): self
     {
-        $this->strengh = $strength;
+        $this->strength = $strength;
 
         return $this;
     }
@@ -74,7 +69,7 @@ class SavingThrow
         return $this->dexterity;
     }
 
-    public function setDexterity(bool $dexterity): self
+    public function setDexterity(?bool $dexterity): self
     {
         $this->dexterity = $dexterity;
 
@@ -86,7 +81,7 @@ class SavingThrow
         return $this->constitution;
     }
 
-    public function setConstitution(bool $constitution): self
+    public function setConstitution(?bool $constitution): self
     {
         $this->constitution = $constitution;
 
@@ -98,7 +93,7 @@ class SavingThrow
         return $this->intelligence;
     }
 
-    public function setIntelligence(bool $intelligence): self
+    public function setIntelligence(?bool $intelligence): self
     {
         $this->intelligence = $intelligence;
 
@@ -110,7 +105,7 @@ class SavingThrow
         return $this->wisdom;
     }
 
-    public function setWisdom(bool $wisdom): self
+    public function setWisdom(?bool $wisdom): self
     {
         $this->wisdom = $wisdom;
 
@@ -122,21 +117,9 @@ class SavingThrow
         return $this->charisma;
     }
 
-    public function setCharisma(bool $charisma): self
+    public function setCharisma(?bool $charisma): self
     {
         $this->charisma = $charisma;
-
-        return $this;
-    }
-
-    public function getCharacter(): ?Character
-    {
-        return $this->character;
-    }
-
-    public function setCharacter(?Character $character): self
-    {
-        $this->character = $character;
 
         return $this;
     }

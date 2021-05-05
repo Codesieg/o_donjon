@@ -18,61 +18,54 @@ class Caracteristic
     private $id;
 
     /**
-     * @ORM\Column(type="integer", options={"default": "1"}))
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $level;
 
     /**
-     * @ORM\Column(type="integer", options={"default": "0"}))
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $experience;
 
     /**
-     * @ORM\Column(type="boolean", options={"default": 0}))
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $inspiration;
 
     /**
-     * @ORM\Column(type="integer", options={"default": "0"}))
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $armor_class;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $speed;
 
     /**
-     * @ORM\Column(type="integer", options={"default": "0"}))
+     * @ORM\Column(type="integer", nullable=true)
      */
-    private $current_hp;
+    private $currentHP;
 
     /**
-     * @ORM\Column(type="integer", options={"default": "0"})
+     * @ORM\Column(type="integer", nullable=true)
      */
-    private $total_hp;
+    private $totalHP;
 
     /**
-     * @ORM\Column(type="string", length=64, nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      */
-    private $hit_dice;
+    private $hitDice;
 
     /**
-     * @ORM\Column(type="integer", options={"default": "0"}))
+     * @ORM\Column(type="integer", nullable=true)
      */
-    private $death_saves_success;
+    private $deathSavesSuccess;
 
     /**
-     * @ORM\Column(type="integer", options={"default": "0"})
+     * @ORM\Column(type="integer", nullable=true)
      */
-    private $death_saves_failures;
-
-    /**
-     * @ORM\OneToOne(targetEntity=Character::class, inversedBy="caracteristics", cascade={"persist", "remove"})
-     */
-    private $character;
-
-
+    private $deathSavesFailures;
 
     public function getId(): ?int
     {
@@ -84,7 +77,7 @@ class Caracteristic
         return $this->level;
     }
 
-    public function setLevel(int $level): self
+    public function setLevel(?int $level): self
     {
         $this->level = $level;
 
@@ -96,7 +89,7 @@ class Caracteristic
         return $this->experience;
     }
 
-    public function setExperience(int $experience): self
+    public function setExperience(?int $experience): self
     {
         $this->experience = $experience;
 
@@ -108,7 +101,7 @@ class Caracteristic
         return $this->inspiration;
     }
 
-    public function setInspiration(bool $inspiration): self
+    public function setInspiration(?bool $inspiration): self
     {
         $this->inspiration = $inspiration;
 
@@ -120,7 +113,7 @@ class Caracteristic
         return $this->armor_class;
     }
 
-    public function setArmorClass(int $armor_class): self
+    public function setArmorClass(?int $armor_class): self
     {
         $this->armor_class = $armor_class;
 
@@ -132,81 +125,69 @@ class Caracteristic
         return $this->speed;
     }
 
-    public function setSpeed(int $speed): self
+    public function setSpeed(?int $speed): self
     {
         $this->speed = $speed;
 
         return $this;
     }
 
-    public function getCurrentHp(): ?int
+    public function getCurrentHP(): ?int
     {
-        return $this->current_hp;
+        return $this->currentHP;
     }
 
-    public function setCurrentHp(int $current_hp): self
+    public function setCurrentHP(?int $currentHP): self
     {
-        $this->current_hp = $current_hp;
+        $this->currentHP = $currentHP;
 
         return $this;
     }
 
-    public function getTotalHp(): ?int
+    public function getTotalHP(): ?int
     {
-        return $this->total_hp;
+        return $this->totalHP;
     }
 
-    public function setTotalHp(int $total_hp): self
+    public function setTotalHP(?int $totalHP): self
     {
-        $this->total_hp = $total_hp;
+        $this->totalHP = $totalHP;
 
         return $this;
     }
 
     public function getHitDice(): ?string
     {
-        return $this->hit_dice;
+        return $this->hitDice;
     }
 
-    public function setHitDice(?string $hit_dice): self
+    public function setHitDice(?string $hitDice): self
     {
-        $this->hit_dice = $hit_dice;
+        $this->hitDice = $hitDice;
 
         return $this;
     }
 
     public function getDeathSavesSuccess(): ?int
     {
-        return $this->death_saves_success;
+        return $this->deathSavesSuccess;
     }
 
-    public function setDeathSavesSuccess(int $death_saves_success): self
+    public function setDeathSavesSuccess(?int $deathSavesSuccess): self
     {
-        $this->death_saves_success = $death_saves_success;
+        $this->deathSavesSuccess = $deathSavesSuccess;
 
         return $this;
     }
 
     public function getDeathSavesFailures(): ?int
     {
-        return $this->death_saves_failures;
+        return $this->deathSavesFailures;
     }
 
-    public function setDeathSavesFailures(int $death_saves_failures): self
+    public function setDeathSavesFailures(?int $deathSavesFailures): self
     {
-        $this->death_saves_failures = $death_saves_failures;
-
-        return $this;
-    }
-
-    public function getCharacter(): ?Character
-    {
-        return $this->character;
-    }
-
-    public function setCharacter(?Character $character): self
-    {
-        $this->character = $character;
+        $this->deathSavesFailures = $deathSavesFailures;
 
         return $this;
     }

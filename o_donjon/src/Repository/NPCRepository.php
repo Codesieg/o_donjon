@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Npc;
+use App\Entity\NPC;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method Npc|null find($id, $lockMode = null, $lockVersion = null)
- * @method Npc|null findOneBy(array $criteria, array $orderBy = null)
- * @method Npc[]    findAll()
- * @method Npc[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method NPC|null find($id, $lockMode = null, $lockVersion = null)
+ * @method NPC|null findOneBy(array $criteria, array $orderBy = null)
+ * @method NPC[]    findAll()
+ * @method NPC[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class NpcRepository extends ServiceEntityRepository
+class NPCRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Npc::class);
+        parent::__construct($registry, NPC::class);
     }
 
     // /**
-    //  * @return Npc[] Returns an array of Npc objects
+    //  * @return NPC[] Returns an array of NPC objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class NpcRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Npc
+    public function findOneBySomeField($value): ?NPC
     {
         return $this->createQueryBuilder('n')
             ->andWhere('n.exampleField = :val')

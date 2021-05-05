@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\MapRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=MapRepository::class)
@@ -14,36 +15,43 @@ class Map
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"browse", "read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"read"})
      */
-    private $file_path;
+    private $filePath;
 
     /**
-     * @ORM\Column(type="string", length=64)
+     * @ORM\Column(type="string", length=64, nullable=true)
+     * @Groups({"browse", "read"})
      */
     private $name;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
+     * @Groups({"read"})
      */
     private $description;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"browse", "read"})
      */
-    private $created_at;
+    private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"browse", "read"})
      */
-    private $updated_at;
+    private $updatedAt;
 
     /**
      * @ORM\ManyToOne(targetEntity=Campaign::class, inversedBy="maps")
+     * @Groups({"browse", "read"})
      */
     private $campaign;
 
@@ -54,12 +62,12 @@ class Map
 
     public function getFilePath(): ?string
     {
-        return $this->file_path;
+        return $this->filePath;
     }
 
-    public function setFilePath(?string $file_path): self
+    public function setFilePath(?string $filePath): self
     {
-        $this->file_path = $file_path;
+        $this->filePath = $filePath;
 
         return $this;
     }
@@ -69,7 +77,7 @@ class Map
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(?string $name): self
     {
         $this->name = $name;
 
@@ -81,7 +89,7 @@ class Map
         return $this->description;
     }
 
-    public function setDescription(string $description): self
+    public function setDescription(?string $description): self
     {
         $this->description = $description;
 
@@ -90,24 +98,24 @@ class Map
 
     public function getCreatedAt(): ?\DateTimeInterface
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $created_at): self
+    public function setCreatedAt(?\DateTimeInterface $createdAt): self
     {
-        $this->created_at = $created_at;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
 
     public function getUpdatedAt(): ?\DateTimeInterface
     {
-        return $this->updated_at;
+        return $this->updatedAt;
     }
 
-    public function setUpdatedAt(?\DateTimeInterface $updated_at): self
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
-        $this->updated_at = $updated_at;
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }

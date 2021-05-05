@@ -18,7 +18,7 @@ class Race
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=64)
+     * @ORM\Column(type="string", length=64, nullable=true)
      */
     private $name;
 
@@ -26,11 +26,6 @@ class Race
      * @ORM\Column(type="text", nullable=true)
      */
     private $informations;
-
-    /**
-     * @ORM\OneToOne(targetEntity=Character::class, inversedBy="races", cascade={"persist", "remove"})
-     */
-    private $character;
 
     public function getId(): ?int
     {
@@ -42,7 +37,7 @@ class Race
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(?string $name): self
     {
         $this->name = $name;
 
@@ -54,21 +49,9 @@ class Race
         return $this->informations;
     }
 
-    public function setInformations(string $informations): self
+    public function setInformations(?string $informations): self
     {
         $this->informations = $informations;
-
-        return $this;
-    }
-
-    public function getCharacter(): ?Character
-    {
-        return $this->character;
-    }
-
-    public function setCharacter(?Character $character): self
-    {
-        $this->character = $character;
 
         return $this;
     }
