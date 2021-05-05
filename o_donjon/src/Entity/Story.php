@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\StoryRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=StoryRepository::class)
@@ -14,41 +15,49 @@ class Story
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"browse", "read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=64, nullable=true)
+     * @Groups({"browse", "read"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"read"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
+     * @Groups({"browse", "read"})
      */
     private $isDone;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"read"})
      */
     private $report;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"browse", "read"})
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"browse", "read"})
      */
     private $updatedAt;
 
     /**
      * @ORM\ManyToOne(targetEntity=Campaign::class, inversedBy="stories")
+     * @Groups({"browse", "read"})
      */
     private $campaign;
 
