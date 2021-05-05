@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\CharacterRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=CharacterRepository::class)
@@ -20,116 +21,139 @@ class Character
 
     /**
      * @ORM\Column(type="string", length=64, nullable=true)
+     * @Groups({"browse", "read"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"browse", "read"})
      */
     private $avatar_path;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"browse", "read"})
      */
     private $age;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"browse", "read"})
      */
     private $initiative;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"browse", "read"})
      */
     private $height;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"browse", "read"})
      */
     private $weight;
 
     /**
      * @ORM\Column(type="string", length=64, nullable=true)
+     * @Groups({"browse", "read"})
      */
     private $eyes;
 
     /**
      * @ORM\Column(type="string", length=64, nullable=true)
+     * @Groups({"browse", "read"})
      */
     private $skin;
 
     /**
      * @ORM\Column(type="string", length=64, nullable=true)
+     * @Groups({"browse", "read"})
      */
     private $hair;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"browse", "read"})
      */
     private $appearance;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"browse", "read"})
      */
     private $personality_traits;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"browse", "read"})
      */
     private $ideals;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"browse", "read"})
      */
     private $bonds;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"browse", "read"})
      */
     private $flaws;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"browse", "read"})
      */
     private $allies_and_organizations;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"browse", "read"})
      */
     private $backstory;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"browse", "read"})
      */
     private $treasure;
 
     /**
      * @ORM\Column(type="string", length=64, nullable=true)
+     * @Groups({"browse", "read"})
      */
     private $background;
 
     /**
      * @ORM\Column(type="string", length=64, nullable=true)
+     * @Groups({"browse", "read"})
      */
     private $alignement;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"browse", "read"})
      */
     private $attacks_and_spellcasting;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"browse", "read"})
      */
     private $equipment;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"browse", "read"})
      */
     private $other_proficiencies_and_languages;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"browse", "read"})
      */
     private $features_and_traits;
 
@@ -145,46 +169,55 @@ class Character
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="characters")
+     * @Groups({"browse", "read"})
      */
     private $user;
 
     /**
      * @ORM\ManyToOne(targetEntity=Campaign::class, inversedBy="characters")
+     * @Groups({"browse", "read"})
      */
     private $campaign;
 
     /**
      * @ORM\OneToOne(targetEntity=Race::class, cascade={"persist", "remove"})
+     * @Groups({"browse", "read"})
      */
     private $race;
 
     /**
      * @ORM\OneToOne(targetEntity=CharacterClass::class, cascade={"persist", "remove"})
+     * @Groups({"browse", "read"})
      */
     private $class;
 
     /**
      * @ORM\OneToOne(targetEntity=Caracteristic::class, cascade={"persist", "remove"})
+     * @Groups({"browse", "read"})
      */
     private $caracteristics;
 
     /**
      * @ORM\OneToOne(targetEntity=Statistics::class, cascade={"persist", "remove"})
+     * @Groups({"browse", "read"})
      */
     private $statistics;
 
     /**
      * @ORM\OneToOne(targetEntity=Spell::class, cascade={"persist", "remove"})
+     * @Groups({"browse", "read"})
      */
     private $spell;
 
     /**
      * @ORM\OneToOne(targetEntity=SavingThrow::class, cascade={"persist", "remove"})
+     * @Groups({"browse", "read"})
      */
     private $savingThrowspell;
 
     /**
      * @ORM\OneToOne(targetEntity=Skill::class, cascade={"persist", "remove"})
+     * @Groups({"browse", "read"})
      */
     private $skill;
 
