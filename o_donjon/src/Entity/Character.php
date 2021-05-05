@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\CharacterRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=CharacterRepository::class)
@@ -15,11 +16,13 @@ class Character
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"browse", "read", "list_character"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=64, nullable=true)
+     * @Groups({"list_character"})
      */
     private $name;
 

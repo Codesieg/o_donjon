@@ -18,7 +18,7 @@ class User implements UserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"browse", "read"})
+     * @Groups({"browse", "read", "list_campaign", "list_character"})
      */
     private $id;
 
@@ -30,7 +30,6 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="json")
-     * @Groups({"read"})
      */
     private $roles = [];
 
@@ -42,7 +41,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=64, nullable=true)
-     * @Groups({"browse", "read"})
+     * @Groups({"browse", "read", "list_campaign", "list_character"})
      */
     private $name;
 
@@ -69,19 +68,18 @@ class User implements UserInterface
 
     /**
      * @ORM\OneToMany(targetEntity=Campaign::class, mappedBy="owner")
-     * @Groups({"read"})
      */
     private $OrganizedCampaigns;
 
     /**
      * @ORM\ManyToMany(targetEntity=Campaign::class, inversedBy="users")
-     * @Groups({"read"})
+     * @Groups({"list_campaign", "read"})
      */
     private $campaigns;
 
     /**
      * @ORM\OneToMany(targetEntity=Character::class, mappedBy="user")
-     * @Groups({"read"})
+     * @Groups({"list_character", "read"})
      */
     private $characters;
 

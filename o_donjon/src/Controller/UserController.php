@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Campaign;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
@@ -21,8 +22,8 @@ class UserController extends AbstractController
      */
     public function browse(UserRepository $userRepository): Response
     {
-        $stories = $userRepository->findAll();
-        return $this->json($stories, 200, [], [
+        $users = $userRepository->findAll();
+        return $this->json($users, 200, [], [
             'groups' => ['browse'],
         ]);
     }
@@ -60,7 +61,7 @@ class UserController extends AbstractController
         return $this->json($user, 200, [], [
             'groups' => ['read'],
         ]);
-    }
+    }    
 
     /**
      * @Route("/{id}", name="edit", methods={"PUT", "PATCH"}, requirements={"id": "\d+"})
@@ -93,6 +94,26 @@ class UserController extends AbstractController
         $em->flush();
 
         return $this->json(null, 204);
+    }
+
+    /**
+     * @Route("/{id}/campaign", name="list_campaign", methods={"GET"}, requirements={"id": "\d+"})
+     */
+    public function listCampaign(User $user): Response
+    {
+        return $this->json($user, 200, [], [
+            'groups' => ['list_campaign'],
+        ]);
+    }
+
+    /**
+     * @Route("/{id}/character", name="list_character", methods={"GET"}, requirements={"id": "\d+"})
+     */
+    public function listCharacter(User $user): Response
+    {
+        return $this->json($user, 200, [], [
+            'groups' => ['list_character'],
+        ]);
     }
 
 }

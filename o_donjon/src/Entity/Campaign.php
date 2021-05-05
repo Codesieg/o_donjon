@@ -4,9 +4,9 @@ namespace App\Entity;
 
 use App\Repository\CampaignRepository;
 use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\Serializer\Annotation\Groups;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=CampaignRepository::class)
@@ -17,13 +17,12 @@ class Campaign
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"browse", "read"})
+     * @Groups({"browse", "read", "list_campaign"})
      */
     private $id;
 
     /**
-feature/campaign
-     * @Groups({"browse", "read"})
+     * @Groups({"browse", "read", "list_campaign"})
      * @ORM\Column(type="string", length=64, nullable=true)
      */
     private $name;
@@ -63,6 +62,7 @@ feature/campaign
     private $updatedAt;
 
     /**
+     * @Groups({"browse", "read"})
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="OrganizedCampaigns")
      */
     private $owner;
