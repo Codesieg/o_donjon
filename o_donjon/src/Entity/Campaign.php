@@ -22,7 +22,6 @@ class Campaign
     private $id;
 
     /**
-feature/campaign
      * @Groups({"browse", "read"})
      * @ORM\Column(type="string", length=64, nullable=true)
      */
