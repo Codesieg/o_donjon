@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\NPCRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=NPCRepository::class)
@@ -14,31 +15,37 @@ class NPC
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"browse", "read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=64, nullable=true)
+     * @Groups({"browse", "read"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=64, nullable=true)
+     * @Groups({"browse", "read"})
      */
     private $type;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"read"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"browse", "read"})
      */
     private $isAlly;
 
     /**
      * @ORM\ManyToOne(targetEntity=Campaign::class, inversedBy="NPCs")
+     * @Groups({"browse", "read"})
      */
     private $campaign;
 
