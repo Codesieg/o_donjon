@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\CampaignRepository;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -16,30 +17,37 @@ class Campaign
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"browse", "read"})
      */
     private $id;
 
     /**
+feature/campaign
+     * @Groups({"browse", "read"})
      * @ORM\Column(type="string", length=64, nullable=true)
      */
     private $name;
 
     /**
+     * @Groups({"browse", "read"})
      * @ORM\Column(type="text", nullable=true)
      */
     private $description;
 
     /**
+     * @Groups({"browse", "read"})
      * @ORM\Column(type="text", nullable=true)
      */
     private $memo;
 
     /**
+     * @Groups({"browse", "read"})
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $isArchived;
 
     /**
+     * @Groups({"browse", "read"})
      * @ORM\Column(type="string", length=64, nullable=true)
      */
     private $invitationCode;
