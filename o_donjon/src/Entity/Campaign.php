@@ -17,48 +17,49 @@ class Campaign
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"browse", "read"})
+     * @Groups({"browse_campaign", "read_campaign"})
      */
     private $id;
 
     /**
-feature/campaign
-     * @Groups({"browse", "read"})
+     * @Groups({"browse_campaign", "read_campaign"})
      * @ORM\Column(type="string", length=64, nullable=true)
      */
     private $name;
 
     /**
-     * @Groups({"browse", "read"})
+     * @Groups({"browse_campaign", "read_campaign"})
      * @ORM\Column(type="text", nullable=true)
      */
     private $description;
 
     /**
-     * @Groups({"browse", "read"})
+     * @Groups({"browse_campaign", "read_campaign"})
      * @ORM\Column(type="text", nullable=true)
      */
     private $memo;
 
     /**
-     * @Groups({"browse", "read"})
+     * @Groups({"browse_campaign", "read_campaign"})
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $isArchived;
 
     /**
-     * @Groups({"browse", "read"})
+     * @Groups({"browse_campaign", "read_campaign"})
      * @ORM\Column(type="string", length=64, nullable=true)
      */
     private $invitationCode;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"browse_campaign", "read_campaign"})
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"browse_campaign", "read_campaign"})
      */
     private $updatedAt;
 
@@ -74,25 +75,25 @@ feature/campaign
 
     /**
      * @ORM\OneToMany(targetEntity=Character::class, mappedBy="campaign")
-     * @Groups({"characterList"})
+     * @Groups({"browse_campaign_character"})
      */
     private $characters;
 
     /**
      * @ORM\OneToMany(targetEntity=NPC::class, mappedBy="campaign")
-     * @Groups({"npcList"})
+     * @Groups({"browse_campaign_npc"})
      */
     private $NPCs;
 
     /**
      * @ORM\OneToMany(targetEntity=Story::class, mappedBy="campaign")
-     * @Groups({"storiesList"})
+     * @Groups({"browse_campaign_stories"})
      */
     private $stories;
 
     /**
      * @ORM\OneToMany(targetEntity=Map::class, mappedBy="campaign")
-     *  @Groups({"mapsList"})
+     *  @Groups({"browse_campaign_maps"})
      */
     private $maps;
 

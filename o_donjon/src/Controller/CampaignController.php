@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /*********************BREAD***************************************************/
 
 /**
- * @Route("/campaigns", name="campaign_")
+ * @Route("/campaign", name="campaign_")
  */
 class CampaignController extends AbstractController
 {
@@ -26,7 +26,7 @@ class CampaignController extends AbstractController
     {
         $campaigns = $campaignRepository->findAll();
         return $this->json($campaigns, 200, [], [
-            'groups' => ['browse'],
+            'groups' => ['read_campaign','browse_campaign'],
         ]);
     }
 
@@ -36,7 +36,7 @@ class CampaignController extends AbstractController
     public function read(Campaign $campaign): Response
     {
         return $this->json($campaign, 200, [], [
-            'groups' => ['read'],
+            'groups' => ['read_campaign','browse_campaign'],
         ]);
     }
 
@@ -49,12 +49,15 @@ class CampaignController extends AbstractController
             'csrf_protection' => false,
         ]);
         $sentData = json_decode($request->getContent(), true);
+        
         $form->submit($sentData);
 
         if ($form->isValid()) {
+           
             $this->getDoctrine()->getManager()->flush();
+           
             return $this->json($campaign, 200, [], [
-                'groups' => ['read'],
+                'groups' => ['read_campaign'],
             ]);
         }
 
@@ -80,7 +83,7 @@ class CampaignController extends AbstractController
             $em->flush();
 
             return $this->json($campaign, 201, [], [
-                'groups' => ['read'],
+                'groups' => ['read_campaign'],
             ]);
         } else {
             $errors = $form->getErrors(true, false);
@@ -103,30 +106,15 @@ class CampaignController extends AbstractController
 
     /*********************ADVANCED-REQUESTS***************************************************/
 
-   /**
-    * READ WITH ASSOCIATED STATS (NB OF STORIES,..) => remplacera read ?
-    *
-     * @Route("/{id}/stats", name="stats_read", methods={"GET"}, requirements={"id": "\d+"})
-     */
-    public function statsRead(Campaign $campaign, CampaignRepository $campaignRepository): Response
-    {
-        
-        $campaigns = $campaignRepository->findWithStats();
-        
-        return $this->json($campaign, 200, [], [
-            'groups' => ['read'],
-        ]);
-    }
-
     /**
     * GET ALL STORIES OF A CAMPAIGN
     *
      * @Route("/{id}/story", name="stories_list", methods={"GET"}, requirements={"id": "\d+"})
      */
-    public function storiesList(Campaign $campaign): Response
+    public function browseStories(Campaign $campaign): Response
     {    
         return $this->json($campaign, 200, [], [
-            'groups' => ['storiesList'],
+            'groups' => ['browse_campaign_stories'],
         ]);
     }
 
@@ -135,10 +123,10 @@ class CampaignController extends AbstractController
     *
      * @Route("/{id}/map", name="maps_list", methods={"GET"}, requirements={"id": "\d+"})
      */
-    public function mapsList(Campaign $campaign): Response
+    public function browseMaps(Campaign $campaign): Response
     {    
         return $this->json($campaign, 200, [], [
-            'groups' => ['mapsList'],
+            'groups' => ['browse_campaign_maps'],
         ]);
     }
 
@@ -147,22 +135,22 @@ class CampaignController extends AbstractController
     *
      * @Route("/{id}/npc", name="npc_list", methods={"GET"}, requirements={"id": "\d+"})
      */
-    public function npcList(Campaign $campaign): Response
+    public function browseNpc(Campaign $campaign): Response
     {    
         return $this->json($campaign, 200, [], [
-            'groups' => ['npcList'],
+            'groups' => ['browse_campaign_npc'],
         ]);
     }
 
     /**
-    * GET ALL CHARACTER OF A CAMPAIGN
+    * GET ALL CHARACTERS OF A CAMPAIGN
     *
      * @Route("/{id}/character", name="character_list", methods={"GET"}, requirements={"id": "\d+"})
      */
-    public function characterList(Campaign $campaign): Response
+    public function browseCharacter(Campaign $campaign): Response
     {    
         return $this->json($campaign, 200, [], [
-            'groups' => ['characterList'],
+            'groups' => ['browse_campaign_character'],
         ]);
     }
 

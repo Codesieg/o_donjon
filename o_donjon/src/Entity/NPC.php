@@ -15,31 +15,31 @@ class NPC
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"browse", "read", "npcList"})
+     * @Groups({"browse", "read", "browse_campaign_npc"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=64, nullable=true)
-     * @Groups({"browse", "read", "npcList"})
+     * @Groups({"browse", "read", "browse_campaign_npc"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=64, nullable=true)
-     * @Groups({"browse", "read", "npcList"})
+     * @Groups({"browse", "read", "browse_campaign_npc"})
      */
     private $type;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"browse", "read", "npcList"})
+     * @Groups({"browse", "read", "browse_campaign_npc"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Groups({"browse", "read", "npcList"})
+     * @Groups({"browse", "read", "browse_campaign_npc"})
      */
     private $isAlly;
 
