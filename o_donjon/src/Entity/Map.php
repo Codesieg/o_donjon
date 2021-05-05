@@ -15,19 +15,19 @@ class Map
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"browse", "read"})
+     * @Groups({"browse", "read", "mapsList"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"read"})
+     * @Groups({"browse", "read", "mapsList"})
      */
     private $filePath;
 
     /**
      * @ORM\Column(type="string", length=64, nullable=true)
-     * @Groups({"browse", "read"})
+     * @Groups({"browse", "read", "mapsList"})
      */
     private $name;
 
@@ -39,13 +39,13 @@ class Map
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * @Groups({"browse", "read"})
+     * @Groups({"browse", "read", "mapsList"})
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * @Groups({"browse", "read"})
+     * @Groups({"browse", "read", "mapsList"})
      */
     private $updatedAt;
 

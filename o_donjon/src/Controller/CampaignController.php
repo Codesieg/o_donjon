@@ -111,7 +111,7 @@ class CampaignController extends AbstractController
     public function statsRead(Campaign $campaign, CampaignRepository $campaignRepository): Response
     {
         
-        $campaigns = $campaignRepository->findWithStats($id);
+        $campaigns = $campaignRepository->findWithStats();
         
         return $this->json($campaign, 200, [], [
             'groups' => ['read'],
@@ -121,12 +121,48 @@ class CampaignController extends AbstractController
     /**
     * GET ALL STORIES OF A CAMPAIGN
     *
-     * @Route("/{id}/stories", name="stories_read", methods={"GET"}, requirements={"id": "\d+"})
+     * @Route("/{id}/story", name="stories_list", methods={"GET"}, requirements={"id": "\d+"})
      */
-    public function storiesRead(Campaign $campaign): Response
+    public function storiesList(Campaign $campaign): Response
     {    
         return $this->json($campaign, 200, [], [
             'groups' => ['storiesList'],
+        ]);
+    }
+
+    /**
+    * GET ALL MAPS OF A CAMPAIGN
+    *
+     * @Route("/{id}/map", name="maps_list", methods={"GET"}, requirements={"id": "\d+"})
+     */
+    public function mapsList(Campaign $campaign): Response
+    {    
+        return $this->json($campaign, 200, [], [
+            'groups' => ['mapsList'],
+        ]);
+    }
+
+    /**
+    * GET ALL NPC OF A CAMPAIGN
+    *
+     * @Route("/{id}/npc", name="npc_list", methods={"GET"}, requirements={"id": "\d+"})
+     */
+    public function npcList(Campaign $campaign): Response
+    {    
+        return $this->json($campaign, 200, [], [
+            'groups' => ['npcList'],
+        ]);
+    }
+
+    /**
+    * GET ALL CHARACTER OF A CAMPAIGN
+    *
+     * @Route("/{id}/character", name="character_list", methods={"GET"}, requirements={"id": "\d+"})
+     */
+    public function characterList(Campaign $campaign): Response
+    {    
+        return $this->json($campaign, 200, [], [
+            'groups' => ['characterList'],
         ]);
     }
 

@@ -74,11 +74,13 @@ feature/campaign
 
     /**
      * @ORM\OneToMany(targetEntity=Character::class, mappedBy="campaign")
+     * @Groups({"characterList"})
      */
     private $characters;
 
     /**
      * @ORM\OneToMany(targetEntity=NPC::class, mappedBy="campaign")
+     * @Groups({"npcList"})
      */
     private $NPCs;
 
@@ -90,6 +92,7 @@ feature/campaign
 
     /**
      * @ORM\OneToMany(targetEntity=Map::class, mappedBy="campaign")
+     *  @Groups({"mapsList"})
      */
     private $maps;
 

@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\CharacterRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=CharacterRepository::class)
@@ -15,131 +16,157 @@ class Character
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"browse", "read", "characterList"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=64, nullable=true)
+     * @Groups({"browse", "read", "characterList"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"browse", "read", "characterList"})
      */
     private $avatar_path;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"browse", "read", "characterList"})
      */
     private $age;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"browse", "read", "characterList"})
      */
     private $initiative;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"browse", "read", "characterList"})
      */
     private $height;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"browse", "read", "characterList"})
      */
     private $weight;
 
     /**
      * @ORM\Column(type="string", length=64, nullable=true)
+     * @Groups({"browse", "read", "characterList"})
      */
     private $eyes;
 
     /**
      * @ORM\Column(type="string", length=64, nullable=true)
+     * @Groups({"browse", "read", "characterList"})
      */
     private $skin;
 
     /**
      * @ORM\Column(type="string", length=64, nullable=true)
+     * @Groups({"browse", "read", "characterList"})
      */
     private $hair;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"browse", "read", "characterList"})
      */
     private $appearance;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"browse", "read", "characterList"})
      */
     private $personality_traits;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"browse", "read", "characterList"})
      */
     private $ideals;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"browse", "read", "characterList"})
      */
     private $bonds;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"browse", "read", "characterList"})
      */
     private $flaws;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"browse", "read", "characterList"})
      */
     private $allies_and_organizations;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"browse", "read", "characterList"})
      */
     private $backstory;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"browse", "read", "characterList"})
      */
     private $treasure;
 
     /**
      * @ORM\Column(type="string", length=64, nullable=true)
+     * @Groups({"browse", "read", "characterList"})
      */
     private $background;
 
     /**
      * @ORM\Column(type="string", length=64, nullable=true)
+     * @Groups({"browse", "read", "characterList"})
      */
     private $alignement;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"browse", "read", "characterList"})
      */
     private $attacks_and_spellcasting;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"browse", "read", "characterList"})
      */
     private $equipment;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"browse", "read", "characterList"})
      */
     private $other_proficiencies_and_languages;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"browse", "read", "characterList"})
      */
     private $features_and_traits;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"browse", "read", "characterList"})
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"browse", "read", "characterList"})
      */
     private $updatedAt;
 
