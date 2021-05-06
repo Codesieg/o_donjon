@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\Character;
+use App\Entity\Statistics;
 use App\Form\CharacterType;
+use App\Form\StatisticsType;
 use App\Repository\CharacterRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,16 +25,23 @@ class CharacterController extends AbstractController
     {
         // Create a new character 
         $character = new Character();
+        
+        // creat new stats for a new character
+        $statistics = new Statistics();
+        $character->setStatistics($statistics);
+        
+        // dd($character);
         // Create a new forms character  
         $form = $this->createForm(CharacterType::class, $character, ['csrf_protection' => false]);
         $sentData = json_decode($request->getContent(), true); // On definit le parametre à true afin de retourner un tableau associatif
         $form->submit($sentData);
         $form->getData();
-        // dd($form);
+        
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($character);
+            $em->persist($statistics);
             $em->flush();
 
             return $this->json($character, 201, [], [

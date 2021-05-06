@@ -3,9 +3,12 @@
 namespace App\Form;
 
 use App\Entity\Character;
+use App\Form\StatisticsType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class CharacterType extends AbstractType
 {
@@ -42,7 +45,8 @@ class CharacterType extends AbstractType
             ->add('race')
             ->add('class')
             ->add('caracteristics')
-            ->add('statistics')
+            ->add('statistics',EntityType::class, [
+                'class'   => StatisticsType::class])
             ->add('spell')
             ->add('savingThrowspell')
             ->add('skill')
