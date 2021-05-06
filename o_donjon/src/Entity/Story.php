@@ -15,43 +15,43 @@ class Story
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"browse_story", "read_story"})
+     * @Groups({"browse_story", "read_story", "browse_campaign_stories"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=64, nullable=true)
-     * @Groups({"browse_story", "read_story"})
+     * @Groups({"browse_story", "read_story", "browse_campaign_stories"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"read_story"})
+     * @Groups({"browse_story", "read_story", "browse_campaign_stories"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
-     * @Groups({"browse_story", "read_story"})
+     * @Groups({"browse_story", "read_story", "browse_campaign_stories"})
      */
     private $isDone;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"read_story"})
+     * @Groups({"browse_story", "read_story", "browse_campaign_stories"})
      */
     private $report;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * @Groups({"browse_story", "read_story"})
+     * @Groups({"browse_story", "read_story", "browse_campaign_stories"})
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * @Groups({"browse_story", "read_story"})
+     * @Groups({"browse_story", "read_story", "browse_campaign_stories"})
      */
     private $updatedAt;
 

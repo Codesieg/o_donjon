@@ -53,11 +53,13 @@ class Campaign
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"browse_campaign", "read_campaign"})
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"browse_campaign", "read_campaign"})
      */
     private $updatedAt;
 
@@ -74,21 +76,25 @@ class Campaign
 
     /**
      * @ORM\OneToMany(targetEntity=Character::class, mappedBy="campaign")
+     * @Groups({"browse_campaign_character"})
      */
     private $characters;
 
     /**
      * @ORM\OneToMany(targetEntity=NPC::class, mappedBy="campaign")
+     * @Groups({"browse_campaign_npc"})
      */
     private $NPCs;
 
     /**
      * @ORM\OneToMany(targetEntity=Story::class, mappedBy="campaign")
+     * @Groups({"browse_campaign_stories"})
      */
     private $stories;
 
     /**
      * @ORM\OneToMany(targetEntity=Map::class, mappedBy="campaign")
+     *  @Groups({"browse_campaign_maps"})
      */
     private $maps;
 
@@ -291,6 +297,7 @@ class Campaign
 
     /**
      * @return Collection|Story[]
+     * 
      */
     public function getStories(): Collection
     {
