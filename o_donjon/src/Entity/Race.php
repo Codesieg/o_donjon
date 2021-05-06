@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\RaceRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=RaceRepository::class)
@@ -19,11 +20,13 @@ class Race
 
     /**
      * @ORM\Column(type="string", length=64, nullable=true)
+     * @Groups({"read_character"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"read_character"})
      */
     private $informations;
 

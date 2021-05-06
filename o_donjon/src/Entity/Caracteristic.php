@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\CaracteristicRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=CaracteristicRepository::class)
@@ -19,16 +20,19 @@ class Caracteristic
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"read_character"})
      */
     private $level;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"read_character"})
      */
     private $experience;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
+     * @Groups({"read_character"})
      */
     private $inspiration;
 
@@ -39,31 +43,37 @@ class Caracteristic
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"read_character"})
      */
     private $speed;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"read_character"})
      */
     private $currentHP;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"read_character"})
      */
     private $totalHP;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"read_character"})
      */
     private $hitDice;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"read_character"})
      */
     private $deathSavesSuccess;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"read_character"})
      */
     private $deathSavesFailures;
 
