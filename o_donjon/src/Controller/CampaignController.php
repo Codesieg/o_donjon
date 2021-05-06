@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 
 /**
- * @Route("/campaigns", name="campaign_")
+ * @Route("/campaign", name="campaign_")
  */
 class CampaignController extends AbstractController
 {
@@ -25,7 +25,7 @@ class CampaignController extends AbstractController
     {
         $campaigns = $CampaignRepository->findAll();
         return $this->json($campaigns, 200, [], [
-            'groups' => ['browse'],
+            'groups' => ['browse_campaign'],
         ]);
     }
 
@@ -35,7 +35,7 @@ class CampaignController extends AbstractController
     public function read(Campaign $campaign): Response
     {
         return $this->json($campaign, 200, [], [
-            'groups' => ['read'],
+            'groups' => ['read_campaign'],
         ]);
     }
 
@@ -55,7 +55,7 @@ class CampaignController extends AbstractController
         if ($form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
             return $this->json($campaign, 200, [], [
-                'groups' => ['read'],
+                'groups' => ['read_campaign'],
             ]);
         }
 
@@ -81,7 +81,7 @@ class CampaignController extends AbstractController
             $em->flush();
 
             return $this->json($campaign, 201, [], [
-                'groups' => ['read'],
+                'groups' => ['read_campaign'],
             ]);
         } else {
             $errors = $form->getErrors(true, false);
