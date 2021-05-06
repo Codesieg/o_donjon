@@ -16,13 +16,13 @@ class Character
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"browse", "read", "browse_campaign_character"})
+     * @Groups({"browse", "read", "browse_campaign_character", "list_character"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=64, nullable=true)
-     * @Groups({"browse", "read", "browse_campaign_character"})
+     * @Groups({"browse", "read", "browse_campaign_character", "list_character"})
      */
     private $name;
 
@@ -172,46 +172,55 @@ class Character
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="characters")
+     * @Groups({"browse", "read"})
      */
     private $user;
 
     /**
      * @ORM\ManyToOne(targetEntity=Campaign::class, inversedBy="characters")
+     * @Groups({"browse", "read"})
      */
     private $campaign;
 
     /**
      * @ORM\OneToOne(targetEntity=Race::class, cascade={"persist", "remove"})
+     * @Groups({"browse", "read"})
      */
     private $race;
 
     /**
      * @ORM\OneToOne(targetEntity=CharacterClass::class, cascade={"persist", "remove"})
+     * @Groups({"browse", "read"})
      */
     private $class;
 
     /**
      * @ORM\OneToOne(targetEntity=Caracteristic::class, cascade={"persist", "remove"})
+     * @Groups({"browse", "read"})
      */
     private $caracteristics;
 
     /**
      * @ORM\OneToOne(targetEntity=Statistics::class, cascade={"persist", "remove"})
+     * @Groups({"browse", "read"})
      */
     private $statistics;
 
     /**
      * @ORM\OneToOne(targetEntity=Spell::class, cascade={"persist", "remove"})
+     * @Groups({"browse", "read"})
      */
     private $spell;
 
     /**
      * @ORM\OneToOne(targetEntity=SavingThrow::class, cascade={"persist", "remove"})
+     * @Groups({"browse", "read"})
      */
     private $savingThrowspell;
 
     /**
      * @ORM\OneToOne(targetEntity=Skill::class, cascade={"persist", "remove"})
+     * @Groups({"browse", "read"})
      */
     private $skill;
 
