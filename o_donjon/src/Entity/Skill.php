@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\SkillRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=SkillRepository::class)
@@ -19,91 +20,109 @@ class Skill
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"read_character"})
      */
     private $acrobatics;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
+     * @Groups({"read_character"})
      */
     private $animalHandling;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
+     * @Groups({"read_character"})
      */
     private $arcana;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
+     * @Groups({"read_character"})
      */
     private $athletics;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
+     * @Groups({"read_character"})
      */
     private $deception;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
+     * @Groups({"read_character"})
      */
     private $history;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
+     * @Groups({"read_character"})
      */
     private $insight;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
+     * @Groups({"read_character"})
      */
     private $intimidation;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
+     * @Groups({"read_character"})
      */
     private $investigation;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
+     * @Groups({"read_character"})
      */
     private $medecine;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
+     * @Groups({"read_character"})
      */
     private $nature;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
+     * @Groups({"read_character"})
      */
     private $perception;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
+     * @Groups({"read_character"})
      */
     private $performance;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
+     * @Groups({"read_character"})
      */
     private $persuasion;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
+     * @Groups({"read_character"})
      */
     private $religion;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
+     * @Groups({"read_character"})
      */
     private $sleightOfHand;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
+     * @Groups({"read_character"})
      */
     private $stealth;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
+     * @Groups({"read_character"})
      */
     private $survival;
 

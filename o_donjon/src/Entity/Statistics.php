@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\StatisticsRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=StatisticsRepository::class)
@@ -19,41 +20,49 @@ class Statistics
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"read_character"})
      */
     private $strength;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"read_character"})
      */
     private $dexterity;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"read_character"})
      */
     private $constitution;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"read_character"})
      */
     private $intelligence;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"read_character"})
      */
     private $wisdom;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"read_character"})
      */
     private $charisma;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"read_character"})
      */
     private $passiveWisdom;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"read_character"})
      */
     private $proficiencyBonus;
 

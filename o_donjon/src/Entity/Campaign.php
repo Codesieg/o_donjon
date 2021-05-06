@@ -17,12 +17,12 @@ class Campaign
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"browse_campaign", "read_campaign", "list_campaign"})
+     * @Groups({"browse_campaign", "read_campaign", "list_campaign", "read_character"})
      */
     private $id;
 
     /**
-     * @Groups({"browse_campaign", "read_campaign", "list_campaign"})
+     * @Groups({"browse_campaign", "read_campaign", "list_campaign", "read_character"})
      * @ORM\Column(type="string", length=64, nullable=true)
      */
     private $name;

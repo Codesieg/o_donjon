@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\SpellRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=SpellRepository::class)
@@ -24,21 +25,25 @@ class Spell
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"browse", "read_character"})
      */
     private $spell_attack_bonus;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"browse", "read_character"})
      */
     private $spellcasting_ability;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"browse", "read_character"})
      */
     private $spell_save_dc;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"browse", "read_character"})
      */
     private $spells_list;
 

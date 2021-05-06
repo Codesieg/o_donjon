@@ -2,8 +2,10 @@
 
 namespace App\Entity;
 
-use App\Repository\CharacterRepository;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\CharacterRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
@@ -223,6 +225,12 @@ class Character
      * @Groups({"browse_character", "read_character"})
      */
     private $skill;
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime;
+    }
+
 
     public function getId(): ?int
     {
