@@ -17,36 +17,36 @@ class Campaign
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"browse", "read", "list_campaign"})
+     * @Groups({"browse_campaign", "read_campaign", "list_campaign"})
      */
     private $id;
 
     /**
-     * @Groups({"browse", "read", "list_campaign"})
+     * @Groups({"browse_campaign", "read_campaign", "list_campaign"})
      * @ORM\Column(type="string", length=64, nullable=true)
      */
     private $name;
 
     /**
-     * @Groups({"browse", "read"})
+     * @Groups({"browse_campaign", "read_campaign"})
      * @ORM\Column(type="text", nullable=true)
      */
     private $description;
 
     /**
-     * @Groups({"browse", "read"})
+     * @Groups({"browse_campaign", "read_campaign"})
      * @ORM\Column(type="text", nullable=true)
      */
     private $memo;
 
     /**
-     * @Groups({"browse", "read"})
+     * @Groups({"browse_campaign", "read_campaign"})
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $isArchived;
 
     /**
-     * @Groups({"browse", "read"})
+     * @Groups({"browse_campaign", "read_campaign"})
      * @ORM\Column(type="string", length=64, nullable=true)
      */
     private $invitationCode;
@@ -62,7 +62,7 @@ class Campaign
     private $updatedAt;
 
     /**
-     * @Groups({"browse", "read"})
+     * @Groups({"browse_campaign", "read_campaign"})
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="OrganizedCampaigns")
      */
     private $owner;

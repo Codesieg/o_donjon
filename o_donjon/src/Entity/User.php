@@ -18,13 +18,13 @@ class User implements UserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"browse", "read", "list_campaign", "list_character"})
+     * @Groups({"browse_user", "read_user", "list_campaign", "list_character"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Groups({"read"})
+     * @Groups({"read_user"})
      */
     private $email;
 
@@ -41,13 +41,13 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=64, nullable=true)
-     * @Groups({"browse", "read", "list_campaign", "list_character"})
+     * @Groups({"browse_user", "read_user", "list_campaign", "list_character"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"browse", "read"})
+     * @Groups({"browse_user", "read_user"})
      */
     private $avatarPath;
 
@@ -73,13 +73,13 @@ class User implements UserInterface
 
     /**
      * @ORM\ManyToMany(targetEntity=Campaign::class, inversedBy="users")
-     * @Groups({"list_campaign", "read"})
+     * @Groups({"list_campaign", "read_user"})
      */
     private $campaigns;
 
     /**
      * @ORM\OneToMany(targetEntity=Character::class, mappedBy="user")
-     * @Groups({"list_character", "read"})
+     * @Groups({"list_character", "read_user"})
      */
     private $characters;
 

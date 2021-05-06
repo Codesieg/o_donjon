@@ -19,7 +19,7 @@ class CharacterController extends AbstractController
     /**
      * @Route("/add", name="add", methods={"POST"},)
      */
-    public function create(Request $request): Response
+    public function add(Request $request): Response
     {
         // Create a new character 
         $character = new Character();
@@ -36,7 +36,7 @@ class CharacterController extends AbstractController
             $em->flush();
 
             return $this->json($character, 201, [], [
-                'groups' => ['read'],
+                'groups' => ['read_character'],
             ]);
         }
         return $this->json($form->getErrors(true, false)->__toString(), 400);
@@ -75,7 +75,7 @@ class CharacterController extends AbstractController
         $Allcharacters = $characters->findAll();
         return $this->json(
             $Allcharacters, 200, [], [
-                'groups' => ['browse'],
+                'groups' => ['browse_character'],
             ]
         );
     }
@@ -88,7 +88,7 @@ class CharacterController extends AbstractController
         
         return $this->json(
             $character, 200, [], [
-                'groups' => ['read'],
+                'groups' => ['read_character'],
             ]
         );
     }
