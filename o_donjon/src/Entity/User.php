@@ -18,7 +18,7 @@ class User implements UserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"browse", "read"})
+     * @Groups({"browse", "read", "read_character"})
      */
     private $id;
 
@@ -42,7 +42,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=64, nullable=true)
-     * @Groups({"browse", "read"})
+     * @Groups({"browse", "read", "read_character"})
      */
     private $name;
 
