@@ -243,6 +243,14 @@ class Campaign
         return $this->characters;
     }
 
+    /**
+     * @Groups({"count_characters"})
+     */
+    public function getCountCharacters()
+    {
+        return $this->characters->count();
+    }
+
     public function addCharacter(Character $character): self
     {
         if (!$this->characters->contains($character)) {
@@ -271,6 +279,14 @@ class Campaign
     public function getNPCs(): Collection
     {
         return $this->NPCs;
+    }
+
+    /**
+     * @Groups({"count_npcs"})
+     */
+    public function getCountNpcs()
+    {
+        return $this->characters->count();
     }
 
     public function addNPC(NPC $nPC): self
@@ -304,6 +320,14 @@ class Campaign
         return $this->stories;
     }
 
+    /**
+     * @Groups({"count_stories"})
+     */
+    public function getCountStories()
+    {
+        return $this->characters->count();
+    }
+
     public function addStory(Story $story): self
     {
         if (!$this->stories->contains($story)) {
@@ -332,6 +356,14 @@ class Campaign
     public function getMaps(): Collection
     {
         return $this->maps;
+    }
+
+    /**
+     * @Groups({"count_maps"})
+     */
+    public function getCountMaps()
+    {
+        return $this->characters->count();
     }
 
     public function addMap(Map $map): self
