@@ -88,9 +88,7 @@ class CharacterController extends AbstractController
         
         return $this->json(
             $character, 200, [], [
-                'groups' => [
-                'read_character', 
-            ],
+                'groups' => ['read_character'],
             ]
         );
     }

@@ -4,9 +4,9 @@ namespace App\Entity;
 
 use App\Repository\CampaignRepository;
 use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\Serializer\Annotation\Groups;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=CampaignRepository::class)
@@ -17,51 +17,54 @@ class Campaign
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"browse", "read" , "read_character"})
+     * @Groups({"browse_campaign", "read_campaign", "list_campaign", "read_character"})
      */
     private $id;
 
     /**
-     * @Groups({"browse", "read", "read_character"})
+     * @Groups({"browse_campaign", "read_campaign", "list_campaign", "read_character"})
      * @ORM\Column(type="string", length=64, nullable=true)
      */
     private $name;
 
     /**
-     * @Groups({"browse", "read"})
+     * @Groups({"browse_campaign", "read_campaign"})
      * @ORM\Column(type="text", nullable=true)
      */
     private $description;
 
     /**
-     * @Groups({"browse", "read"})
+     * @Groups({"browse_campaign", "read_campaign"})
      * @ORM\Column(type="text", nullable=true)
      */
     private $memo;
 
     /**
-     * @Groups({"browse", "read"})
+     * @Groups({"browse_campaign", "read_campaign"})
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $isArchived;
 
     /**
-     * @Groups({"browse", "read"})
+     * @Groups({"browse_campaign", "read_campaign"})
      * @ORM\Column(type="string", length=64, nullable=true)
      */
     private $invitationCode;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"browse_campaign", "read_campaign"})
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"browse_campaign", "read_campaign"})
      */
     private $updatedAt;
 
     /**
+     * @Groups({"browse_campaign", "read_campaign"})
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="OrganizedCampaigns")
      */
     private $owner;
@@ -73,21 +76,25 @@ class Campaign
 
     /**
      * @ORM\OneToMany(targetEntity=Character::class, mappedBy="campaign")
+     * @Groups({"browse_campaign_character"})
      */
     private $characters;
 
     /**
      * @ORM\OneToMany(targetEntity=NPC::class, mappedBy="campaign")
+     * @Groups({"browse_campaign_npc"})
      */
     private $NPCs;
 
     /**
      * @ORM\OneToMany(targetEntity=Story::class, mappedBy="campaign")
+     * @Groups({"browse_campaign_stories"})
      */
     private $stories;
 
     /**
      * @ORM\OneToMany(targetEntity=Map::class, mappedBy="campaign")
+     *  @Groups({"browse_campaign_maps"})
      */
     private $maps;
 
@@ -236,6 +243,14 @@ class Campaign
         return $this->characters;
     }
 
+    /**
+     * @Groups({"count_characters"})
+     */
+    public function getCountCharacters()
+    {
+        return $this->characters->count();
+    }
+
     public function addCharacter(Character $character): self
     {
         if (!$this->characters->contains($character)) {
@@ -266,6 +281,14 @@ class Campaign
         return $this->NPCs;
     }
 
+    /**
+     * @Groups({"count_npcs"})
+     */
+    public function getCountNpcs()
+    {
+        return $this->characters->count();
+    }
+
     public function addNPC(NPC $nPC): self
     {
         if (!$this->NPCs->contains($nPC)) {
@@ -290,10 +313,19 @@ class Campaign
 
     /**
      * @return Collection|Story[]
+     * 
      */
     public function getStories(): Collection
     {
         return $this->stories;
+    }
+
+    /**
+     * @Groups({"count_stories"})
+     */
+    public function getCountStories()
+    {
+        return $this->characters->count();
     }
 
     public function addStory(Story $story): self
@@ -324,6 +356,14 @@ class Campaign
     public function getMaps(): Collection
     {
         return $this->maps;
+    }
+
+    /**
+     * @Groups({"count_maps"})
+     */
+    public function getCountMaps()
+    {
+        return $this->characters->count();
     }
 
     public function addMap(Map $map): self
