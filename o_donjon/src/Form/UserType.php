@@ -25,8 +25,8 @@ class UserType extends AbstractType
             ->add('name')
             ->add('avatarPath')
             ->add('status')
-            ->add('createdAt')
-            ->add('updatedAt')
+            // ->add('createdAt')
+            // ->add('updatedAt')
             ->add('campaigns')
         ;
     }

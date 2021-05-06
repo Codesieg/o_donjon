@@ -16,8 +16,8 @@ class StoryType extends AbstractType
             ->add('description')
             ->add('isDone')
             ->add('report')
-            ->add('createdAt')
-            ->add('updatedAt')
+            // ->add('createdAt')
+            // ->add('updatedAt')
             ->add('campaign')
         ;
     }

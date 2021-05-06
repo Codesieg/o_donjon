@@ -10,6 +10,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=CampaignRepository::class)
+ * @ORM\HasLifecycleCallbacks()
  */
 class Campaign
 {
@@ -105,6 +106,7 @@ class Campaign
         $this->NPCs = new ArrayCollection();
         $this->stories = new ArrayCollection();
         $this->maps = new ArrayCollection();
+        $this->createdAt = new \DateTime();
     }
 
     public function getId(): ?int
@@ -189,9 +191,13 @@ class Campaign
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
+    /**
+     * @ORM\PreUpdate
+     */
+
+    public function setUpdatedAt(): self
     {
-        $this->updatedAt = $updatedAt;
+        $this->updatedAt = new \DateTime();
 
         return $this;
     }
