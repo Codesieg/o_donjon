@@ -154,5 +154,19 @@ class CampaignController extends AbstractController
         ]);
     }
 
+
+    /**
+    * READ WITH ASSOCIATED STATS (NB OF STORIES,..) => remplacera read ?
+    *
+     * @Route("/{id}/stats", name="stats_read", methods={"GET"}, requirements={"id": "\d+"})
+     */
+    public function readStats(Campaign $campaign): Response
+    {       
+        return $this->json($campaign, 200, [], [
+            'groups' => ['read_campaign', 'count_characters', 'count_NPCs', 'count_stories', 'count_maps'],
+        ]);
+    }
+
+
     
 }
