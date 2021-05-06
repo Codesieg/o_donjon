@@ -16,145 +16,145 @@ class Character
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"browse", "read", "browse_campaign_character", "list_character"})
+     * @Groups({"browse_character", "read_character", "list_character", "browse_campaign_character"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=64, nullable=true)
-     * @Groups({"browse", "read", "browse_campaign_character", "list_character"})
+     * @Groups({"browse_character", "read_character", "list_character", "browse_campaign_character"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"browse", "read", "browse_campaign_character"})
+     * @Groups({"browse_character", "read_character", "browse_campaign_character"})
      */
     private $avatar_path;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Groups({"browse", "read", "browse_campaign_character"})
+     * @Groups({"browse_character", "read_character", "browse_campaign_character"})
      */
     private $age;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Groups({"browse", "read", "browse_campaign_character"})
+     * @Groups({"browse_character", "read_character", "browse_campaign_character"})
      */
     private $initiative;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Groups({"browse", "read", "browse_campaign_character"})
+     * @Groups({"browse_character", "read_character", "browse_campaign_character"})
      */
     private $height;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Groups({"browse", "read", "browse_campaign_character"})
+     * @Groups({"browse_character", "read_character", "browse_campaign_character"})
      */
     private $weight;
 
     /**
      * @ORM\Column(type="string", length=64, nullable=true)
-     * @Groups({"browse", "read", "browse_campaign_character"})
+     * @Groups({"browse_character", "read_character", "browse_campaign_character"})
      */
     private $eyes;
 
     /**
      * @ORM\Column(type="string", length=64, nullable=true)
-     * @Groups({"browse", "read", "browse_campaign_character"})
+     * @Groups({"browse_character", "read_character", "browse_campaign_character"})
      */
     private $skin;
 
     /**
      * @ORM\Column(type="string", length=64, nullable=true)
-     * @Groups({"browse", "read", "browse_campaign_character"})
+     * @Groups({"browse_character", "read_character", "browse_campaign_character"})
      */
     private $hair;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"browse", "read", "browse_campaign_character"})
+     * @Groups({"browse_character", "read_character", "browse_campaign_character"})
      */
     private $appearance;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"browse", "read", "browse_campaign_character"})
+     * @Groups({"browse_character", "read_character", "browse_campaign_character"})
      */
     private $personality_traits;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"browse", "read", "browse_campaign_character"})
+     * @Groups({"browse_character", "read_character", "browse_campaign_character"})
      */
     private $ideals;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"browse", "read", "browse_campaign_character"})
+     * @Groups({"browse_character", "read_character", "browse_campaign_character"})
      */
     private $bonds;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"browse", "read", "browse_campaign_character"})
+     * @Groups({"browse_character", "read_character", "browse_campaign_character"})
      */
     private $flaws;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"browse", "read", "browse_campaign_character"})
+     * @Groups({"browse_character", "read_character", "browse_campaign_character"})
      */
     private $allies_and_organizations;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"browse", "read", "browse_campaign_character"})
+     * @Groups({"browse_character", "read_character", "browse_campaign_character"})
      */
     private $backstory;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"browse", "read", "browse_campaign_character"})
+     * @Groups({"browse_character", "read_character", "browse_campaign_character"})
      */
     private $treasure;
 
     /**
      * @ORM\Column(type="string", length=64, nullable=true)
-     * @Groups({"browse", "read", "browse_campaign_character"})
+     * @Groups({"browse_character", "read_character", "browse_campaign_character"})
      */
     private $background;
 
     /**
      * @ORM\Column(type="string", length=64, nullable=true)
-     * @Groups({"browse", "read", "browse_campaign_character"})
+     * @Groups({"browse_character", "read_character", "browse_campaign_character"})
      */
     private $alignement;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"browse", "read", "browse_campaign_character"})
+     * @Groups({"browse_character", "read_character", "browse_campaign_character"})
      */
     private $attacks_and_spellcasting;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"browse", "read", "browse_campaign_character"})
+     * @Groups({"browse_character", "read_character", "browse_campaign_character"})
      */
     private $equipment;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"browse", "read", "browse_campaign_character"})
+     * @Groups({"browse_character", "read_character", "browse_campaign_character"})
      */
     private $other_proficiencies_and_languages;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"browse", "read", "browse_campaign_character"})
+     * @Groups({"browse_character", "read_character", "browse_campaign_character"})
      */
     private $features_and_traits;
 
@@ -172,55 +172,55 @@ class Character
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="characters")
-     * @Groups({"browse", "read"})
+     * @Groups({"browse_character", "read_character"})
      */
     private $user;
 
     /**
      * @ORM\ManyToOne(targetEntity=Campaign::class, inversedBy="characters")
-     * @Groups({"browse", "read"})
+     * @Groups({"browse_character", "read_character"})
      */
     private $campaign;
 
     /**
      * @ORM\OneToOne(targetEntity=Race::class, cascade={"persist", "remove"})
-     * @Groups({"browse", "read"})
+     * @Groups({"browse_character", "read_character"})
      */
     private $race;
 
     /**
      * @ORM\OneToOne(targetEntity=CharacterClass::class, cascade={"persist", "remove"})
-     * @Groups({"browse", "read"})
+     * @Groups({"browse_character", "read_character"})
      */
     private $class;
 
     /**
      * @ORM\OneToOne(targetEntity=Caracteristic::class, cascade={"persist", "remove"})
-     * @Groups({"browse", "read"})
+     * @Groups({"browse_character", "read_character"})
      */
     private $caracteristics;
 
     /**
      * @ORM\OneToOne(targetEntity=Statistics::class, cascade={"persist", "remove"})
-     * @Groups({"browse", "read"})
+     * @Groups({"browse_character", "read_character"})
      */
     private $statistics;
 
     /**
      * @ORM\OneToOne(targetEntity=Spell::class, cascade={"persist", "remove"})
-     * @Groups({"browse", "read"})
+     * @Groups({"browse_character", "read_character"})
      */
     private $spell;
 
     /**
      * @ORM\OneToOne(targetEntity=SavingThrow::class, cascade={"persist", "remove"})
-     * @Groups({"browse", "read"})
+     * @Groups({"browse_character", "read_character"})
      */
     private $savingThrowspell;
 
     /**
      * @ORM\OneToOne(targetEntity=Skill::class, cascade={"persist", "remove"})
-     * @Groups({"browse", "read"})
+     * @Groups({"browse_character", "read_character"})
      */
     private $skill;
 

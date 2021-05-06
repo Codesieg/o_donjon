@@ -23,7 +23,7 @@ class MapController extends AbstractController
     {
         $stories = $mapRepository->findAll();
         return $this->json($stories, 200, [], [
-            'groups' => ['browse'],
+            'groups' => ['browse_map'],
         ]);
     }
 
@@ -45,7 +45,7 @@ class MapController extends AbstractController
             $em->flush();
 
             return $this->json($map, 201, [], [
-                'groups' => ['read'],
+                'groups' => ['read_map'],
             ]);
         }
 
@@ -58,7 +58,7 @@ class MapController extends AbstractController
     public function read(Map $map): Response
     {
         return $this->json($map, 200, [], [
-            'groups' => ['read'],
+            'groups' => ['read_map'],
         ]);
     }
 
@@ -77,7 +77,7 @@ class MapController extends AbstractController
             $this->getDoctrine()->getManager()->flush();
 
             return $this->json($map, 200, [], [
-                'groups' => ['read'],
+                'groups' => ['read_map'],
             ]);
         }
         return $this->json($form->getErrors(true, false)->__toString(), 400);

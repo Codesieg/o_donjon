@@ -26,7 +26,7 @@ class CampaignController extends AbstractController
     {
         $campaigns = $campaignRepository->findAll();
         return $this->json($campaigns, 200, [], [
-            'groups' => ['read_campaign','browse_campaign'],
+            'groups' => ['browse_campaign'],
         ]);
     }
 
@@ -36,7 +36,7 @@ class CampaignController extends AbstractController
     public function read(Campaign $campaign): Response
     {
         return $this->json($campaign, 200, [], [
-            'groups' => ['read_campaign','browse_campaign'],
+            'groups' => ['read_campaign'],
         ]);
     }
 

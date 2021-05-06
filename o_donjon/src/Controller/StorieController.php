@@ -23,7 +23,7 @@ class StorieController extends AbstractController
     {
         $stories = $storyRepository->findAll();
         return $this->json($stories, 200, [], [
-            'groups' => ['browse'],
+            'groups' => ['browse_story'],
         ]);
     }
 
@@ -45,7 +45,7 @@ class StorieController extends AbstractController
             $em->flush();
 
             return $this->json($story, 201, [], [
-                'groups' => ['read'],
+                'groups' => ['read_story'],
             ]);
         }
 
@@ -58,7 +58,7 @@ class StorieController extends AbstractController
     public function read(Story $story): Response
     {
         return $this->json($story, 200, [], [
-            'groups' => ['read'],
+            'groups' => ['read_story'],
         ]);
     }
 
@@ -77,7 +77,7 @@ class StorieController extends AbstractController
             $this->getDoctrine()->getManager()->flush();
 
             return $this->json($story, 200, [], [
-                'groups' => ['read'],
+                'groups' => ['read_story'],
             ]);
         }
         return $this->json($form->getErrors(true, false)->__toString(), 400);

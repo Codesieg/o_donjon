@@ -23,7 +23,7 @@ class NpcController extends AbstractController
     {
         $stories = $npcRepository->findAll();
         return $this->json($stories, 200, [], [
-            'groups' => ['browse'],
+            'groups' => ['browse_npc'],
         ]);
     }
 
@@ -45,7 +45,7 @@ class NpcController extends AbstractController
             $em->flush();
 
             return $this->json($npc, 201, [], [
-                'groups' => ['read'],
+                'groups' => ['read_npc'],
             ]);
         }
 
@@ -58,7 +58,7 @@ class NpcController extends AbstractController
     public function read(NPC $npc): Response
     {
         return $this->json($npc, 200, [], [
-            'groups' => ['read'],
+            'groups' => ['read_npc'],
         ]);
     }
 
@@ -77,7 +77,7 @@ class NpcController extends AbstractController
             $this->getDoctrine()->getManager()->flush();
 
             return $this->json($npc, 200, [], [
-                'groups' => ['read'],
+                'groups' => ['read_npc'],
             ]);
         }
         return $this->json($form->getErrors(true, false)->__toString(), 400);
