@@ -2,7 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\User;
+use App\Entity\Race;
+use App\Form\RaceType;
 use App\Entity\Character;
 use App\Entity\Statistics;
 use App\Form\CharacterType;
@@ -24,43 +25,58 @@ class CharacterController extends AbstractController
      */
     public function add(Request $request): Response
     {
+
+        // pour l'user :  $request->cookies->get('PHPSESSID');
+        $race = new Race();
+
+        
+        // Create a new forms stats  
+        // $formRace = $this->createForm(RaceType::class, $race, ['csrf_protection' => false]);
+        $sentData = json_decode($request->getContent(), true);
+        $request->request->replace(is_array($sentData) ? $sentData : array());
+        // dd($request);
+
+        // $formRace->submit($sentData);
+        
+        $raceName = $request->request->get('race');
+        $race->setName($raceName[0]["name"]);
+        // $race->setInformations($raceName["informations"]);
+        // dd($race);
+
+
+        // Create a new stats 
+        $stats = new Statistics();
+        
+        // Create a new forms stats  
+        $formStat = $this->createForm(StatisticsType::class, $stats, ['csrf_protection' => false]);
+        $sentDataStats = json_decode($request->getContent(), true); 
+        $formStat->submit($sentDataStats);
+
+        // dd($stats, $race);
+        
         // Create a new character 
         $character = new Character();
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($character);
         // Create a new forms character  
         $form = $this->createForm(CharacterType::class, $character, ['csrf_protection' => false]);
         $sentData = json_decode($request->getContent(), true); // On definit le parametre à true afin de retourner un tableau associatif
         $form->submit($sentData);
-        $form->getData();
+        $character->setStatistics($stats);
+        $raceInfo = $character->setRace($race);
+        
+        // dd($raceInfo);
 
-        $em->persist($character);
-
-           // Create a new stats 
-        $stats = new Statistics();
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($stats);
-           // Create a new forms character  
-        $formStat= $this->createForm(StatisticsType::class, $stats, ['csrf_protection' => false]);
-           $sentDataStats = json_decode($request->getContent(), true); // On definit le parametre à true afin de retourner un tableau associatif
-        $formStat->submit($sentDataStats);
-        // $formStat->getData();
-        //    dd($formStat);
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($stats);
-        // dd($stats);
-        $em->flush();
-
-        // if ($form->isValid()) {
-        //     $em = $this->getDoctrine()->getManager();
-        //     $em->persist($character);
-        //     // $em->persist($statistics);
-        //     $em->flush();
-
-            return $this->json(['character' => $character, 'statistics' => $stats],  201, [], [
+        
+        
+        if ($form->isValid()) {
+            
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($character);
+            $em->flush();
+            
+            return $this->json($character,  201, [], [
                 'groups' => ['read_character'],
             ]);
-        // }
+        }
         return $this->json($form->getErrors(true, false)->__toString(), 400);
         
     }
