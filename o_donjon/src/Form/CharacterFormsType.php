@@ -39,6 +39,8 @@ class CharacterFormsType extends AbstractType
             ->add('equipment', CharacterType::class)
             ->add('other_proficiencies_and_languages', CharacterType::class)
             ->add('features_and_traits', CharacterType::class)
+            // ->add('createdAt')
+            // ->add('updatedAt')
             ->add('user', CharacterType::class)
             ->add('campaign', CharacterType::class)
             ->add('race', CharacterType::class)

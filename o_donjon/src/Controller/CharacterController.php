@@ -18,6 +18,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
      */
 class CharacterController extends AbstractController
 {
+    
     /**
      * @Route("/add", name="add", methods={"POST"},)
      */
@@ -25,29 +26,41 @@ class CharacterController extends AbstractController
     {
         // Create a new character 
         $character = new Character();
-        
-        // creat new stats for a new character
-        $statistics = new Statistics();
-        $character->setStatistics($statistics);
-        
-        // dd($character);
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($character);
         // Create a new forms character  
         $form = $this->createForm(CharacterType::class, $character, ['csrf_protection' => false]);
         $sentData = json_decode($request->getContent(), true); // On definit le parametre à true afin de retourner un tableau associatif
         $form->submit($sentData);
         $form->getData();
-        
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($character);
-            $em->persist($statistics);
-            $em->flush();
+        $em->persist($character);
 
-            return $this->json($character, 201, [], [
+           // Create a new stats 
+        $stats = new Statistics();
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($stats);
+           // Create a new forms character  
+        $formStat= $this->createForm(StatisticsType::class, $stats, ['csrf_protection' => false]);
+           $sentDataStats = json_decode($request->getContent(), true); // On definit le parametre à true afin de retourner un tableau associatif
+        $formStat->submit($sentDataStats);
+        // $formStat->getData();
+        //    dd($formStat);
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($stats);
+        // dd($stats);
+        $em->flush();
+
+        // if ($form->isValid()) {
+        //     $em = $this->getDoctrine()->getManager();
+        //     $em->persist($character);
+        //     // $em->persist($statistics);
+        //     $em->flush();
+
+            return $this->json(['character' => $character, 'statistics' => $stats],  201, [], [
                 'groups' => ['read_character'],
             ]);
-        }
+        // }
         return $this->json($form->getErrors(true, false)->__toString(), 400);
         
     }

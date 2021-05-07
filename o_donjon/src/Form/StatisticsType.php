@@ -27,6 +27,7 @@ class StatisticsType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Statistics::class,
+            "allow_extra_fields" => true
         ]);
     }
 }
