@@ -54,7 +54,8 @@ class CampaignController extends AbstractController
         $form->submit($sentData);
 
         if ($form->isValid()) {
-           
+            
+            $campaign->setOwner($owner);
             $this->getDoctrine()->getManager()->flush();
            
             return $this->json($campaign, 200, [], [
