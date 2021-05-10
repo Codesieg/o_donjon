@@ -45,6 +45,8 @@ class CampaignController extends AbstractController
      */
     public function edit(Request $request, Campaign $campaign): Response
     {
+        $owner = $this->getUser();
+        
         $form = $this->createForm(CampaignType::class, $campaign, [
             'csrf_protection' => false,
         ]);
