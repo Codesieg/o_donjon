@@ -69,6 +69,9 @@ class CampaignController extends AbstractController
      */
     public function add(Request $request): Response
     {
+        $owner = $this->getUser();
+        // dd($owner);
+
         $campaign = new Campaign();
         $form = $this->createForm(CampaignType::class, $campaign, [
             'csrf_protection' => false,
@@ -78,6 +81,7 @@ class CampaignController extends AbstractController
         $form->getData();
 
         if ($form->isValid()) {
+            $campaign->setOwner($owner);
             $em = $this->getDoctrine()->getManager();
             $em->persist($campaign);
             $em->flush();
