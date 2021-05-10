@@ -21,6 +21,10 @@ class CharacterController extends AbstractController
      */
     public function add(Request $request): Response
     {
+
+        $user = $this->getUser();
+        // dd($user);
+
         // Create a new character 
         $character = new Character();
         // Create a new forms character  
@@ -31,6 +35,8 @@ class CharacterController extends AbstractController
         // dd($form);
 
         if ($form->isValid()) {
+            $character->setUser($user);
+            // dd($character);
             $em = $this->getDoctrine()->getManager();
             $em->persist($character);
             $em->flush();
