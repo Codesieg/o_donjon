@@ -69,6 +69,9 @@ class CampaignController extends AbstractController
      */
     public function add(Request $request): Response
     {
+        $owner = $this->getUser();
+        // dd($owner);
+
         $campaign = new Campaign();
         $form = $this->createForm(CampaignType::class, $campaign, [
             'csrf_protection' => false,
@@ -78,6 +81,7 @@ class CampaignController extends AbstractController
         $form->getData();
 
         if ($form->isValid()) {
+            $campaign->setOwner($owner);
             $em = $this->getDoctrine()->getManager();
             $em->persist($campaign);
             $em->flush();
@@ -153,6 +157,20 @@ class CampaignController extends AbstractController
             'groups' => ['browse_campaign_character'],
         ]);
     }
+
+
+    /**
+    * READ WITH ASSOCIATED STATS (NB OF STORIES,..) => remplacera read ?
+    *
+     * @Route("/{id}/stats", name="stats_read", methods={"GET"}, requirements={"id": "\d+"})
+     */
+    public function readStats(Campaign $campaign): Response
+    {       
+        return $this->json($campaign, 200, [], [
+            'groups' => ['read_campaign', 'count_characters', 'count_npcs', 'count_stories', 'count_maps'],
+        ]);
+    }
+
 
     
 }

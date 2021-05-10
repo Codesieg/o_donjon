@@ -2,30 +2,28 @@
 
 namespace App\Form;
 
-use App\Entity\Story;
+use App\Entity\Spell;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class StoryType extends AbstractType
+class SpellType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('description')
-            ->add('isDone')
-            ->add('report')
-            // ->add('createdAt')
-            // ->add('updatedAt')
-            ->add('campaign')
+            ->add('spellcasting_class')
+            ->add('spell_attack_bonus')
+            ->add('spellcasting_ability')
+            ->add('spell_save_dc')
+            ->add('spells_list')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Story::class,
+            'data_class' => Spell::class,
         ]);
     }
 }

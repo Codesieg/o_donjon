@@ -3,9 +3,13 @@
 namespace App\Form;
 
 use App\Entity\Character;
+use App\Entity\Statistics;
+use App\Form\StatisticsType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class CharacterType extends AbstractType
 {
@@ -35,9 +39,9 @@ class CharacterType extends AbstractType
             ->add('equipment')
             ->add('other_proficiencies_and_languages')
             ->add('features_and_traits')
-            ->add('createdAt')
-            ->add('updatedAt')
-            ->add('user')
+            // ->add('createdAt')
+            // ->add('updatedAt')
+            // ->add('user')
             ->add('campaign')
             ->add('race')
             ->add('class')
@@ -53,6 +57,7 @@ class CharacterType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Character::class,
+            "allow_extra_fields" => true
         ]);
     }
 }

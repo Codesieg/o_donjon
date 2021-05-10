@@ -4,9 +4,22 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\Campaign;
+use App\Entity\Race;
+use App\Entity\Skill;
+use App\Entity\Spell;
+use App\Form\RaceType;
+use App\Form\SkillType;
+use App\Form\SpellType;
 use App\Entity\Character;
+use App\Entity\Statistics;
+use App\Entity\SavingThrow;
 use App\Form\CharacterType;
 use App\Repository\CampaignRepository;
+use App\Form\StatisticsType;
+use App\Entity\Caracteristic;
+use App\Form\SavingThrowType;
+use App\Entity\CharacterClass;
+use App\Form\CaracteristicType;
 use App\Repository\CharacterRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,26 +33,99 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
      */
 class CharacterController extends AbstractController
 {
+    
     /**
      * @Route("/add", name="add", methods={"POST"},)
      */
     public function add(Request $request): Response
+    // pour l'user :  $request->cookies->get('PHPSESSID');
     {
+
+        $user = $this->getUser();
+
+    
+        $class = new CharacterClass();
+
+        // Create a new form Class 
+        $sentData = json_decode($request->getContent(), true);
+        $class->setName($sentData["ClassProperty"]["name"]);
+        $class->setInformations($sentData["ClassProperty"]["informations"]);
+
+        $race = new Race();
+
+        // Create a new form Race 
+        $sentData = json_decode($request->getContent(), true);
+        $race->setName($sentData["races"]["name"]);
+        $race->setInformations($sentData["races"]["informations"]);
+
+        // Create a new stats 
+        $stats = new Statistics();
+        
+        // Create a new form Stats 
+        $formStat = $this->createForm(StatisticsType::class, $stats, ['csrf_protection' => false]);
+        $sentDataStats = json_decode($request->getContent(), true); 
+        $formStat->submit($sentDataStats);
+
+         // Create a new stats 
+        $caracteristics = new Caracteristic();
+        
+         // Create a new form Stats 
+        $form = $this->createForm(CaracteristicType::class, $caracteristics, ['csrf_protection' => false]);
+        $sentData = json_decode($request->getContent(), true); 
+        $form->submit($sentData);
+
+        // Create a new Spell 
+        $spell = new Spell();
+
+         // Create a new form spell 
+        $formStat = $this->createForm(SpellType::class, $spell, ['csrf_protection' => false]);
+        $sentDataStats = json_decode($request->getContent(), true); 
+        $formStat->submit($sentDataStats);
+
+        // Create a new SavingThrows 
+        $savingThrows  = new SavingThrow();
+
+        // Create a new form Skill 
+        $sentData = json_decode($request->getContent(), true);
+        $savingThrows->setStrength($sentData["savingThrowspellDone"]["strength"]);
+        $savingThrows->setDexterity($sentData["savingThrowspellDone"]["dexterity"]);
+        $savingThrows->setConstitution($sentData["savingThrowspellDone"]["constitution"]);
+        $savingThrows->setIntelligence($sentData["savingThrowspellDone"]["intelligence"]);
+        $savingThrows->setWisdom($sentData["savingThrowspellDone"]["wisdom"]);
+        $savingThrows->setCharisma($sentData["savingThrowspellDone"]["charisma"]);
+        
+
+        // Create a new Skill 
+        $skill = new Skill();
+
+         // Create a new form Skill 
+        $formStat = $this->createForm(SkillType::class, $skill, ['csrf_protection' => false]);
+        $sentDataStats = json_decode($request->getContent(), true); 
+        $formStat->submit($sentDataStats);
+        
+
         // Create a new character 
         $character = new Character();
         // Create a new forms character  
         $form = $this->createForm(CharacterType::class, $character, ['csrf_protection' => false]);
         $sentData = json_decode($request->getContent(), true); // On definit le parametre à true afin de retourner un tableau associatif
         $form->submit($sentData);
-        $form->getData();
-        // dd($form);
-
+        $character->setStatistics($stats);
+        $character->setRace($race);
+        $character->setSpell($spell);
+        $character->setSkill($skill);
+        $character->setSavingThrowspell($savingThrows);
+        $character->setClass($class);
+        $character->setCaracteristics($caracteristics);
+        $character->setUser($user);
+        
+        
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($character);
             $em->flush();
-
-            return $this->json($character, 201, [], [
+            
+            return $this->json($character,  201, [], [
                 'groups' => ['read_character'],
             ]);
         }

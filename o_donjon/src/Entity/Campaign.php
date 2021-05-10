@@ -10,6 +10,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=CampaignRepository::class)
+ * @ORM\HasLifecycleCallbacks()
  */
 class Campaign
 {
@@ -17,12 +18,12 @@ class Campaign
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"browse_campaign", "read_campaign", "list_campaign"})
+     * @Groups({"browse_campaign", "read_campaign", "list_campaign", "read_character"})
      */
     private $id;
 
     /**
-     * @Groups({"browse_campaign", "read_campaign", "list_campaign"})
+     * @Groups({"browse_campaign", "read_campaign", "list_campaign", "read_character"})
      * @ORM\Column(type="string", length=64, nullable=true)
      */
     private $name;
@@ -66,6 +67,7 @@ class Campaign
     /**
      * @Groups({"browse_campaign", "read_campaign"})
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="OrganizedCampaigns")
+     * @Groups({"browse", "read"})
      */
     private $owner;
 
@@ -105,6 +107,7 @@ class Campaign
         $this->NPCs = new ArrayCollection();
         $this->stories = new ArrayCollection();
         $this->maps = new ArrayCollection();
+        $this->createdAt = new \DateTime();
     }
 
     public function getId(): ?int
@@ -189,9 +192,13 @@ class Campaign
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
+    /**
+     * @ORM\PreUpdate
+     */
+
+    public function setUpdatedAt(): self
     {
-        $this->updatedAt = $updatedAt;
+        $this->updatedAt = new \DateTime();
 
         return $this;
     }
@@ -243,6 +250,14 @@ class Campaign
         return $this->characters;
     }
 
+    /**
+     * @Groups({"count_characters"})
+     */
+    public function getCountCharacters()
+    {
+        return $this->characters->count();
+    }
+
     public function addCharacter(Character $character): self
     {
         if (!$this->characters->contains($character)) {
@@ -271,6 +286,14 @@ class Campaign
     public function getNPCs(): Collection
     {
         return $this->NPCs;
+    }
+
+    /**
+     * @Groups({"count_npcs"})
+     */
+    public function getCountNpcs()
+    {
+        return $this->characters->count();
     }
 
     public function addNPC(NPC $nPC): self
@@ -304,6 +327,14 @@ class Campaign
         return $this->stories;
     }
 
+    /**
+     * @Groups({"count_stories"})
+     */
+    public function getCountStories()
+    {
+        return $this->characters->count();
+    }
+
     public function addStory(Story $story): self
     {
         if (!$this->stories->contains($story)) {
@@ -332,6 +363,14 @@ class Campaign
     public function getMaps(): Collection
     {
         return $this->maps;
+    }
+
+    /**
+     * @Groups({"count_maps"})
+     */
+    public function getCountMaps()
+    {
+        return $this->characters->count();
     }
 
     public function addMap(Map $map): self
