@@ -19,7 +19,7 @@ class User implements UserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"browse_user", "read_user", "list_campaign", "list_character", "read_character"})
+     * @Groups({"browse_user", "read_user", "browse_campaign", "list_character", "read_character"})
      */
     private $id;
 
