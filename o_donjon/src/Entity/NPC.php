@@ -32,6 +32,7 @@ class NPC
     private $type;
 
     /**
+     * @ORM\Column(type="text", nullable=true)
      * @Groups({"browse_npc", "read_npc", "browse_campaign_npc"})
      */
     private $description;
