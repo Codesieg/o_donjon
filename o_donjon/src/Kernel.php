@@ -37,7 +37,7 @@ class Kernel extends BaseKernel
         }
     }
 
-    public function registerBundles()
+    /* public function registerBundles()
     {
         $bundles = [
             // ...
@@ -45,5 +45,5 @@ class Kernel extends BaseKernel
             // ...
         ];
         // ...
-    }
+    } */
 }
