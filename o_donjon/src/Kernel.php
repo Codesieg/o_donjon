@@ -37,13 +37,13 @@ class Kernel extends BaseKernel
         }
     }
 
-    public function registerBundles()
-    {
-        $bundles = [
-            // ...
-            new Nelmio\CorsBundle\NelmioCorsBundle(),
-            // ...
-        ];
-        // ...
-    }
+    // public function registerBundles()
+    // {
+    //     $bundles = [
+    //         // ...
+    //         new Nelmio\CorsBundle\NelmioCorsBundle(),
+    //         // ...
+    //     ];
+    //     // ...
+    // }
 }
