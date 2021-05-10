@@ -67,6 +67,7 @@ class Campaign
     /**
      * @Groups({"browse_campaign", "read_campaign"})
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="OrganizedCampaigns")
+     * @Groups({"browse", "read"})
      */
     private $owner;
 
