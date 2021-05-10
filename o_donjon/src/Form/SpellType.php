@@ -2,32 +2,28 @@
 
 namespace App\Form;
 
-use App\Entity\Campaign;
+use App\Entity\Spell;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CampaignType extends AbstractType
+class SpellType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('description')
-            ->add('memo')
-            ->add('is_archived')
-            ->add('invitation_code')
-            ->add('createdAt')
-            ->add('updatedAt')
-            // ->add('owner')
-            ->add('campaignUsers')
+            ->add('spellcasting_class')
+            ->add('spell_attack_bonus')
+            ->add('spellcasting_ability')
+            ->add('spell_save_dc')
+            ->add('spells_list')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Campaign::class,
+            'data_class' => Spell::class,
         ]);
     }
 }

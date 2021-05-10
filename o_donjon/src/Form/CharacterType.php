@@ -41,7 +41,7 @@ class CharacterType extends AbstractType
             ->add('features_and_traits')
             // ->add('createdAt')
             // ->add('updatedAt')
-            ->add('user')
+            // ->add('user')
             ->add('campaign')
             ->add('race')
             ->add('class')

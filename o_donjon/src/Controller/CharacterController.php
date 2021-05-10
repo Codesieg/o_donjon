@@ -3,15 +3,18 @@
 namespace App\Controller;
 
 use App\Entity\Race;
-use App\Form\RaceType;
-use App\Entity\Character;
-use App\Entity\SavingThrow;
 use App\Entity\Skill;
 use App\Entity\Spell;
+use App\Form\RaceType;
+use App\Form\SkillType;
+use App\Form\SpellType;
+use App\Entity\Character;
 use App\Entity\Statistics;
+use App\Entity\SavingThrow;
 use App\Form\CharacterType;
 use App\Form\StatisticsType;
 use App\Entity\Caracteristic;
+use App\Form\SavingThrowType;
 use App\Entity\CharacterClass;
 use App\Form\CaracteristicType;
 use App\Repository\CharacterRepository;
@@ -33,13 +36,14 @@ class CharacterController extends AbstractController
     // pour l'user :  $request->cookies->get('PHPSESSID');
     {
 
+        $user = $this->getUser();
+    
         $class = new CharacterClass();
 
         // Create a new form Class 
         $sentData = json_decode($request->getContent(), true);
         $class->setName($sentData["ClassProperty"]["name"]);
         $class->setInformations($sentData["ClassProperty"]["informations"]);
-
 
         $race = new Race();
 
@@ -57,10 +61,10 @@ class CharacterController extends AbstractController
         $formStat->submit($sentDataStats);
 
          // Create a new stats 
-        $caracteristic = new Caracteristic();
+        $caracteristics = new Caracteristic();
         
          // Create a new form Stats 
-        $form = $this->createForm(CaracteristicType::class, $caracteristic, ['csrf_protection' => false]);
+        $form = $this->createForm(CaracteristicType::class, $caracteristics, ['csrf_protection' => false]);
         $sentData = json_decode($request->getContent(), true); 
         $form->submit($sentData);
 
@@ -73,12 +77,17 @@ class CharacterController extends AbstractController
         $formStat->submit($sentDataStats);
 
         // Create a new SavingThrows 
-        $skill = new SavingThrow();
+        $savingThrows  = new SavingThrow();
 
-         // Create a new form Skill 
-        $formStat = $this->createForm(SkillType::class, $skill, ['csrf_protection' => false]);
-        $sentDataStats = json_decode($request->getContent(), true); 
-        $formStat->submit($sentDataStats);
+        // Create a new form Skill 
+        $sentData = json_decode($request->getContent(), true);
+        $savingThrows->setStrength($sentData["savingThrowspellDone"]["strength"]);
+        $savingThrows->setDexterity($sentData["savingThrowspellDone"]["dexterity"]);
+        $savingThrows->setConstitution($sentData["savingThrowspellDone"]["constitution"]);
+        $savingThrows->setIntelligence($sentData["savingThrowspellDone"]["intelligence"]);
+        $savingThrows->setWisdom($sentData["savingThrowspellDone"]["wisdom"]);
+        $savingThrows->setCharisma($sentData["savingThrowspellDone"]["charisma"]);
+        
 
         // Create a new Skill 
         $skill = new Skill();
@@ -98,7 +107,10 @@ class CharacterController extends AbstractController
         $character->setRace($race);
         $character->setSpell($spell);
         $character->setSkill($skill);
+        $character->setSavingThrowspell($savingThrows);
         $character->setClass($class);
+        $character->setCaracteristics($caracteristics);
+        $character->setUser($user);
         
         
         if ($form->isValid()) {
