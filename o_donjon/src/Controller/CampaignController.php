@@ -49,7 +49,6 @@ class CampaignController extends AbstractController
             'csrf_protection' => false,
         ]);
         $sentData = json_decode($request->getContent(), true);
-        dd($sentData);
         $form->submit($sentData);
 
         if ($form->isValid()) {
