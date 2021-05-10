@@ -18,7 +18,7 @@ class Campaign
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"browse_campaign", "read_campaign", "list_campaign", "read_character"})
+     * @Groups({"browse_campaign", "read_campaign", "browse_campaign", "read_character"})
      */
     private $id;
 

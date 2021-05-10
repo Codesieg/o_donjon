@@ -42,7 +42,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=64, nullable=true)
-     * @Groups({"browse_user", "read_user", "list_campaign", "list_character", "read_character"})
+     * @Groups({"browse_user", "read_user", "list_campaign", "list_character", "read_character", "browse_campaign", "read_campaign"})
      */
     private $name;
 
