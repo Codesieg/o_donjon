@@ -2,10 +2,11 @@
 
 namespace App;
 
-use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Nelmio\CorsBundle\NelmioCorsBundle;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
+use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
 class Kernel extends BaseKernel
 {
@@ -35,4 +36,14 @@ class Kernel extends BaseKernel
             (require $path)($routes->withPath($path), $this);
         }
     }
+
+    /* public function registerBundles()
+    {
+        $bundles = [
+            // ...
+            new Nelmio\CorsBundle\NelmioCorsBundle(),
+            // ...
+        ];
+        // ...
+    } */
 }

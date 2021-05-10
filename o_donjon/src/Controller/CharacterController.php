@@ -37,6 +37,7 @@ class CharacterController extends AbstractController
     {
 
         $user = $this->getUser();
+
     
         $class = new CharacterClass();
 
@@ -97,6 +98,7 @@ class CharacterController extends AbstractController
         $sentDataStats = json_decode($request->getContent(), true); 
         $formStat->submit($sentDataStats);
         
+
         // Create a new character 
         $character = new Character();
         // Create a new forms character  
@@ -114,7 +116,6 @@ class CharacterController extends AbstractController
         
         
         if ($form->isValid()) {
-            
             $em = $this->getDoctrine()->getManager();
             $em->persist($character);
             $em->flush();
@@ -172,9 +173,7 @@ class CharacterController extends AbstractController
         
         return $this->json(
             $character, 200, [], [
-                'groups' => [
-                'read_character', 
-            ],
+                'groups' => ['read_character'],
             ]
         );
     }

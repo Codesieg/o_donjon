@@ -11,6 +11,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @ORM\HasLifecycleCallbacks()
  */
 class User implements UserInterface
 {
@@ -18,19 +19,18 @@ class User implements UserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"browse", "read", "read_character"})
+     * @Groups({"browse_user", "read_user", "list_campaign", "list_character", "read_character"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Groups({"read"})
+     * @Groups({"read_user"})
      */
     private $email;
 
     /**
      * @ORM\Column(type="json")
-     * @Groups({"read"})
      */
     private $roles = [];
 
@@ -42,13 +42,13 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=64, nullable=true)
-     * @Groups({"browse", "read", "read_character"})
+     * @Groups({"browse_user", "read_user", "list_campaign", "list_character", "read_character"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"browse", "read"})
+     * @Groups({"browse_user", "read_user"})
      */
     private $avatarPath;
 
@@ -69,19 +69,18 @@ class User implements UserInterface
 
     /**
      * @ORM\OneToMany(targetEntity=Campaign::class, mappedBy="owner")
-     * @Groups({"read"})
      */
     private $OrganizedCampaigns;
 
     /**
      * @ORM\ManyToMany(targetEntity=Campaign::class, inversedBy="users")
-     * @Groups({"read"})
+     * @Groups({"list_campaign", "read_user"})
      */
     private $campaigns;
 
     /**
      * @ORM\OneToMany(targetEntity=Character::class, mappedBy="user")
-     * @Groups({"read"})
+     * @Groups({"list_character", "read_user"})
      */
     private $characters;
 
@@ -90,6 +89,7 @@ class User implements UserInterface
         $this->OrganizedCampaigns = new ArrayCollection();
         $this->campaigns = new ArrayCollection();
         $this->characters = new ArrayCollection();
+        $this->createdAt = new \DateTime();
     }
 
     public function getId(): ?int
@@ -226,9 +226,13 @@ class User implements UserInterface
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
+    /**
+     * @ORM\PreUpdate
+     */
+
+    public function setUpdatedAt(): self
     {
-        $this->updatedAt = $updatedAt;
+        $this->updatedAt = new \DateTime();
 
         return $this;
     }
