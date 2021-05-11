@@ -28,6 +28,7 @@ class CampaignType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Campaign::class,
+            'allow_extra_fields' => true,
         ]);
     }
 }
