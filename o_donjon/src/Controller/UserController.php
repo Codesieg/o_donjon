@@ -16,13 +16,13 @@ use Symfony\Component\Routing\Annotation\Route;
 
 
 /**
-     * @Route("/user", name="user_")
+     * @Route("", name="user_")
      */
 
 class UserController extends AbstractController
 {
     /**
-     * @Route("", name="browse", methods={"GET"})
+     * @Route("/users", name="browse", methods={"GET"})
      */
     public function browse(UserRepository $userRepository): Response
     {
@@ -33,7 +33,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("", name="add", methods={"POST"})
+     * @Route("/register", name="add", methods={"POST"})
      */
     public function add(Request $request): Response
     {
@@ -58,7 +58,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="read", methods={"GET"}, requirements={"id": "\d+"})
+     * @Route("/user/{id}", name="read", methods={"GET"}, requirements={"id": "\d+"})
      */
     public function read(User $user): Response
     {
@@ -68,7 +68,7 @@ class UserController extends AbstractController
     }    
 
     /**
-     * @Route("/{id}", name="edit", methods={"PUT", "PATCH"}, requirements={"id": "\d+"})
+     * @Route("/user/{id}", name="edit", methods={"PUT", "PATCH"}, requirements={"id": "\d+"})
      */
     public function edit(User $user, Request $request): Response
     {
@@ -89,7 +89,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="delete", methods={"DELETE"}, requirements={"id": "\d+"})
+     * @Route("/user/{id}", name="delete", methods={"DELETE"}, requirements={"id": "\d+"})
      */
     public function delete(User $user): Response
     {
@@ -102,26 +102,6 @@ class UserController extends AbstractController
 
 
     /***********************************************ADVANCED METHODS**************************************/
-
-    /**
-     * @Route("/{id}/campaign", name="list_campaign", methods={"GET"}, requirements={"id": "\d+"})
-     */
-    public function listCampaign(User $user): Response
-    {
-        return $this->json($user, 200, [], [
-            'groups' => ['list_campaign'],
-        ]);
-    }
-
-    /**
-     * @Route("/{id}/character", name="list_character", methods={"GET"}, requirements={"id": "\d+"})
-     */
-    public function listCharacter(User $user): Response
-    {
-        return $this->json($user, 200, [], [
-            'groups' => ['list_character'],
-        ]);
-    }
 
     /**
      * AUTHORIZE A USER TO JOIN A CAMPAIGN

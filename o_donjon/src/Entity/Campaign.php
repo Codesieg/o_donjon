@@ -23,7 +23,7 @@ class Campaign
     private $id;
 
     /**
-     * @Groups({"browse_campaign", "read_campaign", "list_campaign", "read_character"})
+     * @Groups({"browse_campaign", "read_campaign", "read_character"})
      * @ORM\Column(type="string", length=64, nullable=true)
      */
     private $name;
