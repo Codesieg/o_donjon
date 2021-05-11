@@ -20,11 +20,28 @@ use Symfony\Component\Routing\Annotation\Route;
 class CampaignController extends AbstractController
 {
     /**
+     * @Route("/dm", name="browse_dm", methods={"GET"})
+     */
+    public function browseDm(CampaignRepository $campaignRepository): Response
+    {
+
+        $userId = $this->getUser()->getId();
+
+        $campaigns = $campaignRepository->findBy(array('owner' => $userId));
+        return $this->json($campaigns, 200, [], [
+            'groups' => ['browse_campaign'],
+        ]);
+    }
+
+    /**
      * @Route("", name="browse", methods={"GET"})
      */
     public function browse(CampaignRepository $campaignRepository): Response
     {
-        $campaigns = $campaignRepository->findAll();
+
+        $userId = $this->getUser()->getId();
+
+        $campaigns = $campaignRepository->findByUser($userId);
         return $this->json($campaigns, 200, [], [
             'groups' => ['browse_campaign'],
         ]);
