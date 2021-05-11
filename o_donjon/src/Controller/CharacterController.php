@@ -2,22 +2,19 @@
 
 namespace App\Controller;
 
-use App\Entity\User;
-use App\Entity\Campaign;
 use App\Entity\Race;
+use App\Entity\User;
 use App\Entity\Skill;
 use App\Entity\Spell;
-use App\Form\RaceType;
 use App\Form\SkillType;
 use App\Form\SpellType;
+use App\Entity\Campaign;
 use App\Entity\Character;
 use App\Entity\Statistics;
 use App\Entity\SavingThrow;
 use App\Form\CharacterType;
-use App\Repository\CampaignRepository;
 use App\Form\StatisticsType;
 use App\Entity\Caracteristic;
-use App\Form\SavingThrowType;
 use App\Entity\CharacterClass;
 use App\Form\CaracteristicType;
 use App\Repository\CharacterRepository;
@@ -33,50 +30,47 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
      */
 class CharacterController extends AbstractController
 {
-    
+
     /**
      * @Route("/add", name="add", methods={"POST"},)
      */
     public function add(Request $request): Response
     // pour l'user :  $request->cookies->get('PHPSESSID');
     {
-
         $user = $this->getUser();
 
-    
-        $class = new CharacterClass();
+        $repository = $this->getDoctrine()->getRepository(User::class);
+        $data_users = $repository->findOneBy(['id' => $user->getId()]);
+        dd($data_users);
 
-        // Create a new form Class 
+        // Create a new  Class 
+        $class = new CharacterClass();
         $sentData = json_decode($request->getContent(), true);
         $class->setName($sentData["ClassProperty"]["name"]);
         $class->setInformations($sentData["ClassProperty"]["informations"]);
 
+        // Create a new Race 
         $race = new Race();
-
-        // Create a new form Race 
         $sentData = json_decode($request->getContent(), true);
         $race->setName($sentData["races"]["name"]);
         $race->setInformations($sentData["races"]["informations"]);
 
         // Create a new stats 
-        $stats = new Statistics();
-        
+        $statistics = new Statistics();
         // Create a new form Stats 
-        $formStat = $this->createForm(StatisticsType::class, $stats, ['csrf_protection' => false]);
-        $sentDataStats = json_decode($request->getContent(), true); 
-        $formStat->submit($sentDataStats);
+        $formStat = $this->createForm(StatisticsType::class, $statistics, ['csrf_protection' => false]);
+        $sentData = json_decode($request->getContent(), true); 
+        $formStat->submit($sentData);
 
-         // Create a new stats 
+         // Create a new caracteristics 
         $caracteristics = new Caracteristic();
-        
-         // Create a new form Stats 
+         // Create a new form caracteristics 
         $form = $this->createForm(CaracteristicType::class, $caracteristics, ['csrf_protection' => false]);
         $sentData = json_decode($request->getContent(), true); 
         $form->submit($sentData);
 
         // Create a new Spell 
         $spell = new Spell();
-
          // Create a new form spell 
         $formStat = $this->createForm(SpellType::class, $spell, ['csrf_protection' => false]);
         $sentDataStats = json_decode($request->getContent(), true); 
@@ -84,8 +78,7 @@ class CharacterController extends AbstractController
 
         // Create a new SavingThrows 
         $savingThrows  = new SavingThrow();
-
-        // Create a new form Skill 
+        // Create a new form SavingThrows 
         $sentData = json_decode($request->getContent(), true);
         $savingThrows->setStrength($sentData["savingThrowspellDone"]["strength"]);
         $savingThrows->setDexterity($sentData["savingThrowspellDone"]["dexterity"]);
@@ -94,23 +87,118 @@ class CharacterController extends AbstractController
         $savingThrows->setWisdom($sentData["savingThrowspellDone"]["wisdom"]);
         $savingThrows->setCharisma($sentData["savingThrowspellDone"]["charisma"]);
         
-
         // Create a new Skill 
         $skill = new Skill();
-
          // Create a new form Skill 
         $formStat = $this->createForm(SkillType::class, $skill, ['csrf_protection' => false]);
         $sentDataStats = json_decode($request->getContent(), true); 
         $formStat->submit($sentDataStats);
         
-
         // Create a new character 
         $character = new Character();
         // Create a new forms character  
         $form = $this->createForm(CharacterType::class, $character, ['csrf_protection' => false]);
         $sentData = json_decode($request->getContent(), true); // On definit le parametre à true afin de retourner un tableau associatif
         $form->submit($sentData);
-        $character->setStatistics($stats);
+
+        // We add all property to character
+        $character->setStatistics($statistics);
+        $character->setRace($race);
+        $character->setSpell($spell);
+        $character->setSkill($skill);
+        $character->setSavingThrowspell($savingThrows);
+        $character->setClass($class);
+        $character->setCaracteristics($caracteristics);
+        $character->setUser($user);
+
+        // If the form is correct persist and flush it
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($character);
+            $em->flush();
+
+            // We are returning json for the api
+            return $this->json($character,  201, [], [
+                'groups' => ['read_character'],
+            ]);
+        }
+        // if the form is not correct return en error
+        return $this->json($form->getErrors(true, false)->__toString(), 400);
+        
+    }
+
+    /**
+     * @Route("/{id}", name="edit", methods={"PUT"}, requirements={"id": "\d+"})
+     */
+    public function edit(Request $request, character $character): Response
+    {
+        // Get user from character  
+        $user = $this->getUser();
+
+        // Edit class 
+        $classId = $character->getClass(); 
+        $class = $this->getDoctrine()->getManager()->getRepository(CharacterClass::class)->find($classId);
+
+        $sentData = json_decode($request->getContent(), true); 
+        $class->setName($sentData["ClassProperty"]["name"]);
+        $class->setInformations($sentData["ClassProperty"]["informations"]);
+        
+
+        // Edit race 
+        $raceId = $character->getRace();
+        $race = $this->getDoctrine()->getManager()->getRepository(Race::class)->find($raceId);
+        
+        $sentData = json_decode($request->getContent(), true); 
+        $race->setName($sentData["races"]["name"]);
+        $race->setInformations($sentData["races"]["informations"]);
+
+
+        // Edit stats 
+        $statisticsId = $character->getStatistics();
+        $statistics = $this->getDoctrine()->getManager()->getRepository(Statistics::class)->find($statisticsId);
+        $formStat = $this->createForm(StatisticsType::class, $statistics, ['csrf_protection' => false]);
+        $sentData = json_decode($request->getContent(), true); 
+        $formStat->submit($sentData);
+
+        // Edit caracteristics 
+        $caracteristicsId = $character->getCaracteristics();
+        $caracteristics = $this->getDoctrine()->getManager()->getRepository(Caracteristic::class)->find($caracteristicsId);
+        $formStat = $this->createForm(CaracteristicType::class, $caracteristics, ['csrf_protection' => false]);
+        $sentData = json_decode($request->getContent(), true); 
+        $formStat->submit($sentData);
+
+        // Edit spell 
+        $spellId = $character->getSpell();
+        $spell = $this->getDoctrine()->getManager()->getRepository(Spell::class)->find($spellId);
+        $formStat = $this->createForm(SpellType::class, $spell, ['csrf_protection' => false]);
+        $sentData = json_decode($request->getContent(), true); 
+        $formStat->submit($sentData);
+
+        // Edit savingthrowspell 
+        $savingThrowsId = $character->getSavingThrowspell();
+        $savingThrows = $this->getDoctrine()->getManager()->getRepository(SavingThrow::class)->find($savingThrowsId);
+        
+        $sentData = json_decode($request->getContent(), true); 
+        $savingThrows->setStrength($sentData["savingThrowspellDone"]["strength"]);
+        $savingThrows->setDexterity($sentData["savingThrowspellDone"]["dexterity"]);
+        $savingThrows->setConstitution($sentData["savingThrowspellDone"]["constitution"]);
+        $savingThrows->setIntelligence($sentData["savingThrowspellDone"]["intelligence"]);
+        $savingThrows->setWisdom($sentData["savingThrowspellDone"]["wisdom"]);
+        $savingThrows->setCharisma($sentData["savingThrowspellDone"]["charisma"]);
+        
+        // Edit a  Skill for a character
+        $skillId = $character->getSkill();
+        $skill = $this->getDoctrine()->getManager()->getRepository(Skill::class)->find($skillId);
+        $formStat = $this->createForm(SkillType::class, $skill, ['csrf_protection' => false]);
+        $sentData = json_decode($request->getContent(), true); 
+        $formStat->submit($sentData);
+        
+
+        // Create a new forms character  
+        $form = $this->createForm(CharacterType::class, $character, ['csrf_protection' => false]);
+        $sentData = json_decode($request->getContent(), true); // On definit le parametre à true afin de retourner un tableau associatif
+        $form->submit($sentData);
+        $character->setStatistics($statistics);
         $character->setRace($race);
         $character->setSpell($spell);
         $character->setSkill($skill);
@@ -119,40 +207,18 @@ class CharacterController extends AbstractController
         $character->setCaracteristics($caracteristics);
         $character->setUser($user);
         
-        
+        // If the form is correct persist and flush it
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($character);
             $em->flush();
             
+            // We are returning json for the api
             return $this->json($character,  201, [], [
                 'groups' => ['read_character'],
             ]);
         }
-        return $this->json($form->getErrors(true, false)->__toString(), 400);
-        
-    }
-
-        /**
-     * @Route("/{id}", name="edit", methods={"PUT"},)
-     */
-    public function edit(Request $request, Character $character): Response
-    {
-        // Create a new forms character  
-        $form = $this->createForm(CharacterType::class, $character, ['csrf_protection' => false]);
-
-        $sentData = json_decode($request->getContent(), true); // On definit le parametre à true afin de retourner un tableau associatif
-        $form->submit($sentData);
-        $form->getData();
-
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->flush();
-
-            return $this->json([
-                $character, 200, [],
-            ]);
-        }
+        // if the form is not correct return en error
         return $this->json($form->getErrors(true, false)->__toString(), 400);
         
     }
