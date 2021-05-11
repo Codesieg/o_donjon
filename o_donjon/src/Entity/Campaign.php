@@ -42,7 +42,7 @@ class Campaign
 
     /**
      * @Groups({"browse_campaign", "read_campaign"})
-     * @ORM\Column(type="boolean", options={"default": false})
+     * @ORM\Column(type="boolean", options={"default": 0}, nullable=true)
      */
     private $isArchived;
 
