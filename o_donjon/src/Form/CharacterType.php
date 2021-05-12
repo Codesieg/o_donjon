@@ -3,13 +3,10 @@
 namespace App\Form;
 
 use App\Entity\Character;
-use App\Entity\Statistics;
 use App\Form\StatisticsType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class CharacterType extends AbstractType
 {
@@ -43,13 +40,13 @@ class CharacterType extends AbstractType
             // ->add('updatedAt')
             // ->add('user')
             ->add('campaign')
-            ->add('race')
-            ->add('class')
-            ->add('caracteristics')
-            ->add('statistics')
-            ->add('spell')
-            ->add('savingThrowspell')
-            ->add('skill')
+            ->add('race', RaceType::class)
+            ->add('class', CharacterClassType::class)
+            ->add('caracteristics', CaracteristicType::class)
+            ->add('statistics', StatisticsType::class)
+            ->add('spell', SpellType::class)
+            ->add('savingThrowspell', SavingThrowType::class)
+            ->add('skill', SkillType::class)
         ;
     }
 
