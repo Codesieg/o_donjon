@@ -45,30 +45,29 @@ class CharacterController extends AbstractController
     // pour l'user :  $request->cookies->get('PHPSESSID');
     {
         $user = $this->getUser();
-        // dd($user);
-        $character = new Race();  
+        
+        $character = new Race();
         $form = $this->createForm(RaceType::class, $character, [
             'csrf_protection' => false,
         ]);  
         
-        $character = new CharacterClass();  
+        $character = new CharacterClass();
         $form = $this->createForm(CharacterClassType::class, $character, [
             'csrf_protection' => false,
         ]);  
         
-        $character = new Statistics();  
+        $character = new Statistics();
         $form = $this->createForm(StatisticsType::class, $character, [
             'csrf_protection' => false,
             ]);  
             
-            
-        $character = new Spell();  
+    
+        $character = new Spell();
         $form = $this->createForm(SpellType::class, $character, [
             'csrf_protection' => false,
             ]);  
             
-        
-        $character = new SavingThrow();  
+        $character = new SavingThrow();
         $form = $this->createForm(SavingThrowType::class, $character, [
             'csrf_protection' => false,
         ]);  
@@ -77,7 +76,6 @@ class CharacterController extends AbstractController
         $form = $this->createForm(SkillType::class, $character, [
             'csrf_protection' => false,
         ]);  
-
 
         // Create a new character 
         $character = new Character();

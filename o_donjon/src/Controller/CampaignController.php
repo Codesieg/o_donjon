@@ -20,12 +20,26 @@ use Symfony\Component\Routing\Annotation\Route;
 class CampaignController extends AbstractController
 {
     /**
+     * @Route("/dm", name="browse_dm", methods={"GET"})
+     */
+    public function browseDm(CampaignRepository $campaignRepository): Response
+    {
+
+        $userId = $this->getUser()->getId();
+
+        $campaigns = $campaignRepository->findBy(array('owner' => $userId));
+        return $this->json($campaigns, 200, [], [
+            'groups' => ['browse_campaign'],
+        ]);
+    }
+
+    /**
      * @Route("", name="browse", methods={"GET"})
      */
     public function browse(CampaignRepository $campaignRepository): Response
     {
-        $campaigns = $campaignRepository->findAll();
-        
+        $userId = $this->getUser()->getId();
+        $campaigns = $campaignRepository->findByUser($userId);
         return $this->json($campaigns, 200, [], [
             'groups' => ['browse_campaign'],
         ]);
@@ -45,16 +59,30 @@ class CampaignController extends AbstractController
      * @Route("/{id}", name="edit", methods={"PUT", "PATCH"}, requirements={"id": "\d+"})
      */
     public function edit(Request $request, Campaign $campaign): Response
-    {
+    {   
+
+        // on récupère l'ID de l'utilisateur connecté
+        $userId = $this->getUser()->getId();
+
+        // on récupére l'ID du owner de la campagne
+        $campaignId = $campaign->getOwner()->getId();
+
+        // on compare les deux ID et si ils sont différents alors on retourne une erreur
+        if ($userId != $campaignId) {
+            return $this->json('wrong user ID', 401);
+        }
+
+        $owner = $this->getUser();
+        
         $form = $this->createForm(CampaignType::class, $campaign, [
             'csrf_protection' => false,
         ]);
         $sentData = json_decode($request->getContent(), true);
-        dd($sentData);
         $form->submit($sentData);
 
         if ($form->isValid()) {
-           
+            
+            $campaign->setOwner($owner);
             $this->getDoctrine()->getManager()->flush();
            
             return $this->json($campaign, 200, [], [
@@ -104,6 +132,17 @@ class CampaignController extends AbstractController
      */
     public function delete(Campaign $campaign): Response
     {
+        // on récupère l'ID de l'utilisateur connecté
+        $userId = $this->getUser()->getId();
+
+        // on récupére l'ID du owner de la campagne
+        $campaignId = $campaign->getOwner()->getId();
+
+        // on compare les deux ID et si ils sont différents alors on retourne une erreur
+        if ($userId != $campaignId) {
+            return $this->json('wrong user ID', 401);
+        }
+
         $em = $this->getDoctrine()->getManager();
         $em->remove($campaign);
         $em->flush();

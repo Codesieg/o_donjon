@@ -15,8 +15,8 @@ class CampaignType extends AbstractType
             ->add('name')
             ->add('description')
             ->add('memo')
-            ->add('is_archived')
-            ->add('invitation_code')
+            ->add('isArchived')
+            ->add('invitationCode')
             // ->add('createdAt')
             // ->add('updatedAt')
             // ->add('owner')
@@ -28,7 +28,7 @@ class CampaignType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Campaign::class,
-            "allow_extra_fields" => true
+            'allow_extra_fields' => true
         ]);
     }
 }
