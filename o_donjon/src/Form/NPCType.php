@@ -24,6 +24,7 @@ class NPCType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => NPC::class,
+            "allow_extra_fields" => true
         ]);
     }
 }
