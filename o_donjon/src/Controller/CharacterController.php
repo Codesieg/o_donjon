@@ -197,7 +197,12 @@ class CharacterController extends AbstractController
      */
     public function browse(CharacterRepository $characters): Response
     {
-        $Allcharacters = $characters->findAll();
+         // on récupère l'ID de l'utilisateur connecté
+        $userId = $this->getUser()->getId();
+
+        // dd($userId);
+        $Allcharacters = $characters->find($userId);
+        dd($Allcharacters);
         return $this->json(
             $Allcharacters, 200, [], [
                 'groups' => ['browse_character'],
