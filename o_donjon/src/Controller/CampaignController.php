@@ -107,7 +107,7 @@ class CampaignController extends AbstractController
         ]);
         $sentData = json_decode($request->getcontent(), true);
         $form->submit($sentData);
-        $form->getData();
+        // $form->getData();
         // dd($form);
 
 
