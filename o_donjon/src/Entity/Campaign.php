@@ -30,7 +30,7 @@ class Campaign
 
     /**
      * @Groups({"browse_campaign", "read_campaign"})
-     * @ORM\Column(type="json", nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      */
     private $description;
 

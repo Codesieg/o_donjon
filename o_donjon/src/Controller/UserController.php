@@ -134,12 +134,14 @@ class UserController extends AbstractController
     /**
      * AUTHORIZE A USER TO JOIN A CAMPAIGN
      * 
-     * @Route("user/campaign/{id}", name="add_campaign", methods={"POST"})
+     * @Route("/user/campaign/{id}", name="add_campaign", methods={"POST"})
      * 
      */
-    public function addCampaign(Request $request, User $user, Campaign $campaign): Response
+    public function addCampaign(Request $request, Campaign $campaign): Response
     {
-
+        // Identify the user
+        $user = $this->getUser();
+        
         // Identify campaign invitation code
         $campaignInvitationCode = $campaign->getInvitationCode();
 
