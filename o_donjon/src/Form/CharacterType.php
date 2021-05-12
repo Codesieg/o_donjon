@@ -42,14 +42,14 @@ class CharacterType extends AbstractType
             // ->add('createdAt')
             // ->add('updatedAt')
             // ->add('user')
-            ->add('campaign')
-            ->add('race')
-            ->add('class')
-            ->add('caracteristics')
-            ->add('statistics')
-            ->add('spell')
-            ->add('savingThrowspell')
-            ->add('skill')
+            ->add('campaign', CampaignType::class)
+            ->add('race', RaceType::class)
+            ->add('class', CharacterClassType::class)
+            ->add('caracteristics',CaracteristicType::class)
+            ->add('statistics', StatisticsType::class)
+            ->add('spell',SpellType::class)
+            ->add('savingThrowspell', SavingThrowType::class)
+            ->add('skill', SkillType::class)
         ;
     }
 
