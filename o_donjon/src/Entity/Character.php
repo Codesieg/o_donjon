@@ -19,13 +19,13 @@ class Character
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"browse_character", "read_character", "list_character", "browse_campaign_character"})
+     * @Groups({"browse_character", "read_character", "browse_campaign_character", "read_user"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=64, nullable=true)
-     * @Groups({"browse_character", "read_character", "list_character", "browse_campaign_character"})
+     * @Groups({"browse_character", "read_character", "browse_campaign_character", "read_user"})
      */
     private $name;
 

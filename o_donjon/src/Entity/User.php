@@ -90,6 +90,7 @@ class User implements UserInterface
         $this->campaigns = new ArrayCollection();
         $this->characters = new ArrayCollection();
         $this->createdAt = new \DateTime();
+        $this->status = 1;
     }
 
     public function getId(): ?int
