@@ -51,7 +51,7 @@ class CampaignController extends AbstractController
     public function read(Campaign $campaign): Response
     {
         return $this->json($campaign, 200, [], [
-            'groups' => ['read_campaign'],
+            'groups' => ['read_campaign', 'count_characters', 'count_npcs', 'count_stories', 'count_maps'],
         ]);
     }
 

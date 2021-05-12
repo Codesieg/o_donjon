@@ -293,7 +293,7 @@ class Campaign
      */
     public function getCountNpcs()
     {
-        return $this->characters->count();
+        return $this->NPCs->count();
     }
 
     public function addNPC(NPC $nPC): self
@@ -332,7 +332,7 @@ class Campaign
      */
     public function getCountStories()
     {
-        return $this->characters->count();
+        return $this->stories->count();
     }
 
     public function addStory(Story $story): self
@@ -370,7 +370,7 @@ class Campaign
      */
     public function getCountMaps()
     {
-        return $this->characters->count();
+        return $this->maps->count();
     }
 
     public function addMap(Map $map): self
