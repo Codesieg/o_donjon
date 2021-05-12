@@ -18,7 +18,7 @@ class CampaignRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Campaign::class);
     }
-
+  
     public function findByUser($userId)
     {
         $qb = $this->createQueryBuilder('campaign')
@@ -31,7 +31,6 @@ class CampaignRepository extends ServiceEntityRepository
         return $results;
     }
     
-
     // public function findWithStats($id)
     // {
     //     return $this->createQueryBuilder('c')

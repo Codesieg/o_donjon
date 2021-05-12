@@ -38,9 +38,7 @@ class CampaignController extends AbstractController
      */
     public function browse(CampaignRepository $campaignRepository): Response
     {
-
         $userId = $this->getUser()->getId();
-
         $campaigns = $campaignRepository->findByUser($userId);
         return $this->json($campaigns, 200, [], [
             'groups' => ['browse_campaign'],
@@ -103,12 +101,15 @@ class CampaignController extends AbstractController
         $owner = $this->getUser();
 
         $campaign = new Campaign();
+    
         $form = $this->createForm(CampaignType::class, $campaign, [
             'csrf_protection' => false,
         ]);
         $sentData = json_decode($request->getcontent(), true);
         $form->submit($sentData);
         $form->getData();
+        // dd($form);
+
 
         if ($form->isValid()) {
             $campaign->setOwner($owner);

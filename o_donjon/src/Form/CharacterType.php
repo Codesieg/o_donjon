@@ -42,9 +42,9 @@ class CharacterType extends AbstractType
             ->add('campaign')
             ->add('race', RaceType::class)
             ->add('class', CharacterClassType::class)
-            ->add('caracteristics', CaracteristicType::class)
+            ->add('caracteristics',CaracteristicType::class)
             ->add('statistics', StatisticsType::class)
-            ->add('spell', SpellType::class)
+            ->add('spell',SpellType::class)
             ->add('savingThrowspell', SavingThrowType::class)
             ->add('skill', SkillType::class)
         ;
