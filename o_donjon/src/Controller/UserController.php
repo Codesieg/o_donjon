@@ -78,7 +78,7 @@ class UserController extends AbstractController
         $userId = $this->getUser()->getId();
 
         // on récupére l'ID envoyer par la requête
-        $requestId = filter_var($request->getPathInfo(), FILTER_SANITIZE_NUMBER_INT);
+        $requestId = $user->getId();
 
         // on compare les deux ID et si ils sont différents alors on retourne une erreur
         if ($userId != $requestId) {
@@ -114,6 +114,18 @@ class UserController extends AbstractController
      */
     public function delete(User $user): Response
     {
+
+        // on récupère l'ID de l'utilisateur connecté
+        $userId = $this->getUser()->getId();
+
+        // on récupére l'ID du owner de la campagne
+        $requestId = $user->getId();
+
+        // on compare les deux ID et si ils sont différents alors on retourne une erreur
+        if ($userId != $requestId) {
+            return $this->json('wrong user ID', 401);
+        }
+
         $em = $this->getDoctrine()->getManager();
         $em->remove($user);
         $em->flush();
