@@ -7,6 +7,8 @@
 /public/bundles/
 /var/
 /vendor/
+/mercure
+config/packages/mercure.yaml
 ###< symfony/framework-bundle ###
 
 ###> symfony/phpunit-bridge ###
