@@ -105,11 +105,27 @@ class CharacterController extends AbstractController
         
     }
 
-        /**
+    /**
      * @Route("/{id}", name="edit", methods={"PUT"},)
      */
     public function edit(Request $request, Character $character): Response
     {
+        // on récupère l'ID de l'utilisateur connecté
+        $userId = $this->getUser()->getId();
+
+        // on récupére l'ID du owner du personnage
+        $characterOwnerId = $character->getUser()->getId();
+
+        // on recupère l'ID du owner de la campagne du personnage (si il y en a)
+        if ($character->getCampaign()) {
+            $campagneOwnerId = $character->getCampaign()->getOwner()->getId();
+        }
+
+        // on compare les deux ID et si ils sont différents alors on retourne une erreur
+        if ($userId != $characterOwnerId && $userId != $campagneOwnerId) {
+            return $this->json('wrong user ID', 401);
+        }
+
         // Create a new forms character  
         $form = $this->createForm(CharacterType::class, $character, ['csrf_protection' => false]);
 
@@ -121,9 +137,11 @@ class CharacterController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->flush();
 
-            return $this->json([
-                $character, 200, [],
-            ]);
+            return $this->json(
+                $character, 200, [], [
+                    'groups' => ['read_character'],
+                ]
+            );;
         }
         return $this->json($form->getErrors(true, false)->__toString(), 400);
         
@@ -161,6 +179,17 @@ class CharacterController extends AbstractController
      */
     public function delete(Character $character): Response
     {
+        // on récupère l'ID de l'utilisateur connecté
+        $userId = $this->getUser()->getId();
+
+        // on récupére l'ID du owner du personnage
+        $requestId = $character->getUser()->getId();
+
+        // on compare les deux ID et si ils sont différents alors on retourne une erreur
+        if ($userId != $requestId) {
+            return $this->json('wrong user ID', 401);
+        }
+
         $em = $this->getDoctrine()->getManager();
         $em->remove($character);
         $em->flush();

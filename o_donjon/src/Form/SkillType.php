@@ -37,6 +37,7 @@ class SkillType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Skill::class,
+            "allow_extra_fields" => true
         ]);
     }
 }

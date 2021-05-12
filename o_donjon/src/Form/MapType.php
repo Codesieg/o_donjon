@@ -25,6 +25,7 @@ class MapType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Map::class,
+            "allow_extra_fields" => true
         ]);
     }
 }

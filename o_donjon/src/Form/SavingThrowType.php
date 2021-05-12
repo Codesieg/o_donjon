@@ -25,6 +25,7 @@ class SavingThrowType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => SavingThrow::class,
+            "allow_extra_fields" => true
         ]);
     }
 }

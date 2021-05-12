@@ -26,6 +26,7 @@ class StoryType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Story::class,
+            "allow_extra_fields" => true
         ]);
     }
 }

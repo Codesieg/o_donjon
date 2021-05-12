@@ -24,6 +24,7 @@ class SpellType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Spell::class,
+            "allow_extra_fields" => true
         ]);
     }
 }
