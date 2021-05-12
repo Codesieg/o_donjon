@@ -17,12 +17,15 @@ use App\Form\StatisticsType;
 use App\Entity\Caracteristic;
 use App\Entity\CharacterClass;
 use App\Form\CaracteristicType;
+use App\Repository\CampaignRepository;
 use App\Repository\CharacterRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+
+
 
 /**
      * @Route("/character", name="character")
@@ -38,10 +41,10 @@ class CharacterController extends AbstractController
     // pour l'user :  $request->cookies->get('PHPSESSID');
     {
         $user = $this->getUser();
+        // dd($user);
 
-        $repository = $this->getDoctrine()->getRepository(User::class);
-        $data_users = $repository->findOneBy(['id' => $user->getId()]);
-        dd($data_users);
+        // $repository = $this->getDoctrine()->getRepository(User::class);
+        // $data_users = $repository->findOneBy(['id' => $user->getId()]);
 
         // Create a new  Class 
         $class = new CharacterClass();
@@ -135,6 +138,8 @@ class CharacterController extends AbstractController
         // Get user from character  
         $user = $this->getUser();
 
+        // dd($user);
+
         // Edit class 
         $classId = $character->getClass(); 
         $class = $this->getDoctrine()->getManager()->getRepository(CharacterClass::class)->find($classId);
@@ -186,7 +191,7 @@ class CharacterController extends AbstractController
         $savingThrows->setWisdom($sentData["savingThrowspellDone"]["wisdom"]);
         $savingThrows->setCharisma($sentData["savingThrowspellDone"]["charisma"]);
         
-        // Edit a  Skill for a character
+        // Edit a Skill for a character
         $skillId = $character->getSkill();
         $skill = $this->getDoctrine()->getManager()->getRepository(Skill::class)->find($skillId);
         $formStat = $this->createForm(SkillType::class, $skill, ['csrf_protection' => false]);
@@ -194,7 +199,7 @@ class CharacterController extends AbstractController
         $formStat->submit($sentData);
         
 
-        // Create a new forms character  
+        // Edit a character  
         $form = $this->createForm(CharacterType::class, $character, ['csrf_protection' => false]);
         $sentData = json_decode($request->getContent(), true); // On definit le parametre à true afin de retourner un tableau associatif
         $form->submit($sentData);
@@ -210,7 +215,6 @@ class CharacterController extends AbstractController
         // If the form is correct persist and flush it
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($character);
             $em->flush();
             
             // We are returning json for the api
@@ -262,50 +266,31 @@ class CharacterController extends AbstractController
         return $this->json(null, 204);
     }
 
-    /************************************ADVANCED METHODS*************************************/
 
     /**
      * ASSIGN A CAMPAIGN TO A CHARACTER
      * 
-     * @Route("/{id}/campaign/{campaign_id}", name="edit_campaign", methods={"PATCH"})
+     * @Route("/{id}/campaign", name="edit_campaign", methods={"PUT"})
      * @ParamConverter("character", options={"mapping": {"id": "id"}})
-     * @ParamConverter("campaign", options={"mapping": {"campaign_id": "id"}})
      * 
      */
-    public function editCampaign(Request $request, Character $character, Campaign $campaign): Response
-    {
-        // Identify campaign Id
-        $campaignId = $campaign->getId();
-
-        // Associate form and character 
-        $form = $this->createForm(CharacterType::class, $character, [
-            'csrf_protection' => false
-        ]);
+        // public function addCampaign(Request $request, Character $character, CampaignRepository $campaign) : Response
+        // {
         
-        // Transform request json content
-        $sentData = json_decode($request->getContent(), true);
+        // $campaigns = $campaign->find($userId);
+        // $character->setCampaign($campaigns);
+
         
-        // Assign new campaign Id to the request character  
-        $sentData['campaign'] = $campaignId;
-
-        // Submit updated data
-        $form->submit($sentData);
-
-        // Check and responses
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->flush();
-
-            return $this->json(
-                $character, 200, [], [
-                    'groups' => ['read_character'],
-                ]
-            );
-        }
-        return $this->json($form->getErrors(true, false)->__toString(), 400);
-        
-    }
-
-
-
+        //     if ($form->isValid()) {
+        //                 $em = $this->getDoctrine()->getManager();
+        //                 $em->flush();
+            
+        //                 return $this->json(
+        //                     $character, 200, [], [
+        //                         'groups' => ['read_character'],
+        //                     ]
+        //                 );
+        //             }
+        //             return $this->json($form->getErrors(true, false)->__toString(), 400);
+        // }
 }
