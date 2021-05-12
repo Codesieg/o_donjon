@@ -18,7 +18,19 @@ class CampaignRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Campaign::class);
     }
-
+  
+    public function findByUser($userId)
+    {
+        $qb = $this->createQueryBuilder('campaign')
+           ->leftJoin ('campaign.users','users')
+           ->where('users.id = :id')
+           ->setParameter('id', $userId);
+         
+        $query = $qb->getQuery();
+        $results = $query->getResult();
+        return $results;
+    }
+    
     // public function findWithStats($id)
     // {
     //     return $this->createQueryBuilder('c')

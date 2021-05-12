@@ -19,7 +19,7 @@ class User implements UserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"browse_user", "read_user", "browse_campaign", "list_character", "read_character"})
+     * @Groups({"browse_user", "read_user", "browse_campaign", "list_character", "read_character", "read_campaign"})
      */
     private $id;
 
@@ -42,7 +42,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=64, nullable=true)
-     * @Groups({"browse_user", "read_user", "list_campaign", "list_character", "read_character"})
+     * @Groups({"browse_user", "read_user", "list_campaign", "list_character", "read_character", "browse_campaign", "read_campaign"})
      */
     private $name;
 
@@ -90,6 +90,7 @@ class User implements UserInterface
         $this->campaigns = new ArrayCollection();
         $this->characters = new ArrayCollection();
         $this->createdAt = new \DateTime();
+        $this->status = 1;
     }
 
     public function getId(): ?int
