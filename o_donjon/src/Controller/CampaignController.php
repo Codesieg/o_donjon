@@ -20,11 +20,28 @@ use Symfony\Component\Routing\Annotation\Route;
 class CampaignController extends AbstractController
 {
     /**
+     * @Route("/dm", name="browse_dm", methods={"GET"})
+     */
+    public function browseDm(CampaignRepository $campaignRepository): Response
+    {
+
+        $userId = $this->getUser()->getId();
+
+        $campaigns = $campaignRepository->findBy(array('owner' => $userId));
+        return $this->json($campaigns, 200, [], [
+            'groups' => ['browse_campaign'],
+        ]);
+    }
+
+    /**
      * @Route("", name="browse", methods={"GET"})
      */
     public function browse(CampaignRepository $campaignRepository): Response
     {
-        $campaigns = $campaignRepository->findAll();
+
+        $userId = $this->getUser()->getId();
+
+        $campaigns = $campaignRepository->findByUser($userId);
         return $this->json($campaigns, 200, [], [
             'groups' => ['browse_campaign'],
         ]);
@@ -45,15 +62,17 @@ class CampaignController extends AbstractController
      */
     public function edit(Request $request, Campaign $campaign): Response
     {
+        $owner = $this->getUser();
+        
         $form = $this->createForm(CampaignType::class, $campaign, [
             'csrf_protection' => false,
         ]);
         $sentData = json_decode($request->getContent(), true);
-        dd($sentData);
         $form->submit($sentData);
 
         if ($form->isValid()) {
-           
+            
+            $campaign->setOwner($owner);
             $this->getDoctrine()->getManager()->flush();
            
             return $this->json($campaign, 200, [], [

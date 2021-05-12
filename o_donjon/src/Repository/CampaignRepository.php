@@ -19,18 +19,31 @@ class CampaignRepository extends ServiceEntityRepository
         parent::__construct($registry, Campaign::class);
     }
 
-    public function findWithStats($id)
+    public function findByUser($userId)
     {
-        return $this->createQueryBuilder('c')
-            ->leftJoin()
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        $qb = $this->createQueryBuilder('campaign')
+           ->leftJoin ('campaign.users','users')
+           ->where('users.id = :id')
+           ->setParameter('id', $userId);
+         
+        $query = $qb->getQuery();
+        $results = $query->getResult();
+        return $results;
     }
+    
+
+    // public function findWithStats($id)
+    // {
+    //     return $this->createQueryBuilder('c')
+    //         ->leftJoin()
+    //         ->andWhere('c.exampleField = :val')
+    //         ->setParameter('val', $value)
+    //         ->orderBy('c.id', 'ASC')
+    //         ->setMaxResults(10)
+    //         ->getQuery()
+    //         ->getResult()
+    //     ;
+    // }
 
     // /**
     //  * @return Campaign[] Returns an array of Campaign objects

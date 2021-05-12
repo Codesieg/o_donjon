@@ -18,7 +18,7 @@ class Campaign
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"browse_campaign", "read_campaign", "list_campaign", "read_character"})
+     * @Groups({"browse_campaign", "read_campaign", "browse_campaign", "read_character"})
      */
     private $id;
 
@@ -42,7 +42,7 @@ class Campaign
 
     /**
      * @Groups({"browse_campaign", "read_campaign"})
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean", options={"default": 0}, nullable=true)
      */
     private $isArchived;
 
