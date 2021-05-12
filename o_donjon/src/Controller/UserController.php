@@ -12,7 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 
 /**
@@ -33,9 +33,9 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/register", name="add", methods={"POST"})
+     * @Route("/login", name="add", methods={"POST"})
      */
-    public function add(Request $request): Response
+    public function add(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user, ['csrf_protection' => false]);
@@ -44,6 +44,8 @@ class UserController extends AbstractController
         $form->submit($sentData);
 
         if ($form->isValid()) {
+            $password = $form->get('password')->getData();
+            $user->setPassword($passwordEncoder->encodePassword($user, $password));
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
@@ -70,18 +72,37 @@ class UserController extends AbstractController
     /**
      * @Route("/user/{id}", name="edit", methods={"PUT", "PATCH"}, requirements={"id": "\d+"})
      */
-    public function edit(User $user, Request $request): Response
-    {
-        $form = $this->createForm(UserType::class, $user, ['csrf_protection' => false]);
+    public function edit(UserPasswordEncoderInterface $passwordEncoder, Request $request, User $user): Response
+    {   
+        // on récupère l'ID de l'utilisateur connecté
+        $userId = $this->getUser()->getId();
 
-        $sentData = json_decode($request->getContent(), true);
-        $form->submit($sentData);
+        // on récupére l'ID envoyer par la requête
+        $requestId = filter_var($request->getPathInfo(), FILTER_SANITIZE_NUMBER_INT);
+
+        // on compare les deux ID et si ils sont différents alors on retourne une erreur
+        if ($userId != $requestId) {
+            return $this->json('wrong user ID', 401);
+        }
+
+        // on récupère les informations de la requête
+        $requestData = json_decode($request->getContent(), true);
+
+        $form = $this->createForm(UserType::class, $user, ['csrf_protection' => false]);
+        $form->submit($requestData);
 
         if ($form->isValid()) {
 
+            $password = $form->get('password')->getData();
+
+            if ($password !== null) {
+                $encodedPassword = $passwordEncoder->encodePassword($user, $password);
+                $user->setPassword($encodedPassword);
+            }
+
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->json($user, 200, [], [
+            return $this->json($user, 201, [], [
                 'groups' => ['read_user'],
             ]);
         }
