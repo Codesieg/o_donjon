@@ -129,7 +129,7 @@ class CharacterController extends AbstractController
         // Edit stats 
         $statisticsId = $character->getStatistics();
         $statistics = $this->getDoctrine()->getManager()->getRepository(Statistics::class)->find($statisticsId);
-        $formStat = $this->createForm(StatisticsType::class, $statistics, ['csrf_protection' => false]);
+        $form = $this->createForm(StatisticsType::class, $statistics, ['csrf_protection' => false]);
         $sentData = json_decode($request->getContent(), true); 
 
         // Edit spell 
@@ -137,30 +137,24 @@ class CharacterController extends AbstractController
         $spell = $this->getDoctrine()->getManager()->getRepository(Spell::class)->find($spellId);
         $form = $this->createForm(SpellType::class, $spell, ['csrf_protection' => false]);
         $sentData = json_decode($request->getContent(), true); 
-        $form->submit($sentData);
 
         // Edit savingthrowspell 
         $savingthrowspellId = $character->getSavingThrowspell();
         $savingthrowspell = $this->getDoctrine()->getManager()->getRepository(SavingThrow::class)->find($savingthrowspellId);
         $form = $this->createForm(SavingThrowType::class, $savingthrowspell, ['csrf_protection' => false]);
         $sentData = json_decode($request->getContent(), true); 
-        $form->submit($sentData);
 
         // Edit skill 
         $skillId = $character->getSavingThrowspell();
         $skill = $this->getDoctrine()->getManager()->getRepository(Skill::class)->find($skillId);
         $form = $this->createForm(SkillType::class, $skill, ['csrf_protection' => false]);
         $sentData = json_decode($request->getContent(), true); 
-        $form->submit($sentData);
 
         // Edit campaign 
         $campaignId = $character->getCampaign();
-        $campaign = $this->getDoctrine()->getManager()->getRepository(Campaign::class)->find($campaignId);
-        $form = $this->createForm(CampaignType::class, $campaign, ['csrf_protection' => false]);
+        $this->getDoctrine()->getManager()->getRepository(Campaign::class)->find($campaignId);
         $sentData = json_decode($request->getContent(), true); 
-        $form->submit($sentData);
 
-        
         // Edit a character  
         $form = $this->createForm(CharacterType::class, $character, ['csrf_protection' => false]);
         $sentData = json_decode($request->getContent(), true); // On definit le parametre à true afin de retourner un tableau associatif
