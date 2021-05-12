@@ -61,7 +61,19 @@ class CampaignController extends AbstractController
      * @Route("/{id}", name="edit", methods={"PUT", "PATCH"}, requirements={"id": "\d+"})
      */
     public function edit(Request $request, Campaign $campaign): Response
-    {
+    {   
+
+        // on récupère l'ID de l'utilisateur connecté
+        $userId = $this->getUser()->getId();
+
+        // on récupére l'ID du owner de a campagne
+        $campaignId = $campaign->getOwner()->getId();
+
+        // on compare les deux ID et si ils sont différents alors on retourne une erreur
+        if ($userId != $campaignId) {
+            return $this->json('wrong user ID', 401);
+        }
+
         $owner = $this->getUser();
         
         $form = $this->createForm(CampaignType::class, $campaign, [
