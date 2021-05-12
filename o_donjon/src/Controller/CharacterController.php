@@ -193,7 +193,7 @@ class CharacterController extends AbstractController
     }
 
     /**
-     * @Route("/browse", name="browse", methods={"GET"})
+     * @Route("", name="browse", methods={"GET"})
      */
     public function browse(CharacterRepository $characters): Response
     {
