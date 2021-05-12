@@ -14,11 +14,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-
-/**
-     * @Route("", name="user_")
-     */
-
 class UserController extends AbstractController
 {
     /**
@@ -139,65 +134,46 @@ class UserController extends AbstractController
     /**
      * AUTHORIZE A USER TO JOIN A CAMPAIGN
      * 
-     * @Route("/{id}/campaign/{campaign_id}", name="add_campaign", methods={"POST"})
-     * 
-     * @ParamConverter("user", options={"mapping": {"id": "id"}})
-     * @ParamConverter("campaign", options={"mapping": {"campaign_id": "id"}})
+     * @Route("/user/campaign/{id}", name="add_campaign", methods={"POST"})
      * 
      */
-    public function addCampaign(Request $request, User $user, Campaign $campaign): Response
+    public function addCampaign(Request $request, Campaign $campaign): Response
     {
-        // Identify campaign Id
-        $campaignId = $campaign->getId();
+        // Identify the user
+        $user = $this->getUser();
+        
         // Identify campaign invitation code
         $campaignInvitationCode = $campaign->getInvitationCode();
 
         // Transform request json content
         $sentData = json_decode($request->getContent(), true);
-        $requestInvitationCode = $sentData['invitation_code'];
+        $requestInvitationCode = $sentData['invitationCode'];
 
         // Check invitation code
-        if ($requestInvitationCode == $campaignInvitationCode) {
+        if ($requestInvitationCode != $campaignInvitationCode) {
             
-            // Add the user to the campaign
-            $campaign->addUser($user);
-            
-            // Associate form and character 
-            $form = $this->createForm(CampaignType::class, $campaign, [
-            'csrf_protection' => false
-            ]);
-            
-            // Submit updated data
-            $form->submit($sentData);
-
-            // Check and responses
-            if ($form->isValid()) {
-                
-                // Update the DB
-                $em = $this->getDoctrine()->getManager();
-                $em->flush();
-                
-                $responseData = [
-                    'status' => 'success',
-                    'message' => 'Ok, you can join the campaign !'
-                ];
-                
-                return $this->json($responseData, 200, []);
-
-            } else {
-                $responseData = [
-                    'status' => 'error',
-                    'message' => 'A problem occurs !'
-                ];
-                return $this->json($responseData, 400, []);
-            }
-        } else {
             $responseData = [
                 'status' => 'error',
                 'message' => 'This invitation code is not valid !'
             ];
+            
             return $this->json($responseData, 401, []);
-        }
+        } 
+
+        // Add the user to the campaign
+        $campaign->addUser($user);
+
+        // Update the DB
+        $em = $this->getDoctrine()->getManager();
+        $em->flush();
+        
+        $responseData = [
+            'status' => 'success',
+            'message' => 'Ok, you can join the campaign !'
+        ];
+        
+        return $this->json($responseData, 200, []);
+
     }
 
 }

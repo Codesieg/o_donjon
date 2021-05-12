@@ -16,7 +16,7 @@ class CampaignType extends AbstractType
             ->add('description')
             ->add('memo')
             ->add('isArchived')
-            ->add('invitationCode')
+            // ->add('invitationCode')
             // ->add('createdAt')
             // ->add('updatedAt')
             // ->add('owner')

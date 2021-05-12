@@ -30,7 +30,7 @@ class Campaign
 
     /**
      * @Groups({"browse_campaign", "read_campaign"})
-     * @ORM\Column(type="json", nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      */
     private $description;
 
@@ -107,6 +107,7 @@ class Campaign
         $this->stories = new ArrayCollection();
         $this->maps = new ArrayCollection();
         $this->createdAt = new \DateTime();
+        $this->invitationCode = uniqid();
     }
 
     public function getId(): ?int
