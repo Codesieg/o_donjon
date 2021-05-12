@@ -29,6 +29,7 @@ class CaracteristicType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Caracteristic::class,
+            "allow_extra_fields" => true
         ]);
     }
 }
