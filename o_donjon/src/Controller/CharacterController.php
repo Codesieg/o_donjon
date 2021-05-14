@@ -195,16 +195,16 @@ class CharacterController extends AbstractController
     /**
      * @Route("", name="browse", methods={"GET"})
      */
-    public function browse(CharacterRepository $characters): Response
+    public function browse(CharacterRepository $characterRepository): Response
     {
          // on récupère l'ID de l'utilisateur connecté
         $userId = $this->getUser()->getId();
 
         // dd($userId);
-        $Allcharacters = $characters->find($userId);
-        dd($Allcharacters);
+        $characters = $characterRepository->findByUser($userId);
+        // dd($characters);
         return $this->json(
-            $Allcharacters, 200, [], [
+            $characters, 200, [], [
                 'groups' => ['browse_character'],
             ]
         );
