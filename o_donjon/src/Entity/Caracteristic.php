@@ -61,7 +61,7 @@ class Caracteristic
     private $totalHP;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="string", length=64, nullable=true)
      * @Groups({"read_character"})
      */
     private $hitDice;
