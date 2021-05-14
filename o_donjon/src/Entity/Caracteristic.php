@@ -38,6 +38,7 @@ class Caracteristic
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"read_character"})
      */
     private $armor_class;
 
