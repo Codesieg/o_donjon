@@ -44,57 +44,79 @@ class CharacterController extends AbstractController
     public function add(Request $request): Response
     // pour l'user :  $request->cookies->get('PHPSESSID');
     {
+        // on récupère l'utilisateur connecté
         $user = $this->getUser();
         
+        // on créer un objet Race
         $character = new Race();
+        // on créer un formulaire pour la classe Race
         $form = $this->createForm(RaceType::class, $character, [
             'csrf_protection' => false,
-        ]);  
-        
+        ]);
+
+        // on créer un objet CharacterClass
         $character = new CharacterClass();
+        // on créer un formulaire pour la classe CharacterClass
         $form = $this->createForm(CharacterClassType::class, $character, [
             'csrf_protection' => false,
         ]);  
         
+        // on créer un objet Statistics
         $character = new Statistics();
+        // on créer un formulaire pour la classe Statistics
         $form = $this->createForm(StatisticsType::class, $character, [
             'csrf_protection' => false,
             ]);  
             
-    
+        // on créer un objet Spell
         $character = new Spell();
+        // on créer un formulaire pour la classe Spell
         $form = $this->createForm(SpellType::class, $character, [
             'csrf_protection' => false,
             ]);  
-            
+        
+        // on créer un objet SavingThrow
         $character = new SavingThrow();
+        // on créer un formulaire pour la classe SavingThrow
         $form = $this->createForm(SavingThrowType::class, $character, [
             'csrf_protection' => false,
         ]);  
-
-        $character = new Skill();  
+        
+        // on créer un objet Skill
+        $character = new Skill();
+        // on créer un formulaire pour la classe Skill
         $form = $this->createForm(SkillType::class, $character, [
             'csrf_protection' => false,
         ]);  
 
-        // Create a new character 
+        // on créer un objet Character
         $character = new Character();
-        // Create a new forms character  
+        // on créer un formulaire pour la classe Character
         $form = $this->createForm(CharacterType::class, $character, ['csrf_protection' => false]);
+
+        // on récupère les informations de la requête
         $sentData = json_decode($request->getContent(), true); // On definit le parametre à true afin de retourner un tableau associatif
+        // on envoie les informations dans le formulaire
         $form->submit($sentData);
-        $character->setUser($user);
         
-        
+        // si les données sont valides
         if ($form->isValid()) {
+
+            // on associe l'utilisateur au personnage
+            $character->setUser($user);
+
+            // on envoie les données à la BDD
             $em = $this->getDoctrine()->getManager();
             $em->persist($character);
             $em->flush();
             
+            // on retourne le personnage créé
             return $this->json($character,  201, [], [
                 'groups' => ['read_character'],
             ]);
         }
+
+        // si le formulaire n'est pas valide on retourne les erreurs
         return $this->json($form->getErrors(true, false)->__toString(), 400);
     }
 
@@ -103,10 +125,10 @@ class CharacterController extends AbstractController
      */
     public function edit(Request $request, character $character): Response
     {
-        // Get user from character  
+        // on récupère l'utilisateur connecté
         $user = $this->getUser();
         
-        // Edit race 
+        // Edit race
         $raceId = $character->getRace();
         $race = $this->getDoctrine()->getManager()->getRepository(Race::class)->find($raceId);
         $form = $this->createForm(RaceType::class, $race, ['csrf_protection' => false]);
@@ -148,8 +170,12 @@ class CharacterController extends AbstractController
         $form = $this->createForm(SkillType::class, $skill, ['csrf_protection' => false]);
         $sentData = json_decode($request->getContent(), true); 
 
+        // on récupère l'ID de la campagne liée au personnage
         $campaignId = $character->getCampaign();
+
+        // si le personnage est lié à une campagne
         if ( $campaignId !== null){
+            // on récupère la campagne
             $this->getDoctrine()->getManager()->getRepository(Campaign::class)->find($campaignId);
             $sentData = json_decode($request->getContent(), true); 
         }
@@ -172,24 +198,28 @@ class CharacterController extends AbstractController
 
         // Edit a character  
         $form = $this->createForm(CharacterType::class, $character, ['csrf_protection' => false]);
+        // on récupère les informations de la requête
         $sentData = json_decode($request->getContent(), true); // On definit le parametre à true afin de retourner un tableau associatif
+        // on envoie les informations dans le formulaire
         $form->submit($sentData);
-        // $character->setStatistics($statistics);
-        $character->setUser($user);
-
         
-        // If the form is correct persist and flush it
+        // si les données sont valides
         if ($form->isValid()) {
+
+            // on associe l'utilisateur au personnage
+            $character->setUser($user);
+
+            // on envoie les données à la BDD
             $em = $this->getDoctrine()->getManager();
             $em->flush();
             
-            // We are returning json for the api
+            // on retourne le personnage modifié
             return $this->json($character,  201, [], [
                 'groups' => ['read_character'],
             ]);
 
         }
-        // if the form is not correct return en error
+        // si le formulaire n'est pas valide on retourne les erreurs
         return $this->json($form->getErrors(true, false)->__toString(), 400);
         
     }
@@ -202,9 +232,10 @@ class CharacterController extends AbstractController
          // on récupère l'ID de l'utilisateur connecté
         $userId = $this->getUser()->getId();
 
-        // dd($userId);
+        // on récupère les personnages associés à l'utilisateur
         $characters = $characterRepository->findByUser($userId);
-        // dd($characters);
+
+        // on retourne la liste des personnages
         return $this->json(
             $characters, 200, [], [
                 'groups' => ['browse_character'],
@@ -217,7 +248,7 @@ class CharacterController extends AbstractController
      */
     public function read(Character $character): Response
     {
-        
+        // on retourne le personnage
         return $this->json(
             $character, 200, [], [
                 'groups' => ['read_character'],
@@ -242,38 +273,13 @@ class CharacterController extends AbstractController
             return $this->json('wrong user ID', 401);
         }
 
+        // on demande à la BDD de supprimer le personnage
         $em = $this->getDoctrine()->getManager();
         $em->remove($character);
         $em->flush();
-
+        
+        // on retourne un code 204 si le personnage est bien supprimé
         return $this->json(null, 204);
     }
 
-
-    /**
-     * ASSIGN A CAMPAIGN TO A CHARACTER
-     * 
-     * @Route("/{id}/campaign", name="edit_campaign", methods={"PUT"})
-     * @ParamConverter("character", options={"mapping": {"id": "id"}})
-     * 
-     */
-        // public function addCampaign(Request $request, Character $character, CampaignRepository $campaign) : Response
-        // {
-        
-        // $campaigns = $campaign->find($userId);
-        // $character->setCampaign($campaigns);
-
-        
-        //     if ($form->isValid()) {
-        //                 $em = $this->getDoctrine()->getManager();
-        //                 $em->flush();
-            
-        //                 return $this->json(
-        //                     $character, 200, [], [
-        //                         'groups' => ['read_character'],
-        //                     ]
-        //                 );
-        //             }
-        //             return $this->json($form->getErrors(true, false)->__toString(), 400);
-        // }
 }
