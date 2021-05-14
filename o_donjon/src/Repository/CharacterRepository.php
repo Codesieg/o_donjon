@@ -19,6 +19,18 @@ class CharacterRepository extends ServiceEntityRepository
         parent::__construct($registry, Character::class);
     }
 
+    public function findByUser($userId)
+    {
+        $qb = $this->createQueryBuilder('character')
+           ->leftJoin ('character.user','user')
+           ->where('user.id = :id')
+           ->setParameter('id', $userId);
+         
+        $query = $qb->getQuery();
+        $results = $query->getResult();
+        return $results;
+    }
+
     // /**
     //  * @return Character[] Returns an array of Character objects
     //  */
