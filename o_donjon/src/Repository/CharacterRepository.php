@@ -18,17 +18,18 @@ class CharacterRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Character::class);
     }
-
+    
+    // requête personnalisée pour récupérer les personnages d'un utilisateur
     public function findByUser($userId)
     {
-        $qb = $this->createQueryBuilder('character')
-           ->leftJoin ('character.user','user')
-           ->where('user.id = :id')
-           ->setParameter('id', $userId);
+        $qb = $this->createQueryBuilder('character') // on créer la requête pour la table character
+           ->leftJoin ('character.user','user') // on joint la table user à traver la table user
+           ->where('user.id = :id') // on récupère les personnages associées à l'ID
+           ->setParameter('id', $userId); // on associe l'ID de l'utilisateur au paramètre ID
          
-        $query = $qb->getQuery();
-        $results = $query->getResult();
-        return $results;
+        $query = $qb->getQuery(); // on prépare la requête
+        $results = $query->getResult(); // on lance la requête
+        return $results; // on return les résultats
     }
 
     // /**

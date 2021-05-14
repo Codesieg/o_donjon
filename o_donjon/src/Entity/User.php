@@ -89,6 +89,7 @@ class User implements UserInterface
         $this->OrganizedCampaigns = new ArrayCollection();
         $this->campaigns = new ArrayCollection();
         $this->characters = new ArrayCollection();
+        // associe la date de la création de l'objet à createdAt
         $this->createdAt = new \DateTime();
         $this->status = 1;
     }
@@ -232,7 +233,8 @@ class User implements UserInterface
      */
 
     public function setUpdatedAt(): self
-    {
+    {   
+        // on associe la date à updatedAt lors d'une modification
         $this->updatedAt = new \DateTime();
 
         return $this;

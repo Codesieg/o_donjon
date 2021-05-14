@@ -20,8 +20,11 @@ class UserController extends AbstractController
      * @Route("/users", name="browse", methods={"GET"})
      */
     public function browse(UserRepository $userRepository): Response
-    {
+    {   
+        // on récupère les utilisateurs
         $users = $userRepository->findAll();
+
+        // on retourne la liste des utilisateurs
         return $this->json($users, 200, [], [
             'groups' => ['browse_user'],
         ]);
@@ -31,26 +34,40 @@ class UserController extends AbstractController
      * @Route("/login", name="add", methods={"POST"})
      */
     public function add(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
-    {
+    {   
+        // on créé un objet User
         $user = new User();
+
+        // on créer un formulaire pour la classe User
         $form = $this->createForm(UserType::class, $user, ['csrf_protection' => false]);
 
+        // on récupère les informations de la requête
         $sentData = json_decode($request->getContent(), true);
+
+        // on envoie les informations dans le formulaire
         $form->submit($sentData);
 
+        // si les données sont valides
         if ($form->isValid()) {
+
+            // on récupère le mdp saisi par l'utilisateur
             $password = $form->get('password')->getData();
+
+            // on encode le mdp
             $user->setPassword($passwordEncoder->encodePassword($user, $password));
 
+            // on envoie les données à la BDD
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
-
+            
+            // on retourne l'utilisateur créé
             return $this->json($user, 201, [], [
                 'groups' => ['read_user'],
             ]);
         }
 
+        // si le formulaire n'est pas valide on retourne les erreurs
         return $this->json($form->getErrors(true, false)->__toString(), 400);
     }
 
@@ -58,7 +75,19 @@ class UserController extends AbstractController
      * @Route("/user/{id}", name="read", methods={"GET"}, requirements={"id": "\d+"})
      */
     public function read(User $user): Response
-    {
+    {   
+        // on récupère l'ID de l'utilisateur connecté
+        $userId = $this->getUser()->getId();
+
+        // on récupére l'ID envoyer par la requête
+        $requestId = $user->getId();
+
+        // on compare les deux ID et si ils sont différents alors on retourne une erreur
+        if ($userId != $requestId) {
+            return $this->json('wrong user ID', 401);
+        }
+
+        // on retourne l'utilisateur concerné
         return $this->json($user, 200, [], [
             'groups' => ['read_user'],
         ]);
@@ -83,24 +112,34 @@ class UserController extends AbstractController
         // on récupère les informations de la requête
         $requestData = json_decode($request->getContent(), true);
 
+        // on récupère les informations de la requête
         $form = $this->createForm(UserType::class, $user, ['csrf_protection' => false]);
+
+        // on envoie les informations dans le formulaire
         $form->submit($requestData);
 
+        // si les données sont valides
         if ($form->isValid()) {
 
+            // on récupère le mdp saisi par l'utilisateur
             $password = $form->get('password')->getData();
 
+            // si le mdp n'est pas nul
             if ($password !== null) {
+                // on encode le mdp
                 $encodedPassword = $passwordEncoder->encodePassword($user, $password);
                 $user->setPassword($encodedPassword);
             }
-
+            
+            // on envoie les données à la BDD
             $this->getDoctrine()->getManager()->flush();
 
+            // on retourne l'utilisateur modifié
             return $this->json($user, 201, [], [
                 'groups' => ['read_user'],
             ]);
         }
+        // si le formulaire n'est pas valide on retourne les erreurs
         return $this->json($form->getErrors(true, false)->__toString(), 400);
     }
 
@@ -121,10 +160,12 @@ class UserController extends AbstractController
             return $this->json('wrong user ID', 401);
         }
 
+        // on supprime l'histoire de la BDD
         $em = $this->getDoctrine()->getManager();
         $em->remove($user);
         $em->flush();
 
+        // on retourne un code 204 si l'utilisateur a bien été supprimée
         return $this->json(null, 204);
     }
 
