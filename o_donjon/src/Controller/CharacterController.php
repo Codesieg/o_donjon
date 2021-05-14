@@ -148,10 +148,11 @@ class CharacterController extends AbstractController
         $form = $this->createForm(SkillType::class, $skill, ['csrf_protection' => false]);
         $sentData = json_decode($request->getContent(), true); 
 
-        // Edit campaign 
         $campaignId = $character->getCampaign();
-        $this->getDoctrine()->getManager()->getRepository(Campaign::class)->find($campaignId);
-        $sentData = json_decode($request->getContent(), true); 
+        if ( $campaignId !== null){
+            $this->getDoctrine()->getManager()->getRepository(Campaign::class)->find($campaignId);
+            $sentData = json_decode($request->getContent(), true); 
+        }
 
         // on récupère l'ID de l'utilisateur connecté
         $userId = $this->getUser()->getId();
@@ -173,8 +174,9 @@ class CharacterController extends AbstractController
         $form = $this->createForm(CharacterType::class, $character, ['csrf_protection' => false]);
         $sentData = json_decode($request->getContent(), true); // On definit le parametre à true afin de retourner un tableau associatif
         $form->submit($sentData);
-        $character->setStatistics($statistics);
+        // $character->setStatistics($statistics);
         $character->setUser($user);
+
         
         // If the form is correct persist and flush it
         if ($form->isValid()) {
