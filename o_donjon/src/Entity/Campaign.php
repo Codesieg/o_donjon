@@ -99,14 +99,18 @@ class Campaign
      */
     private $maps;
 
+
+    // fonction appelée lors de la création d'un objet
     public function __construct()
-    {
+    {   
         $this->users = new ArrayCollection();
         $this->characters = new ArrayCollection();
         $this->NPCs = new ArrayCollection();
         $this->stories = new ArrayCollection();
         $this->maps = new ArrayCollection();
+        // associe la date de la création de l'objet à createdAt
         $this->createdAt = new \DateTime();
+        // on génère un code d'invitation
         $this->invitationCode = uniqid();
     }
 
@@ -195,9 +199,10 @@ class Campaign
     /**
      * @ORM\PreUpdate
      */
-
+    
     public function setUpdatedAt(): self
-    {
+    {   
+        // on associe la date à updatedAt lors d'une modification
         $this->updatedAt = new \DateTime();
 
         return $this;

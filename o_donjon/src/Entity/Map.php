@@ -57,7 +57,8 @@ class Map
     private $campaign;
 
     public function __construct()
-    {
+    {   
+        // associe la date de la création de l'objet à createdAt
         $this->createdAt = new \DateTime();
     }
 
@@ -124,7 +125,8 @@ class Map
      */
 
     public function setUpdatedAt(): self
-    {
+    {   
+        // on associe la date à updatedAt lors d'une modification
         $this->updatedAt = new \DateTime();
 
         return $this;
