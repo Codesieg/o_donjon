@@ -22,10 +22,10 @@ class MapController extends AbstractController
     public function browse(MapRepository $mapRepository): Response
     {   
         // on récupère les maps
-        $stories = $mapRepository->findAll();
+        $maps = $mapRepository->findAll();
 
         // on retourne la liste des maps
-        return $this->json($stories, 200, [], [
+        return $this->json($maps, 200, [], [
             'groups' => ['browse_map'],
         ]);
     }
