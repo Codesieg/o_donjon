@@ -160,13 +160,16 @@ class CharacterController extends AbstractController
         // on récupére l'ID du owner du personnage
         $characterOwnerId = $character->getUser()->getId();
 
+        // on définit la valeur par défaut du propriétaire de la campagne à 0
+        $campaignOwnerId = 0;
+
         // on recupère l'ID du owner de la campagne du personnage (si il y en a)
         if ($character->getCampaign()) {
-            $campagneOwnerId = $character->getCampaign()->getOwner()->getId();
+            $campaignOwnerId = $character->getCampaign()->getOwner()->getId();
         }
 
         // on compare les deux ID et si ils sont différents alors on retourne une erreur
-        if ($userId != $characterOwnerId && $userId != $campagneOwnerId) {
+        if ($userId != $characterOwnerId && $userId != $campaignOwnerId) {
             return $this->json('wrong user ID', 401);
         }
 
