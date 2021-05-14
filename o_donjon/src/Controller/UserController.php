@@ -169,7 +169,7 @@ class UserController extends AbstractController
         
         $responseData = [
             'status' => 'success',
-            'message' => 'Ok, you can join the campaign !'
+            'message' => 'Yeah, you have joined the campaign !'
         ];
         
         return $this->json($responseData, 200, []);
