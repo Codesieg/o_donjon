@@ -38,7 +38,7 @@ class StorieController extends AbstractController
         // on créer un objet Story
         $story = new Story();
 
-        // on créer un formulaire pour la classe
+        // on créer un formulaire pour la classe Storie
         $form = $this->createForm(StoryType::class, $story, ['csrf_protection' => false]);
         
         // on récupère les informations de la requête
@@ -60,7 +60,6 @@ class StorieController extends AbstractController
                 'groups' => ['read_story'],
             ]);
         }
-
         // si le formulaire n'est pas valide on retourne les erreurs
         return $this->json($form->getErrors(true, false)->__toString(), 400);
     }
