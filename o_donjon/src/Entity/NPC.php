@@ -90,12 +90,12 @@ class NPC
         return $this;
     }
 
-    public function getIsAlly(): ?int
+    public function getIsAlly(): ?string
     {
         return $this->isAlly;
     }
 
-    public function setIsAlly(?int $isAlly): self
+    public function setIsAlly(?string $isAlly): self
     {
         $this->isAlly = $isAlly;
 
