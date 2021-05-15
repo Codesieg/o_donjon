@@ -38,7 +38,7 @@ class NPC
     private $description;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string", length=64, nullable=true)
      * @Groups({"browse_npc", "read_npc", "browse_campaign_npc"})
      */
     private $isAlly;
