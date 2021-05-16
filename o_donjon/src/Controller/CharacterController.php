@@ -101,7 +101,7 @@ class CharacterController extends AbstractController
     /**
      * @Route("/{id}", name="edit", methods={"PUT"}, requirements={"id": "\d+"})
      */
-    public function edit(Request $request, character $character): Response
+    public function edit(Request $request, character $character, CampaignRepository $campaignRepository): Response
     {
         // Get user from character  
         $user = $this->getUser();
@@ -149,7 +149,16 @@ class CharacterController extends AbstractController
         $sentData = json_decode($request->getContent(), true); 
 
         $campaignId = $character->getCampaign();
+
         if ( $campaignId !== null){
+            
+            $test = $campaignRepository->findByUserAndByCampaign($user->getId(), $campaignId->getId());
+            if (empty($test)) {
+                echo "Vous n'avez pas rejoint cette campagne";
+            } else {
+                echo "Ok !!";
+            }
+            // dd($user->getId(), $campaignId->getId(), $test);
             $this->getDoctrine()->getManager()->getRepository(Campaign::class)->find($campaignId);
             $sentData = json_decode($request->getContent(), true); 
         }

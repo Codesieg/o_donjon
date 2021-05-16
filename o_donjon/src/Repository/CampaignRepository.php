@@ -30,6 +30,22 @@ class CampaignRepository extends ServiceEntityRepository
         $results = $query->getResult();
         return $results;
     }
+
+    public function findByUserAndByCampaign($userId, $campaignId)
+    {
+        $qb = $this->createQueryBuilder('c')
+           ->leftJoin ('c.users','u')
+           ->where('u.id = :id')
+           ->setParameter('id', $userId)
+           ->andWhere('c.id = :campaignId')
+           ->setParameter('campaignId', $campaignId);
+         
+        // dd($qb);
+        $query = $qb->getQuery();
+        // dd($query);
+        $results = $query->getResult();
+        return $results;
+    }
     
     // public function findWithStats($id)
     // {

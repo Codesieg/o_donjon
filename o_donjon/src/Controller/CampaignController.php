@@ -26,7 +26,6 @@ class CampaignController extends AbstractController
     {
 
         $userId = $this->getUser()->getId();
-
         $campaigns = $campaignRepository->findBy(array('owner' => $userId));
         return $this->json($campaigns, 200, [], [
             'groups' => ['browse_campaign'],
