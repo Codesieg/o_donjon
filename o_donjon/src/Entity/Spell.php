@@ -47,6 +47,13 @@ class Spell
      */
     private $spells_list;
 
+    public function __construct()
+    {   
+        $this->spell_attack_bonus = 0;
+        $this->spellcasting_ability = 0;
+        $this->spell_save_dc = 0;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

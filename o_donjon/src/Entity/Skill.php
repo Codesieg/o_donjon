@@ -126,6 +126,28 @@ class Skill
      */
     private $survival;
 
+    public function __construct()
+    {   
+        $this->acrobatics = 0;
+        $this->animalHandling = 0;
+        $this->arcana = 0;
+        $this->athletics = 0;
+        $this->deception = 0;
+        $this->history = 0;
+        $this->insight = 0;
+        $this->intimidation = 0;
+        $this->investigation = 0;
+        $this->medecine = 0;
+        $this->nature = 0;
+        $this->perception = 0;
+        $this->performance = 0;
+        $this->persuasion = 0;
+        $this->religion = 0;
+        $this->sleightOfHand = 0;
+        $this->stealth = 0;
+        $this->survival = 0;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

@@ -40,7 +40,7 @@ class Caracteristic
      * @ORM\Column(type="integer", options={"default": 0})
      * @Groups({"read_character"})
      */
-    private $armor_class;
+    private $armorClass;
 
     /**
      * @ORM\Column(type="integer", options={"default": 0})
@@ -77,6 +77,20 @@ class Caracteristic
      * @Groups({"read_character"})
      */
     private $deathSavesFailures;
+
+    public function __construct()
+    {   
+        $this->level = 0;
+        $this->experience = 0;
+        $this->inspiration = 0;
+        $this->armorClass = 0;
+        $this->speed = 0;
+        $this->currentHP = 0;
+        $this->totalHP = 0;
+        $this->hitDice = 0;
+        $this->deathSavesSuccess = 0;
+        $this->deathSavesFailures = 0;
+    }
 
     public function getId(): ?int
     {
@@ -121,12 +135,12 @@ class Caracteristic
 
     public function getArmorClass(): ?int
     {
-        return $this->armor_class;
+        return $this->armorClass;
     }
 
-    public function setArmorClass(?int $armor_class): self
+    public function setArmorClass(?int $armorClass): self
     {
-        $this->armor_class = $armor_class;
+        $this->armor_class = $armorClass;
 
         return $this;
     }

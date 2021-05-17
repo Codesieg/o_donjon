@@ -232,6 +232,10 @@ class Character
     {   
         // associe la date de la création de l'objet à createdAt
         $this->createdAt = new \DateTime();
+        $this->age = 0;
+        $this->initiative = 0;
+        $this->height = 0;
+        $this->weight = 0;
     }
 
     public function getId(): ?int
