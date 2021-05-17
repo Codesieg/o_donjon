@@ -261,31 +261,4 @@ class CharacterController extends AbstractController
         return $this->json(null, 204);
     }
 
-
-    /**
-     * ASSIGN A CAMPAIGN TO A CHARACTER
-     * 
-     * @Route("/{id}/campaign", name="edit_campaign", methods={"PUT"})
-     * @ParamConverter("character", options={"mapping": {"id": "id"}})
-     * 
-     */
-        // public function addCampaign(Request $request, Character $character, CampaignRepository $campaign) : Response
-        // {
-        
-        // $campaigns = $campaign->find($userId);
-        // $character->setCampaign($campaigns);
-
-        
-        //     if ($form->isValid()) {
-        //                 $em = $this->getDoctrine()->getManager();
-        //                 $em->flush();
-            
-        //                 return $this->json(
-        //                     $character, 200, [], [
-        //                         'groups' => ['read_character'],
-        //                     ]
-        //                 );
-        //             }
-        //             return $this->json($form->getErrors(true, false)->__toString(), 400);
-        // }
 }
