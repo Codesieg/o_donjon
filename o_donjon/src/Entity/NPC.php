@@ -38,7 +38,7 @@ class NPC
     private $description;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string", length=64, nullable=true)
      * @Groups({"browse_npc", "read_npc", "browse_campaign_npc"})
      */
     private $isAlly;
@@ -90,12 +90,12 @@ class NPC
         return $this;
     }
 
-    public function getIsAlly(): ?int
+    public function getIsAlly(): ?string
     {
         return $this->isAlly;
     }
 
-    public function setIsAlly(?int $isAlly): self
+    public function setIsAlly(?string $isAlly): self
     {
         $this->isAlly = $isAlly;
 

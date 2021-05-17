@@ -18,12 +18,12 @@ class Campaign
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"browse_campaign", "read_campaign", "read_character", "read_user", "browse_npc", "read_npc","browse_story", "read_story", "browse_map", "read_map"})
+     * @Groups({"browse_campaign", "read_campaign", "read_user", "browse_npc", "read_npc","browse_story", "read_story", "browse_map", "read_map"})
      */
     private $id;
 
     /**
-     * @Groups({"browse_campaign", "read_campaign", "read_character", "read_user", "browse_npc", "read_npc","browse_story", "read_story", "browse_map", "read_map"})
+     * @Groups({"browse_campaign", "read_campaign", "read_user", "browse_npc", "read_npc","browse_story", "read_story", "browse_map", "read_map"})
      * @ORM\Column(type="string", length=64, nullable=true)
      */
     private $name;
@@ -99,14 +99,18 @@ class Campaign
      */
     private $maps;
 
+
+    // fonction appelée lors de la création d'un objet
     public function __construct()
-    {
+    {   
         $this->users = new ArrayCollection();
         $this->characters = new ArrayCollection();
         $this->NPCs = new ArrayCollection();
         $this->stories = new ArrayCollection();
         $this->maps = new ArrayCollection();
+        // associe la date de la création de l'objet à createdAt
         $this->createdAt = new \DateTime();
+        // on génère un code d'invitation
         $this->invitationCode = uniqid();
     }
 
@@ -195,9 +199,10 @@ class Campaign
     /**
      * @ORM\PreUpdate
      */
-
+    
     public function setUpdatedAt(): self
-    {
+    {   
+        // on associe la date à updatedAt lors d'une modification
         $this->updatedAt = new \DateTime();
 
         return $this;
@@ -262,7 +267,7 @@ class Campaign
     {
         if (!$this->characters->contains($character)) {
             $this->characters[] = $character;
-            $character->setCampaign($this);
+            $character->setCampaignId($this);
         }
 
         return $this;
@@ -273,7 +278,7 @@ class Campaign
         if ($this->characters->removeElement($character)) {
             // set the owning side to null (unless already changed)
             if ($character->getCampaign() === $this) {
-                $character->setCampaign(null);
+                $character->setCampaignID(null);
             }
         }
 

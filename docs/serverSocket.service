@@ -1,0 +1,21 @@
+[Unit]
+Description=Star websocket server
+After=network-online.target
+
+[Service]
+Type=simple
+
+User=oclock
+Group=oclock
+UMask=007
+
+ExecStart=/var/www/html/projet-o-donjon-back/o_donjon/ php bin/console run:websocket-server
+
+Restart=on-failure
+
+# Configures the time to wait before service is stopped forcefully.
+TimeoutStopSec=300
+
+[Install]
+WantedBy=multi-user.target
+

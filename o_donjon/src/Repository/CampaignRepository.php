@@ -18,17 +18,18 @@ class CampaignRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Campaign::class);
     }
-  
+    
+    // requête personnalisée pour récupérer les campagnes où l'utilisateur est joueur
     public function findByUser($userId)
-    {
-        $qb = $this->createQueryBuilder('campaign')
-           ->leftJoin ('campaign.users','users')
-           ->where('users.id = :id')
-           ->setParameter('id', $userId);
+    {   
+        $qb = $this->createQueryBuilder('campaign') // on créer la requête pour la table campaign
+           ->leftJoin ('campaign.users','users') // on joint la table user à traver la table intermédiaire campaign_user
+           ->where('users.id = :id') // on récupère les campagnes associées à l'ID
+           ->setParameter('id', $userId); // on associe l'ID de l'utilisateur au paramètre ID
          
-        $query = $qb->getQuery();
-        $results = $query->getResult();
-        return $results;
+        $query = $qb->getQuery(); // on prépare la requête
+        $results = $query->getResult(); // on lance la requête
+        return $results; // on return les résultats
     }
 
     public function findByUserAndByCampaign($userId, $campaignId)

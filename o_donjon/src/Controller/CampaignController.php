@@ -24,9 +24,13 @@ class CampaignController extends AbstractController
      */
     public function browseDm(CampaignRepository $campaignRepository): Response
     {
-
+        // on récupère l'Id de l'utilisateur connecté
         $userId = $this->getUser()->getId();
+
+        // on récupère les campagnes dont l'utilisateur est le DM
         $campaigns = $campaignRepository->findBy(array('owner' => $userId));
+
+        // on retourne la liste des campagnes récupérées
         return $this->json($campaigns, 200, [], [
             'groups' => ['browse_campaign'],
         ]);
@@ -37,8 +41,13 @@ class CampaignController extends AbstractController
      */
     public function browse(CampaignRepository $campaignRepository): Response
     {
+        // on récupère l'Id de l'utilisateur connecté
         $userId = $this->getUser()->getId();
+
+        // on récupère les campagnes où l'utilisateur est enregistré comme joueur
         $campaigns = $campaignRepository->findByUser($userId);
+
+        // on retourne la liste des campagnes récupérées
         return $this->json($campaigns, 200, [], [
             'groups' => ['browse_campaign'],
         ]);
@@ -49,6 +58,7 @@ class CampaignController extends AbstractController
      */
     public function read(Campaign $campaign): Response
     {
+        // on retourne la campagne concernée avec le nombre de personnages, NPCs, histoires et maps associés
         return $this->json($campaign, 200, [], [
             'groups' => ['read_campaign', 'count_characters', 'count_npcs', 'count_stories', 'count_maps'],
         ]);
@@ -71,24 +81,34 @@ class CampaignController extends AbstractController
             return $this->json('wrong user ID', 401);
         }
 
+        // on récupère l'utilisateur connecté
         $owner = $this->getUser();
         
+        // on créer un formulaire pour la classe campaign
         $form = $this->createForm(CampaignType::class, $campaign, [
             'csrf_protection' => false,
         ]);
+        // on récupère les informations de la requête
         $sentData = json_decode($request->getContent(), true);
+        // on envoie les informations dans le formulaire
         $form->submit($sentData);
-
+        
+        // si les données sont valides
         if ($form->isValid()) {
             
+            // on associe l'utilisateur à la campagne en tant que DM
             $campaign->setOwner($owner);
+
+            // on envoie les données à la BDD
             $this->getDoctrine()->getManager()->flush();
-           
+            
+            // on retourne la campagne modifiée
             return $this->json($campaign, 200, [], [
                 'groups' => ['read_campaign'],
             ]);
         }
 
+        // si le formulaire n'est pas valide on retourne les erreurs
         return $this->json($form->getErrors(true, false)->__toString(), 400);
     }
 
@@ -96,29 +116,41 @@ class CampaignController extends AbstractController
      * @Route("", name="add", methods={"POST"})
      */
     public function add(Request $request): Response
-    {
+    {   
+        // on récupère l'utilisateur connecté
         $owner = $this->getUser();
 
+        // on créer un objet campagne
         $campaign = new Campaign();
-    
+        
+        // on créer un formulaire pour la classe campaign
         $form = $this->createForm(CampaignType::class, $campaign, [
             'csrf_protection' => false,
         ]);
+        
+        // on récupère les informations de la requête
         $sentData = json_decode($request->getcontent(), true);
+
+        // on envoie les informations dans le formulaire
         $form->submit($sentData);
-        // $form->getData();
-        // dd($form);
 
-
+        // si les données sont valides
         if ($form->isValid()) {
+
+            // on associe l'utilisateur à la campagne en tant que DM
             $campaign->setOwner($owner);
+
+            // on envoie les données à la BDD
             $em = $this->getDoctrine()->getManager();
             $em->persist($campaign);
             $em->flush();
 
+            // on retourne la campagne créée
             return $this->json($campaign, 201, [], [
                 'groups' => ['read_campaign'],
             ]);
+
+        // si le formulaire n'est pas valide on retourne les erreurs
         } else {
             $errors = $form->getErrors(true, false);
             $errorString = (string) $errors;
@@ -142,10 +174,12 @@ class CampaignController extends AbstractController
             return $this->json('wrong user ID', 401);
         }
 
+        // on demande à la BDD de supprimer la campagne
         $em = $this->getDoctrine()->getManager();
         $em->remove($campaign);
         $em->flush();
 
+        // on retourne un code 204 si la campagne est bien supprimée
         return $this->json(null, 204);
     }
 
@@ -157,7 +191,8 @@ class CampaignController extends AbstractController
      * @Route("/{id}/story", name="stories_list", methods={"GET"}, requirements={"id": "\d+"})
      */
     public function browseStories(Campaign $campaign): Response
-    {    
+    {
+        // on retourne les histoires associées à la campagne
         return $this->json($campaign, 200, [], [
             'groups' => ['browse_campaign_stories'],
         ]);
@@ -170,6 +205,7 @@ class CampaignController extends AbstractController
      */
     public function browseMaps(Campaign $campaign): Response
     {    
+        // on retourne les cartes associées à la campagne
         return $this->json($campaign, 200, [], [
             'groups' => ['browse_campaign_maps'],
         ]);
@@ -181,7 +217,8 @@ class CampaignController extends AbstractController
      * @Route("/{id}/npc", name="npc_list", methods={"GET"}, requirements={"id": "\d+"})
      */
     public function browseNpc(Campaign $campaign): Response
-    {    
+    {   
+        // on retourne les NPCs associés à la campagne
         return $this->json($campaign, 200, [], [
             'groups' => ['browse_campaign_npc'],
         ]);
@@ -193,25 +230,11 @@ class CampaignController extends AbstractController
      * @Route("/{id}/character", name="character_list", methods={"GET"}, requirements={"id": "\d+"})
      */
     public function browseCharacter(Campaign $campaign): Response
-    {    
+    {   
+        // on retourne les personnages associés à la campagne
         return $this->json($campaign, 200, [], [
             'groups' => ['browse_campaign_character'],
         ]);
     }
 
-
-    /**
-    * READ WITH ASSOCIATED STATS (NB OF STORIES,..) => remplacera read ?
-    *
-     * @Route("/{id}/stats", name="stats_read", methods={"GET"}, requirements={"id": "\d+"})
-     */
-    public function readStats(Campaign $campaign): Response
-    {       
-        return $this->json($campaign, 200, [], [
-            'groups' => ['read_campaign', 'count_characters', 'count_npcs', 'count_stories', 'count_maps'],
-        ]);
-    }
-
-
-    
 }

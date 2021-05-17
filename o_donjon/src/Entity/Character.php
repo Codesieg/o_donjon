@@ -6,6 +6,7 @@ use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\CharacterRepository;
 use Doctrine\Common\Collections\ArrayCollection;
+use phpDocumentor\Reflection\Types\Integer;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
@@ -181,7 +182,6 @@ class Character
 
     /**
      * @ORM\ManyToOne(targetEntity=Campaign::class, inversedBy="characters")
-     * @Groups({"browse_character", "read_character", "edit_character"})
      */
     private $campaign;
 
@@ -228,7 +228,8 @@ class Character
     private $skill;
 
     public function __construct()
-    {
+    {   
+        // associe la date de la création de l'objet à createdAt
         $this->createdAt = new \DateTime();
     }
 
@@ -535,7 +536,8 @@ class Character
      */
 
     public function setUpdatedAt(): self
-    {
+    {   
+        // on associe la date à updatedAt lors d'une modification
         $this->updatedAt = new \DateTime();
 
         return $this;
@@ -558,7 +560,15 @@ class Character
         return $this->campaign;
     }
 
-    public function setCampaign(?Campaign $campaign): self
+    /**
+     * @Groups({"browse_character", "read_character"})
+     */
+    public function getCampaignID(): ?Int
+    {
+        return $this->campaign->getId();
+    }
+
+    public function setCampaignID(?Campaign $campaign): self
     {
         $this->campaign = $campaign;
 
