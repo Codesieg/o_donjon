@@ -87,7 +87,6 @@ class Caracteristic
         $this->speed = 0;
         $this->currentHP = 0;
         $this->totalHP = 0;
-        $this->hitDice = 0;
         $this->deathSavesSuccess = 0;
         $this->deathSavesFailures = 0;
     }
