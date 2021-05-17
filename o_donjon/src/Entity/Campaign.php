@@ -18,12 +18,12 @@ class Campaign
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"browse_campaign", "read_campaign", "read_user", "browse_npc", "read_npc","browse_story", "read_story", "browse_map", "read_map"})
+     * @Groups({"browse_campaign", "read_campaign", "read_user", "browse_npc", "read_npc","browse_story", "read_story", "browse_map", "read_map", "browse_character", "read_character"})
      */
     private $id;
 
     /**
-     * @Groups({"browse_campaign", "read_campaign", "read_user", "browse_npc", "read_npc","browse_story", "read_story", "browse_map", "read_map"})
+     * @Groups({"browse_campaign", "read_campaign", "read_user", "browse_npc", "read_npc","browse_story", "read_story", "browse_map", "read_map", "browse_character", "read_character"})
      * @ORM\Column(type="string", length=64, nullable=true)
      */
     private $name;
@@ -267,7 +267,7 @@ class Campaign
     {
         if (!$this->characters->contains($character)) {
             $this->characters[] = $character;
-            $character->setCampaignId($this);
+            $character->setCampaign($this);
         }
 
         return $this;
@@ -278,7 +278,7 @@ class Campaign
         if ($this->characters->removeElement($character)) {
             // set the owning side to null (unless already changed)
             if ($character->getCampaign() === $this) {
-                $character->setCampaignID(null);
+                $character->setCampaign(null);
             }
         }
 

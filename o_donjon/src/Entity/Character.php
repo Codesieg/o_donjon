@@ -182,6 +182,7 @@ class Character
 
     /**
      * @ORM\ManyToOne(targetEntity=Campaign::class, inversedBy="characters")
+     * @Groups({"browse_character", "read_character"})
      */
     private $campaign;
 
@@ -560,15 +561,7 @@ class Character
         return $this->campaign;
     }
 
-    /**
-     * @Groups({"browse_character", "read_character"})
-     */
-    public function getCampaignID(): ?Int
-    {
-        return $this->campaign->getId();
-    }
-
-    public function setCampaignID(?Campaign $campaign): self
+    public function setCampaign(?Campaign $campaign): self
     {
         $this->campaign = $campaign;
 
