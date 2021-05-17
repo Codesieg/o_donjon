@@ -37,25 +37,25 @@ class Character
     private $avatar_path;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", options={"default": 0})
      * @Groups({"browse_character", "read_character", "browse_campaign_character", "edit_character"})
      */
     private $age;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", options={"default": 0})
      * @Groups({"browse_character", "read_character", "browse_campaign_character", "edit_character"})
      */
     private $initiative;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", options={"default": 0})
      * @Groups({"browse_character", "read_character", "browse_campaign_character", "edit_character"})
      */
     private $height;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", options={"default": 0})
      * @Groups({"browse_character", "read_character", "browse_campaign_character", "edit_character"})
      */
     private $weight;
@@ -232,6 +232,10 @@ class Character
     {   
         // associe la date de la création de l'objet à createdAt
         $this->createdAt = new \DateTime();
+        $this->age = 0;
+        $this->initiative = 0;
+        $this->height = 0;
+        $this->weight = 0;
     }
 
     public function getId(): ?int

@@ -19,112 +19,134 @@ class Skill
     private $id;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", options={"default": 0})
      * @Groups({"read_character"})
      */
     private $acrobatics;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean", options={"default": 0})
      * @Groups({"read_character"})
      */
     private $animalHandling;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean", options={"default": 0})
      * @Groups({"read_character"})
      */
     private $arcana;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean", options={"default": 0})
      * @Groups({"read_character"})
      */
     private $athletics;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean", options={"default": 0})
      * @Groups({"read_character"})
      */
     private $deception;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean", options={"default": 0})
      * @Groups({"read_character"})
      */
     private $history;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean", options={"default": 0})
      * @Groups({"read_character"})
      */
     private $insight;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean", options={"default": 0})
      * @Groups({"read_character"})
      */
     private $intimidation;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean", options={"default": 0})
      * @Groups({"read_character"})
      */
     private $investigation;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean", options={"default": 0})
      * @Groups({"read_character"})
      */
     private $medecine;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean", options={"default": 0})
      * @Groups({"read_character"})
      */
     private $nature;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean", options={"default": 0})
      * @Groups({"read_character"})
      */
     private $perception;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean", options={"default": 0})
      * @Groups({"read_character"})
      */
     private $performance;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean", options={"default": 0})
      * @Groups({"read_character"})
      */
     private $persuasion;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean", options={"default": 0})
      * @Groups({"read_character"})
      */
     private $religion;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean", options={"default": 0})
      * @Groups({"read_character"})
      */
     private $sleightOfHand;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean", options={"default": 0})
      * @Groups({"read_character"})
      */
     private $stealth;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean", options={"default": 0})
      * @Groups({"read_character"})
      */
     private $survival;
+
+    public function __construct()
+    {   
+        $this->acrobatics = 0;
+        $this->animalHandling = 0;
+        $this->arcana = 0;
+        $this->athletics = 0;
+        $this->deception = 0;
+        $this->history = 0;
+        $this->insight = 0;
+        $this->intimidation = 0;
+        $this->investigation = 0;
+        $this->medecine = 0;
+        $this->nature = 0;
+        $this->perception = 0;
+        $this->performance = 0;
+        $this->persuasion = 0;
+        $this->religion = 0;
+        $this->sleightOfHand = 0;
+        $this->stealth = 0;
+        $this->survival = 0;
+    }
 
     public function getId(): ?int
     {
