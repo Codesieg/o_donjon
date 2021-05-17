@@ -228,6 +228,12 @@ class Character
      */
     private $skill;
 
+    /**
+     * @ORM\Column(type="boolean", options={"default": false})
+     * @Groups({"browse_character", "read_character", "edit_character"})
+     */
+    private $isDead;
+
     public function __construct()
     {   
         // associe la date de la création de l'objet à createdAt
@@ -236,6 +242,7 @@ class Character
         $this->initiative = 0;
         $this->height = 0;
         $this->weight = 0;
+        $this->isDead = false;
     }
 
     public function getId(): ?int
@@ -652,6 +659,18 @@ class Character
     public function setSkill(?Skill $skill): self
     {
         $this->skill = $skill;
+
+        return $this;
+    }
+
+    public function getIsDead(): ?bool
+    {
+        return $this->isDead;
+    }
+
+    public function setIsDead(bool $isDead): self
+    {
+        $this->isDead = $isDead;
 
         return $this;
     }
