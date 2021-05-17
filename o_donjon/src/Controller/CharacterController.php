@@ -46,78 +46,135 @@ class CharacterController extends AbstractController
     {
         // on récupère l'utilisateur connecté
         $user = $this->getUser();
-        
-        // on créer un objet Race
-        $character = new Race();
-        // on créer un formulaire pour la classe Race
-        $form = $this->createForm(RaceType::class, $character, [
-            'csrf_protection' => false,
-        ]);
-
-        // on créer un objet CharacterClass
-        $character = new CharacterClass();
-        // on créer un formulaire pour la classe CharacterClass
-        $form = $this->createForm(CharacterClassType::class, $character, [
-            'csrf_protection' => false,
-        ]);  
-        
-        // on créer un objet Statistics
-        $character = new Statistics();
-        // on créer un formulaire pour la classe Statistics
-        $form = $this->createForm(StatisticsType::class, $character, [
-            'csrf_protection' => false,
-            ]);  
-            
-        // on créer un objet Spell
-        $character = new Spell();
-        // on créer un formulaire pour la classe Spell
-        $form = $this->createForm(SpellType::class, $character, [
-            'csrf_protection' => false,
-            ]);  
-        
-        // on créer un objet SavingThrow
-        $character = new SavingThrow();
-        // on créer un formulaire pour la classe SavingThrow
-        $form = $this->createForm(SavingThrowType::class, $character, [
-            'csrf_protection' => false,
-        ]);  
-        
-        // on créer un objet Skill
-        $character = new Skill();
-        // on créer un formulaire pour la classe Skill
-        $form = $this->createForm(SkillType::class, $character, [
-            'csrf_protection' => false,
-        ]);  
 
         // on créer un objet Character
         $character = new Character();
-        // on créer un formulaire pour la classe Character
-        $form = $this->createForm(CharacterType::class, $character, ['csrf_protection' => false]);
 
-        // on récupère les informations de la requête
-        $sentData = json_decode($request->getContent(), true); // On definit le parametre à true afin de retourner un tableau associatif
-        // on envoie les informations dans le formulaire
-        $form->submit($sentData);
+        // on associe l'utilisateur au personnage
+        $character->setUser($user);
+
+        // on créer un objet Race
+        $race = new Race();
+
+        // on créer un objet CharacterClass
+        $class = new CharacterClass();
+
+        // on créer un objet Caracteristic
+        $caracteristics = new Caracteristic();
+
+        // on créer un objet Statistics
+        $statistics = new Statistics();
+
+        // on créer un objet Spell
+        $spell = new Spell();
+
+        // on créer un objet Spell
+        $spell = new Spell();
+
+        // on créer un objet SavingThrow
+        $savingThrowspell = new SavingThrow();
+
+        // on créer un objet Skill
+        $skill = new Skill();
+
+        // on associe les objets créés à l'objet character
+        $character->setRace($race);
+        $character->setClass($class);
+        $character->setCaracteristics($caracteristics);
+        $character->setStatistics($statistics);
+        $character->setSpell($spell);
+        $character->setSavingThrowspell($savingThrowspell);
+        $character->setSkill($skill);
+
+        // on récupère le nom saisi par l'utilisateur
+        $data = json_decode($request->getContent(), true);
+        $name = $data['name'];
+
+        // on défini ce nom comme celui du personnage
+        $character->setName($name);
+
+        // on envoie les données à la BDD
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($character);
+        $em->flush();
         
-        // si les données sont valides
-        if ($form->isValid()) {
+        // on retourne le personnage créé
+        return $this->json($character,  201, [], [
+            'groups' => ['read_character'],
+        ]);
 
-            // on associe l'utilisateur au personnage
-            $character->setUser($user);
 
-            // on envoie les données à la BDD
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($character);
-            $em->flush();
+        // // on créer un objet Race
+        // $character = new Race();
+        // // on créer un formulaire pour la classe Race
+        // $form = $this->createForm(RaceType::class, $character, [
+        //     'csrf_protection' => false,
+        // ]);
+
+        // // on créer un objet CharacterClass
+        // $character = new CharacterClass();
+        // // on créer un formulaire pour la classe CharacterClass
+        // $form = $this->createForm(CharacterClassType::class, $character, [
+        //     'csrf_protection' => false,
+        // ]);  
+        
+        // // on créer un objet Statistics
+        // $character = new Statistics();
+        // // on créer un formulaire pour la classe Statistics
+        // $form = $this->createForm(StatisticsType::class, $character, [
+        //     'csrf_protection' => false,
+        //     ]);  
             
-            // on retourne le personnage créé
-            return $this->json($character,  201, [], [
-                'groups' => ['read_character'],
-            ]);
-        }
+        // // on créer un objet Spell
+        // $character = new Spell();
+        // // on créer un formulaire pour la classe Spell
+        // $form = $this->createForm(SpellType::class, $character, [
+        //     'csrf_protection' => false,
+        //     ]);  
+        
+        // // on créer un objet SavingThrow
+        // $character = new SavingThrow();
+        // // on créer un formulaire pour la classe SavingThrow
+        // $form = $this->createForm(SavingThrowType::class, $character, [
+        //     'csrf_protection' => false,
+        // ]);  
+        
+        // // on créer un objet Skill
+        // $character = new Skill();
+        // // on créer un formulaire pour la classe Skill
+        // $form = $this->createForm(SkillType::class, $character, [
+        //     'csrf_protection' => false,
+        // ]);  
 
-        // si le formulaire n'est pas valide on retourne les erreurs
-        return $this->json($form->getErrors(true, false)->__toString(), 400);
+        // // on créer un objet Character
+        // $character = new Character();
+        // on créer un formulaire pour la classe Character
+        // $form = $this->createForm(CharacterType::class, $character, ['csrf_protection' => false]);
+
+        // // on récupère les informations de la requête
+        // $sentData = json_decode($request->getContent(), true); // On definit le parametre à true afin de retourner un tableau associatif
+        // // on envoie les informations dans le formulaire
+        // $form->submit($sentData);
+        
+        // // si les données sont valides
+        // if ($form->isValid()) {
+
+        //     // on associe l'utilisateur au personnage
+        //     $character->setUser($user);
+
+        //     // on envoie les données à la BDD
+        //     $em = $this->getDoctrine()->getManager();
+        //     $em->persist($character);
+        //     $em->flush();
+            
+        //     // on retourne le personnage créé
+        //     return $this->json($character,  201, [], [
+        //         'groups' => ['read_character'],
+        //     ]);
+        // }
+
+        // // si le formulaire n'est pas valide on retourne les erreurs
+        // return $this->json($form->getErrors(true, false)->__toString(), 400);
     }
 
     /**

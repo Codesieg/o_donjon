@@ -19,40 +19,50 @@ class SavingThrow
     private $id;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean", options={"default": 0})
      * @Groups({"read_character"})
      */
     private $strength;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean", options={"default": 0})
      * @Groups({"read_character"})
      */
     private $dexterity;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean", options={"default": 0})
      * @Groups({"read_character"})
      */
     private $constitution;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean", options={"default": 0})
      * @Groups({"read_character"})
      */
     private $intelligence;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean", options={"default": 0})
      * @Groups({"read_character"})
      */
     private $wisdom;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean", options={"default": 0})
      * @Groups({"read_character"})
      */
     private $charisma;
+
+    public function __construct()
+    {   
+        $this->strength = 0;
+        $this->dexterity = 0;
+        $this->constitution = 0;
+        $this->intelligence = 0;
+        $this->wisdom = 0;
+        $this->charisma = 0;
+    }
 
     public function getId(): ?int
     {
