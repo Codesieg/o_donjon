@@ -104,7 +104,7 @@ class CampaignController extends AbstractController
             
             // on retourne la campagne modifiée
             return $this->json($campaign, 200, [], [
-                'groups' => ['read_campaign'],
+                'groups' => ['read_campaign', 'count_characters', 'count_npcs', 'count_stories', 'count_maps'],
             ]);
         }
 
