@@ -15,7 +15,7 @@ class CaracteristicType extends AbstractType
             ->add('level')
             ->add('experience')
             ->add('inspiration')
-            ->add('armor_class')
+            ->add('armorClass')
             ->add('speed')
             ->add('currentHP')
             ->add('totalHP')

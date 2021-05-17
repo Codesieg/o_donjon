@@ -37,25 +37,25 @@ class Character
     private $avatar_path;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", options={"default": 0})
      * @Groups({"browse_character", "read_character", "browse_campaign_character", "edit_character"})
      */
     private $age;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", options={"default": 0})
      * @Groups({"browse_character", "read_character", "browse_campaign_character", "edit_character"})
      */
     private $initiative;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", options={"default": 0})
      * @Groups({"browse_character", "read_character", "browse_campaign_character", "edit_character"})
      */
     private $height;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", options={"default": 0})
      * @Groups({"browse_character", "read_character", "browse_campaign_character", "edit_character"})
      */
     private $weight;

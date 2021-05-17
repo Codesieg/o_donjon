@@ -24,19 +24,19 @@ class Spell
     private $spellcasting_class;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", options={"default": 0})
      * @Groups({"browse", "read_character"})
      */
     private $spell_attack_bonus;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", options={"default": 0})
      * @Groups({"browse", "read_character"})
      */
     private $spellcasting_ability;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", options={"default": 0})
      * @Groups({"browse", "read_character"})
      */
     private $spell_save_dc;

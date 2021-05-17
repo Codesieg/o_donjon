@@ -19,37 +19,37 @@ class SavingThrow
     private $id;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean", options={"default": 0})
      * @Groups({"read_character"})
      */
     private $strength;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean", options={"default": 0})
      * @Groups({"read_character"})
      */
     private $dexterity;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean", options={"default": 0})
      * @Groups({"read_character"})
      */
     private $constitution;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean", options={"default": 0})
      * @Groups({"read_character"})
      */
     private $intelligence;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean", options={"default": 0})
      * @Groups({"read_character"})
      */
     private $wisdom;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean", options={"default": 0})
      * @Groups({"read_character"})
      */
     private $charisma;

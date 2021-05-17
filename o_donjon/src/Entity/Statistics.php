@@ -19,49 +19,49 @@ class Statistics
     private $id;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", options={"default": 0})
      * @Groups({"read_character"})
      */
     private $strength;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", options={"default": 0})
      * @Groups({"read_character"})
      */
     private $dexterity;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", options={"default": 0})
      * @Groups({"read_character"})
      */
     private $constitution;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", options={"default": 0})
      * @Groups({"read_character"})
      */
     private $intelligence;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", options={"default": 0})
      * @Groups({"read_character"})
      */
     private $wisdom;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", options={"default": 0})
      * @Groups({"read_character"})
      */
     private $charisma;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", options={"default": 0})
      * @Groups({"read_character"})
      */
     private $passiveWisdom;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", options={"default": 0})
      * @Groups({"read_character"})
      */
     private $proficiencyBonus;

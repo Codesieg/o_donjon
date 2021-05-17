@@ -19,43 +19,43 @@ class Caracteristic
     private $id;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", options={"default": 0})
      * @Groups({"read_character"})
      */
     private $level;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", options={"default": 0})
      * @Groups({"read_character"})
      */
     private $experience;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean", options={"default": 0})
      * @Groups({"read_character"})
      */
     private $inspiration;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", options={"default": 0})
      * @Groups({"read_character"})
      */
     private $armor_class;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", options={"default": 0})
      * @Groups({"read_character"})
      */
     private $speed;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", options={"default": 0})
      * @Groups({"read_character"})
      */
     private $currentHP;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", options={"default": 0})
      * @Groups({"read_character"})
      */
     private $totalHP;
@@ -67,13 +67,13 @@ class Caracteristic
     private $hitDice;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", options={"default": 0})
      * @Groups({"read_character"})
      */
     private $deathSavesSuccess;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", options={"default": 0})
      * @Groups({"read_character"})
      */
     private $deathSavesFailures;
