@@ -36,6 +36,7 @@ class CharacterType extends AbstractType
             ->add('equipment')
             ->add('other_proficiencies_and_languages')
             ->add('features_and_traits')
+            ->add('isDead')
             // ->add('createdAt')
             // ->add('updatedAt')
             // ->add('user')
