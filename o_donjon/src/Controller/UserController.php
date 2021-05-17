@@ -6,6 +6,7 @@ use App\Entity\Campaign;
 use App\Entity\User;
 use App\Form\CampaignType;
 use App\Form\UserType;
+use App\Repository\CampaignRepository;
 use App\Repository\UserRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -173,26 +174,27 @@ class UserController extends AbstractController
     /***********************************************ADVANCED METHODS**************************************/
 
     /**
-     * AUTHORIZE A USER TO JOIN A CAMPAIGN
+     * AUTHORIZE A USER TO JOIN THE CAMPAIGN CORRESPONDING TO HIS INVITATION CODE
      * 
-     * @Route("/user/campaign/{id}", name="add_campaign", methods={"POST"})
+     * @Route("/user/campaign/join", name="user_campaign_join", methods={"POST"})
      * 
      */
-    public function addCampaign(Request $request, Campaign $campaign): Response
+    public function joinCampaign(Request $request, CampaignRepository $campaignRepository): Response
     {
         // Identify the user
         $user = $this->getUser();
-        
-        // Identify campaign invitation code
-        $campaignInvitationCode = $campaign->getInvitationCode();
 
-        // Transform request json content
+        // Transform received json content to an associated array
         $sentData = json_decode($request->getContent(), true);
-        $requestInvitationCode = $sentData['invitationCode'];
+        
+        // Recover the invitation code from the associated array
+        $requestedInvitationCode = $sentData['invitationCode'];
+                
+        // Identify the campaign corresponding to the invitation code
+        $requestedCampaign = $campaignRepository->findBy(array('invitationCode' => $requestedInvitationCode));
 
-        // Check invitation code
-        if ($requestInvitationCode != $campaignInvitationCode) {
-            
+        // If no campaign found, send an error message
+        if (empty($requestedCampaign)) {
             $responseData = [
                 'status' => 'error',
                 'message' => 'This invitation code is not valid !'
@@ -201,16 +203,19 @@ class UserController extends AbstractController
             return $this->json($responseData, 401, []);
         } 
 
-        // Add the user to the campaign
-        $campaign->addUser($user);
+        // Else add the user to the campaign
+        $joinedCampaign = $requestedCampaign[0];
+        $joinedCampaign->addUser($user);
+        $joinedCampaignName = $joinedCampaign->getName();
 
         // Update the DB
         $em = $this->getDoctrine()->getManager();
         $em->flush();
         
+        // Reurn a success message
         $responseData = [
             'status' => 'success',
-            'message' => 'Yeah, you have joined the campaign !'
+            'message' => 'Yeah, you have joined the campaign ' . $joinedCampaignName . ' !'
         ];
         
         return $this->json($responseData, 200, []);

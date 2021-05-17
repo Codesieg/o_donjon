@@ -123,7 +123,7 @@ class CharacterController extends AbstractController
     /**
      * @Route("/{id}", name="edit", methods={"PUT"}, requirements={"id": "\d+"})
      */
-    public function edit(Request $request, character $character): Response
+    public function edit(Request $request, character $character, CampaignRepository $campaignRepository): Response
     {
         // on récupère l'utilisateur connecté
         $user = $this->getUser();
