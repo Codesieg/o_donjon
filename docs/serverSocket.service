@@ -9,7 +9,7 @@ User=oclock
 Group=oclock
 UMask=007
 
-ExecStart=/var/www/html/projet-o-donjon-back/o_donjon/ php bin/console run:websocket-server
+ExecStart=/var/www/html/projet-o-donjon-back/o_donjon/ bin/console run:websocket-server
 
 Restart=on-failure
 
