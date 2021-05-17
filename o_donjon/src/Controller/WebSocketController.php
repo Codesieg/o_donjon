@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class WebSocketController extends AbstractController
 {
     /**
-     * @Route("/web/socket", name="web_socket")
+     * @Route("/websocket", name="web_socket")
      */
     public function index(): Response
     {
