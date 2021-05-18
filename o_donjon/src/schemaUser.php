@@ -44,3 +44,18 @@ use OpenApi\Annotations as OA;
  *      @OA\Property(type="string", maxLength=64, nullable=true, property="name"),
  * )
  */
+
+/**
+ * @OA\RequestBody(
+ *      request="registerUser",
+ *      required=true,
+ *      @OA\JsonContent(
+ *          required={"email", "password", "name", "avatarPath"},
+ *          @OA\Property(type="string", maxLength=180, uniqueItems=true, property="email"),
+ *          @OA\Property(type="string", property="password"),
+ *          @OA\Property(type="string", maxLength=64, nullable=true, property="name"),
+ *          @OA\Property(type="string", maxLength=255, nullable=true, property="avatarPath"),
+ *      )
+ * )
+ */
+ 

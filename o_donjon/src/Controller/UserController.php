@@ -22,6 +22,8 @@ class UserController extends AbstractController
      * @Route("/user", name="browse", methods={"GET"})
      * @OA\Get(
      *      path="/user",
+     *      tags={"User"},
+     *      security={"bearer"},
      *      @OA\Response(
      *          response="200",
      *          description="List of the users",
@@ -44,10 +46,12 @@ class UserController extends AbstractController
      * @Route("/login", name="add", methods={"POST"})
      * @OA\Post(
      *      path="/login",
+     *      tags={"User"},
+     *      @OA\RequestBody(ref="#/components/requestBodies/registerUser"),
      *      @OA\Response(
      *          response="201",
      *          description="Register new user",
-     *          @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/userList"))
+     *          @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/user"))
      *      )
      * )
      */
@@ -93,18 +97,15 @@ class UserController extends AbstractController
      * @Route("/user/{id}", name="read", methods={"GET"}, requirements={"id": "\d+"})
      * @OA\Get(
      *      path="/user/{id}",
-     *      @OA\Parameter(
-     *          name="id",
-     *          in="path",
-     *          description="User ID",
-     *          required=true,
-     *          @OA\Schema(type="integer")
-     *      ),
+     *      tags={"User"},
+     *      security={"bearer"},
+     *      @OA\Parameter(ref="#/components/parameters/id"),
      *      @OA\Response(
      *          response="200",
      *          description="User informations",
      *          @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/user"))
-     *      )
+     *      ),
+     *      @OA\Response(response="404", ref="#/components/responses/notFound")
      * )
      */
     public function read(User $user): Response
