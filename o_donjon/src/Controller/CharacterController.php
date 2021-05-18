@@ -266,9 +266,6 @@ class CharacterController extends AbstractController
         // si les données sont valides
         if ($form->isValid()) {
 
-            // on associe l'utilisateur au personnage
-            $character->setUser($user);
-
             // on envoie les données à la BDD
             $em = $this->getDoctrine()->getManager();
             $em->flush();
