@@ -7,6 +7,9 @@ use App\Entity\Race;
 use App\Entity\CharacterClass;
 use App\Entity\Caracteristic;
 use App\Entity\Statistics;
+use App\Entity\Spell;
+use App\Entity\SavingThrow;
+use App\Entity\Skill;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -202,30 +205,34 @@ class AppFixtures extends Fixture
         /******************SPELL TABLE*************************/
 
         $spellCastingClasses = [
-            'human',
-            'dwarves',
-            'elves',
-            'halflings',
+            'barbarian',
+            'bard',
+            'cleric',
+            'druid',
+            'fighter',
+            'monk',
+            'paladin',
+            'ranger',
+            'rogue',
+            'sorcerer',
+            'warlock',
+            'wizard',
         ];
 
-        /******************SAVING THROWS TABLE*********************/
-
-        $savingsThrowsStrengthes = [
-            'human',
-            'dwarves',
-            'elves',
-            'halflings',
+        $spellsList = [
+            'animal friendship',
+            'acid splash',
+            'blink',
+            'calm emotions',
+            'detect poison and disease',
+            'greater invisibility',
+            'hypnotic pattern',
+            'guidance',
+            'poison spray',
+            'teleport',
         ];
 
-        /***********************SKILL TABLE************************/
-
-        $skillAcrobatics = [
-            'human',
-            'dwarves',
-            'elves',
-            'halflings',
-        ];
-
+        
         /****************************************************CHARACTER CREATION***************************************************/
 
                
@@ -234,6 +241,9 @@ class AppFixtures extends Fixture
         $classes = [];
         $caracteristics = [];
         $statistics = [];
+        $spells = [];
+        $savingThrows = [];
+        $skills = [];
 
         foreach ($characterNames as $characterName) {
             
@@ -308,6 +318,18 @@ class AppFixtures extends Fixture
             $statistic = new Statistics();
             $character->setStatistics($statistic);
             $statistics[] = $statistic;
+
+            $spell = new Spell();
+            $character->setSpell($spell);
+            $spells[] = $spell;
+
+            $savingThrow = new SavingThrow();
+            $character->setSavingThrowspell($savingThrow);
+            $savingThrows[] = $savingThrow;
+
+            $skill = new Skill();
+            $character->setSkill($skill);
+            $skills[] = $skill;
             
             $manager->persist($character);
             
@@ -368,10 +390,76 @@ class AppFixtures extends Fixture
 
         foreach ($statistics as $statistic) {
             
-            $statistic->setStrength(random_int(1, 20));
-            
-            
+            $statistic->setStrength(random_int(1, 10));
+            $statistic->setDexterity(random_int(1, 10));
+            $statistic->setConstitution(random_int(1, 10));
+            $statistic->setIntelligence(random_int(1, 10));
+            $statistic->setWisdom(random_int(1, 10));
+            $statistic->setCharisma(random_int(1, 10));
+            $statistic->setPassiveWisdom(random_int(1, 10));
+            $statistic->setProficiencyBonus(random_int(1, 10));
+                        
         }
+
+        /****************************************************SPELL CREATION***************************************************/
+
+        foreach ($spells as $spell) {
+            
+            shuffle($spellCastingClasses);
+            $spell->setSpellcastingClass($spellCastingClasses[1]);
+
+            $spell->setSpellAttackBonus(random_int(1, 10));
+            
+            $spell->setSpellcastingAbility(random_int(1, 10));
+
+            $spell->setSpellSaveDc(random_int(1, 10));
+
+            shuffle($spellsList);
+            $characterSpells = '';
+            for ($i = 0; $i < rand(1, 5); $i++) { 
+                $characterSpells = $characterSpells . " " . $spellsList[$i];
+            };
+            $spell->setSpellsList($characterSpells);              
+        }
+
+        /****************************************************SAVING THROW CREATION***************************************************/
+
+        foreach ($savingThrows as $savingThrow) {
+ 
+            $savingThrow->setStrength((bool)random_int(0, 1));
+            $savingThrow->setDexterity((bool)random_int(0, 1));
+            $savingThrow->setConstitution((bool)random_int(0, 1));
+            $savingThrow->setIntelligence((bool)random_int(0, 1));
+            $savingThrow->setWisdom((bool)random_int(0, 1));
+            $savingThrow->setCharisma((bool)random_int(0, 1));           
+        }
+
+        /****************************************************SKILL CREATION***************************************************/
+
+        foreach ($skills as $skill) {
+ 
+            $skill->setAcrobatics((bool)random_int(0, 1));
+            $skill->setAnimalHandling((bool)random_int(0, 1));
+            $skill->setArcana((bool)random_int(0, 1));
+            $skill->setAthletics((bool)random_int(0, 1));
+            $skill->setDeception((bool)random_int(0, 1));
+            $skill->setHistory((bool)random_int(0, 1));
+            $skill->setInsight((bool)random_int(0, 1));
+            $skill->setIntimidation((bool)random_int(0, 1));
+            $skill->setInvestigation((bool)random_int(0, 1));
+            $skill->setMedecine((bool)random_int(0, 1));
+            $skill->setNature((bool)random_int(0, 1));
+            $skill->setPerception((bool)random_int(0, 1));
+            $skill->setPerformance((bool)random_int(0, 1));
+            $skill->setPersuasion((bool)random_int(0, 1));
+            $skill->setReligion((bool)random_int(0, 1));
+            $skill->setSleightOfHand((bool)random_int(0, 1));
+            $skill->setStealth((bool)random_int(0, 1));
+            $skill->setSurvival((bool)random_int(0, 1));
+          
+        }
+
+
 
         /******************************************************************************************************************************/
         /****************************************************SENDING TO THE DB*********************************************************/
