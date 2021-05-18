@@ -129,6 +129,19 @@ class UserController extends AbstractController
 
     /**
      * @Route("/user/{id}", name="edit", methods={"PUT", "PATCH"}, requirements={"id": "\d+"})
+     * @OA\Put(
+     *      path="/user/{id}",
+     *      tags={"User"},
+     *      security={"bearer"},
+     *      @OA\Parameter(ref="#/components/parameters/id"),
+     *      @OA\RequestBody(ref="#/components/requestBodies/registerUser"),
+     *      @OA\Response(
+     *          response="200",
+     *          description="User informations",
+     *          @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/user"))
+     *      ),
+     *      @OA\Response(response="404", ref="#/components/responses/notFound")
+     * )
      */
     public function edit(UserPasswordEncoderInterface $passwordEncoder, Request $request, User $user): Response
     {   
@@ -179,6 +192,17 @@ class UserController extends AbstractController
 
     /**
      * @Route("/user/{id}", name="delete", methods={"DELETE"}, requirements={"id": "\d+"})
+     * @OA\Delete(
+     *      path="/user/{id}",
+     *      tags={"User"},
+     *      security={"bearer"},
+     *      @OA\Parameter(ref="#/components/parameters/id"),
+     *      @OA\Response(
+     *          response="204",
+     *          description="",
+     *      ),
+     *      @OA\Response(response="404", ref="#/components/responses/notFound")
+     * )
      */
     public function delete(User $user): Response
     {
