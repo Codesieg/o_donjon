@@ -1,0 +1,173 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API O'donjon",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "https://odonjon.fr/",
+            "description": "API pour O'donjon"
+        }
+    ],
+    "paths": {
+        "/user": {
+            "get": {
+                "operationId": "App\\Controller\\UserController::browse",
+                "responses": {
+                    "200": {
+                        "description": "List of the users",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/userList"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/login": {
+            "post": {
+                "operationId": "App\\Controller\\UserController::add",
+                "responses": {
+                    "201": {
+                        "description": "Register new user",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/userList"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/{id}": {
+            "get": {
+                "operationId": "App\\Controller\\UserController::read",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User informations",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/user"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "userList": {
+                "description": "List of the users",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string",
+                        "maxLength": 64,
+                        "nullable": true
+                    },
+                    "avatarPath": {
+                        "type": "string",
+                        "maxLength": 255,
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "user": {
+                "description": "user informations",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "email": {
+                        "type": "string",
+                        "maxLength": 180,
+                        "uniqueItems": true
+                    },
+                    "name": {
+                        "type": "string",
+                        "maxLength": 64,
+                        "nullable": true
+                    },
+                    "avatarPath": {
+                        "type": "string",
+                        "maxLength": 255,
+                        "nullable": true
+                    },
+                    "campaigns": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/campaignList"
+                        }
+                    },
+                    "characters": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/characterList"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "campaignList": {
+                "description": "List of the campaigns",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string",
+                        "maxLength": 64,
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "characterList": {
+                "description": "List of the characters",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string",
+                        "maxLength": 64,
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            }
+        }
+    }
+}

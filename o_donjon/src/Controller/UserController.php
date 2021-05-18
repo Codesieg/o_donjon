@@ -8,6 +8,7 @@ use App\Form\CampaignType;
 use App\Form\UserType;
 use App\Repository\CampaignRepository;
 use App\Repository\UserRepository;
+use OpenApi\Annotations as OA;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,7 +19,15 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class UserController extends AbstractController
 {
     /**
-     * @Route("/users", name="browse", methods={"GET"})
+     * @Route("/user", name="browse", methods={"GET"})
+     * @OA\Get(
+     *      path="/user",
+     *      @OA\Response(
+     *          response="200",
+     *          description="List of the users",
+     *          @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/userList"))
+     *      )
+     * )
      */
     public function browse(UserRepository $userRepository): Response
     {   
@@ -33,6 +42,14 @@ class UserController extends AbstractController
 
     /**
      * @Route("/login", name="add", methods={"POST"})
+     * @OA\Post(
+     *      path="/login",
+     *      @OA\Response(
+     *          response="201",
+     *          description="Register new user",
+     *          @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/userList"))
+     *      )
+     * )
      */
     public function add(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {   
@@ -74,6 +91,21 @@ class UserController extends AbstractController
 
     /**
      * @Route("/user/{id}", name="read", methods={"GET"}, requirements={"id": "\d+"})
+     * @OA\Get(
+     *      path="/user/{id}",
+     *      @OA\Parameter(
+     *          name="id",
+     *          in="path",
+     *          description="User ID",
+     *          required=true,
+     *          @OA\Schema(type="integer")
+     *      ),
+     *      @OA\Response(
+     *          response="200",
+     *          description="User informations",
+     *          @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/user"))
+     *      )
+     * )
      */
     public function read(User $user): Response
     {   
