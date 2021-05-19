@@ -12,6 +12,7 @@ use App\Entity\SavingThrow;
 use App\Entity\Skill;
 use App\Entity\Campaign;
 use App\Entity\Map;
+use App\Entity\Story;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -591,6 +592,33 @@ class AppFixtures extends Fixture
             $maps[] = $map;
         }
 
+        foreach ($storyNames as $storyName) {
+
+            $story = new Story();
+
+            $story->setName($storyName);
+
+            shuffle($words);
+            $description = '';
+            for ($i = 0; $i < rand(10, 30); $i++) { 
+                $description = $description . " " . $words[$i];
+            };
+            $story->setDescription($description);
+
+            $story->setIsDone((bool)random_int(0, 1));
+
+            shuffle($words);
+            $report = '';
+            for ($i = 0; $i < rand(10, 30); $i++) { 
+                $report = $report . " " . $words[$i];
+            };
+            $story->setReport($report);
+
+            $manager->persist($map);
+
+            $maps[] = $map;
+        }
+
         foreach ($campaignNames as $campaignName) {
             
             $campaign = new Campaign();
@@ -616,6 +644,11 @@ class AppFixtures extends Fixture
             shuffle($maps);
             for ($index = 0; $index < rand(1,4); $index++) { 
                 $campaign->addMap($maps[$index]);
+            }
+
+            shuffle($stories);
+            for ($index = 0; $index < rand(1,4); $index++) { 
+                $campaign->addStory($stories[$index]);
             }
 
             $manager->persist($campaign);
