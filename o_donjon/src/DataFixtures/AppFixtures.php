@@ -10,6 +10,8 @@ use App\Entity\Statistics;
 use App\Entity\Spell;
 use App\Entity\SavingThrow;
 use App\Entity\Skill;
+use App\Entity\Campaign;
+use App\Entity\Map;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -27,8 +29,9 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
-        
+        /******************************************************************************************************************/
         /*******************************************************TABLES WITH DATA*******************************************/
+        /******************************************************************************************************************/
 
         /*****CHARACTER TABLE****************/
 
@@ -232,8 +235,33 @@ class AppFixtures extends Fixture
             'teleport',
         ];
 
+        $campaignNames = [
+            'Lanilet Abyss',
+            'The Expanse of Ammar',
+            'Bordfait Bay',
+            'Krǫptugrgarðr ',
+            'The Flat Fields',
+            'The Tranquil Havens',
+            'The Arrival Territory',
+            'The Mad Rift',
+            'The Guardian Domain',
+            'The Quag of Blythehampton',
+            'Elegant Woodland',
+            'Little Kingfisher Grove',
+            'Danvista Timberland',
+            'Small Wonders Meadow',
+            'Nightowl Gardens',
+            'Windy Willows Grange',
+            'Rattlesnake Fields',           
+        ];
+
         
-        /****************************************************CHARACTER CREATION***************************************************/
+        /******************************************************************************************************************/
+        /******************************************************* ENTITIES FILLING IN **************************************/
+        /******************************************************************************************************************/
+
+
+        /********************************************CHARACTER AND DEPENDENCIES CREATION**************************************/
 
                
         $characters = [];
@@ -458,6 +486,49 @@ class AppFixtures extends Fixture
             $skill->setSurvival((bool)random_int(0, 1));
           
         }
+
+        /****************************************************CAMPAIGN AND DEPENDENCIES CREATION***************************************************/
+
+        $campaigns = [];
+        $NPCs = [];
+        $stories = [];
+        $maps = [];
+
+        foreach ($campaignNames as $campaignName) {
+            
+            $campaign = new Campaign();
+            
+            $campaign->setName($campaignName);
+
+            shuffle($words);
+            $description = '';
+            for ($i = 0; $i < rand(10, 30); $i++) { 
+                $description = $description . " " . $words[$i];
+            };
+            $campaign->setDescription($description);
+
+            shuffle($words);
+            $memo = '';
+            for ($i = 0; $i < rand(5, 15); $i++) { 
+                $memo = $memo . " " . $words[$i];
+            };
+            $campaign->setMemo($memo);
+            
+            $campaign->setIsArchived((bool)random_int(0, 1));
+
+            /* $map = new Map();
+            $campaign->addMap($map);
+            $maps[] = $map; */
+
+            
+            $manager->persist($campaign);
+            
+            $campaigns[] = $campaign;
+        }
+
+        
+
+
 
 
 
