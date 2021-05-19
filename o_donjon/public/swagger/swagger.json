@@ -67,6 +67,42 @@
                 ]
             }
         },
+        "/campaign/{id}": {
+            "get": {
+                "tags": [
+                    "Campaign"
+                ],
+                "operationId": "App\\Controller\\CampaignController::read",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of campaigns as a player",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/campaign"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/notFound"
+                    }
+                },
+                "security": [
+                    {
+                        "scalar": "bearer"
+                    }
+                ]
+            }
+        },
         "/user": {
             "get": {
                 "tags": [
@@ -369,11 +405,11 @@
                         "nullable": true
                     },
                     "description": {
-                        "type": "text",
+                        "type": "string",
                         "nullable": true
                     },
                     "memo": {
-                        "type": "text",
+                        "type": "string",
                         "nullable": true
                     },
                     "isArchived": {
@@ -411,6 +447,29 @@
                     }
                 },
                 "type": "object"
+            },
+            "campaign": {
+                "description": "Information of a campaign",
+                "properties": {
+                    "countCharacters": {
+                        "type": "integer"
+                    },
+                    "countNpcs": {
+                        "type": "integer"
+                    },
+                    "countStories": {
+                        "type": "integer"
+                    },
+                    "countMaps": {
+                        "type": "integer"
+                    }
+                },
+                "type": "object",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/campaignList"
+                    }
+                ]
             }
         },
         "responses": {

@@ -7,6 +7,7 @@ use App\Entity\Campaign;
 use App\Entity\Story;
 use App\Form\CampaignType;
 use App\Repository\CampaignRepository;
+use OpenApi\Annotations as OA;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -75,6 +76,18 @@ class CampaignController extends AbstractController
 
     /**
      * @Route("/{id}", name="read", methods={"GET"}, requirements={"id": "\d+"})
+     * @OA\Get(
+     *      path="/campaign/{id}",
+     *      tags={"Campaign"},
+     *      security={"bearer"},
+     *      @OA\Parameter(ref="#/components/parameters/id"),
+     *      @OA\Response(
+     *          response="200",
+     *          description="List of campaigns as a player",
+     *          @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/campaign"))
+     *      ),
+     *      @OA\Response(response="404", ref="#/components/responses/notFound"),
+     * )
      */
     public function read(Campaign $campaign): Response
     {
