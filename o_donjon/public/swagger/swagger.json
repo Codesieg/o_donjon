@@ -65,6 +65,38 @@
                         "scalar": "bearer"
                     }
                 ]
+            },
+            "post": {
+                "tags": [
+                    "Campaign"
+                ],
+                "operationId": "App\\Controller\\CampaignController::add",
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/campaign"
+                },
+                "responses": {
+                    "200": {
+                        "description": "Informations of the campaign",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/campaign"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/notFound"
+                    }
+                },
+                "security": [
+                    {
+                        "scalar": "bearer"
+                    }
+                ]
             }
         },
         "/campaign/{id}": {
@@ -80,7 +112,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "List of campaigns as a player",
+                        "description": "Informations of the campaign",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -113,11 +145,11 @@
                     }
                 ],
                 "requestBody": {
-                    "$ref": "#/components/requestBodies/campaignEdit"
+                    "$ref": "#/components/requestBodies/campaign"
                 },
                 "responses": {
                     "200": {
-                        "description": "List of campaigns as a player",
+                        "description": "Informations of the campaign",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -582,7 +614,7 @@
                     }
                 }
             },
-            "campaignEdit": {
+            "campaign": {
                 "required": true,
                 "content": {
                     "application/json": {

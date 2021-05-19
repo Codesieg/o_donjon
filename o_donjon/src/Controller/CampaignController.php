@@ -83,7 +83,7 @@ class CampaignController extends AbstractController
      *      @OA\Parameter(ref="#/components/parameters/id"),
      *      @OA\Response(
      *          response="200",
-     *          description="List of campaigns as a player",
+     *          description="Informations of the campaign",
      *          @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/campaign"))
      *      ),
      *      @OA\Response(response="404", ref="#/components/responses/notFound"),
@@ -104,10 +104,10 @@ class CampaignController extends AbstractController
      *      tags={"Campaign"},
      *      security={"bearer"},
      *      @OA\Parameter(ref="#/components/parameters/id"),
-     *      @OA\RequestBody(ref="#/components/requestBodies/campaignEdit"),
+     *      @OA\RequestBody(ref="#/components/requestBodies/campaign"),
      *      @OA\Response(
      *          response="200",
-     *          description="List of campaigns as a player",
+     *          description="Informations of the campaign",
      *          @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/campaign"))
      *      ),
      *      @OA\Response(response="404", ref="#/components/responses/notFound"),
@@ -160,6 +160,18 @@ class CampaignController extends AbstractController
 
     /**
      * @Route("", name="add", methods={"POST"})
+     * @OA\Post(
+     *      path="/campaign",
+     *      tags={"Campaign"},
+     *      security={"bearer"},
+     *      @OA\RequestBody(ref="#/components/requestBodies/campaign"),
+     *      @OA\Response(
+     *          response="200",
+     *          description="Informations of the campaign",
+     *          @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/campaign"))
+     *      ),
+     *      @OA\Response(response="404", ref="#/components/responses/notFound"),
+     * )
      */
     public function add(Request $request): Response
     {   
@@ -193,7 +205,7 @@ class CampaignController extends AbstractController
 
             // on retourne la campagne créée
             return $this->json($campaign, 201, [], [
-                'groups' => ['read_campaign'],
+                'groups' => ['read_campaign', 'count_characters', 'count_npcs', 'count_stories', 'count_maps'],
             ]);
 
         // si le formulaire n'est pas valide on retourne les erreurs

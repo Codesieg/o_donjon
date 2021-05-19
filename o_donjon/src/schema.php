@@ -108,7 +108,7 @@ use OpenApi\Annotations as OA;
 
 /**
  * @OA\RequestBody(
- *      request="campaignEdit",
+ *      request="campaign",
  *      required=true,
  *      @OA\JsonContent(
  *          required={"name", "password", "name", "avatarPath"},
