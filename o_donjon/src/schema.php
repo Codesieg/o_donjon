@@ -259,7 +259,27 @@ use OpenApi\Annotations as OA;
  *      schema="npcInfo",
  *      description="Information of a NPC",
  *      allOf={@OA\Schema(ref="#/components/schemas/npc")},
- *      @OA\Property(type="integer", nullable=true, property="campaign"),
+ *      @OA\Property(
+ *          type="object",
+ *          @OA\Property(type="integer", property="id"),
+ *          @OA\Property(type="string", maxLength=64, nullable=true, property="name"),
+ *          property="campaign"),
+ *      ),
+ * )
+ */
+
+/**
+ * @OA\RequestBody(
+ *      request="npc",
+ *      required=true,
+ *      @OA\JsonContent(
+ *          required={"name", "type", "description", "isAlly", "campaign"},
+ *          @OA\Property(type="string", maxLength=64, nullable=true, property="name"),
+ *          @OA\Property(type="string", maxLength=64, nullable=true, property="type"),
+ *          @OA\Property(type="string", nullable=true, property="description"),
+ *          @OA\Property(type="string", maxLength=64, nullable=true, property="isAlly"),
+ *          @OA\Property(type="integer", property="campaign"),
+ *      )
  * )
  */
 

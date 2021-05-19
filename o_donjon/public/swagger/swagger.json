@@ -497,6 +497,165 @@
                 ]
             }
         },
+        "/nps": {
+            "get": {
+                "tags": [
+                    "NPC"
+                ],
+                "operationId": "App\\Controller\\NpcController::browse",
+                "responses": {
+                    "200": {
+                        "description": "List of NPCs",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/npcInfo"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "scalar": "bearer"
+                    }
+                ]
+            }
+        },
+        "/npc": {
+            "post": {
+                "tags": [
+                    "NPC"
+                ],
+                "operationId": "App\\Controller\\NpcController::add",
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/npc"
+                },
+                "responses": {
+                    "200": {
+                        "description": "Informations of the NPC",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/npcInfo"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/notFound"
+                    }
+                },
+                "security": [
+                    {
+                        "scalar": "bearer"
+                    }
+                ]
+            }
+        },
+        "/npc/{id}": {
+            "get": {
+                "tags": [
+                    "NPC"
+                ],
+                "operationId": "App\\Controller\\NpcController::read",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Informations of the NPC",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/npcInfo"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/notFound"
+                    }
+                },
+                "security": [
+                    {
+                        "scalar": "bearer"
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "NPC"
+                ],
+                "operationId": "App\\Controller\\NpcController::edit",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/npc"
+                },
+                "responses": {
+                    "200": {
+                        "description": "Informations of the NPC",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/npcInfo"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/notFound"
+                    }
+                },
+                "security": [
+                    {
+                        "scalar": "bearer"
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "NPC"
+                ],
+                "operationId": "App\\Controller\\NpcController::delete",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": ""
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/notFound"
+                    }
+                },
+                "security": [
+                    {
+                        "scalar": "bearer"
+                    }
+                ]
+            }
+        },
         "/story": {
             "get": {
                 "tags": [
@@ -607,7 +766,7 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Informations of the campaign",
+                        "description": "Informations of the story",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1218,8 +1377,17 @@
                 "description": "Information of a NPC",
                 "properties": {
                     "campaign": {
-                        "type": "integer",
-                        "nullable": true
+                        "properties": {
+                            "id": {
+                                "type": "integer"
+                            },
+                            "name": {
+                                "type": "string",
+                                "maxLength": 64,
+                                "nullable": true
+                            }
+                        },
+                        "type": "object"
                     }
                 },
                 "type": "object",
@@ -1536,6 +1704,47 @@
                                 },
                                 "description": {
                                     "type": "string",
+                                    "nullable": true
+                                },
+                                "campaign": {
+                                    "type": "integer"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "npc": {
+                "required": true,
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "required": [
+                                "name",
+                                "type",
+                                "description",
+                                "isAlly",
+                                "campaign"
+                            ],
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "maxLength": 64,
+                                    "nullable": true
+                                },
+                                "type": {
+                                    "type": "string",
+                                    "maxLength": 64,
+                                    "nullable": true
+                                },
+                                "description": {
+                                    "type": "string",
+                                    "nullable": true
+                                },
+                                "isAlly": {
+                                    "type": "string",
+                                    "maxLength": 64,
                                     "nullable": true
                                 },
                                 "campaign": {

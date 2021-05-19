@@ -120,7 +120,7 @@ class StorieController extends AbstractController
      *      @OA\RequestBody(ref="#/components/requestBodies/story"),
      *      @OA\Response(
      *          response="200",
-     *          description="Informations of the campaign",
+     *          description="Informations of the story",
      *          @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/storyInfo"))
      *      ),
      *      @OA\Response(response="404", ref="#/components/responses/notFound"),
