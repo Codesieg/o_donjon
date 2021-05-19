@@ -179,7 +179,7 @@ use OpenApi\Annotations as OA;
  *          @OA\Property(type="integer", property="id"),
  *          @OA\Property(type="string", maxLength=64, nullable=true, property="name"),
  *          property="campaign"),
- * )
+ *      )
  * )
  */
 
@@ -188,11 +188,12 @@ use OpenApi\Annotations as OA;
  *      request="story",
  *      required=true,
  *      @OA\JsonContent(
- *          required={"name", "description", "isDone", "avatarPath"},
+ *          required={"name", "description", "isDone", "report", "campaign"},
  *          @OA\Property(type="string", maxLength=64, nullable=true, property="name"),
  *          @OA\Property(type="string", nullable=true, property="description"),
  *          @OA\Property(type="boolean", default=0, nullable=true, example="false", property="isDone"),
  *          @OA\Property(type="string", nullable=true, property="report"),
+ *          @OA\Property(type="integer", property="campaign"),
  *      )
  * )
  */
@@ -216,7 +217,26 @@ use OpenApi\Annotations as OA;
  *      schema="mapInfo",
  *      description="Information of a map",
  *      allOf={@OA\Schema(ref="#/components/schemas/map")},
- *      @OA\Property(type="integer", nullable=true, property="campaign"),
+ *      @OA\Property(
+ *          type="object",
+ *          @OA\Property(type="integer", property="id"),
+ *          @OA\Property(type="string", maxLength=64, nullable=true, property="name"),
+ *          property="campaign"),
+ *      ),
+ * )
+ */
+
+/**
+ * @OA\RequestBody(
+ *      request="map",
+ *      required=true,
+ *      @OA\JsonContent(
+ *          required={"filePath", "name", "description", "campaign"},
+ *          @OA\Property(type="string", maxLength=255, nullable=true, property="filePath"),
+ *          @OA\Property(type="string", maxLength=64, nullable=true, property="name"),
+ *          @OA\Property(type="string", nullable=true, property="description"),
+ *          @OA\Property(type="integer", property="campaign"),
+ *      )
  * )
  */
 

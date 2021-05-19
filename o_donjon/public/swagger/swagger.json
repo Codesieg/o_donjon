@@ -340,6 +340,163 @@
                 ]
             }
         },
+        "/map": {
+            "get": {
+                "tags": [
+                    "Map"
+                ],
+                "operationId": "App\\Controller\\MapController::browse",
+                "responses": {
+                    "200": {
+                        "description": "List of maps",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/mapInfo"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "scalar": "bearer"
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Map"
+                ],
+                "operationId": "App\\Controller\\MapController::add",
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/map"
+                },
+                "responses": {
+                    "200": {
+                        "description": "Informations of the map",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/mapInfo"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/notFound"
+                    }
+                },
+                "security": [
+                    {
+                        "scalar": "bearer"
+                    }
+                ]
+            }
+        },
+        "/map/{id}": {
+            "get": {
+                "tags": [
+                    "Map"
+                ],
+                "operationId": "App\\Controller\\MapController::read",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Informations of the map",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/mapInfo"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/notFound"
+                    }
+                },
+                "security": [
+                    {
+                        "scalar": "bearer"
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Map"
+                ],
+                "operationId": "App\\Controller\\MapController::edit",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/map"
+                },
+                "responses": {
+                    "200": {
+                        "description": "Informations of the map",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/mapInfo"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/notFound"
+                    }
+                },
+                "security": [
+                    {
+                        "scalar": "bearer"
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Map"
+                ],
+                "operationId": "App\\Controller\\MapController::delete",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": ""
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/notFound"
+                    }
+                },
+                "security": [
+                    {
+                        "scalar": "bearer"
+                    }
+                ]
+            }
+        },
         "/story": {
             "get": {
                 "tags": [
@@ -1009,8 +1166,17 @@
                 "description": "Information of a map",
                 "properties": {
                     "campaign": {
-                        "type": "integer",
-                        "nullable": true
+                        "properties": {
+                            "id": {
+                                "type": "integer"
+                            },
+                            "name": {
+                                "type": "string",
+                                "maxLength": 64,
+                                "nullable": true
+                            }
+                        },
+                        "type": "object"
                     }
                 },
                 "type": "object",
@@ -1314,7 +1480,8 @@
                                 "name",
                                 "description",
                                 "isDone",
-                                "avatarPath"
+                                "report",
+                                "campaign"
                             ],
                             "properties": {
                                 "name": {
@@ -1335,6 +1502,44 @@
                                 "report": {
                                     "type": "string",
                                     "nullable": true
+                                },
+                                "campaign": {
+                                    "type": "integer"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "map": {
+                "required": true,
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "required": [
+                                "filePath",
+                                "name",
+                                "description",
+                                "campaign"
+                            ],
+                            "properties": {
+                                "filePath": {
+                                    "type": "string",
+                                    "maxLength": 255,
+                                    "nullable": true
+                                },
+                                "name": {
+                                    "type": "string",
+                                    "maxLength": 64,
+                                    "nullable": true
+                                },
+                                "description": {
+                                    "type": "string",
+                                    "nullable": true
+                                },
+                                "campaign": {
+                                    "type": "integer"
                                 }
                             },
                             "type": "object"
