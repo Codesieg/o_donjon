@@ -4,7 +4,7 @@ namespace App;
 
 use OpenApi\Annotations as OA;
 
-/* User schema */
+/* ========== User schema ========== */
 
 /**
  * @OA\Schema(
@@ -72,7 +72,7 @@ use OpenApi\Annotations as OA;
  * )
  */
 
-/* Campaign schema */
+/* ========== Campaign schema ========== */
 
 /**
  * @OA\Schema(
@@ -82,7 +82,7 @@ use OpenApi\Annotations as OA;
  *      @OA\Property(type="string", maxLength=64, nullable=true, property="name"),
  *      @OA\Property(type="string", nullable=true, property="description"),
  *      @OA\Property(type="string", nullable=true, property="memo"),
- *      @OA\Property(type="boolean", default=0 , nullable=true, property="isArchived"),
+ *      @OA\Property(type="boolean", default=0, nullable=true, property="isArchived", example="false"),
  *      @OA\Property(type="string", maxLength=64, nullable=true, property="invitationCode"),
  *      @OA\Property(type="string", format="date-time", nullable=true, property="createdAt"),
  *      @OA\Property(type="string", format="date-time", nullable=true, property="updatedAt"),
@@ -103,5 +103,19 @@ use OpenApi\Annotations as OA;
  *      @OA\Property(type="integer", property="countNpcs"),
  *      @OA\Property(type="integer", property="countStories"),
  *      @OA\Property(type="integer", property="countMaps"),
+ * )
+ */
+
+/**
+ * @OA\RequestBody(
+ *      request="campaignEdit",
+ *      required=true,
+ *      @OA\JsonContent(
+ *          required={"name", "password", "name", "avatarPath"},
+ *          @OA\Property(type="string", maxLength=64, nullable=true, property="name"),
+ *          @OA\Property(type="string", nullable=true, property="description"),
+ *          @OA\Property(type="string", nullable=true, property="memo"),
+ *          @OA\Property(type="boolean", default=0, nullable=true, property="isArchived", example="false"),
+ *      )
  * )
  */

@@ -99,6 +99,19 @@ class CampaignController extends AbstractController
 
     /**
      * @Route("/{id}", name="edit", methods={"PUT", "PATCH"}, requirements={"id": "\d+"})
+     * @OA\Put(
+     *      path="/campaign/{id}",
+     *      tags={"Campaign"},
+     *      security={"bearer"},
+     *      @OA\Parameter(ref="#/components/parameters/id"),
+     *      @OA\RequestBody(ref="#/components/requestBodies/campaignEdit"),
+     *      @OA\Response(
+     *          response="200",
+     *          description="List of campaigns as a player",
+     *          @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/campaign"))
+     *      ),
+     *      @OA\Response(response="404", ref="#/components/responses/notFound"),
+     * )
      */
     public function edit(Request $request, Campaign $campaign): Response
     {   

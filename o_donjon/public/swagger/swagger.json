@@ -101,6 +101,43 @@
                         "scalar": "bearer"
                     }
                 ]
+            },
+            "put": {
+                "tags": [
+                    "Campaign"
+                ],
+                "operationId": "App\\Controller\\CampaignController::edit",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/campaignEdit"
+                },
+                "responses": {
+                    "200": {
+                        "description": "List of campaigns as a player",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/campaign"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/notFound"
+                    }
+                },
+                "security": [
+                    {
+                        "scalar": "bearer"
+                    }
+                ]
             }
         },
         "/user": {
@@ -415,6 +452,7 @@
                     "isArchived": {
                         "type": "boolean",
                         "default": 0,
+                        "example": "false",
                         "nullable": true
                     },
                     "invitationCode": {
@@ -537,6 +575,43 @@
                                 "invitationCode": {
                                     "type": "string",
                                     "maxLength": 64
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "campaignEdit": {
+                "required": true,
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "required": [
+                                "name",
+                                "password",
+                                "name",
+                                "avatarPath"
+                            ],
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "maxLength": 64,
+                                    "nullable": true
+                                },
+                                "description": {
+                                    "type": "string",
+                                    "nullable": true
+                                },
+                                "memo": {
+                                    "type": "string",
+                                    "nullable": true
+                                },
+                                "isArchived": {
+                                    "type": "boolean",
+                                    "default": 0,
+                                    "example": "false",
+                                    "nullable": true
                                 }
                             },
                             "type": "object"
