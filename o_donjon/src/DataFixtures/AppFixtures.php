@@ -36,6 +36,120 @@ class AppFixtures extends Fixture
         /*******************************************************TABLES WITH DATA*******************************************/
         /******************************************************************************************************************/
 
+        /*****USER TABLE****************/
+
+        $userEmails = [
+            'nicolas@odonjon.fr',
+            'nael@odonjon.fr',
+            'amelie@odonjon.fr',
+            'mathieu@odonjon.fr',
+            'mickael@odonjon.fr',
+            'cecile@odonjon.fr',
+        ];
+
+        /*****CAMPAIGN TABLE****************/
+
+        $campaignNames = [
+            'Lanilet Abyss',
+            'The Expanse of Ammar',
+            'Bordfait Bay',
+            'Krǫptugrgarðr ',
+            'The Flat Fields',
+            'The Tranquil Havens',
+            'The Arrival Territory',
+            'The Mad Rift',
+            'The Guardian Domain',
+            'The Quag of Blythehampton',
+            'Elegant Woodland',
+            'Little Kingfisher Grove',
+            'Danvista Timberland',
+            'Small Wonders Meadow',
+            'Nightowl Gardens',
+            'Windy Willows Grange',
+            'Rattlesnake Fields',           
+        ];
+
+        /*****MAP TABLE****************/
+
+        $mapNames = [
+            'The Eternity Amphitheater',
+            'The Bloodbath Stadium',
+            'The Anthrax Arena',
+            'Lirk Vale',
+            'Strab Market',
+            'Briostrint East',
+            'Lower Leerlal',
+            'Tottiact Point',
+            'Upper South Shrepim',
+            'Plapap Wood',
+            'Downtown Cheaheb',
+            'Hepislet Garden',
+            'Grigimrag',
+            'Boulder Mountain Penitentiary',
+            'Ashmount Asylum',
+            'Doveport Prison',
+        ];
+
+        /*****STORY TABLE****************/
+
+        $storyNames = [
+            'Super powers in paradise gardens',
+            'Deserted in your parents in law\'s house',
+            'Personification of the local restaurant',
+            'Bravery in the kitchen',
+            'Body swap in the swamp',
+            'Creature of your parents in law\'s house',
+            'Heroism in the sport stadium',
+            'Job in your new house',
+            'Insomnia in another dimension',
+            'Mysterious door in the swamp',
+            'Ruling the world with a centaur',
+            'Double life of your best friend',
+            'Boardgames with an arsonist',
+            'Pillow fight with a mutant',
+            'Changing history with a deaf person',
+            'Spending time in nature with a psychic',
+            'Making history with a creepy stranger',
+            'Courage of your girlfriend',
+            'Virtual reality with a dragon',
+            'Training animals with a hunter',
+        ];
+
+        /*****NPC TABLE****************/
+
+        $NpcNames = [
+            'Recaller',
+            'Cannibal',
+            'Joker',
+            'Scratcher',
+            'Cleaver',
+            'Spitter',
+            'Smart Zombie',
+            'Feral Zombie',
+            'Wailer',
+            'Glider',
+            'Anje',
+            'Ttarmek',
+            'Kaijin',
+            'Trezzahn',
+            'Hokima',
+            'Zulkis',
+            'Zulbaljin',
+            'Tzuljin',
+            'Voyambi',
+            'Rakash',
+            'Kalgith',
+            'Bazgazis',
+            'Zith\'tunes',
+            'Diggarin',
+            'Moglan',
+            'Onnemor',
+            'Sorgan',
+            'Or\'onoth',
+            'Dorgathan',
+            'Brar\'anoth',
+        ];
+        
         /*****CHARACTER TABLE****************/
 
         $characterNames = [
@@ -238,107 +352,171 @@ class AppFixtures extends Fixture
             'teleport',
         ];
 
-        $campaignNames = [
-            'Lanilet Abyss',
-            'The Expanse of Ammar',
-            'Bordfait Bay',
-            'Krǫptugrgarðr ',
-            'The Flat Fields',
-            'The Tranquil Havens',
-            'The Arrival Territory',
-            'The Mad Rift',
-            'The Guardian Domain',
-            'The Quag of Blythehampton',
-            'Elegant Woodland',
-            'Little Kingfisher Grove',
-            'Danvista Timberland',
-            'Small Wonders Meadow',
-            'Nightowl Gardens',
-            'Windy Willows Grange',
-            'Rattlesnake Fields',           
-        ];
-
-        $mapNames = [
-            'The Eternity Amphitheater',
-            'The Bloodbath Stadium',
-            'The Anthrax Arena',
-            'Lirk Vale',
-            'Strab Market',
-            'Briostrint East',
-            'Lower Leerlal',
-            'Tottiact Point',
-            'Upper South Shrepim',
-            'Plapap Wood',
-            'Downtown Cheaheb',
-            'Hepislet Garden',
-            'Grigimrag',
-            'Boulder Mountain Penitentiary',
-            'Ashmount Asylum',
-            'Doveport Prison',
-        ];
-
-        $storyNames = [
-            'Super powers in paradise gardens',
-            'Deserted in your parents in law\'s house',
-            'Personification of the local restaurant',
-            'Bravery in the kitchen',
-            'Body swap in the swamp',
-            'Creature of your parents in law\'s house',
-            'Heroism in the sport stadium',
-            'Job in your new house',
-            'Insomnia in another dimension',
-            'Mysterious door in the swamp',
-            'Ruling the world with a centaur',
-            'Double life of your best friend',
-            'Boardgames with an arsonist',
-            'Pillow fight with a mutant',
-            'Changing history with a deaf person',
-            'Spending time in nature with a psychic',
-            'Making history with a creepy stranger',
-            'Courage of your girlfriend',
-            'Virtual reality with a dragon',
-            'Training animals with a hunter',
-        ];
-
-        $NpcNames = [
-            'Recaller',
-            'Cannibal',
-            'Joker',
-            'Scratcher',
-            'Cleaver',
-            'Spitter',
-            'Smart Zombie',
-            'Feral Zombie',
-            'Wailer',
-            'Glider',
-            'Anje',
-            'Ttarmek',
-            'Kaijin',
-            'Trezzahn',
-            'Hokima',
-            'Zulkis',
-            'Zulbaljin',
-            'Tzuljin',
-            'Voyambi',
-            'Rakash',
-            'Kalgith',
-            'Bazgazis',
-            'Zith\'tunes',
-            'Diggarin',
-            'Moglan',
-            'Onnemor',
-            'Sorgan',
-            'Or\'onoth',
-            'Dorgathan',
-            'Brar\'anoth',
-        ];
-
-
-
         
         /******************************************************************************************************************/
         /******************************************************* ENTITIES FILLING IN **************************************/
         /******************************************************************************************************************/
+
+        $user = [];
+
+        foreach ($userEmails as $userEmail) {
+
+            $user = new User();
+            
+            $user->setEmail($userEmail);
+            
+            $emailExplode = explode("@", $userEmail);
+            $name = $emailExplode[0];
+            
+            $encryptedPassword = $this->encoder->encodePassword($user, $name);
+            $user->setPassword($encryptedPassword);
+            
+            $user->setName($name);
+
+            $user->setAvatarPath($name . '.png');
+            
+            $user->setStatus(random_int(1, 2));
+
+            $manager->persist($user);
+            
+            $users[] = $user;
+
+        }
+
+
+        /****************************************************CAMPAIGN AND DEPENDENCIES CREATION***************************************************/
+
+        $campaigns = [];
+        $NPCs = [];
+        $stories = [];
+        $maps = [];
+
+        foreach ($mapNames as $mapName) {
+
+            $map = new Map();
+
+            $map->setName($mapName);
+
+            shuffle($words);
+            $description = '';
+            for ($i = 0; $i < rand(10, 30); $i++) { 
+                $description = $description . " " . $words[$i];
+            };
+            $map->setDescription($description);
+
+            $map->setFilePath($mapName . '.png');
+
+            $manager->persist($map);
+
+            $maps[] = $map;
+        }
+
+        foreach ($storyNames as $storyName) {
+
+            $story = new Story();
+
+            $story->setName($storyName);
+
+            shuffle($words);
+            $description = '';
+            for ($i = 0; $i < rand(10, 30); $i++) { 
+                $description = $description . " " . $words[$i];
+            };
+            $story->setDescription($description);
+
+            $story->setIsDone((bool)random_int(0, 1));
+
+            shuffle($words);
+            $report = '';
+            for ($i = 0; $i < rand(10, 30); $i++) { 
+                $report = $report . " " . $words[$i];
+            };
+            $story->setReport($report);
+
+            $manager->persist($story);
+
+            $stories[] = $story;
+        }
+
+        foreach ($NpcNames as $NpcName) {
+
+            $Npc = new NPC();
+
+            $Npc->setName($NpcName);
+
+            shuffle($words);
+            $type = '';
+            for ($i = 0; $i < rand(1, 5); $i++) { 
+                $type = $type . " " . $words[$i];
+            };
+            $Npc->setType($type);
+
+            shuffle($words);
+            $isAlly = '';
+            for ($i = 0; $i < rand(1, 5); $i++) { 
+                $isAlly = $isAlly . " " . $words[$i];
+            };
+            $Npc->setIsAlly($isAlly);
+
+            shuffle($words);
+            $description = '';
+            for ($i = 0; $i < rand(10, 30); $i++) { 
+                $description = $description . " " . $words[$i];
+            };
+            $Npc->setDescription($description);
+
+            $manager->persist($Npc);
+
+            $NPCs[] = $Npc;
+        }
+
+        foreach ($campaignNames as $campaignName) {
+            
+            $campaign = new Campaign();
+            
+            $campaign->setName($campaignName);
+
+            shuffle($users);
+            $campaign->setOwner($users[1]);
+            for ($index = 0; $index < rand(1,2); $index++) { 
+                $campaign->addUser($users[$index]);
+            }
+
+            shuffle($words);
+            $description = '';
+            for ($i = 0; $i < rand(10, 30); $i++) { 
+                $description = $description . " " . $words[$i];
+            };
+            $campaign->setDescription($description);
+
+            shuffle($words);
+            $memo = '';
+            for ($i = 0; $i < rand(5, 15); $i++) { 
+                $memo = $memo . " " . $words[$i];
+            };
+            $campaign->setMemo($memo);
+            
+            $campaign->setIsArchived((bool)random_int(0, 1));
+
+            shuffle($maps);
+            for ($index = 0; $index < rand(1,5); $index++) { 
+                $campaign->addMap($maps[$index]);
+            }
+
+            shuffle($stories);
+            for ($index = 0; $index < rand(1,10); $index++) { 
+                $campaign->addStory($stories[$index]);
+            }
+
+            shuffle($NPCs);
+            for ($index = 0; $index < rand(1,8); $index++) { 
+                $campaign->addNPC($NPCs[$index]);
+            }
+
+            $manager->persist($campaign);
+            
+            $campaigns[] = $campaign;
+        }
 
 
         /********************************************CHARACTER AND DEPENDENCIES CREATION**************************************/
@@ -356,6 +534,9 @@ class AppFixtures extends Fixture
         foreach ($characterNames as $characterName) {
             
             $character = new Character();
+
+            shuffle($users);
+            $character->setUser($users[1]);
             
             $character->setName($characterName);
             
@@ -366,9 +547,12 @@ class AppFixtures extends Fixture
             $character->setHeight(random_int(50, 300));
             
             $character->setWeight(random_int(10, 200));
+
+            shuffle($campaigns);
+            $character->setCampaign($campaigns[1]);
             
             shuffle($characterEyes);
-            $character->setEyes($characterEyes[0]);
+            $character->setEyes($characterEyes[1]);
             
             shuffle($characterSkins);
             $character->setSkin($characterSkins[1]);
@@ -566,142 +750,6 @@ class AppFixtures extends Fixture
             $skill->setSurvival((bool)random_int(0, 1));
           
         }
-
-        /****************************************************CAMPAIGN AND DEPENDENCIES CREATION***************************************************/
-
-        $campaigns = [];
-        $NPCs = [];
-        $stories = [];
-        $maps = [];
-
-        foreach ($mapNames as $mapName) {
-
-            $map = new Map();
-
-            $map->setName($mapName);
-
-            shuffle($words);
-            $description = '';
-            for ($i = 0; $i < rand(10, 30); $i++) { 
-                $description = $description . " " . $words[$i];
-            };
-            $map->setDescription($description);
-
-            $map->setFilePath($mapName . '.png');
-
-            $manager->persist($map);
-
-            $maps[] = $map;
-        }
-
-        foreach ($storyNames as $storyName) {
-
-            $story = new Story();
-
-            $story->setName($storyName);
-
-            shuffle($words);
-            $description = '';
-            for ($i = 0; $i < rand(10, 30); $i++) { 
-                $description = $description . " " . $words[$i];
-            };
-            $story->setDescription($description);
-
-            $story->setIsDone((bool)random_int(0, 1));
-
-            shuffle($words);
-            $report = '';
-            for ($i = 0; $i < rand(10, 30); $i++) { 
-                $report = $report . " " . $words[$i];
-            };
-            $story->setReport($report);
-
-            $manager->persist($story);
-
-            $stories[] = $story;
-        }
-
-        foreach ($NpcNames as $NpcName) {
-
-            $Npc = new NPC();
-
-            $Npc->setName($NpcName);
-
-            shuffle($words);
-            $type = '';
-            for ($i = 0; $i < rand(1, 5); $i++) { 
-                $type = $type . " " . $words[$i];
-            };
-            $Npc->setType($type);
-
-            shuffle($words);
-            $isAlly = '';
-            for ($i = 0; $i < rand(1, 5); $i++) { 
-                $isAlly = $isAlly . " " . $words[$i];
-            };
-            $Npc->setIsAlly($isAlly);
-
-            shuffle($words);
-            $description = '';
-            for ($i = 0; $i < rand(10, 30); $i++) { 
-                $description = $description . " " . $words[$i];
-            };
-            $Npc->setDescription($description);
-
-            $manager->persist($Npc);
-
-            $NPCs[] = $Npc;
-        }
-
-        foreach ($campaignNames as $campaignName) {
-            
-            $campaign = new Campaign();
-            
-            $campaign->setName($campaignName);
-
-            shuffle($words);
-            $description = '';
-            for ($i = 0; $i < rand(10, 30); $i++) { 
-                $description = $description . " " . $words[$i];
-            };
-            $campaign->setDescription($description);
-
-            shuffle($words);
-            $memo = '';
-            for ($i = 0; $i < rand(5, 15); $i++) { 
-                $memo = $memo . " " . $words[$i];
-            };
-            $campaign->setMemo($memo);
-            
-            $campaign->setIsArchived((bool)random_int(0, 1));
-
-            shuffle($maps);
-            for ($index = 0; $index < rand(1,5); $index++) { 
-                $campaign->addMap($maps[$index]);
-            }
-
-            shuffle($stories);
-            for ($index = 0; $index < rand(1,10); $index++) { 
-                $campaign->addStory($stories[$index]);
-            }
-
-            shuffle($NPCs);
-            for ($index = 0; $index < rand(1,8); $index++) { 
-                $campaign->addNPC($NPCs[$index]);
-            }
-
-            $manager->persist($campaign);
-            
-            $campaigns[] = $campaign;
-        }
-
-
-
-        
-
-
-
-
 
         /******************************************************************************************************************************/
         /****************************************************SENDING TO THE DB*********************************************************/
