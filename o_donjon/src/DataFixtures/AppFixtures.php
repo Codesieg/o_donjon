@@ -255,6 +255,83 @@ class AppFixtures extends Fixture
             'Rattlesnake Fields',           
         ];
 
+        $mapNames = [
+            'The Eternity Amphitheater',
+            'The Bloodbath Stadium',
+            'The Anthrax Arena',
+            'Lirk Vale',
+            'Strab Market',
+            'Briostrint East',
+            'Lower Leerlal',
+            'Tottiact Point',
+            'Upper South Shrepim',
+            'Plapap Wood',
+            'Downtown Cheaheb',
+            'Hepislet Garden',
+            'Grigimrag',
+            'Boulder Mountain Penitentiary',
+            'Ashmount Asylum',
+            'Doveport Prison',
+        ];
+
+        $storyNames = [
+            'Super powers in paradise gardens',
+            'Deserted in your parents in law\'s house',
+            'Personification of the local restaurant',
+            'Bravery in the kitchen',
+            'Body swap in the swamp',
+            'Creature of your parents in law\'s house',
+            'Heroism in the sport stadium',
+            'Job in your new house',
+            'Insomnia in another dimension',
+            'Mysterious door in the swamp',
+            'Ruling the world with a centaur',
+            'Double life of your best friend',
+            'Boardgames with an arsonist',
+            'Pillow fight with a mutant',
+            'Changing history with a deaf person',
+            'Spending time in nature with a psychic',
+            'Making history with a creepy stranger',
+            'Courage of your girlfriend',
+            'Virtual reality with a dragon',
+            'Training animals with a hunter',
+        ];
+
+        $npcNames = [
+            'Recaller',
+            'Cannibal',
+            'Joker',
+            'Scratcher',
+            'Cleaver',
+            'Spitter',
+            'Smart Zombie',
+            'Feral Zombie',
+            'Wailer',
+            'Glider',
+            'Anje',
+            'Ttarmek',
+            'Kaijin',
+            'Trezzahn',
+            'Hokima',
+            'Zulkis',
+            'Zulbaljin',
+            'Tzuljin',
+            'Voyambi',
+            'Rakash',
+            'Kalgith',
+            'Bazgazis',
+            'Zith\'tunes',
+            'Diggarin',
+            'Moglan',
+            'Onnemor',
+            'Sorgan',
+            'Or\'onoth',
+            'Dorgathan',
+            'Brar\'anoth',
+        ];
+
+
+
         
         /******************************************************************************************************************/
         /******************************************************* ENTITIES FILLING IN **************************************/
@@ -494,6 +571,26 @@ class AppFixtures extends Fixture
         $stories = [];
         $maps = [];
 
+        foreach ($mapNames as $mapName) {
+
+            $map = new Map();
+
+            $map->setName($mapName);
+
+            shuffle($words);
+            $description = '';
+            for ($i = 0; $i < rand(10, 30); $i++) { 
+                $description = $description . " " . $words[$i];
+            };
+            $map->setDescription($description);
+
+            $map->setFilePath($mapName . '.png');
+
+            $manager->persist($map);
+
+            $maps[] = $map;
+        }
+
         foreach ($campaignNames as $campaignName) {
             
             $campaign = new Campaign();
@@ -516,15 +613,17 @@ class AppFixtures extends Fixture
             
             $campaign->setIsArchived((bool)random_int(0, 1));
 
-            /* $map = new Map();
-            $campaign->addMap($map);
-            $maps[] = $map; */
+            shuffle($maps);
+            for ($index = 0; $index < rand(1,4); $index++) { 
+                $campaign->addMap($maps[$index]);
+            }
 
-            
             $manager->persist($campaign);
             
             $campaigns[] = $campaign;
         }
+
+
 
         
 
