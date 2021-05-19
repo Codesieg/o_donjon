@@ -36,7 +36,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
      * 
      */
 class CharacterController extends AbstractController
-{
+{   
 
     /**
      * @Route("/add", name="add", methods={"POST"},)
@@ -44,6 +44,7 @@ class CharacterController extends AbstractController
     public function add(Request $request): Response
     // pour l'user :  $request->cookies->get('PHPSESSID');
     {
+        
         // on récupère l'utilisateur connecté
         $user = $this->getUser();
 
@@ -265,9 +266,6 @@ class CharacterController extends AbstractController
         
         // si les données sont valides
         if ($form->isValid()) {
-
-            // on associe l'utilisateur au personnage
-            $character->setUser($user);
 
             // on envoie les données à la BDD
             $em = $this->getDoctrine()->getManager();

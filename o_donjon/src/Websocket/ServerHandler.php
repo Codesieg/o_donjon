@@ -19,7 +19,11 @@ class ServerHandler implements MessageComponentInterface
     public function onOpen(ConnectionInterface $conn)
     {
         $this->connections->attach($conn);
+    
     }
+    // public function onOpen($conn) {
+    //     $conn->send('Hello ' . $conn->Session->get('name'));
+    // }
 
     public function onMessage(ConnectionInterface $from, $msg)
     {

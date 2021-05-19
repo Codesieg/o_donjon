@@ -15,8 +15,6 @@ class AuthenticationSuccessListener
         $data = $event->getData();
         $user = $event->getUser();
 
-        // dump($user);
-
         // if (!$user instanceof UserInterface) {
         //     return;
         // }
@@ -24,7 +22,8 @@ class AuthenticationSuccessListener
         $data['data'] = array(
             'id' => $user->getId(),
             'email' => $user->getEmail(),
-            'name' => $user->getName()
+            'name' => $user->getName(),
+            'avatarPath' => $user->getAvatarPath(),
         );
 
         // dd($data);
