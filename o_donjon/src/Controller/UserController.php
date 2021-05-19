@@ -147,7 +147,7 @@ class UserController extends AbstractController
     {   
         // on récupère l'ID de l'utilisateur connecté
         $userId = $this->getUser()->getId();
-
+        
         // on récupére l'ID envoyer par la requête
         $requestId = $user->getId();
 

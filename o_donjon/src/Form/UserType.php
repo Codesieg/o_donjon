@@ -30,7 +30,7 @@ class UserType extends AbstractType
             // ->add('status')
             // ->add('createdAt')
             // ->add('updatedAt')
-            ->add('campaigns')
+            // ->add('campaigns')
         ;
     }
 
