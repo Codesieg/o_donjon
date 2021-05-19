@@ -21,6 +21,16 @@ class CampaignController extends AbstractController
 {
     /**
      * @Route("/dm", name="browse_dm", methods={"GET"})
+     * @OA\Get(
+     *      path="/campaign/dm",
+     *      tags={"Campaign"},
+     *      security={"bearer"},
+     *      @OA\Response(
+     *          response="200",
+     *          description="List of campaigns as the DM",
+     *          @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/campaignList"))
+     *      )
+     * )
      */
     public function browseDm(CampaignRepository $campaignRepository): Response
     {
@@ -38,6 +48,16 @@ class CampaignController extends AbstractController
 
     /**
      * @Route("", name="browse", methods={"GET"})
+     * @OA\Get(
+     *      path="/campaign",
+     *      tags={"Campaign"},
+     *      security={"bearer"},
+     *      @OA\Response(
+     *          response="200",
+     *          description="List of campaigns as a player",
+     *          @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/campaignList"))
+     *      )
+     * )
      */
     public function browse(CampaignRepository $campaignRepository): Response
     {

@@ -11,6 +11,62 @@
         }
     ],
     "paths": {
+        "/campaign/dm": {
+            "get": {
+                "tags": [
+                    "Campaign"
+                ],
+                "operationId": "App\\Controller\\CampaignController::browseDm",
+                "responses": {
+                    "200": {
+                        "description": "List of campaigns as the DM",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/campaignList"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "scalar": "bearer"
+                    }
+                ]
+            }
+        },
+        "/campaign": {
+            "get": {
+                "tags": [
+                    "Campaign"
+                ],
+                "operationId": "App\\Controller\\CampaignController::browse",
+                "responses": {
+                    "200": {
+                        "description": "List of campaigns as a player",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/campaignList"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "scalar": "bearer"
+                    }
+                ]
+            }
+        },
         "/user": {
             "get": {
                 "tags": [
@@ -261,7 +317,7 @@
                     "campaigns": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/campaignList"
+                            "$ref": "#/components/schemas/userCampaignList"
                         }
                     },
                     "characters": {
@@ -273,7 +329,7 @@
                 },
                 "type": "object"
             },
-            "campaignList": {
+            "userCampaignList": {
                 "description": "List of the campaigns",
                 "properties": {
                     "id": {
@@ -297,6 +353,61 @@
                         "type": "string",
                         "maxLength": 64,
                         "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "campaignList": {
+                "description": "List of campaign",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string",
+                        "maxLength": 64,
+                        "nullable": true
+                    },
+                    "description": {
+                        "type": "text",
+                        "nullable": true
+                    },
+                    "memo": {
+                        "type": "text",
+                        "nullable": true
+                    },
+                    "isArchived": {
+                        "type": "boolean",
+                        "default": 0,
+                        "nullable": true
+                    },
+                    "invitationCode": {
+                        "type": "string",
+                        "maxLength": 64,
+                        "nullable": true
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "updatedAt": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "owner": {
+                        "properties": {
+                            "id": {
+                                "type": "integer"
+                            },
+                            "name": {
+                                "type": "string",
+                                "maxLength": 64,
+                                "nullable": true
+                            }
+                        },
+                        "type": "object"
                     }
                 },
                 "type": "object"

@@ -229,7 +229,9 @@ class UserController extends AbstractController
 
 
     /***********************************************ADVANCED METHODS**************************************/
+
     /* AUTHORIZE A USER TO JOIN THE CAMPAIGN CORRESPONDING TO HIS INVITATION CODE */
+    
     /**
      * @Route("/user/campaign/join", name="user_campaign_join", methods={"POST"})
      * @OA\Post(
