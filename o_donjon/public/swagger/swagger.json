@@ -161,6 +161,59 @@
                     }
                 ]
             }
+        },
+        "/user/campaign/join": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "operationId": "App\\Controller\\UserController::joinCampaign",
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/joinCampaignUser"
+                },
+                "responses": {
+                    "200": {
+                        "description": "User informations",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Yeah, you have joined the campaign"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Campaign not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "This invitation code is not valid !"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/notFound"
+                    }
+                },
+                "security": [
+                    {
+                        "scalar": "bearer"
+                    }
+                ]
+            }
         }
     },
     "components": {
@@ -295,6 +348,25 @@
                                     "type": "string",
                                     "maxLength": 255,
                                     "nullable": true
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "joinCampaignUser": {
+                "required": true,
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "required": [
+                                "invitationCode"
+                            ],
+                            "properties": {
+                                "invitationCode": {
+                                    "type": "string",
+                                    "maxLength": 64
                                 }
                             },
                             "type": "object"

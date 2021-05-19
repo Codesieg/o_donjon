@@ -58,3 +58,14 @@ use OpenApi\Annotations as OA;
  *      )
  * )
  */
+
+/**
+ * @OA\RequestBody(
+ *      request="joinCampaignUser",
+ *      required=true,
+ *      @OA\JsonContent(
+ *          required={"invitationCode"},
+ *          @OA\Property(type="string", maxLength=64, property="invitationCode"),
+ *      )
+ * )
+ */

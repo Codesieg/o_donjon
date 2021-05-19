@@ -229,12 +229,30 @@ class UserController extends AbstractController
 
 
     /***********************************************ADVANCED METHODS**************************************/
-
+    /* AUTHORIZE A USER TO JOIN THE CAMPAIGN CORRESPONDING TO HIS INVITATION CODE */
     /**
-     * AUTHORIZE A USER TO JOIN THE CAMPAIGN CORRESPONDING TO HIS INVITATION CODE
-     * 
      * @Route("/user/campaign/join", name="user_campaign_join", methods={"POST"})
-     * 
+     * @OA\Post(
+     *      path="/user/campaign/join",
+     *      tags={"User"},
+     *      security={"bearer"},
+     *      @OA\RequestBody(ref="#/components/requestBodies/joinCampaignUser"),
+     *      @OA\Response(
+     *          response="200",
+     *          description="User informations",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="message",type="string", example="Yeah, you have joined the campaign")
+     *          ),
+     *      ),
+     *      @OA\Response(
+     *          response="401",
+     *          description="Campaign not found",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="message",type="string", example="This invitation code is not valid !")
+     *          ),
+     *      ),
+     *      @OA\Response(response="404", ref="#/components/responses/notFound")
+     * )
      */
     public function joinCampaign(Request $request, CampaignRepository $campaignRepository): Response
     {
