@@ -13,6 +13,8 @@ use App\Entity\Skill;
 use App\Entity\Campaign;
 use App\Entity\Map;
 use App\Entity\Story;
+use App\Entity\NPC;
+use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -298,7 +300,7 @@ class AppFixtures extends Fixture
             'Training animals with a hunter',
         ];
 
-        $npcNames = [
+        $NpcNames = [
             'Recaller',
             'Cannibal',
             'Joker',
@@ -614,9 +616,41 @@ class AppFixtures extends Fixture
             };
             $story->setReport($report);
 
-            $manager->persist($map);
+            $manager->persist($story);
 
-            $maps[] = $map;
+            $stories[] = $story;
+        }
+
+        foreach ($NpcNames as $NpcName) {
+
+            $Npc = new NPC();
+
+            $Npc->setName($NpcName);
+
+            shuffle($words);
+            $type = '';
+            for ($i = 0; $i < rand(1, 5); $i++) { 
+                $type = $type . " " . $words[$i];
+            };
+            $Npc->setType($type);
+
+            shuffle($words);
+            $isAlly = '';
+            for ($i = 0; $i < rand(1, 5); $i++) { 
+                $isAlly = $isAlly . " " . $words[$i];
+            };
+            $Npc->setIsAlly($isAlly);
+
+            shuffle($words);
+            $description = '';
+            for ($i = 0; $i < rand(10, 30); $i++) { 
+                $description = $description . " " . $words[$i];
+            };
+            $Npc->setDescription($description);
+
+            $manager->persist($Npc);
+
+            $NPCs[] = $Npc;
         }
 
         foreach ($campaignNames as $campaignName) {
@@ -642,13 +676,18 @@ class AppFixtures extends Fixture
             $campaign->setIsArchived((bool)random_int(0, 1));
 
             shuffle($maps);
-            for ($index = 0; $index < rand(1,4); $index++) { 
+            for ($index = 0; $index < rand(1,5); $index++) { 
                 $campaign->addMap($maps[$index]);
             }
 
             shuffle($stories);
-            for ($index = 0; $index < rand(1,4); $index++) { 
+            for ($index = 0; $index < rand(1,10); $index++) { 
                 $campaign->addStory($stories[$index]);
+            }
+
+            shuffle($NPCs);
+            for ($index = 0; $index < rand(1,8); $index++) { 
+                $campaign->addNPC($NPCs[$index]);
             }
 
             $manager->persist($campaign);
