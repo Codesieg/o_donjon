@@ -89,6 +89,18 @@ class StorieController extends AbstractController
 
     /**
      * @Route("/{id}", name="read", methods={"GET"}, requirements={"id": "\d+"})
+     * @OA\Get(
+     *      path="/story/{id}",
+     *      tags={"Story"},
+     *      security={"bearer"},
+     *      @OA\Parameter(ref="#/components/parameters/id"),
+     *      @OA\Response(
+     *          response="200",
+     *          description="Informations of the story",
+     *          @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/storyInfo"))
+     *      ),
+     *      @OA\Response(response="404", ref="#/components/responses/notFound"),
+     * )
      */
     public function read(Story $story): Response
     {   
@@ -100,6 +112,19 @@ class StorieController extends AbstractController
 
     /**
      * @Route("/{id}", name="edit", methods={"PUT", "PATCH"}, requirements={"id": "\d+"})
+     * @OA\Put(
+     *      path="/story/{id}",
+     *      tags={"Story"},
+     *      security={"bearer"},
+     *      @OA\Parameter(ref="#/components/parameters/id"),
+     *      @OA\RequestBody(ref="#/components/requestBodies/story"),
+     *      @OA\Response(
+     *          response="200",
+     *          description="Informations of the campaign",
+     *          @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/storyInfo"))
+     *      ),
+     *      @OA\Response(response="404", ref="#/components/responses/notFound"),
+     * )
      */
     public function edit(Story $story, Request $request): Response
     {   
@@ -129,6 +154,17 @@ class StorieController extends AbstractController
 
     /**
      * @Route("/{id}", name="delete", methods={"DELETE"}, requirements={"id": "\d+"})
+     * @OA\Delete(
+     *      path="/story/{id}",
+     *      tags={"Story"},
+     *      security={"bearer"},
+     *      @OA\Parameter(ref="#/components/parameters/id"),
+     *      @OA\Response(
+     *          response="204",
+     *          description="",
+     *      ),
+     *      @OA\Response(response="404", ref="#/components/responses/notFound")
+     * )
      */
     public function delete(Story $story): Response
     {   
