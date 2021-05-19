@@ -340,6 +340,66 @@
                 ]
             }
         },
+        "/story": {
+            "get": {
+                "tags": [
+                    "Story"
+                ],
+                "operationId": "App\\Controller\\StorieController::browse",
+                "responses": {
+                    "200": {
+                        "description": "List of stories",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/storyInfo"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "scalar": "bearer"
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Story"
+                ],
+                "operationId": "App\\Controller\\StorieController::add",
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/story"
+                },
+                "responses": {
+                    "200": {
+                        "description": "Informations of the story",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/storyInfo"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/notFound"
+                    }
+                },
+                "security": [
+                    {
+                        "scalar": "bearer"
+                    }
+                ]
+            }
+        },
         "/user": {
             "get": {
                 "tags": [
@@ -789,6 +849,9 @@
                         "type": "string",
                         "format": "date-time",
                         "nullable": true
+                    },
+                    "campaign": {
+                        "type": "integer"
                     }
                 },
                 "type": "object"
@@ -797,8 +860,17 @@
                 "description": "Information of a story",
                 "properties": {
                     "campaign": {
-                        "type": "integer",
-                        "nullable": true
+                        "properties": {
+                            "id": {
+                                "type": "integer"
+                            },
+                            "name": {
+                                "type": "string",
+                                "maxLength": 64,
+                                "nullable": true
+                            }
+                        },
+                        "type": "object"
                     }
                 },
                 "type": "object",
@@ -1106,9 +1178,9 @@
                         "schema": {
                             "required": [
                                 "name",
-                                "password",
-                                "name",
-                                "avatarPath"
+                                "description",
+                                "memo",
+                                "isArchived"
                             ],
                             "properties": {
                                 "name": {
@@ -1128,6 +1200,43 @@
                                     "type": "boolean",
                                     "default": 0,
                                     "example": "false",
+                                    "nullable": true
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "story": {
+                "required": true,
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "required": [
+                                "name",
+                                "description",
+                                "isDone",
+                                "avatarPath"
+                            ],
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "maxLength": 64,
+                                    "nullable": true
+                                },
+                                "description": {
+                                    "type": "string",
+                                    "nullable": true
+                                },
+                                "isDone": {
+                                    "type": "boolean",
+                                    "default": 0,
+                                    "example": "false",
+                                    "nullable": true
+                                },
+                                "report": {
+                                    "type": "string",
                                     "nullable": true
                                 }
                             },

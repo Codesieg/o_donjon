@@ -143,7 +143,7 @@ use OpenApi\Annotations as OA;
  *      request="campaign",
  *      required=true,
  *      @OA\JsonContent(
- *          required={"name", "password", "name", "avatarPath"},
+ *          required={"name", "description", "memo", "isArchived"},
  *          @OA\Property(type="string", maxLength=64, nullable=true, property="name"),
  *          @OA\Property(type="string", nullable=true, property="description"),
  *          @OA\Property(type="string", nullable=true, property="memo"),
@@ -165,6 +165,7 @@ use OpenApi\Annotations as OA;
  *      @OA\Property(type="string", nullable=true, property="report"),
  *      @OA\Property(type="string", format="date-time", property="createdAt"),
  *      @OA\Property(type="string", format="date-time", nullable=true, property="updatedAt"),
+ *      @OA\Property(type="integer", property="campaign"),
  * )
  */
 
@@ -173,7 +174,26 @@ use OpenApi\Annotations as OA;
  *      schema="storyInfo",
  *      description="Information of a story",
  *      allOf={@OA\Schema(ref="#/components/schemas/story")},
- *      @OA\Property(type="integer", nullable=true, property="campaign"),
+ *      @OA\Property(
+ *          type="object",
+ *          @OA\Property(type="integer", property="id"),
+ *          @OA\Property(type="string", maxLength=64, nullable=true, property="name"),
+ *          property="campaign"),
+ * )
+ * )
+ */
+
+/**
+ * @OA\RequestBody(
+ *      request="story",
+ *      required=true,
+ *      @OA\JsonContent(
+ *          required={"name", "description", "isDone", "avatarPath"},
+ *          @OA\Property(type="string", maxLength=64, nullable=true, property="name"),
+ *          @OA\Property(type="string", nullable=true, property="description"),
+ *          @OA\Property(type="boolean", default=0, nullable=true, example="false", property="isDone"),
+ *          @OA\Property(type="string", nullable=true, property="report"),
+ *      )
  * )
  */
 

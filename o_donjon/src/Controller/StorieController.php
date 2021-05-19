@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Story;
 use App\Form\StoryType;
 use App\Repository\StoryRepository;
+use OpenApi\Annotations as OA;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,6 +19,16 @@ class StorieController extends AbstractController
 {
     /**
      * @Route("", name="browse", methods={"GET"})
+     * @OA\Get(
+     *      path="/story",
+     *      tags={"Story"},
+     *      security={"bearer"},
+     *      @OA\Response(
+     *          response="200",
+     *          description="List of stories",
+     *          @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/storyInfo"))
+     *      )
+     * )
      */
     public function browse(StoryRepository $storyRepository): Response
     {   
@@ -32,6 +43,18 @@ class StorieController extends AbstractController
 
     /**
      * @Route("", name="add", methods={"POST"})
+     * @OA\Post(
+     *      path="/story",
+     *      tags={"Story"},
+     *      security={"bearer"},
+     *      @OA\RequestBody(ref="#/components/requestBodies/story"),
+     *      @OA\Response(
+     *          response="200",
+     *          description="Informations of the story",
+     *          @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/storyInfo"))
+     *      ),
+     *      @OA\Response(response="404", ref="#/components/responses/notFound"),
+     * )
      */
     public function add(Request $request): Response
     {   
