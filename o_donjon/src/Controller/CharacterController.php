@@ -398,4 +398,10 @@ class CharacterController extends AbstractController
         return $this->json(null, 204);
     }
 
+    public function resetCampaign(Character $character): Void
+    {
+        $character->setCampaign(null);
+
+        $this->getDoctrine()->getManager()>flush();
+    }
 }
