@@ -16,6 +16,20 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
+/**
+ * @OA\Get(
+ *      path="/login_check",
+ *      tags={"User"},
+ *      security={"bearer"},
+ *      @OA\RequestBody(ref="#/components/requestBodies/connectionUser"),
+ *      @OA\Response(
+ *          response="200",
+ *          description="data of the connected user",
+ *          @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/connectionUser"))
+ *      )
+ * )
+ */
+
 class UserController extends AbstractController
 {
     /**

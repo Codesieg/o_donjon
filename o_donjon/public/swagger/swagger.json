@@ -340,6 +340,479 @@
                 ]
             }
         },
+        "/character": {
+            "get": {
+                "tags": [
+                    "Character"
+                ],
+                "operationId": "App\\Controller\\CharacterController::browse",
+                "responses": {
+                    "200": {
+                        "description": "List of characters of the user",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/character"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "scalar": "bearer"
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Character"
+                ],
+                "operationId": "App\\Controller\\CharacterController::add",
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/characterName"
+                },
+                "responses": {
+                    "200": {
+                        "description": "Informations of the character",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/characterInfo"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/notFound"
+                    }
+                },
+                "security": [
+                    {
+                        "scalar": "bearer"
+                    }
+                ]
+            }
+        },
+        "/character/{id}": {
+            "get": {
+                "tags": [
+                    "Character"
+                ],
+                "operationId": "App\\Controller\\CharacterController::read",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Informations of the character",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/characterInfo"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/notFound"
+                    }
+                },
+                "security": [
+                    {
+                        "scalar": "bearer"
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Character"
+                ],
+                "operationId": "App\\Controller\\CharacterController::edit",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/character"
+                },
+                "responses": {
+                    "200": {
+                        "description": "Informations of the character",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/characterInfo"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/notFound"
+                    }
+                },
+                "security": [
+                    {
+                        "scalar": "bearer"
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Character"
+                ],
+                "operationId": "App\\Controller\\CharacterController::delete",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": ""
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/notFound"
+                    }
+                },
+                "security": [
+                    {
+                        "scalar": "bearer"
+                    }
+                ]
+            }
+        },
+        "/map": {
+            "get": {
+                "tags": [
+                    "Map"
+                ],
+                "operationId": "App\\Controller\\MapController::browse",
+                "responses": {
+                    "200": {
+                        "description": "List of maps",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/map"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "scalar": "bearer"
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Map"
+                ],
+                "operationId": "App\\Controller\\MapController::add",
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/map"
+                },
+                "responses": {
+                    "200": {
+                        "description": "Informations of the map",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/mapInfo"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/notFound"
+                    }
+                },
+                "security": [
+                    {
+                        "scalar": "bearer"
+                    }
+                ]
+            }
+        },
+        "/map/{id}": {
+            "get": {
+                "tags": [
+                    "Map"
+                ],
+                "operationId": "App\\Controller\\MapController::read",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Informations of the map",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/mapInfo"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/notFound"
+                    }
+                },
+                "security": [
+                    {
+                        "scalar": "bearer"
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Map"
+                ],
+                "operationId": "App\\Controller\\MapController::edit",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/map"
+                },
+                "responses": {
+                    "200": {
+                        "description": "Informations of the map",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/mapInfo"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/notFound"
+                    }
+                },
+                "security": [
+                    {
+                        "scalar": "bearer"
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Map"
+                ],
+                "operationId": "App\\Controller\\MapController::delete",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": ""
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/notFound"
+                    }
+                },
+                "security": [
+                    {
+                        "scalar": "bearer"
+                    }
+                ]
+            }
+        },
+        "/nps": {
+            "get": {
+                "tags": [
+                    "NPC"
+                ],
+                "operationId": "App\\Controller\\NpcController::browse",
+                "responses": {
+                    "200": {
+                        "description": "List of NPCs",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/npcInfo"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "scalar": "bearer"
+                    }
+                ]
+            }
+        },
+        "/npc": {
+            "post": {
+                "tags": [
+                    "NPC"
+                ],
+                "operationId": "App\\Controller\\NpcController::add",
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/npc"
+                },
+                "responses": {
+                    "200": {
+                        "description": "Informations of the NPC",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/npcInfo"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/notFound"
+                    }
+                },
+                "security": [
+                    {
+                        "scalar": "bearer"
+                    }
+                ]
+            }
+        },
+        "/npc/{id}": {
+            "get": {
+                "tags": [
+                    "NPC"
+                ],
+                "operationId": "App\\Controller\\NpcController::read",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Informations of the NPC",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/npcInfo"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/notFound"
+                    }
+                },
+                "security": [
+                    {
+                        "scalar": "bearer"
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "NPC"
+                ],
+                "operationId": "App\\Controller\\NpcController::edit",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/npc"
+                },
+                "responses": {
+                    "200": {
+                        "description": "Informations of the NPC",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/npcInfo"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/notFound"
+                    }
+                },
+                "security": [
+                    {
+                        "scalar": "bearer"
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "NPC"
+                ],
+                "operationId": "App\\Controller\\NpcController::delete",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": ""
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/notFound"
+                    }
+                },
+                "security": [
+                    {
+                        "scalar": "bearer"
+                    }
+                ]
+            }
+        },
         "/story": {
             "get": {
                 "tags": [
@@ -450,7 +923,7 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Informations of the campaign",
+                        "description": "Informations of the story",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -488,6 +961,36 @@
                     },
                     "404": {
                         "$ref": "#/components/responses/notFound"
+                    }
+                },
+                "security": [
+                    {
+                        "scalar": "bearer"
+                    }
+                ]
+            }
+        },
+        "/login_check": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/connectionUser"
+                },
+                "responses": {
+                    "200": {
+                        "description": "data of the connected user",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/connectionUser"
+                                    }
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -708,16 +1211,19 @@
                 "description": "List of the users",
                 "properties": {
                     "id": {
-                        "type": "integer"
+                        "type": "integer",
+                        "example": "7"
                     },
                     "name": {
                         "type": "string",
                         "maxLength": 64,
+                        "example": "Martin",
                         "nullable": true
                     },
                     "avatarPath": {
                         "type": "string",
                         "maxLength": 255,
+                        "example": "avatar_martin.png",
                         "nullable": true
                     }
                 },
@@ -727,21 +1233,25 @@
                 "description": "user informations",
                 "properties": {
                     "id": {
-                        "type": "integer"
+                        "type": "integer",
+                        "example": "7"
                     },
                     "email": {
                         "type": "string",
                         "maxLength": 180,
-                        "uniqueItems": true
+                        "uniqueItems": true,
+                        "example": "martin@odonjon.com"
                     },
                     "name": {
                         "type": "string",
                         "maxLength": 64,
+                        "example": "Martin",
                         "nullable": true
                     },
                     "avatarPath": {
                         "type": "string",
                         "maxLength": 255,
+                        "example": "avatar_martin.png",
                         "nullable": true
                     },
                     "campaigns": {
@@ -763,11 +1273,13 @@
                 "description": "List of the campaigns",
                 "properties": {
                     "id": {
-                        "type": "integer"
+                        "type": "integer",
+                        "example": "7"
                     },
                     "name": {
                         "type": "string",
                         "maxLength": 64,
+                        "example": "Les poules de ma grand-mère",
                         "nullable": true
                     }
                 },
@@ -777,12 +1289,49 @@
                 "description": "List of the characters",
                 "properties": {
                     "id": {
-                        "type": "integer"
+                        "type": "integer",
+                        "example": "7"
                     },
                     "name": {
                         "type": "string",
                         "maxLength": 64,
+                        "example": "Dwalïn",
                         "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "connectionUser": {
+                "description": "JWT and user data",
+                "properties": {
+                    "token": {
+                        "type": "string",
+                        "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2MjE0OTgwODYsImV4cCI6MTYyMTUyNjg4Niwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoibmFlbEBvZG9uam9uLmNvbSJ9.tR9dFk5g2tJ1YnV_vGBFmP-37LnaOAqhvgT6VhunNVnmd5xIriR50_hmqa5PMkFFHwSurx2KoxwhpZEOXKabSdRb2yipHszo64TIDNjV35jdli8JAOxX6xSQBqE1lK6-iOKJay7Eeuu1N7TViJdbPfDZodomLDLXOdd3ZHMOb8m3-YerQ0mhHNPf5ze2pYbUgoRG8iOGZJtUnQRYutSqeIEQFqk696gyWJKnG_yd16aPhvzf12gmn4cctOhbpO9-oxt6GDAuMpcEBZVoYhkbNN53QJJ6aCZfp2TpUkbL8io8jPdrUxcil_-yMFVnjBewkzTjFdmypWh2Qo4Dad2K7w"
+                    },
+                    "data": {
+                        "properties": {
+                            "id": {
+                                "type": "integer",
+                                "example": "7"
+                            },
+                            "email": {
+                                "type": "string",
+                                "example": "example@odonjon.com"
+                            },
+                            "name": {
+                                "type": "string",
+                                "maxLength": 64,
+                                "example": "Martin",
+                                "nullable": true
+                            },
+                            "avatarPath": {
+                                "type": "string",
+                                "maxLength": 255,
+                                "example": "avatar_martin.png",
+                                "nullable": true
+                            }
+                        },
+                        "type": "object"
                     }
                 },
                 "type": "object"
@@ -791,19 +1340,23 @@
                 "description": "List of campaign",
                 "properties": {
                     "id": {
-                        "type": "integer"
+                        "type": "integer",
+                        "example": "7"
                     },
                     "name": {
                         "type": "string",
                         "maxLength": 64,
+                        "example": "Les poules de ma grand-mère",
                         "nullable": true
                     },
                     "description": {
                         "type": "string",
+                        "example": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus impedit sequi amet ipsa, recusandae cumque, culpa ullam officia optio qui reiciendis similique, illo illum minus quaerat vitae aliquid iure labore!",
                         "nullable": true
                     },
                     "memo": {
                         "type": "string",
+                        "example": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus impedit sequi amet ipsa, recusandae cumque, culpa ullam officia optio qui reiciendis similique, illo illum minus quaerat vitae aliquid iure labore!",
                         "nullable": true
                     },
                     "isArchived": {
@@ -815,6 +1368,7 @@
                     "invitationCode": {
                         "type": "string",
                         "maxLength": 64,
+                        "example": "60a60a7d4e18a",
                         "nullable": true
                     },
                     "createdAt": {
@@ -829,11 +1383,13 @@
                     "owner": {
                         "properties": {
                             "id": {
-                                "type": "integer"
+                                "type": "integer",
+                                "example": "7"
                             },
                             "name": {
                                 "type": "string",
                                 "maxLength": 64,
+                                "example": "Martin",
                                 "nullable": true
                             }
                         },
@@ -846,16 +1402,20 @@
                 "description": "Information of a campaign",
                 "properties": {
                     "countCharacters": {
-                        "type": "integer"
+                        "type": "integer",
+                        "example": "5"
                     },
                     "countNpcs": {
-                        "type": "integer"
+                        "type": "integer",
+                        "example": "17"
                     },
                     "countStories": {
-                        "type": "integer"
+                        "type": "integer",
+                        "example": "3"
                     },
                     "countMaps": {
-                        "type": "integer"
+                        "type": "integer",
+                        "example": "11"
                     }
                 },
                 "type": "object",
@@ -917,15 +1477,18 @@
                 "description": "Information of a story",
                 "properties": {
                     "id": {
-                        "type": "integer"
+                        "type": "integer",
+                        "example": "7"
                     },
                     "name": {
                         "type": "string",
                         "maxLength": 64,
+                        "example": "disparition mystérieuse au poulailler",
                         "nullable": true
                     },
                     "description": {
                         "type": "string",
+                        "example": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus impedit sequi amet ipsa, recusandae cumque, culpa ullam officia optio qui reiciendis similique, illo illum minus quaerat vitae aliquid iure labore!",
                         "nullable": true
                     },
                     "isDone": {
@@ -936,6 +1499,7 @@
                     },
                     "report": {
                         "type": "string",
+                        "example": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus impedit sequi amet ipsa, recusandae cumque, culpa ullam officia optio qui reiciendis similique, illo illum minus quaerat vitae aliquid iure labore!",
                         "nullable": true
                     },
                     "createdAt": {
@@ -948,7 +1512,8 @@
                         "nullable": true
                     },
                     "campaign": {
-                        "type": "integer"
+                        "type": "integer",
+                        "example": "7"
                     }
                 },
                 "type": "object"
@@ -959,11 +1524,13 @@
                     "campaign": {
                         "properties": {
                             "id": {
-                                "type": "integer"
+                                "type": "integer",
+                                "example": "7"
                             },
                             "name": {
                                 "type": "string",
                                 "maxLength": 64,
+                                "example": "Les poules de ma grand-mère",
                                 "nullable": true
                             }
                         },
@@ -981,16 +1548,19 @@
                 "description": "Information of a map",
                 "properties": {
                     "id": {
-                        "type": "integer"
+                        "type": "integer",
+                        "example": "7"
                     },
                     "filePath": {
                         "type": "string",
                         "maxLength": 64,
+                        "example": "poulailler.png",
                         "nullable": true
                     },
                     "name": {
                         "type": "string",
                         "maxLength": 64,
+                        "example": "Le poulailler de ma grand-mère",
                         "nullable": true
                     },
                     "createdAt": {
@@ -1001,6 +1571,21 @@
                         "type": "string",
                         "format": "date-time",
                         "nullable": true
+                    },
+                    "campaign": {
+                        "properties": {
+                            "id": {
+                                "type": "integer",
+                                "example": "7"
+                            },
+                            "name": {
+                                "type": "string",
+                                "maxLength": 64,
+                                "example": "Les poules de ma grand-mère",
+                                "nullable": true
+                            }
+                        },
+                        "type": "object"
                     }
                 },
                 "type": "object"
@@ -1008,8 +1593,9 @@
             "mapInfo": {
                 "description": "Information of a map",
                 "properties": {
-                    "campaign": {
-                        "type": "integer",
+                    "description": {
+                        "type": "string",
+                        "example": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus impedit sequi amet ipsa, recusandae cumque, culpa ullam officia optio qui reiciendis similique, illo illum minus quaerat vitae aliquid iure labore!",
                         "nullable": true
                     }
                 },
@@ -1024,25 +1610,30 @@
                 "description": "Information of a NPC",
                 "properties": {
                     "id": {
-                        "type": "integer"
+                        "type": "integer",
+                        "example": "7"
                     },
                     "name": {
                         "type": "string",
                         "maxLength": 64,
+                        "example": "Cocotte",
                         "nullable": true
                     },
                     "type": {
                         "type": "string",
                         "maxLength": 64,
+                        "example": "animal",
                         "nullable": true
                     },
                     "description": {
                         "type": "string",
+                        "example": "Au mon dieu une poule qui parle !",
                         "nullable": true
                     },
                     "isAlly": {
                         "type": "string",
                         "maxLength": 64,
+                        "example": "true",
                         "nullable": true
                     }
                 },
@@ -1052,8 +1643,19 @@
                 "description": "Information of a NPC",
                 "properties": {
                     "campaign": {
-                        "type": "integer",
-                        "nullable": true
+                        "properties": {
+                            "id": {
+                                "type": "integer",
+                                "example": "7"
+                            },
+                            "name": {
+                                "type": "string",
+                                "maxLength": 64,
+                                "example": "Les poules de ma grand-mère",
+                                "nullable": true
+                            }
+                        },
+                        "type": "object"
                     }
                 },
                 "type": "object",
@@ -1067,105 +1669,129 @@
                 "description": "Information of a character",
                 "properties": {
                     "id": {
-                        "type": "integer"
+                        "type": "integer",
+                        "example": "7"
                     },
                     "name": {
                         "type": "string",
                         "maxLength": 64,
+                        "example": "Dwalïn",
                         "nullable": true
                     },
                     "avatar_path": {
                         "type": "string",
                         "maxLength": 255,
+                        "example": "dwalin.png",
                         "nullable": true
                     },
                     "age": {
                         "type": "integer",
-                        "default": 0
+                        "default": 0,
+                        "example": "97"
                     },
                     "initiative": {
                         "type": "integer",
-                        "default": 0
+                        "default": 0,
+                        "example": "2"
                     },
                     "height": {
                         "type": "integer",
-                        "default": 0
+                        "default": 0,
+                        "example": "137"
                     },
                     "weight": {
                         "type": "integer",
-                        "default": 0
+                        "default": 0,
+                        "example": "61"
                     },
                     "eyes": {
                         "type": "string",
                         "maxLength": 64,
+                        "example": "marron",
                         "nullable": true
                     },
                     "skin": {
                         "type": "string",
                         "maxLength": 64,
+                        "example": "blanche",
                         "nullable": true
                     },
                     "hair": {
                         "type": "string",
                         "maxLength": 64,
+                        "example": "roux",
                         "nullable": true
                     },
                     "appearance": {
                         "type": "string",
+                        "example": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus impedit sequi amet ipsa, recusandae cumque, culpa ullam officia optio qui reiciendis similique, illo illum minus quaerat vitae aliquid iure labore!",
                         "nullable": true
                     },
                     "personality_traits": {
                         "type": "string",
+                        "example": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus impedit sequi amet ipsa, recusandae cumque, culpa ullam officia optio qui reiciendis similique, illo illum minus quaerat vitae aliquid iure labore!",
                         "nullable": true
                     },
                     "ideals": {
                         "type": "string",
+                        "example": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus impedit sequi amet ipsa, recusandae cumque, culpa ullam officia optio qui reiciendis similique, illo illum minus quaerat vitae aliquid iure labore!",
                         "nullable": true
                     },
                     "bonds": {
                         "type": "string",
+                        "example": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus impedit sequi amet ipsa, recusandae cumque, culpa ullam officia optio qui reiciendis similique, illo illum minus quaerat vitae aliquid iure labore!",
                         "nullable": true
                     },
                     "flaws": {
                         "type": "string",
+                        "example": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus impedit sequi amet ipsa, recusandae cumque, culpa ullam officia optio qui reiciendis similique, illo illum minus quaerat vitae aliquid iure labore!",
                         "nullable": true
                     },
                     "allies_and_organizations": {
                         "type": "string",
+                        "example": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus impedit sequi amet ipsa, recusandae cumque, culpa ullam officia optio qui reiciendis similique, illo illum minus quaerat vitae aliquid iure labore!",
                         "nullable": true
                     },
                     "backstory": {
                         "type": "string",
+                        "example": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus impedit sequi amet ipsa, recusandae cumque, culpa ullam officia optio qui reiciendis similique, illo illum minus quaerat vitae aliquid iure labore!",
                         "nullable": true
                     },
                     "treasure": {
                         "type": "string",
+                        "example": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus impedit sequi amet ipsa, recusandae cumque, culpa ullam officia optio qui reiciendis similique, illo illum minus quaerat vitae aliquid iure labore!",
                         "nullable": true
                     },
                     "background": {
                         "type": "string",
                         "maxLength": 64,
+                        "example": "forgeron",
                         "nullable": true
                     },
                     "alignement": {
                         "type": "string",
                         "maxLength": 64,
+                        "example": "Loyal neutre",
                         "nullable": true
                     },
                     "attacks_and_spellcasting": {
                         "type": "string",
+                        "example": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus impedit sequi amet ipsa, recusandae cumque, culpa ullam officia optio qui reiciendis similique, illo illum minus quaerat vitae aliquid iure labore!",
                         "nullable": true
                     },
                     "equipment": {
                         "type": "string",
+                        "example": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus impedit sequi amet ipsa, recusandae cumque, culpa ullam officia optio qui reiciendis similique, illo illum minus quaerat vitae aliquid iure labore!",
                         "nullable": true
                     },
                     "other_proficiencies_and_languages": {
                         "type": "string",
+                        "example": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus impedit sequi amet ipsa, recusandae cumque, culpa ullam officia optio qui reiciendis similique, illo illum minus quaerat vitae aliquid iure labore!",
                         "nullable": true
                     },
                     "features_and_traits": {
                         "type": "string",
+                        "example": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus impedit sequi amet ipsa, recusandae cumque, culpa ullam officia optio qui reiciendis similique, illo illum minus quaerat vitae aliquid iure labore!",
                         "nullable": true
                     },
                     "createdAt": {
@@ -1183,15 +1809,340 @@
             "characterInfo": {
                 "description": "Information of a character",
                 "properties": {
+                    "user": {
+                        "properties": {
+                            "id": {
+                                "type": "integer",
+                                "example": "7"
+                            },
+                            "name": {
+                                "type": "string",
+                                "maxLength": 64,
+                                "example": "Martin",
+                                "nullable": true
+                            }
+                        },
+                        "type": "object"
+                    },
                     "campaign": {
-                        "type": "integer",
-                        "nullable": true
+                        "properties": {
+                            "id": {
+                                "type": "integer",
+                                "example": "7"
+                            },
+                            "name": {
+                                "type": "string",
+                                "maxLength": 64,
+                                "example": "Les poules de ma grand-mère",
+                                "nullable": true
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "race": {
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "maxLength": 64,
+                                "example": "nain",
+                                "nullable": true
+                            },
+                            "informations": {
+                                "type": "string",
+                                "example": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus impedit sequi amet ipsa, recusandae cumque, culpa ullam officia optio qui reiciendis similique, illo illum minus quaerat vitae aliquid iure labore!",
+                                "nullable": true
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "class": {
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "maxLength": 64,
+                                "example": "guerrier",
+                                "nullable": true
+                            },
+                            "informations": {
+                                "type": "string",
+                                "example": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus impedit sequi amet ipsa, recusandae cumque, culpa ullam officia optio qui reiciendis similique, illo illum minus quaerat vitae aliquid iure labore!",
+                                "nullable": true
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "caracteristics": {
+                        "properties": {
+                            "level": {
+                                "type": "integer",
+                                "default": 0,
+                                "example": "13"
+                            },
+                            "experience": {
+                                "type": "integer",
+                                "default": 0,
+                                "example": "6911"
+                            },
+                            "inspiration": {
+                                "type": "boolean",
+                                "default": false,
+                                "example": "false"
+                            },
+                            "armorClass": {
+                                "type": "integer",
+                                "default": 0,
+                                "example": "13"
+                            },
+                            "speed": {
+                                "type": "integer",
+                                "default": 0,
+                                "example": "7"
+                            },
+                            "currentHP": {
+                                "type": "integer",
+                                "default": 0,
+                                "example": "47"
+                            },
+                            "totalHP": {
+                                "type": "integer",
+                                "default": 0,
+                                "example": "53"
+                            },
+                            "hitDice": {
+                                "type": "string",
+                                "maxLength": 64,
+                                "example": "1D8",
+                                "nullable": true
+                            },
+                            "deathSavesSuccess": {
+                                "type": "integer",
+                                "default": 0,
+                                "example": "0"
+                            },
+                            "deathSavesFailures": {
+                                "type": "integer",
+                                "default": 0,
+                                "example": "0"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "statistics": {
+                        "properties": {
+                            "strength": {
+                                "type": "integer",
+                                "default": 0,
+                                "example": "17"
+                            },
+                            "dexterity": {
+                                "type": "integer",
+                                "default": 0,
+                                "example": "11"
+                            },
+                            "constitution": {
+                                "type": "integer",
+                                "default": 0,
+                                "example": "13"
+                            },
+                            "intelligence": {
+                                "type": "integer",
+                                "default": 0,
+                                "example": "7"
+                            },
+                            "wisdom": {
+                                "type": "integer",
+                                "default": 0,
+                                "example": "11"
+                            },
+                            "charisma": {
+                                "type": "integer",
+                                "default": 0,
+                                "example": "13"
+                            },
+                            "passiveWisdom": {
+                                "type": "integer",
+                                "default": 0,
+                                "example": "2"
+                            },
+                            "proficiencyBonus": {
+                                "type": "integer",
+                                "default": 0,
+                                "example": "2"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "spell": {
+                        "properties": {
+                            "spellcasting_class": {
+                                "type": "string",
+                                "maxLength": 64,
+                                "example": "invocateur",
+                                "nullable": true
+                            },
+                            "spell_attack_bonus": {
+                                "type": "integer",
+                                "default": 0,
+                                "example": "2"
+                            },
+                            "spellcasting_ability": {
+                                "type": "integer",
+                                "default": 0,
+                                "example": "2"
+                            },
+                            "spell_save_dc": {
+                                "type": "integer",
+                                "default": 0,
+                                "example": "2"
+                            },
+                            "spells_list": {
+                                "type": "string",
+                                "example": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus impedit sequi amet ipsa, recusandae cumque, culpa ullam officia optio qui reiciendis similique, illo illum minus quaerat vitae aliquid iure labore!",
+                                "nullable": true
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "savingThrowspell": {
+                        "properties": {
+                            "strength": {
+                                "type": "boolean",
+                                "default": false,
+                                "example": "true"
+                            },
+                            "dexterity": {
+                                "type": "boolean",
+                                "default": false,
+                                "example": "false"
+                            },
+                            "constitution": {
+                                "type": "boolean",
+                                "default": false,
+                                "example": "true"
+                            },
+                            "intelligence": {
+                                "type": "boolean",
+                                "default": false,
+                                "example": "false"
+                            },
+                            "wisdom": {
+                                "type": "boolean",
+                                "default": false,
+                                "example": "false"
+                            },
+                            "charisma": {
+                                "type": "boolean",
+                                "default": false,
+                                "example": "false"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "skill": {
+                        "properties": {
+                            "acrobatics": {
+                                "type": "boolean",
+                                "default": false,
+                                "example": "false"
+                            },
+                            "animalHandling": {
+                                "type": "boolean",
+                                "default": false,
+                                "example": "true"
+                            },
+                            "arcana": {
+                                "type": "boolean",
+                                "default": false,
+                                "example": "false"
+                            },
+                            "athletics": {
+                                "type": "boolean",
+                                "default": false,
+                                "example": "false"
+                            },
+                            "deception": {
+                                "type": "boolean",
+                                "default": false,
+                                "example": "false"
+                            },
+                            "history": {
+                                "type": "boolean",
+                                "default": false,
+                                "example": "false"
+                            },
+                            "insight": {
+                                "type": "boolean",
+                                "default": false,
+                                "example": "false"
+                            },
+                            "intimidation": {
+                                "type": "boolean",
+                                "default": false,
+                                "example": "true"
+                            },
+                            "investigation": {
+                                "type": "boolean",
+                                "default": false,
+                                "example": "false"
+                            },
+                            "medecine": {
+                                "type": "boolean",
+                                "default": false,
+                                "example": "false"
+                            },
+                            "nature": {
+                                "type": "boolean",
+                                "default": false,
+                                "example": "false"
+                            },
+                            "perception": {
+                                "type": "boolean",
+                                "default": false,
+                                "example": "false"
+                            },
+                            "performance": {
+                                "type": "boolean",
+                                "default": false,
+                                "example": "false"
+                            },
+                            "persuasion": {
+                                "type": "boolean",
+                                "default": false,
+                                "example": "false"
+                            },
+                            "religion": {
+                                "type": "boolean",
+                                "default": false,
+                                "example": "true"
+                            },
+                            "sleightOfHand": {
+                                "type": "boolean",
+                                "default": false,
+                                "example": "false"
+                            },
+                            "stealth": {
+                                "type": "boolean",
+                                "default": false,
+                                "example": "false"
+                            },
+                            "survival": {
+                                "type": "boolean",
+                                "default": false,
+                                "example": "true"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "isDead": {
+                        "type": "boolean",
+                        "default": false,
+                        "example": "false"
                     }
                 },
                 "type": "object",
                 "allOf": [
                     {
-                        "$ref": "#/components/schemas/npc"
+                        "$ref": "#/components/schemas/character"
                     }
                 ]
             }
@@ -1213,6 +2164,30 @@
             }
         },
         "requestBodies": {
+            "connectionUser": {
+                "required": true,
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "required": [
+                                "username",
+                                "password"
+                            ],
+                            "properties": {
+                                "username": {
+                                    "type": "string",
+                                    "example": "martin@odonjon.com"
+                                },
+                                "password": {
+                                    "type": "string",
+                                    "example": "password"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
             "registerUser": {
                 "required": true,
                 "content": {
@@ -1228,19 +2203,23 @@
                                 "email": {
                                     "type": "string",
                                     "maxLength": 180,
-                                    "uniqueItems": true
+                                    "uniqueItems": true,
+                                    "example": "martin@odonjon.com"
                                 },
                                 "password": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "example": "password"
                                 },
                                 "name": {
                                     "type": "string",
                                     "maxLength": 64,
+                                    "example": "Martin",
                                     "nullable": true
                                 },
                                 "avatarPath": {
                                     "type": "string",
                                     "maxLength": 255,
+                                    "example": "avatar_martin.png",
                                     "nullable": true
                                 }
                             },
@@ -1260,7 +2239,8 @@
                             "properties": {
                                 "invitationCode": {
                                     "type": "string",
-                                    "maxLength": 64
+                                    "maxLength": 64,
+                                    "example": "60a60a7d4e18a"
                                 }
                             },
                             "type": "object"
@@ -1283,14 +2263,17 @@
                                 "name": {
                                     "type": "string",
                                     "maxLength": 64,
+                                    "example": "Les poules de ma grand-mère",
                                     "nullable": true
                                 },
                                 "description": {
                                     "type": "string",
+                                    "example": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus impedit sequi amet ipsa, recusandae cumque, culpa ullam officia optio qui reiciendis similique, illo illum minus quaerat vitae aliquid iure labore!",
                                     "nullable": true
                                 },
                                 "memo": {
                                     "type": "string",
+                                    "example": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus impedit sequi amet ipsa, recusandae cumque, culpa ullam officia optio qui reiciendis similique, illo illum minus quaerat vitae aliquid iure labore!",
                                     "nullable": true
                                 },
                                 "isArchived": {
@@ -1314,16 +2297,19 @@
                                 "name",
                                 "description",
                                 "isDone",
-                                "avatarPath"
+                                "report",
+                                "campaign"
                             ],
                             "properties": {
                                 "name": {
                                     "type": "string",
                                     "maxLength": 64,
+                                    "example": "disparition mystérieuse au poulailler",
                                     "nullable": true
                                 },
                                 "description": {
                                     "type": "string",
+                                    "example": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus impedit sequi amet ipsa, recusandae cumque, culpa ullam officia optio qui reiciendis similique, illo illum minus quaerat vitae aliquid iure labore!",
                                     "nullable": true
                                 },
                                 "isDone": {
@@ -1334,7 +2320,587 @@
                                 },
                                 "report": {
                                     "type": "string",
+                                    "example": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus impedit sequi amet ipsa, recusandae cumque, culpa ullam officia optio qui reiciendis similique, illo illum minus quaerat vitae aliquid iure labore!",
                                     "nullable": true
+                                },
+                                "campaign": {
+                                    "type": "integer"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "map": {
+                "required": true,
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "required": [
+                                "filePath",
+                                "name",
+                                "description",
+                                "campaign"
+                            ],
+                            "properties": {
+                                "filePath": {
+                                    "type": "string",
+                                    "maxLength": 255,
+                                    "example": "poulailler.png",
+                                    "nullable": true
+                                },
+                                "name": {
+                                    "type": "string",
+                                    "maxLength": 64,
+                                    "example": "Le poulailler de ma grand-mère",
+                                    "nullable": true
+                                },
+                                "description": {
+                                    "type": "string",
+                                    "example": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus impedit sequi amet ipsa, recusandae cumque, culpa ullam officia optio qui reiciendis similique, illo illum minus quaerat vitae aliquid iure labore!",
+                                    "nullable": true
+                                },
+                                "campaign": {
+                                    "type": "integer",
+                                    "example": "7"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "npc": {
+                "required": true,
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "required": [
+                                "name",
+                                "type",
+                                "description",
+                                "isAlly",
+                                "campaign"
+                            ],
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "maxLength": 64,
+                                    "example": "Cocotte",
+                                    "nullable": true
+                                },
+                                "type": {
+                                    "type": "string",
+                                    "maxLength": 64,
+                                    "example": "animal",
+                                    "nullable": true
+                                },
+                                "description": {
+                                    "type": "string",
+                                    "example": "Au mon dieu une poule qui parle !",
+                                    "nullable": true
+                                },
+                                "isAlly": {
+                                    "type": "string",
+                                    "maxLength": 64,
+                                    "example": "true",
+                                    "nullable": true
+                                },
+                                "campaign": {
+                                    "type": "integer",
+                                    "example": "7"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "characterName": {
+                "required": true,
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "required": [
+                                "name"
+                            ],
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "maxLength": 64,
+                                    "example": "Dwalïn",
+                                    "nullable": true
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "character": {
+                "required": true,
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "required": [
+                                "name",
+                                "avatar_path",
+                                "age",
+                                "initiative",
+                                "height",
+                                "weight",
+                                "eyes",
+                                "skin",
+                                "hair",
+                                "appearance",
+                                "personality_traits",
+                                "ideals",
+                                "bonds",
+                                "flaws",
+                                "allies_and_organizations",
+                                "backstory",
+                                "treasure",
+                                "background",
+                                "alignement",
+                                "attacks_and_spellcasting",
+                                "equipment",
+                                "other_proficiencies_and_languages",
+                                "features_and_traits",
+                                "campaign",
+                                "race",
+                                "class",
+                                "caracteristics",
+                                "statistics",
+                                "spell",
+                                "savingThrowspell",
+                                "skill",
+                                "isDead"
+                            ],
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "maxLength": 64,
+                                    "example": "Dwalïn",
+                                    "nullable": true
+                                },
+                                "avatar_path": {
+                                    "type": "string",
+                                    "maxLength": 255,
+                                    "example": "dwalin.png",
+                                    "nullable": true
+                                },
+                                "age": {
+                                    "type": "integer",
+                                    "default": 0,
+                                    "example": "97"
+                                },
+                                "initiative": {
+                                    "type": "integer",
+                                    "default": 0,
+                                    "example": "2"
+                                },
+                                "height": {
+                                    "type": "integer",
+                                    "default": 0,
+                                    "example": "137"
+                                },
+                                "weight": {
+                                    "type": "integer",
+                                    "default": 0,
+                                    "example": "61"
+                                },
+                                "eyes": {
+                                    "type": "string",
+                                    "maxLength": 64,
+                                    "example": "marron",
+                                    "nullable": true
+                                },
+                                "skin": {
+                                    "type": "string",
+                                    "maxLength": 64,
+                                    "example": "blanche",
+                                    "nullable": true
+                                },
+                                "hair": {
+                                    "type": "string",
+                                    "maxLength": 64,
+                                    "example": "roux",
+                                    "nullable": true
+                                },
+                                "appearance": {
+                                    "type": "string",
+                                    "example": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus impedit sequi amet ipsa, recusandae cumque, culpa ullam officia optio qui reiciendis similique, illo illum minus quaerat vitae aliquid iure labore!",
+                                    "nullable": true
+                                },
+                                "personality_traits": {
+                                    "type": "string",
+                                    "example": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus impedit sequi amet ipsa, recusandae cumque, culpa ullam officia optio qui reiciendis similique, illo illum minus quaerat vitae aliquid iure labore!",
+                                    "nullable": true
+                                },
+                                "ideals": {
+                                    "type": "string",
+                                    "example": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus impedit sequi amet ipsa, recusandae cumque, culpa ullam officia optio qui reiciendis similique, illo illum minus quaerat vitae aliquid iure labore!",
+                                    "nullable": true
+                                },
+                                "bonds": {
+                                    "type": "string",
+                                    "example": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus impedit sequi amet ipsa, recusandae cumque, culpa ullam officia optio qui reiciendis similique, illo illum minus quaerat vitae aliquid iure labore!",
+                                    "nullable": true
+                                },
+                                "flaws": {
+                                    "type": "string",
+                                    "example": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus impedit sequi amet ipsa, recusandae cumque, culpa ullam officia optio qui reiciendis similique, illo illum minus quaerat vitae aliquid iure labore!",
+                                    "nullable": true
+                                },
+                                "allies_and_organizations": {
+                                    "type": "string",
+                                    "example": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus impedit sequi amet ipsa, recusandae cumque, culpa ullam officia optio qui reiciendis similique, illo illum minus quaerat vitae aliquid iure labore!",
+                                    "nullable": true
+                                },
+                                "backstory": {
+                                    "type": "string",
+                                    "example": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus impedit sequi amet ipsa, recusandae cumque, culpa ullam officia optio qui reiciendis similique, illo illum minus quaerat vitae aliquid iure labore!",
+                                    "nullable": true
+                                },
+                                "treasure": {
+                                    "type": "string",
+                                    "example": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus impedit sequi amet ipsa, recusandae cumque, culpa ullam officia optio qui reiciendis similique, illo illum minus quaerat vitae aliquid iure labore!",
+                                    "nullable": true
+                                },
+                                "background": {
+                                    "type": "string",
+                                    "maxLength": 64,
+                                    "example": "forgeron",
+                                    "nullable": true
+                                },
+                                "alignement": {
+                                    "type": "string",
+                                    "maxLength": 64,
+                                    "example": "Loyal neutre",
+                                    "nullable": true
+                                },
+                                "attacks_and_spellcasting": {
+                                    "type": "string",
+                                    "example": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus impedit sequi amet ipsa, recusandae cumque, culpa ullam officia optio qui reiciendis similique, illo illum minus quaerat vitae aliquid iure labore!",
+                                    "nullable": true
+                                },
+                                "equipment": {
+                                    "type": "string",
+                                    "example": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus impedit sequi amet ipsa, recusandae cumque, culpa ullam officia optio qui reiciendis similique, illo illum minus quaerat vitae aliquid iure labore!",
+                                    "nullable": true
+                                },
+                                "other_proficiencies_and_languages": {
+                                    "type": "string",
+                                    "example": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus impedit sequi amet ipsa, recusandae cumque, culpa ullam officia optio qui reiciendis similique, illo illum minus quaerat vitae aliquid iure labore!",
+                                    "nullable": true
+                                },
+                                "features_and_traits": {
+                                    "type": "string",
+                                    "example": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus impedit sequi amet ipsa, recusandae cumque, culpa ullam officia optio qui reiciendis similique, illo illum minus quaerat vitae aliquid iure labore!",
+                                    "nullable": true
+                                },
+                                "campaign": {
+                                    "type": "integer"
+                                },
+                                "race": {
+                                    "properties": {
+                                        "name": {
+                                            "type": "string",
+                                            "maxLength": 64,
+                                            "example": "nain",
+                                            "nullable": true
+                                        },
+                                        "informations": {
+                                            "type": "string",
+                                            "example": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus impedit sequi amet ipsa, recusandae cumque, culpa ullam officia optio qui reiciendis similique, illo illum minus quaerat vitae aliquid iure labore!",
+                                            "nullable": true
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "class": {
+                                    "properties": {
+                                        "name": {
+                                            "type": "string",
+                                            "maxLength": 64,
+                                            "example": "guerrier",
+                                            "nullable": true
+                                        },
+                                        "informations": {
+                                            "type": "string",
+                                            "example": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus impedit sequi amet ipsa, recusandae cumque, culpa ullam officia optio qui reiciendis similique, illo illum minus quaerat vitae aliquid iure labore!",
+                                            "nullable": true
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "caracteristics": {
+                                    "properties": {
+                                        "level": {
+                                            "type": "integer",
+                                            "default": 0,
+                                            "example": "13"
+                                        },
+                                        "experience": {
+                                            "type": "integer",
+                                            "default": 0,
+                                            "example": "6911"
+                                        },
+                                        "inspiration": {
+                                            "type": "boolean",
+                                            "default": false,
+                                            "example": "false"
+                                        },
+                                        "armorClass": {
+                                            "type": "integer",
+                                            "default": 0,
+                                            "example": "13"
+                                        },
+                                        "speed": {
+                                            "type": "integer",
+                                            "default": 0,
+                                            "example": "7"
+                                        },
+                                        "currentHP": {
+                                            "type": "integer",
+                                            "default": 0,
+                                            "example": "47"
+                                        },
+                                        "totalHP": {
+                                            "type": "integer",
+                                            "default": 0,
+                                            "example": "53"
+                                        },
+                                        "hitDice": {
+                                            "type": "string",
+                                            "maxLength": 64,
+                                            "example": "1D8",
+                                            "nullable": true
+                                        },
+                                        "deathSavesSuccess": {
+                                            "type": "integer",
+                                            "default": 0,
+                                            "example": "0"
+                                        },
+                                        "deathSavesFailures": {
+                                            "type": "integer",
+                                            "default": 0,
+                                            "example": "0"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "statistics": {
+                                    "properties": {
+                                        "strength": {
+                                            "type": "integer",
+                                            "default": 0,
+                                            "example": "17"
+                                        },
+                                        "dexterity": {
+                                            "type": "integer",
+                                            "default": 0,
+                                            "example": "11"
+                                        },
+                                        "constitution": {
+                                            "type": "integer",
+                                            "default": 0,
+                                            "example": "13"
+                                        },
+                                        "intelligence": {
+                                            "type": "integer",
+                                            "default": 0,
+                                            "example": "7"
+                                        },
+                                        "wisdom": {
+                                            "type": "integer",
+                                            "default": 0,
+                                            "example": "11"
+                                        },
+                                        "charisma": {
+                                            "type": "integer",
+                                            "default": 0,
+                                            "example": "13"
+                                        },
+                                        "passiveWisdom": {
+                                            "type": "integer",
+                                            "default": 0,
+                                            "example": "2"
+                                        },
+                                        "proficiencyBonus": {
+                                            "type": "integer",
+                                            "default": 0,
+                                            "example": "2"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "spell": {
+                                    "properties": {
+                                        "spellcasting_class": {
+                                            "type": "string",
+                                            "maxLength": 64,
+                                            "example": "invocateur",
+                                            "nullable": true
+                                        },
+                                        "spell_attack_bonus": {
+                                            "type": "integer",
+                                            "default": 0,
+                                            "example": "2"
+                                        },
+                                        "spellcasting_ability": {
+                                            "type": "integer",
+                                            "default": 0,
+                                            "example": "2"
+                                        },
+                                        "spell_save_dc": {
+                                            "type": "integer",
+                                            "default": 0,
+                                            "example": "2"
+                                        },
+                                        "spells_list": {
+                                            "type": "string",
+                                            "example": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus impedit sequi amet ipsa, recusandae cumque, culpa ullam officia optio qui reiciendis similique, illo illum minus quaerat vitae aliquid iure labore!",
+                                            "nullable": true
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "savingThrowspell": {
+                                    "properties": {
+                                        "strength": {
+                                            "type": "boolean",
+                                            "default": false,
+                                            "example": "true"
+                                        },
+                                        "dexterity": {
+                                            "type": "boolean",
+                                            "default": false,
+                                            "example": "false"
+                                        },
+                                        "constitution": {
+                                            "type": "boolean",
+                                            "default": false,
+                                            "example": "true"
+                                        },
+                                        "intelligence": {
+                                            "type": "boolean",
+                                            "default": false,
+                                            "example": "false"
+                                        },
+                                        "wisdom": {
+                                            "type": "boolean",
+                                            "default": false,
+                                            "example": "false"
+                                        },
+                                        "charisma": {
+                                            "type": "boolean",
+                                            "default": false,
+                                            "example": "false"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "skill": {
+                                    "properties": {
+                                        "acrobatics": {
+                                            "type": "boolean",
+                                            "default": false,
+                                            "example": "false"
+                                        },
+                                        "animalHandling": {
+                                            "type": "boolean",
+                                            "default": false,
+                                            "example": "true"
+                                        },
+                                        "arcana": {
+                                            "type": "boolean",
+                                            "default": false,
+                                            "example": "false"
+                                        },
+                                        "athletics": {
+                                            "type": "boolean",
+                                            "default": false,
+                                            "example": "false"
+                                        },
+                                        "deception": {
+                                            "type": "boolean",
+                                            "default": false,
+                                            "example": "false"
+                                        },
+                                        "history": {
+                                            "type": "boolean",
+                                            "default": false,
+                                            "example": "false"
+                                        },
+                                        "insight": {
+                                            "type": "boolean",
+                                            "default": false,
+                                            "example": "false"
+                                        },
+                                        "intimidation": {
+                                            "type": "boolean",
+                                            "default": false,
+                                            "example": "true"
+                                        },
+                                        "investigation": {
+                                            "type": "boolean",
+                                            "default": false,
+                                            "example": "false"
+                                        },
+                                        "medecine": {
+                                            "type": "boolean",
+                                            "default": false,
+                                            "example": "false"
+                                        },
+                                        "nature": {
+                                            "type": "boolean",
+                                            "default": false,
+                                            "example": "false"
+                                        },
+                                        "perception": {
+                                            "type": "boolean",
+                                            "default": false,
+                                            "example": "false"
+                                        },
+                                        "performance": {
+                                            "type": "boolean",
+                                            "default": false,
+                                            "example": "false"
+                                        },
+                                        "persuasion": {
+                                            "type": "boolean",
+                                            "default": false,
+                                            "example": "false"
+                                        },
+                                        "religion": {
+                                            "type": "boolean",
+                                            "default": false,
+                                            "example": "true"
+                                        },
+                                        "sleightOfHand": {
+                                            "type": "boolean",
+                                            "default": false,
+                                            "example": "false"
+                                        },
+                                        "stealth": {
+                                            "type": "boolean",
+                                            "default": false,
+                                            "example": "false"
+                                        },
+                                        "survival": {
+                                            "type": "boolean",
+                                            "default": false,
+                                            "example": "true"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "isDead": {
+                                    "type": "boolean",
+                                    "default": false,
+                                    "example": "false"
                                 }
                             },
                             "type": "object"
