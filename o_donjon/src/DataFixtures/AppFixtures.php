@@ -36,18 +36,26 @@ class AppFixtures extends Fixture
         /*******************************************************TABLES WITH DATA*******************************************/
         /******************************************************************************************************************/
 
-        /*****USER TABLE****************/
 
-        $userEmails = [
-            'nicolas@odonjon.fr',
-            'nael@odonjon.fr',
-            'amelie@odonjon.fr',
-            'mathieu@odonjon.fr',
-            'mickael@odonjon.fr',
-            'cecile@odonjon.fr',
+        /***WORDS TO CREATE RANDOM TEXT****/
+        
+        $words = [
+            'Lorem', 'ipsum', 'dolor', 'sit', 'amet', 'consectetur', 'adipisicing', 'elit', 'Cumque', 'itaque', 'maiores', 'voluptatum', 'ducimus', 'molestias', 'eveniet', 'rerum', 'atque', 'illo', 'minima', 'odit', 'officiis', 'voluptatem', 'eos', 'Distinctio', 'consequuntur', 'repudiandae', 'Amet', 'laboriosam','illo', 'aliquid',  'Tenetur', 'nihil', 'harum', 'est', 'autem', 'dolorum', 'ipsam', 'esse', 'recusandae', 'aspernatur', 'voluptatum', 'eveniet', 'libero', 'aliquam', 'officia', 'ullam', 'facere', 'quidem', 'doloribus', 'mollitia', 'adipisci', 'fuga', 'Molestiae', 'nobis', 'illo', 'Similique', 'soluta', 'officia', 'maiores', 'assumenda', 'temporibus', 'nostrum', 'adipisci', 'voluptatum', 'inventore', 'cum', 'quos', 'natus', 'dolorem', 'sapiente', 'sit', 'saepe', 'est', 'non'
         ];
 
-        /*****CAMPAIGN TABLE****************/
+
+        /**********USER DATA****************/
+
+        $userEmails = [
+            'nicolas@odonjon.com',
+            'nael@odonjon.com',
+            'amelie@odonjon.com',
+            'mathieu@odonjon.com',
+            'mickael@odonjon.com',
+            'cecile@odonjon.com',
+        ];
+
+        /*****CAMPAIGN DATA****************/
 
         $campaignNames = [
             'Lanilet Abyss',
@@ -69,7 +77,7 @@ class AppFixtures extends Fixture
             'Rattlesnake Fields',           
         ];
 
-        /*****MAP TABLE****************/
+        /*****MAP DATA****************/
 
         $mapNames = [
             'The Eternity Amphitheater',
@@ -90,7 +98,7 @@ class AppFixtures extends Fixture
             'Doveport Prison',
         ];
 
-        /*****STORY TABLE****************/
+        /*****STORY DATA****************/
 
         $storyNames = [
             'Super powers in paradise gardens',
@@ -115,9 +123,29 @@ class AppFixtures extends Fixture
             'Training animals with a hunter',
         ];
 
-        /*****NPC TABLE****************/
+        /*****NPC DATA****************/
 
         $NpcNames = [
+            'Putrid Spellcaster',
+            'Demonic Warlord',
+            'Mad Enchanter',
+            'Chaos Bard',
+            'Fallen Vampire',
+            'Fallen Hellreaver',
+            'Toxic Trapsmith',
+            'Venom Trickster',
+            'Fallen Samurai',
+            'Armored Tempest',
+            'Corrupted Paladin',
+            'Wasteland Mage',
+            'Battle Seer',
+            'Cataclysmic Vampire',
+            'Venom Runecaster',
+            'Cataclysmic Skymage',
+            'Elemental Adept',
+            'Pyro Arcanist',
+            'Demonic Sorcerer',
+            'Demonic Crusader',
             'Recaller',
             'Cannibal',
             'Joker',
@@ -126,46 +154,55 @@ class AppFixtures extends Fixture
             'Spitter',
             'Smart Zombie',
             'Feral Zombie',
-            'Wailer',
-            'Glider',
-            'Anje',
-            'Ttarmek',
-            'Kaijin',
-            'Trezzahn',
-            'Hokima',
-            'Zulkis',
-            'Zulbaljin',
-            'Tzuljin',
-            'Voyambi',
-            'Rakash',
-            'Kalgith',
-            'Bazgazis',
-            'Zith\'tunes',
-            'Diggarin',
-            'Moglan',
-            'Onnemor',
-            'Sorgan',
-            'Or\'onoth',
-            'Dorgathan',
-            'Brar\'anoth',
+            'Putrid Warrior',
+            'Venom Agent',
+            'Septic Mystic',
+            'Corrupted Archmage',
+            'Shadow Warpriest',
+            'Elemental Archer',
+            'Blood Binder',
+            'Tainted Champion',
+            'Necromantic Warmage',
+            'Cataclysmic Healer',
+
         ];
         
-        /*****CHARACTER TABLE****************/
+        /*****CHARACTER DATA****************/
 
         $characterNames = [
-            'Pikachu',
-            'Salameche',
-            'Bullbizar',
-            'Miaous',
-            'JojoLapin',
-            'Albator',
-            'CapitaineFlam',
-            'NainPortekoi',
-            'Merlin',
-            'Chevalier Arthur',
+            'Wolferal',
+            'Madept',
+            'Indighost',
+            'Sailord',
+            'SilverStarfish',
+            'GrassStalker',
+            'LightStitches',
+            'ImpossiblePanda',
+            'ChainGull',
+            'OddRascal',
+            'Thisse',
+            'Cim',
+            'Oci',
+            'Bradrot',
+            'Brundrirs',
+            'Methongos',
+            'Resh',
+            'Niclisol',
+            'Man',
+            'Thas',
+            'Rangerman',
+            'BumblingBee',
+            'Pillagerman',
+            'Woodpecs',
+            'MemoryMantis',
+            'EcstaticWarlock',
+            'CrownFoal',
+            'ChargeProwler',
+            'LunchPegasus',
+            'FlawlessEagle',
         ];
 
-        $characterEyes = [
+        $eyes = [
             'brown',
             'blue',
             'grey',
@@ -174,7 +211,7 @@ class AppFixtures extends Fixture
             'green-blue',
         ];
 
-        $characterSkins = [
+        $skins = [
             'white',
             'black',
             'red',
@@ -182,7 +219,7 @@ class AppFixtures extends Fixture
             'blue',
         ];
 
-        $characterHairs = [
+        $hairs = [
             'brown',
             'blond',
             'white',
@@ -228,10 +265,26 @@ class AppFixtures extends Fixture
         ];
 
         $alliesAndOrganizations = [
-            'Schtroumpfs',
-            'Zigomatics',
-            'Vikings',
-            'Persians',
+            'Rick of the Winter',
+            'Enguerran the Wild',
+            'Rotbert of the Light',
+            'Lambequin the Poet',
+            'Hal the Poet',
+            'Peares the Slayer',
+            'Richart the Handsome',
+            'Henricus of the Snow',
+            'Herry the Timid',
+            'Dawkin the Chaotic',
+            'Macée the Worthy',
+            'Gennevote of the Snow',
+            'Braya the Warm',
+            'Notekyn the Swift',
+            'Rothais the Reliable',
+            'Libet the Amazing',
+            'Thyphainne the Warden',
+            'Libet the Tiny',
+            'Joyse the Trusted',
+            'Hosannah the Magnificent',
 
         ];
 
@@ -242,6 +295,16 @@ class AppFixtures extends Fixture
             'crown',
             'magic wand',
             'gemstones',
+            'Amethyst Nitzilianite',
+            'Acaganeite',
+            'Meisiterite',
+            'Ferontienite',
+            'Leadkerite',
+            'Orange Zaccnstedtite',
+            'Black Kolaltite',
+            'Achroxylapatite',
+            'Krannghengite',
+            'Turquoise Hemannite',
         ];
 
         $background = [
@@ -267,6 +330,27 @@ class AppFixtures extends Fixture
             'chaotic evil',
         ];
 
+        $attacksAndSpellCasting = [
+            'Sunfire Blitz',
+            'Starfire Hail',
+            'Molten Assault',
+            'Reanimate Corpse',
+            'Wave of Destruction',
+            'Rune of Misery',
+            'Dishonor of Immortality',
+            'Evocation of Sealing',
+            'Flame Burst',
+            'Tranquility',
+            'Alteration of Senses',
+            'Mind Control',
+            'Soulsteal',
+            'Hallucination',
+            'Orb of Divine Intervention',
+            'Decadence of Intellect',
+            'Sorrow',
+
+        ];
+
         $equipment = [
             'sword',
             'padded armor',
@@ -283,12 +367,46 @@ class AppFixtures extends Fixture
 
         ];
 
-        $words = [
-            'Lorem', 'ipsum', 'dolor', 'sit', 'amet', 'consectetur', 'adipisicing', 'elit', 'Cumque', 'itaque', 'maiores', 'voluptatum', 'ducimus', 'molestias', 'eveniet', 'rerum', 'atque', 'illo', 'minima', 'odit', 'officiis', 'voluptatem', 'eos', 'Distinctio', 'consequuntur', 'repudiandae', 'Amet', 'laboriosam','illo', 'aliquid',  'Tenetur', 'nihil', 'harum', 'est', 'autem', 'dolorum', 'ipsam', 'esse', 'recusandae', 'aspernatur', 'voluptatum', 'eveniet', 'libero', 'aliquam', 'officia', 'ullam', 'facere', 'quidem', 'doloribus', 'mollitia', 'adipisci', 'fuga', 'Molestiae', 'nobis', 'illo', 'Similique', 'soluta', 'officia', 'maiores', 'assumenda', 'temporibus', 'nostrum', 'adipisci', 'voluptatum', 'inventore', 'cum', 'quos', 'natus', 'dolorem', 'sapiente', 'sit', 'saepe', 'est', 'non'
+        $otherProficiencyAndLanguages = [
+            'Fafati',
+            'Eesic',
+            'Imumeno',
+            'Akesh',
+            'Iveoygabi',
+            'Yesdazesh',
+            'Slaarran',
+            'Lelfic',
+            'Edmiaman',
+            'Ifmuotean',
+            'Iannarin',
+            'Iexponi',
+
+        ];
+
+        $featuresAndTraits = [
+            'Homo Candidulus',
+            'Homo Potens',
+            'Homo Melior',
+            'Homo Inopinatus',
+            'Homo Celer',
+            'Homo Silvester',
+            'Homo Falsus',
+            'Homo Tenuis',
+            'Homo Dives',
+            'Homo Caecigenus',
+            'Homo Parvulus',
+            'Homo Altus',
+            'Homo Nivosus',
+            'Homo Divinus',
+            'Homo Diligens',
+            'Homo Macer',
+            'Homo Sucinus',
+            'Homo Avarus',
+            'Homo Fortunatus',
         ];
 
 
-        /******************RACE TABLE****************/
+        /******************RACE DATA****************/
 
         $raceNames = [
             'human',
@@ -304,7 +422,7 @@ class AppFixtures extends Fixture
         ];
 
 
-        /******************CLASS TABLE****************/
+        /******************CLASS DATA****************/
 
         $classNames = [
             'barbarian',
@@ -322,7 +440,7 @@ class AppFixtures extends Fixture
         ];
 
 
-        /******************SPELL TABLE*************************/
+        /******************SPELL DATA*************************/
 
         $spellCastingClasses = [
             'barbarian',
@@ -357,6 +475,8 @@ class AppFixtures extends Fixture
         /******************************************************* ENTITIES FILLING IN **************************************/
         /******************************************************************************************************************/
 
+        /****************************************************USER ENTITIES***************************************************/
+
         $user = [];
 
         foreach ($userEmails as $userEmail) {
@@ -384,7 +504,7 @@ class AppFixtures extends Fixture
         }
 
 
-        /****************************************************CAMPAIGN AND DEPENDENCIES CREATION***************************************************/
+        /****************************************************CAMPAIGN AND DEPENDENCIES ENTITIES***************************************************/
 
         $campaigns = [];
         $NPCs = [];
@@ -519,7 +639,7 @@ class AppFixtures extends Fixture
         }
 
 
-        /********************************************CHARACTER AND DEPENDENCIES CREATION**************************************/
+        /********************************************CHARACTER AND DEPENDENCIES ENTITIES**************************************/
 
                
         $characters = [];
@@ -531,13 +651,14 @@ class AppFixtures extends Fixture
         $savingThrows = [];
         $skills = [];
 
+        /****************************************************CHARACTER ENTITY***************************************************/
+
         foreach ($characterNames as $characterName) {
             
             $character = new Character();
 
-            shuffle($users);
-            $character->setUser($users[1]);
-            
+            /****************PROPERTIES********************/
+
             $character->setName($characterName);
             
             $character->setAvatarPath($characterName . '.png');
@@ -547,18 +668,15 @@ class AppFixtures extends Fixture
             $character->setHeight(random_int(50, 300));
             
             $character->setWeight(random_int(10, 200));
-
-            shuffle($campaigns);
-            $character->setCampaign($campaigns[1]);
             
-            shuffle($characterEyes);
-            $character->setEyes($characterEyes[1]);
+            shuffle($eyes);
+            $character->setEyes($eyes[1]);
             
-            shuffle($characterSkins);
-            $character->setSkin($characterSkins[1]);
+            shuffle($skins);
+            $character->setSkin($skins[1]);
             
-            shuffle($characterHairs);
-            $character->setHair($characterHairs[1]);
+            shuffle($hairs);
+            $character->setHair($hairs[1]);
             
             shuffle($appearance);
             $character->setAppearance($appearance[1]);
@@ -595,6 +713,31 @@ class AppFixtures extends Fixture
             shuffle($background);
             $character->setBackground($background[1]);
 
+            shuffle($alignement);
+            $character->setAlignement($alignement[1]);
+
+            shuffle($attacksAndSpellCasting);
+            $character->setAttacksAndSpellcasting($attacksAndSpellCasting[1]);
+
+            shuffle($equipment);
+            $character->setEquipment($equipment[1]);
+
+            shuffle($otherProficiencyAndLanguages);
+            $character->setOtherProficienciesAndLanguages($otherProficiencyAndLanguages[1]);
+
+            shuffle($featuresAndTraits);
+            $character->setFeaturesAndTraits($featuresAndTraits[1]);
+
+
+            /****************RELATIONS********************/
+
+
+            shuffle($users);
+            $character->setUser($users[1]);
+            
+            shuffle($campaigns);
+            $character->setCampaign($campaigns[1]);
+
             $race = new Race();
             $character->setRace($race);
             $races[] = $race;
@@ -628,7 +771,7 @@ class AppFixtures extends Fixture
             $characters[] = $character;
         }
 
-        /****************************************************RACE CREATION***************************************************/
+        /****************************************************RACE ENTITY***************************************************/
 
         foreach ($races as $race) {
             
@@ -644,7 +787,7 @@ class AppFixtures extends Fixture
             
         }
 
-        /****************************************************CLASS CREATION***************************************************/
+        /****************************************************CLASS ENTITY***************************************************/
 
         foreach ($classes as $class) {
             
@@ -660,7 +803,7 @@ class AppFixtures extends Fixture
             
         }
 
-        /****************************************************CARACTERISTIC CREATION***************************************************/
+        /****************************************************CARACTERISTIC ENTITY***************************************************/
 
         foreach ($caracteristics as $caracteristic) {
             
@@ -678,7 +821,7 @@ class AppFixtures extends Fixture
             
         }
 
-        /****************************************************STATISTIC CREATION***************************************************/
+        /****************************************************STATISTIC ENTITY***************************************************/
 
         foreach ($statistics as $statistic) {
             
@@ -693,7 +836,7 @@ class AppFixtures extends Fixture
                         
         }
 
-        /****************************************************SPELL CREATION***************************************************/
+        /****************************************************SPELL ENTITY***************************************************/
 
         foreach ($spells as $spell) {
             
@@ -714,7 +857,7 @@ class AppFixtures extends Fixture
             $spell->setSpellsList($characterSpells);              
         }
 
-        /****************************************************SAVING THROW CREATION***************************************************/
+        /****************************************************SAVING THROW ENTITY***************************************************/
 
         foreach ($savingThrows as $savingThrow) {
  
@@ -726,7 +869,7 @@ class AppFixtures extends Fixture
             $savingThrow->setCharisma((bool)random_int(0, 1));           
         }
 
-        /****************************************************SKILL CREATION***************************************************/
+        /****************************************************SKILL ENTITY***************************************************/
 
         foreach ($skills as $skill) {
  
