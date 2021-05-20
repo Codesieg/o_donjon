@@ -82,19 +82,19 @@ class Campaign
     private $characters;
 
     /**
-     * @ORM\OneToMany(targetEntity=NPC::class, mappedBy="campaign")
+     * @ORM\OneToMany(targetEntity=NPC::class, mappedBy="campaign", orphanRemoval=true)
      * @Groups({"browse_campaign_npc"})
      */
     private $NPCs;
 
     /**
-     * @ORM\OneToMany(targetEntity=Story::class, mappedBy="campaign")
+     * @ORM\OneToMany(targetEntity=Story::class, mappedBy="campaign", orphanRemoval=true)
      * @Groups({"browse_campaign_stories"})
      */
     private $stories;
 
     /**
-     * @ORM\OneToMany(targetEntity=Map::class, mappedBy="campaign")
+     * @ORM\OneToMany(targetEntity=Map::class, mappedBy="campaign", orphanRemoval=true)
      *  @Groups({"browse_campaign_maps"})
      */
     private $maps;

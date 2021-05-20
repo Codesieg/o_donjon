@@ -3,10 +3,15 @@
 namespace App\Controller;
 
 use \DateTimeInterface;
+use App\Controller\CharacterController;
 use App\Entity\Campaign;
+use App\Entity\Character;
 use App\Entity\Story;
 use App\Form\CampaignType;
 use App\Repository\CampaignRepository;
+use App\Repository\CharacterRepository;
+use Container2mxXKpx\getCharacterControllerService;
+use Container2mxXKpx\getCharacterService;
 use OpenApi\Annotations as OA;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -230,19 +235,28 @@ class CampaignController extends AbstractController
      *      @OA\Response(response="404", ref="#/components/responses/notFound")
      * )
      */
-    public function delete(Campaign $campaign): Response
+    public function delete(Campaign $campaign, CharacterRepository $characterRepository, CharacterController $characterController): Response
     {
         // on récupère l'ID de l'utilisateur connecté
         $userId = $this->getUser()->getId();
 
         // on récupére l'ID du owner de la campagne
-        $campaignId = $campaign->getOwner()->getId();
+        $campaignOwnerId = $campaign->getOwner()->getId();
 
         // on compare les deux ID et si ils sont différents alors on retourne une erreur
-        if ($userId != $campaignId) {
+        if ($userId != $campaignOwnerId) {
             return $this->json('wrong user ID', 401);
         }
 
+        $campaignId = $campaign->getId();
+
+        // on récupère les personnages de la campagne
+        $characters = $characterRepository->findBy(array('campaign' => $campaignId));
+
+        foreach ($characters as $character) {
+            
+            $characterController->resetCampaign($character);
+        }
         // on demande à la BDD de supprimer la campagne
         $em = $this->getDoctrine()->getManager();
         $em->remove($campaign);
