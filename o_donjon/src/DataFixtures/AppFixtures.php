@@ -493,7 +493,7 @@ class AppFixtures extends Fixture
             
             $user->setName($name);
 
-            $user->setAvatarPath($name . '.png');
+            $user->setAvatarPath(null);
             
             $user->setStatus(random_int(1, 2));
 
@@ -524,7 +524,7 @@ class AppFixtures extends Fixture
             };
             $map->setDescription($description);
 
-            $map->setFilePath($mapName . '.png');
+            $map->setFilePath(null);
 
             $manager->persist($map);
 
@@ -661,7 +661,7 @@ class AppFixtures extends Fixture
 
             $character->setName($characterName);
             
-            $character->setAvatarPath($characterName . '.png');
+            $character->setAvatarPath(null);
             
             $character->setAge(random_int(0, 300));
             
@@ -735,8 +735,7 @@ class AppFixtures extends Fixture
             shuffle($users);
             $character->setUser($users[1]);
             
-            shuffle($campaigns);
-            $character->setCampaign($campaigns[1]);
+            $character->setCampaign(null);
 
             $race = new Race();
             $character->setRace($race);
