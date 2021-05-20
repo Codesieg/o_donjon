@@ -159,8 +159,9 @@ class UserController extends AbstractController
      */
     public function edit(UserPasswordEncoderInterface $passwordEncoder, Request $request, User $user): Response
     {   
-        // on récupère l'ID de l'utilisateur connecté
+        // on récupère l'ID et le mot de passe de l'utilisateur connecté
         $userId = $this->getUser()->getId();
+        $userPassword = $this->getUser()->getPassword();
         
         // on récupére l'ID envoyer par la requête
         $requestId = $user->getId();
@@ -171,10 +172,16 @@ class UserController extends AbstractController
         }
 
         // on récupère les informations de la requête
-        $requestData = json_decode($request->getContent(), true);
+        $requestData = json_decode($request->getContent(), true);     
+
+        // si aucun mot de passe n'est transmis, on récupère celui de l'utilisateur connecté
+        if (!array_key_exists("password", $requestData)) {
+            $requestData["password"] = $userPassword;
+        } 
 
         // on récupère les informations de la requête
         $form = $this->createForm(UserType::class, $user, ['csrf_protection' => false]);
+
 
         // on envoie les informations dans le formulaire
         $form->submit($requestData);
