@@ -26,7 +26,7 @@ class MapController extends AbstractController
      *      @OA\Response(
      *          response="200",
      *          description="List of maps",
-     *          @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/mapInfo"))
+     *          @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/map"))
      *      )
      * )
      */

@@ -15,7 +15,6 @@ class Race
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"read_character"})
      */
     private $id;
 

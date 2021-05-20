@@ -20,6 +20,7 @@ class Spell
 
     /**
      * @ORM\Column(type="string", length=64, nullable=true)
+     * @Groups({"browse", "read_character"})
      */
     private $spellcasting_class;
 
