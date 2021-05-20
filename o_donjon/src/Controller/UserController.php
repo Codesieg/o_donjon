@@ -147,7 +147,7 @@ class UserController extends AbstractController
     {   
         // on récupère l'ID de l'utilisateur connecté
         $userId = $this->getUser()->getId();
-
+        
         // on récupére l'ID envoyer par la requête
         $requestId = $user->getId();
 
@@ -229,7 +229,9 @@ class UserController extends AbstractController
 
 
     /***********************************************ADVANCED METHODS**************************************/
+
     /* AUTHORIZE A USER TO JOIN THE CAMPAIGN CORRESPONDING TO HIS INVITATION CODE */
+    
     /**
      * @Route("/user/campaign/join", name="user_campaign_join", methods={"POST"})
      * @OA\Post(

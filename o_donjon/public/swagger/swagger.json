@@ -11,6 +11,492 @@
         }
     ],
     "paths": {
+        "/campaign/dm": {
+            "get": {
+                "tags": [
+                    "Campaign"
+                ],
+                "operationId": "App\\Controller\\CampaignController::browseDm",
+                "responses": {
+                    "200": {
+                        "description": "List of campaigns as the DM",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/campaignList"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "scalar": "bearer"
+                    }
+                ]
+            }
+        },
+        "/campaign": {
+            "get": {
+                "tags": [
+                    "Campaign"
+                ],
+                "operationId": "App\\Controller\\CampaignController::browse",
+                "responses": {
+                    "200": {
+                        "description": "List of campaigns as a player",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/campaignList"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "scalar": "bearer"
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Campaign"
+                ],
+                "operationId": "App\\Controller\\CampaignController::add",
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/campaign"
+                },
+                "responses": {
+                    "200": {
+                        "description": "Informations of the campaign",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/campaign"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/notFound"
+                    }
+                },
+                "security": [
+                    {
+                        "scalar": "bearer"
+                    }
+                ]
+            }
+        },
+        "/campaign/{id}": {
+            "get": {
+                "tags": [
+                    "Campaign"
+                ],
+                "operationId": "App\\Controller\\CampaignController::read",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Informations of the campaign",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/campaign"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/notFound"
+                    }
+                },
+                "security": [
+                    {
+                        "scalar": "bearer"
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Campaign"
+                ],
+                "operationId": "App\\Controller\\CampaignController::edit",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/campaign"
+                },
+                "responses": {
+                    "200": {
+                        "description": "Informations of the campaign",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/campaign"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/notFound"
+                    }
+                },
+                "security": [
+                    {
+                        "scalar": "bearer"
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Campaign"
+                ],
+                "operationId": "App\\Controller\\CampaignController::delete",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": ""
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/notFound"
+                    }
+                },
+                "security": [
+                    {
+                        "scalar": "bearer"
+                    }
+                ]
+            }
+        },
+        "/campaign/{id}/story": {
+            "get": {
+                "tags": [
+                    "Campaign"
+                ],
+                "operationId": "App\\Controller\\CampaignController::browseStories",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of stories of a campaign",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/campaignStories"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/notFound"
+                    }
+                },
+                "security": [
+                    {
+                        "scalar": "bearer"
+                    }
+                ]
+            }
+        },
+        "/campaign/{id}/map": {
+            "get": {
+                "tags": [
+                    "Campaign"
+                ],
+                "operationId": "App\\Controller\\CampaignController::browseMaps",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of maps of a campaign",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/campaignMaps"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/notFound"
+                    }
+                },
+                "security": [
+                    {
+                        "scalar": "bearer"
+                    }
+                ]
+            }
+        },
+        "/campaign/{id}/npc": {
+            "get": {
+                "tags": [
+                    "Campaign"
+                ],
+                "operationId": "App\\Controller\\CampaignController::browseNpc",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of NPCs of a campaign",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/campaignNPCs"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/notFound"
+                    }
+                },
+                "security": [
+                    {
+                        "scalar": "bearer"
+                    }
+                ]
+            }
+        },
+        "/campaign/{id}/character": {
+            "get": {
+                "tags": [
+                    "Campaign"
+                ],
+                "operationId": "App\\Controller\\CampaignController::browseCharacter",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of Characters of a campaign",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/campaignCharacters"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/notFound"
+                    }
+                },
+                "security": [
+                    {
+                        "scalar": "bearer"
+                    }
+                ]
+            }
+        },
+        "/story": {
+            "get": {
+                "tags": [
+                    "Story"
+                ],
+                "operationId": "App\\Controller\\StorieController::browse",
+                "responses": {
+                    "200": {
+                        "description": "List of stories",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/storyInfo"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "scalar": "bearer"
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Story"
+                ],
+                "operationId": "App\\Controller\\StorieController::add",
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/story"
+                },
+                "responses": {
+                    "200": {
+                        "description": "Informations of the story",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/storyInfo"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/notFound"
+                    }
+                },
+                "security": [
+                    {
+                        "scalar": "bearer"
+                    }
+                ]
+            }
+        },
+        "/story/{id}": {
+            "get": {
+                "tags": [
+                    "Story"
+                ],
+                "operationId": "App\\Controller\\StorieController::read",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Informations of the story",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/storyInfo"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/notFound"
+                    }
+                },
+                "security": [
+                    {
+                        "scalar": "bearer"
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Story"
+                ],
+                "operationId": "App\\Controller\\StorieController::edit",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/story"
+                },
+                "responses": {
+                    "200": {
+                        "description": "Informations of the campaign",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/storyInfo"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/notFound"
+                    }
+                },
+                "security": [
+                    {
+                        "scalar": "bearer"
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Story"
+                ],
+                "operationId": "App\\Controller\\StorieController::delete",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": ""
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/notFound"
+                    }
+                },
+                "security": [
+                    {
+                        "scalar": "bearer"
+                    }
+                ]
+            }
+        },
         "/user": {
             "get": {
                 "tags": [
@@ -261,7 +747,7 @@
                     "campaigns": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/campaignList"
+                            "$ref": "#/components/schemas/userCampaignList"
                         }
                     },
                     "characters": {
@@ -273,7 +759,7 @@
                 },
                 "type": "object"
             },
-            "campaignList": {
+            "userCampaignList": {
                 "description": "List of the campaigns",
                 "properties": {
                     "id": {
@@ -300,6 +786,414 @@
                     }
                 },
                 "type": "object"
+            },
+            "campaignList": {
+                "description": "List of campaign",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string",
+                        "maxLength": 64,
+                        "nullable": true
+                    },
+                    "description": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "memo": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "isArchived": {
+                        "type": "boolean",
+                        "default": 0,
+                        "example": "false",
+                        "nullable": true
+                    },
+                    "invitationCode": {
+                        "type": "string",
+                        "maxLength": 64,
+                        "nullable": true
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updatedAt": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "owner": {
+                        "properties": {
+                            "id": {
+                                "type": "integer"
+                            },
+                            "name": {
+                                "type": "string",
+                                "maxLength": 64,
+                                "nullable": true
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "campaign": {
+                "description": "Information of a campaign",
+                "properties": {
+                    "countCharacters": {
+                        "type": "integer"
+                    },
+                    "countNpcs": {
+                        "type": "integer"
+                    },
+                    "countStories": {
+                        "type": "integer"
+                    },
+                    "countMaps": {
+                        "type": "integer"
+                    }
+                },
+                "type": "object",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/campaignList"
+                    }
+                ]
+            },
+            "campaignStories": {
+                "description": "List of stories of the campaign",
+                "properties": {
+                    "stories": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/story"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "campaignMaps": {
+                "description": "List of maps of the campaign",
+                "properties": {
+                    "maps": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/map"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "campaignNPCs": {
+                "description": "List of NPCs of the campaign",
+                "properties": {
+                    "NPCs": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/npc"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "campaignCharacters": {
+                "description": "List of Characters of the campaign",
+                "properties": {
+                    "characters": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/character"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "story": {
+                "description": "Information of a story",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string",
+                        "maxLength": 64,
+                        "nullable": true
+                    },
+                    "description": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "isDone": {
+                        "type": "boolean",
+                        "default": 0,
+                        "example": "false",
+                        "nullable": true
+                    },
+                    "report": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updatedAt": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "campaign": {
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "storyInfo": {
+                "description": "Information of a story",
+                "properties": {
+                    "campaign": {
+                        "properties": {
+                            "id": {
+                                "type": "integer"
+                            },
+                            "name": {
+                                "type": "string",
+                                "maxLength": 64,
+                                "nullable": true
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/story"
+                    }
+                ]
+            },
+            "map": {
+                "description": "Information of a map",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "filePath": {
+                        "type": "string",
+                        "maxLength": 64,
+                        "nullable": true
+                    },
+                    "name": {
+                        "type": "string",
+                        "maxLength": 64,
+                        "nullable": true
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updatedAt": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "mapInfo": {
+                "description": "Information of a map",
+                "properties": {
+                    "campaign": {
+                        "type": "integer",
+                        "nullable": true
+                    }
+                },
+                "type": "object",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/map"
+                    }
+                ]
+            },
+            "npc": {
+                "description": "Information of a NPC",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string",
+                        "maxLength": 64,
+                        "nullable": true
+                    },
+                    "type": {
+                        "type": "string",
+                        "maxLength": 64,
+                        "nullable": true
+                    },
+                    "description": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "isAlly": {
+                        "type": "string",
+                        "maxLength": 64,
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "npcInfo": {
+                "description": "Information of a NPC",
+                "properties": {
+                    "campaign": {
+                        "type": "integer",
+                        "nullable": true
+                    }
+                },
+                "type": "object",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/npc"
+                    }
+                ]
+            },
+            "character": {
+                "description": "Information of a character",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string",
+                        "maxLength": 64,
+                        "nullable": true
+                    },
+                    "avatar_path": {
+                        "type": "string",
+                        "maxLength": 255,
+                        "nullable": true
+                    },
+                    "age": {
+                        "type": "integer",
+                        "default": 0
+                    },
+                    "initiative": {
+                        "type": "integer",
+                        "default": 0
+                    },
+                    "height": {
+                        "type": "integer",
+                        "default": 0
+                    },
+                    "weight": {
+                        "type": "integer",
+                        "default": 0
+                    },
+                    "eyes": {
+                        "type": "string",
+                        "maxLength": 64,
+                        "nullable": true
+                    },
+                    "skin": {
+                        "type": "string",
+                        "maxLength": 64,
+                        "nullable": true
+                    },
+                    "hair": {
+                        "type": "string",
+                        "maxLength": 64,
+                        "nullable": true
+                    },
+                    "appearance": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "personality_traits": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "ideals": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "bonds": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "flaws": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "allies_and_organizations": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "backstory": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "treasure": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "background": {
+                        "type": "string",
+                        "maxLength": 64,
+                        "nullable": true
+                    },
+                    "alignement": {
+                        "type": "string",
+                        "maxLength": 64,
+                        "nullable": true
+                    },
+                    "attacks_and_spellcasting": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "equipment": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "other_proficiencies_and_languages": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "features_and_traits": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updatedAt": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "characterInfo": {
+                "description": "Information of a character",
+                "properties": {
+                    "campaign": {
+                        "type": "integer",
+                        "nullable": true
+                    }
+                },
+                "type": "object",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/npc"
+                    }
+                ]
             }
         },
         "responses": {
@@ -367,6 +1261,80 @@
                                 "invitationCode": {
                                     "type": "string",
                                     "maxLength": 64
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "campaign": {
+                "required": true,
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "required": [
+                                "name",
+                                "description",
+                                "memo",
+                                "isArchived"
+                            ],
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "maxLength": 64,
+                                    "nullable": true
+                                },
+                                "description": {
+                                    "type": "string",
+                                    "nullable": true
+                                },
+                                "memo": {
+                                    "type": "string",
+                                    "nullable": true
+                                },
+                                "isArchived": {
+                                    "type": "boolean",
+                                    "default": 0,
+                                    "example": "false",
+                                    "nullable": true
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "story": {
+                "required": true,
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "required": [
+                                "name",
+                                "description",
+                                "isDone",
+                                "avatarPath"
+                            ],
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "maxLength": 64,
+                                    "nullable": true
+                                },
+                                "description": {
+                                    "type": "string",
+                                    "nullable": true
+                                },
+                                "isDone": {
+                                    "type": "boolean",
+                                    "default": 0,
+                                    "example": "false",
+                                    "nullable": true
+                                },
+                                "report": {
+                                    "type": "string",
+                                    "nullable": true
                                 }
                             },
                             "type": "object"

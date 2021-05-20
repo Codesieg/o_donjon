@@ -53,8 +53,11 @@
         <label for="message">Message:</label> <input type="text" id="message">
     </div>
     <button type="button" id="sendBtn">Send</button>
+    <button type="button" id="room1">Room 1</button>
+    <button type="button" id="room2">Room 2</button>
 </div>
 <script type="text/javascript">
+
 
   var conn = new WebSocket('ws://localhost:8080');
 conn.onopen = function(e) {
@@ -64,6 +67,7 @@ conn.onopen = function(e) {
 conn.onmessage = function(e) {
     console.log(e.data);
 };
+
 </script>
 
 {% endblock %}
