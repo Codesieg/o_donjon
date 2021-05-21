@@ -186,11 +186,13 @@ class UserController extends AbstractController
         // on envoie les informations dans le formulaire
         $form->submit($requestData);
 
+
+
         // si les données sont valides
         if ($form->isValid()) {
 
             // on récupère le mdp saisi par l'utilisateur
-            $password = $form->get('password')->getData();
+            $password = (isset($requestData['password']) ? $requestData['password'] : null);
 
             // si le mdp n'est pas nul
             if ($password !== null) {
