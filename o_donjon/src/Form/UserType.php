@@ -22,9 +22,9 @@ class UserType extends AbstractType
                     'Administrateur' => 'ROLE_ADMIN',
                 ],
             ])
-            ->add('password', PasswordType::class, [
-                'required' => false,
-            ])
+            // ->add('password', PasswordType::class, [
+            //     'required' => false,
+            // ])
             ->add('name')
             ->add('avatarPath')
             // ->add('status')

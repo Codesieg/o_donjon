@@ -87,7 +87,7 @@ class UserController extends AbstractController
         if ($form->isValid()) {
 
             // on récupère le mdp saisi par l'utilisateur
-            $password = $form->get('password')->getData();
+            $password = $sentData['password'];
 
             // on encode le mdp
             $user->setPassword($passwordEncoder->encodePassword($user, $password));
