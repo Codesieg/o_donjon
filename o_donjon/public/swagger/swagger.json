@@ -2195,7 +2195,6 @@
                         "schema": {
                             "required": [
                                 "email",
-                                "password",
                                 "name",
                                 "avatarPath"
                             ],
