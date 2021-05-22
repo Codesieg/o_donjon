@@ -20,37 +20,37 @@ class SavingThrow
 
     /**
      * @ORM\Column(type="boolean", options={"default": 0})
-     * @Groups({"read_character"})
+     * @Groups({"read_character", "browse_character", "browse_campaign_character"})
      */
     private $strength;
 
     /**
      * @ORM\Column(type="boolean", options={"default": 0})
-     * @Groups({"read_character"})
+     * @Groups({"read_character", "browse_character", "browse_campaign_character"})
      */
     private $dexterity;
 
     /**
      * @ORM\Column(type="boolean", options={"default": 0})
-     * @Groups({"read_character"})
+     * @Groups({"read_character", "browse_character", "browse_campaign_character"})
      */
     private $constitution;
 
     /**
      * @ORM\Column(type="boolean", options={"default": 0})
-     * @Groups({"read_character"})
+     * @Groups({"read_character", "browse_character", "browse_campaign_character"})
      */
     private $intelligence;
 
     /**
      * @ORM\Column(type="boolean", options={"default": 0})
-     * @Groups({"read_character"})
+     * @Groups({"read_character", "browse_character", "browse_campaign_character"})
      */
     private $wisdom;
 
     /**
      * @ORM\Column(type="boolean", options={"default": 0})
-     * @Groups({"read_character"})
+     * @Groups({"read_character", "browse_character", "browse_campaign_character"})
      */
     private $charisma;
 
