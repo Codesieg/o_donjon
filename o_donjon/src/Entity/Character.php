@@ -176,7 +176,7 @@ class Character
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="characters")
-     * @Groups({"browse_character", "read_character", "edit_character"}, "browse_campaign_character"})
+     * @Groups({"browse_character", "read_character", "edit_character", "browse_campaign_character"})
      */
     private $user;
 
