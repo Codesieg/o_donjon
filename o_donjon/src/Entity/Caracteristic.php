@@ -20,61 +20,61 @@ class Caracteristic
 
     /**
      * @ORM\Column(type="integer", options={"default": 0})
-     * @Groups({"read_character"})
+     * @Groups({"read_character", "browse_character", "browse_campaign_character"})
      */
     private $level;
 
     /**
      * @ORM\Column(type="integer", options={"default": 0})
-     * @Groups({"read_character"})
+     * @Groups({"read_character", "browse_character", "browse_campaign_character"})
      */
     private $experience;
 
     /**
      * @ORM\Column(type="boolean", options={"default": 0})
-     * @Groups({"read_character"})
+     * @Groups({"read_character", "browse_character", "browse_campaign_character"})
      */
     private $inspiration;
 
     /**
      * @ORM\Column(type="integer", options={"default": 0})
-     * @Groups({"read_character"})
+     * @Groups({"read_character", "browse_character", "browse_campaign_character"})
      */
     private $armorClass;
 
     /**
      * @ORM\Column(type="integer", options={"default": 0})
-     * @Groups({"read_character"})
+     * @Groups({"read_character", "browse_character", "browse_campaign_character"})
      */
     private $speed;
 
     /**
      * @ORM\Column(type="integer", options={"default": 0})
-     * @Groups({"read_character"})
+     * @Groups({"read_character", "browse_character", "browse_campaign_character"})
      */
     private $currentHP;
 
     /**
      * @ORM\Column(type="integer", options={"default": 0})
-     * @Groups({"read_character"})
+     * @Groups({"read_character", "browse_character", "browse_campaign_character"})
      */
     private $totalHP;
 
     /**
      * @ORM\Column(type="string", length=64, nullable=true)
-     * @Groups({"read_character"})
+     * @Groups({"read_character", "browse_character", "browse_campaign_character"})
      */
     private $hitDice;
 
     /**
      * @ORM\Column(type="integer", options={"default": 0})
-     * @Groups({"read_character"})
+     * @Groups({"read_character", "browse_character", "browse_campaign_character"})
      */
     private $deathSavesSuccess;
 
     /**
      * @ORM\Column(type="integer", options={"default": 0})
-     * @Groups({"read_character"})
+     * @Groups({"read_character", "browse_character", "browse_campaign_character"})
      */
     private $deathSavesFailures;
 

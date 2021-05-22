@@ -20,13 +20,13 @@ class CharacterClass
 
     /**
      * @ORM\Column(type="string", length=64, nullable=true)
-     * @Groups({"read_character"})
+     * @Groups({"read_character", "browse_character", "browse_campaign_character"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"read_character"})
+     * @Groups({"read_character", "browse_character", "browse_campaign_character"})
      */
     private $informations;
 

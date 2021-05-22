@@ -20,31 +20,31 @@ class Spell
 
     /**
      * @ORM\Column(type="string", length=64, nullable=true)
-     * @Groups({"browse", "read_character"})
+     * @Groups({"browse", "read_character", "browse_character", "browse_campaign_character"})
      */
     private $spellcasting_class;
 
     /**
      * @ORM\Column(type="integer", options={"default": 0})
-     * @Groups({"browse", "read_character"})
+     * @Groups({"browse", "read_character", "browse_character", "browse_campaign_character"})
      */
     private $spell_attack_bonus;
 
     /**
      * @ORM\Column(type="integer", options={"default": 0})
-     * @Groups({"browse", "read_character"})
+     * @Groups({"browse", "read_character", "browse_character", "browse_campaign_character"})
      */
     private $spellcasting_ability;
 
     /**
      * @ORM\Column(type="integer", options={"default": 0})
-     * @Groups({"browse", "read_character"})
+     * @Groups({"browse", "read_character", "browse_character", "browse_campaign_character"})
      */
     private $spell_save_dc;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"browse", "read_character"})
+     * @Groups({"browse", "read_character", "browse_character", "browse_campaign_character"})
      */
     private $spells_list;
 

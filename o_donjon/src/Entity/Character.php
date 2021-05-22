@@ -164,73 +164,73 @@ class Character
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * @Groups({"browse", "read", "browse_campaign_character"})
+     * @Groups({"browse", "read", "browse_character", "read_character", "browse_campaign_character"})
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * @Groups({"browse", "read", "browse_campaign_character"})
+     * @Groups({"browse", "read", "browse_character", "read_character", "browse_campaign_character"})
      */
     private $updatedAt;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="characters")
-     * @Groups({"browse_character", "read_character", "edit_character"})
+     * @Groups({"browse_character", "read_character", "edit_character", "browse_campaign_character"})
      */
     private $user;
 
     /**
      * @ORM\ManyToOne(targetEntity=Campaign::class, inversedBy="characters")
-     * @Groups({"browse_character", "read_character"})
+     * @Groups({"browse_character", "read_character", "browse_campaign_character"})
      */
     private $campaign;
 
     /**
      * @ORM\OneToOne(targetEntity=Race::class, cascade={"persist", "remove"})
-     * @Groups({"browse_character", "read_character", "edit_character"})
+     * @Groups({"browse_character", "read_character", "edit_character", "browse_campaign_character"})
      */
     private $race;
 
     /**
      * @ORM\OneToOne(targetEntity=CharacterClass::class, cascade={"persist", "remove"})
-     * @Groups({"browse_character", "read_character", "edit_character"})
+     * @Groups({"browse_character", "read_character", "edit_character", "browse_campaign_character"})
      */
     private $class;
 
     /**
      * @ORM\OneToOne(targetEntity=Caracteristic::class, cascade={"persist", "remove"})
-     * @Groups({"browse_character", "read_character", "edit_character"})
+     * @Groups({"browse_character", "read_character", "edit_character", "browse_campaign_character"})
      */
     private $caracteristics;
 
     /**
      * @ORM\OneToOne(targetEntity=Statistics::class, cascade={"persist", "remove"})
-     * @Groups({"browse_character", "read_character", "edit_character"})
+     * @Groups({"browse_character", "read_character", "edit_character", "browse_campaign_character"})
      */
     private $statistics;
 
     /**
      * @ORM\OneToOne(targetEntity=Spell::class, cascade={"persist", "remove"})
-     * @Groups({"browse_character", "read_character", "edit_character"})
+     * @Groups({"browse_character", "read_character", "edit_character", "browse_campaign_character"})
      */
     private $spell;
 
     /**
      * @ORM\OneToOne(targetEntity=SavingThrow::class, cascade={"persist", "remove"})
-     * @Groups({"browse_character", "read_character", "edit_character"})
+     * @Groups({"browse_character", "read_character", "edit_character", "browse_campaign_character"})
      */
     private $savingThrowspell;
 
     /**
      * @ORM\OneToOne(targetEntity=Skill::class, cascade={"persist", "remove"})
-     * @Groups({"browse_character", "read_character", "edit_character"})
+     * @Groups({"browse_character", "read_character", "edit_character", "browse_campaign_character"})
      */
     private $skill;
 
     /**
      * @ORM\Column(type="boolean", options={"default": false})
-     * @Groups({"browse_character", "read_character", "edit_character"})
+     * @Groups({"browse_character", "read_character", "edit_character", "browse_campaign_character"})
      */
     private $isDead;
 

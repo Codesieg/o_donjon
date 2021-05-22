@@ -20,109 +20,109 @@ class Skill
 
     /**
      * @ORM\Column(type="boolean", options={"default": 0})
-     * @Groups({"read_character"})
+     * @Groups({"read_character", "browse_character", "browse_campaign_character"})
      */
     private $acrobatics;
 
     /**
      * @ORM\Column(type="boolean", options={"default": 0})
-     * @Groups({"read_character"})
+     * @Groups({"read_character", "browse_character", "browse_campaign_character"})
      */
     private $animalHandling;
 
     /**
      * @ORM\Column(type="boolean", options={"default": 0})
-     * @Groups({"read_character"})
+     * @Groups({"read_character", "browse_character", "browse_campaign_character"})
      */
     private $arcana;
 
     /**
      * @ORM\Column(type="boolean", options={"default": 0})
-     * @Groups({"read_character"})
+     * @Groups({"read_character", "browse_character", "browse_campaign_character"})
      */
     private $athletics;
 
     /**
      * @ORM\Column(type="boolean", options={"default": 0})
-     * @Groups({"read_character"})
+     * @Groups({"read_character", "browse_character", "browse_campaign_character"})
      */
     private $deception;
 
     /**
      * @ORM\Column(type="boolean", options={"default": 0})
-     * @Groups({"read_character"})
+     * @Groups({"read_character", "browse_character", "browse_campaign_character"})
      */
     private $history;
 
     /**
      * @ORM\Column(type="boolean", options={"default": 0})
-     * @Groups({"read_character"})
+     * @Groups({"read_character", "browse_character", "browse_campaign_character"})
      */
     private $insight;
 
     /**
      * @ORM\Column(type="boolean", options={"default": 0})
-     * @Groups({"read_character"})
+     * @Groups({"read_character", "browse_character", "browse_campaign_character"})
      */
     private $intimidation;
 
     /**
      * @ORM\Column(type="boolean", options={"default": 0})
-     * @Groups({"read_character"})
+     * @Groups({"read_character", "browse_character", "browse_campaign_character"})
      */
     private $investigation;
 
     /**
      * @ORM\Column(type="boolean", options={"default": 0})
-     * @Groups({"read_character"})
+     * @Groups({"read_character", "browse_character", "browse_campaign_character"})
      */
     private $medecine;
 
     /**
      * @ORM\Column(type="boolean", options={"default": 0})
-     * @Groups({"read_character"})
+     * @Groups({"read_character", "browse_character", "browse_campaign_character"})
      */
     private $nature;
 
     /**
      * @ORM\Column(type="boolean", options={"default": 0})
-     * @Groups({"read_character"})
+     * @Groups({"read_character", "browse_character", "browse_campaign_character"})
      */
     private $perception;
 
     /**
      * @ORM\Column(type="boolean", options={"default": 0})
-     * @Groups({"read_character"})
+     * @Groups({"read_character", "browse_character", "browse_campaign_character"})
      */
     private $performance;
 
     /**
      * @ORM\Column(type="boolean", options={"default": 0})
-     * @Groups({"read_character"})
+     * @Groups({"read_character", "browse_character", "browse_campaign_character"})
      */
     private $persuasion;
 
     /**
      * @ORM\Column(type="boolean", options={"default": 0})
-     * @Groups({"read_character"})
+     * @Groups({"read_character", "browse_character", "browse_campaign_character"})
      */
     private $religion;
 
     /**
      * @ORM\Column(type="boolean", options={"default": 0})
-     * @Groups({"read_character"})
+     * @Groups({"read_character", "browse_character", "browse_campaign_character"})
      */
     private $sleightOfHand;
 
     /**
      * @ORM\Column(type="boolean", options={"default": 0})
-     * @Groups({"read_character"})
+     * @Groups({"read_character", "browse_character", "browse_campaign_character"})
      */
     private $stealth;
 
     /**
      * @ORM\Column(type="boolean", options={"default": 0})
-     * @Groups({"read_character"})
+     * @Groups({"read_character", "browse_character", "browse_campaign_character"})
      */
     private $survival;
 
