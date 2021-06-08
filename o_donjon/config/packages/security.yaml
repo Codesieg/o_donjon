@@ -10,23 +10,22 @@ security:
       entity:
         class: App\Entity\User
         property: email
+
   firewalls:
     dev:
       pattern: ^/(_(profiler|wdt)|css|images|js)/
       security: false
+
     login:
-      pattern: ^/login
-      # pattern:  ^/api/login
+      pattern:  ^/Api/V1/login
       stateless: true
       anonymous: true
       json_login:
-        # check_path:               /api/
-        check_path: /login_check
+        check_path: /Api/V1/login_check
         success_handler: lexik_jwt_authentication.handler.authentication_success
         failure_handler: lexik_jwt_authentication.handler.authentication_failure
     api:
-      # pattern:   ^/api
-      pattern: ^/
+      pattern: ^/Api/V1
       stateless: true
       guard:
         authenticators:
@@ -45,8 +44,9 @@ security:
   # Easy way to control access for large sections of your site
   # Note: Only the *first* access control that matches will be used
   access_control:
-    # - { path: ^/user, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-    # - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-    # - { path: ^/,       roles: IS_AUTHENTICATED_FULLY }
-    # - { path: ^/admin, roles: ROLE_ADMIN }
-    # - { path: ^/profile, roles: ROLE_USER }
+    - { path: ^/user, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/home, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/,       roles: IS_AUTHENTICATED_FULLY }
+    - { path: ^/admin, roles: ROLE_ADMIN }
+    - { path: ^/profile, roles: ROLE_USER }

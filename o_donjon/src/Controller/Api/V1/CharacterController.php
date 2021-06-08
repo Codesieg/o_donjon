@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Api\V1;
 
 use App\Entity\Race;
 use App\Entity\User;

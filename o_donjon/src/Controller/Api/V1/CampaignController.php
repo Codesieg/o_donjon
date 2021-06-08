@@ -1,22 +1,18 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Api\V1;
 
-use \DateTimeInterface;
-use App\Controller\CharacterController;
+
 use App\Entity\Campaign;
-use App\Entity\Character;
-use App\Entity\Story;
 use App\Form\CampaignType;
+use OpenApi\Annotations as OA;
 use App\Repository\CampaignRepository;
 use App\Repository\CharacterRepository;
-use Container2mxXKpx\getCharacterControllerService;
-use Container2mxXKpx\getCharacterService;
-use OpenApi\Annotations as OA;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use App\Controller\Api\V1\CharacterController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /*********************BREAD***************************************************/
 
