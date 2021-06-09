@@ -6,3 +6,10 @@ body {
     width: 5%;
     margin-right: 2%;
 }
+
+.main {
+    background-image: url(https://www.tribality.com/wp-content/uploads/2019/04/vladimir-krisetskiy-tavern-06.jpg);
+    background-size: cover;
+    background-attachment: scroll;
+    height: 100vh;
+}
