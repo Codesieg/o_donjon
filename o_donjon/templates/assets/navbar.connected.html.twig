@@ -1,19 +1,5 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>
-      {% block title %}O'Donjon{% endblock %}
-    </title>
-    {% block stylesheets %}
-      {{ encore_entry_link_tags('app') }}
-    {% endblock %}
-
-  </head>
-
-  <body>
-    <header>
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark position-fixed">
+<header>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
           <img class="logo" src="{{ asset('images/logo_odonjon.png') }}" alt="">
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
@@ -23,29 +9,23 @@
           <div class="collapse navbar-collapse" id="navbarColor02">
             <ul class="navbar-nav me-auto">
               <li class="nav-item">
-                <a class="nav-link active" href="#">Home
-                  <span class="visually-hidden">(current)</span>
-                </a>
+                <a class="nav-link" href="{{ path('dongeon_master') }}">DM</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Le Projet</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">La Team</a>
+                <a class="nav-link" href="{{ path('player_home') }}">Player</a>
               </li>
             </ul>
             <ul class="d-flex navbar-nav me-3">
               <li class="nav-item">
-                <a class="nav-link" href="#">Connexion</a>
+                <a class="nav-link" href="#">Profil</a>
+              </li>
+            </ul>
+            <ul class="d-flex navbar-nav me-3">
+              <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_logout') }}">Deconnexion</a>
               </li>
             </ul>
           </div>
         </div>
       </nav>
     </header>
-    {% block body %}{% endblock %}
-  </body>
-</html>
-{% block javascripts %}
-  {{ encore_entry_script_tags('app') }}
-{% endblock %}
