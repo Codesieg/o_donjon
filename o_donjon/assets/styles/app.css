@@ -13,3 +13,11 @@ body {
     background-repeat: no-repeat;
     background-attachment: scroll;
 }
+
+.big-title {
+    font-size: 5em;
+}
+
+.dot {
+    width: 5%;
+}
