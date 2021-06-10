@@ -6,7 +6,7 @@
 <div class="container" >
 
     <div class="row">
-        <h1 class="text-center mb-3">Espace joueur</h1>
+        <h1 class="text-center my-3">Espace joueur</h1>
     </div>
     <div class="row">
         <div class="col-12 col-lg-6">
@@ -30,7 +30,7 @@
                     <div class="col-12 col-lg-6 mb-3">
                         <div class="card bg-dark text-white">
                             <img src="{{ asset('images/bg.campaign.jpg') }}" class="card-img" alt="image de la campagne">
-                            <div class="card-img-overlay">
+                            <div class="card-body">
                                 <h5 class="card-title">{{ campaign.name }}</h5>
                                 <p class="card-text">Créé par {{ campaign.owner.name }} le {{ campaign.createdAt|date("d/m/Y") }}</p>
                             </div>
@@ -43,7 +43,7 @@
             <h2 class="text-center mb-3">Vos personnages</h2>
             <div class="row mb-3">
                 <div class="col-12">
-                    <a class="btn btn-primary" type="button" href="">Créer un personnage</a>
+                    <a class="btn btn-secondary w-100" type="button">Créer un personnage</a>
                 </div>
             </div>
             <div class="row mb-3">
@@ -58,11 +58,13 @@
                     <div class="col-12 col-lg-6 mb-3">
                         <div class="card bg-dark text-white">
                             <img src="{{ asset('images/bg.character.jpg') }}" class="card-img" alt="image du personnage">
-                            <div class="card-img-overlay">
+                            <div class="card-body">
                                 <h5 class="card-title">{{ character.name }}</h5>
                                 <h6 class="card-subtitle">{{ character.race.name }}</h6>
                                 {% if character.campaign %}
-                                <p class="card-text">{{ character.campaign.name }}</p>
+                                    <p class="card-text text-center">{{ character.campaign.name }}</p>
+                                {% else %}
+                                    <p class="card-text text-center">Sans campagne</p>
                                 {% endif %}
                             </div>
                         </div>

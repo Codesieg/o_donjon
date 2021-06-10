@@ -40,6 +40,6 @@ body {
 
 /* player space */
 
-.card-img {
-    height: 50%;
+.card-subtitle {
+    font-style: italic;
 }
