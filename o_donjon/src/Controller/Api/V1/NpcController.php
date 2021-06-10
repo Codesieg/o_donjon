@@ -5,7 +5,7 @@ namespace App\Controller\Api\V1;
 use App\Entity\NPC;
 use App\Form\NPCType;
 use App\Repository\NPCRepository;
-use OpenApi\Annotations as OA;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,16 +19,6 @@ class NpcController extends AbstractController
 {
     /**
      * @Route("", name="browse", methods={"GET"})
-     * @OA\Get(
-     *      path="/nps",
-     *      tags={"NPC"},
-     *      security={"bearer"},
-     *      @OA\Response(
-     *          response="200",
-     *          description="List of NPCs",
-     *          @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/npcInfo"))
-     *      )
-     * )
      */
     public function browse(NPCRepository $npcRepository): Response
     {   
@@ -43,18 +33,6 @@ class NpcController extends AbstractController
 
     /**
      * @Route("", name="add", methods={"POST"})
-     * @OA\Post(
-     *      path="/npc",
-     *      tags={"NPC"},
-     *      security={"bearer"},
-     *      @OA\RequestBody(ref="#/components/requestBodies/npc"),
-     *      @OA\Response(
-     *          response="200",
-     *          description="Informations of the NPC",
-     *          @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/npcInfo"))
-     *      ),
-     *      @OA\Response(response="404", ref="#/components/responses/notFound"),
-     * )
      */
     public function add(Request $request): Response
     {   
@@ -89,18 +67,6 @@ class NpcController extends AbstractController
 
     /**
      * @Route("/{id}", name="read", methods={"GET"}, requirements={"id": "\d+"})
-     * @OA\Get(
-     *      path="/npc/{id}",
-     *      tags={"NPC"},
-     *      security={"bearer"},
-     *      @OA\Parameter(ref="#/components/parameters/id"),
-     *      @OA\Response(
-     *          response="200",
-     *          description="Informations of the NPC",
-     *          @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/npcInfo"))
-     *      ),
-     *      @OA\Response(response="404", ref="#/components/responses/notFound"),
-     * )
      */
     public function read(NPC $npc): Response
     {   
@@ -113,19 +79,6 @@ class NpcController extends AbstractController
 
     /**
      * @Route("/{id}", name="edit", methods={"PUT", "PATCH"}, requirements={"id": "\d+"})
-     * @OA\Put(
-     *      path="/npc/{id}",
-     *      tags={"NPC"},
-     *      security={"bearer"},
-     *      @OA\Parameter(ref="#/components/parameters/id"),
-     *      @OA\RequestBody(ref="#/components/requestBodies/npc"),
-     *      @OA\Response(
-     *          response="200",
-     *          description="Informations of the NPC",
-     *          @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/npcInfo"))
-     *      ),
-     *      @OA\Response(response="404", ref="#/components/responses/notFound"),
-     * )
      */
     public function edit(NPC $npc, Request $request): Response
     {   
@@ -156,17 +109,6 @@ class NpcController extends AbstractController
 
     /**
      * @Route("/{id}", name="delete", methods={"DELETE"}, requirements={"id": "\d+"})
-     * @OA\Delete(
-     *      path="/npc/{id}",
-     *      tags={"NPC"},
-     *      security={"bearer"},
-     *      @OA\Parameter(ref="#/components/parameters/id"),
-     *      @OA\Response(
-     *          response="204",
-     *          description="",
-     *      ),
-     *      @OA\Response(response="404", ref="#/components/responses/notFound")
-     * )
      */
     public function delete(NPC $npc): Response
     {   

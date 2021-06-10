@@ -8,7 +8,6 @@ use App\Form\CampaignType;
 use App\Form\UserType;
 use App\Repository\CampaignRepository;
 use App\Repository\UserRepository;
-use OpenApi\Annotations as OA;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,38 +15,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-/**
- * @OA\Get(
- *      path="/login_check",
- *      tags={"User"},
- *      security={"bearer"},
- *      @OA\RequestBody(ref="#/components/requestBodies/connectionUser"),
- *      @OA\Response(
- *          response="200",
- *          description="data of the connected user",
- *          @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/connectionUser"))
- *      )
- * )
- */
-
-/**
- * @Route("/Api/V1", name="api_v1_", methods={"GET"})
- */
 
 class UserController extends AbstractController
 {
     /**
      * @Route("/user", name="browse", methods={"GET"})
-     * @OA\Get(
-     *      path="/user",
-     *      tags={"User"},
-     *      security={"bearer"},
-     *      @OA\Response(
-     *          response="200",
-     *          description="List of the users",
-     *          @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/userList"))
-     *      )
-     * )
      */
     public function browse(UserRepository $userRepository): Response
     {   
@@ -62,16 +34,6 @@ class UserController extends AbstractController
 
     /**
      * @Route("/login", name="add", methods={"POST"})
-     * @OA\Post(
-     *      path="/login",
-     *      tags={"User"},
-     *      @OA\RequestBody(ref="#/components/requestBodies/registerUser"),
-     *      @OA\Response(
-     *          response="201",
-     *          description="Register new user",
-     *          @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/user"))
-     *      )
-     * )
      */
     public function add(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {   
@@ -113,18 +75,6 @@ class UserController extends AbstractController
 
     /**
      * @Route("/user/{id}", name="read", methods={"GET"}, requirements={"id": "\d+"})
-     * @OA\Get(
-     *      path="/user/{id}",
-     *      tags={"User"},
-     *      security={"bearer"},
-     *      @OA\Parameter(ref="#/components/parameters/id"),
-     *      @OA\Response(
-     *          response="200",
-     *          description="User informations",
-     *          @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/user"))
-     *      ),
-     *      @OA\Response(response="404", ref="#/components/responses/notFound")
-     * )
      */
     public function read(User $user): Response
     {   
@@ -147,19 +97,6 @@ class UserController extends AbstractController
 
     /**
      * @Route("/user/{id}", name="edit", methods={"PUT", "PATCH"}, requirements={"id": "\d+"})
-     * @OA\Put(
-     *      path="/user/{id}",
-     *      tags={"User"},
-     *      security={"bearer"},
-     *      @OA\Parameter(ref="#/components/parameters/id"),
-     *      @OA\RequestBody(ref="#/components/requestBodies/registerUser"),
-     *      @OA\Response(
-     *          response="200",
-     *          description="User informations",
-     *          @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/user"))
-     *      ),
-     *      @OA\Response(response="404", ref="#/components/responses/notFound")
-     * )
      */
     public function edit(UserPasswordEncoderInterface $passwordEncoder, Request $request, User $user): Response
     {   
@@ -219,17 +156,6 @@ class UserController extends AbstractController
 
     /**
      * @Route("/user/{id}", name="delete", methods={"DELETE"}, requirements={"id": "\d+"})
-     * @OA\Delete(
-     *      path="/user/{id}",
-     *      tags={"User"},
-     *      security={"bearer"},
-     *      @OA\Parameter(ref="#/components/parameters/id"),
-     *      @OA\Response(
-     *          response="204",
-     *          description="",
-     *      ),
-     *      @OA\Response(response="404", ref="#/components/responses/notFound")
-     * )
      */
     public function delete(User $user): Response
     {
@@ -261,27 +187,6 @@ class UserController extends AbstractController
     
     /**
      * @Route("/user/campaign/join", name="user_campaign_join", methods={"POST"})
-     * @OA\Post(
-     *      path="/user/campaign/join",
-     *      tags={"User"},
-     *      security={"bearer"},
-     *      @OA\RequestBody(ref="#/components/requestBodies/joinCampaignUser"),
-     *      @OA\Response(
-     *          response="200",
-     *          description="User informations",
-     *          @OA\JsonContent(
-     *              @OA\Property(property="message",type="string", example="Yeah, you have joined the campaign")
-     *          ),
-     *      ),
-     *      @OA\Response(
-     *          response="401",
-     *          description="Campaign not found",
-     *          @OA\JsonContent(
-     *              @OA\Property(property="message",type="string", example="This invitation code is not valid !")
-     *          ),
-     *      ),
-     *      @OA\Response(response="404", ref="#/components/responses/notFound")
-     * )
      */
     public function joinCampaign(Request $request, CampaignRepository $campaignRepository): Response
     {

@@ -5,7 +5,6 @@ namespace App\Controller\Api\V1;
 
 use App\Entity\Campaign;
 use App\Form\CampaignType;
-use OpenApi\Annotations as OA;
 use App\Repository\CampaignRepository;
 use App\Repository\CharacterRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,16 +22,6 @@ class CampaignController extends AbstractController
 {
     /**
      * @Route("/dm", name="browse_dm", methods={"GET"})
-     * @OA\Get(
-     *      path="/campaign/dm",
-     *      tags={"Campaign"},
-     *      security={"bearer"},
-     *      @OA\Response(
-     *          response="200",
-     *          description="List of campaigns as the DM",
-     *          @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/campaignList"))
-     *      )
-     * )
      */
     public function browseDm(CampaignRepository $campaignRepository): Response
     {
@@ -50,16 +39,6 @@ class CampaignController extends AbstractController
 
     /**
      * @Route("", name="browse", methods={"GET"})
-     * @OA\Get(
-     *      path="/campaign",
-     *      tags={"Campaign"},
-     *      security={"bearer"},
-     *      @OA\Response(
-     *          response="200",
-     *          description="List of campaigns as a player",
-     *          @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/campaignList"))
-     *      )
-     * )
      */
     public function browse(CampaignRepository $campaignRepository): Response
     {
@@ -77,18 +56,6 @@ class CampaignController extends AbstractController
 
     /**
      * @Route("/{id}", name="read", methods={"GET"}, requirements={"id": "\d+"})
-     * @OA\Get(
-     *      path="/campaign/{id}",
-     *      tags={"Campaign"},
-     *      security={"bearer"},
-     *      @OA\Parameter(ref="#/components/parameters/id"),
-     *      @OA\Response(
-     *          response="200",
-     *          description="Informations of the campaign",
-     *          @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/campaign"))
-     *      ),
-     *      @OA\Response(response="404", ref="#/components/responses/notFound"),
-     * )
      */
     public function read(Campaign $campaign): Response
     {
@@ -100,19 +67,6 @@ class CampaignController extends AbstractController
 
     /**
      * @Route("/{id}", name="edit", methods={"PUT", "PATCH"}, requirements={"id": "\d+"})
-     * @OA\Put(
-     *      path="/campaign/{id}",
-     *      tags={"Campaign"},
-     *      security={"bearer"},
-     *      @OA\Parameter(ref="#/components/parameters/id"),
-     *      @OA\RequestBody(ref="#/components/requestBodies/campaign"),
-     *      @OA\Response(
-     *          response="200",
-     *          description="Informations of the campaign",
-     *          @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/campaign"))
-     *      ),
-     *      @OA\Response(response="404", ref="#/components/responses/notFound"),
-     * )
      */
     public function edit(Request $request, Campaign $campaign): Response
     {   
@@ -161,18 +115,6 @@ class CampaignController extends AbstractController
 
     /**
      * @Route("", name="add", methods={"POST"})
-     * @OA\Post(
-     *      path="/campaign",
-     *      tags={"Campaign"},
-     *      security={"bearer"},
-     *      @OA\RequestBody(ref="#/components/requestBodies/campaign"),
-     *      @OA\Response(
-     *          response="200",
-     *          description="Informations of the campaign",
-     *          @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/campaign"))
-     *      ),
-     *      @OA\Response(response="404", ref="#/components/responses/notFound"),
-     * )
      */
     public function add(Request $request): Response
     {   
@@ -219,17 +161,6 @@ class CampaignController extends AbstractController
 
     /**
      * @Route("/{id}", name="delete", methods={"DELETE"}, requirements={"id": "\d+"})
-     * @OA\Delete(
-     *      path="/campaign/{id}",
-     *      tags={"Campaign"},
-     *      security={"bearer"},
-     *      @OA\Parameter(ref="#/components/parameters/id"),
-     *      @OA\Response(
-     *          response="204",
-     *          description="",
-     *      ),
-     *      @OA\Response(response="404", ref="#/components/responses/notFound")
-     * )
      */
     public function delete(Campaign $campaign, CharacterRepository $characterRepository, CharacterController $characterController): Response
     {
@@ -268,18 +199,6 @@ class CampaignController extends AbstractController
 
     /**
      * @Route("/{id}/story", name="stories_list", methods={"GET"}, requirements={"id": "\d+"})
-     * @OA\Get(
-     *      path="/campaign/{id}/story",
-     *      tags={"Campaign"},
-     *      security={"bearer"},
-     *      @OA\Parameter(ref="#/components/parameters/id"),
-     *      @OA\Response(
-     *          response="200",
-     *          description="List of stories of a campaign",
-     *          @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/campaignStories"))
-     *      ),
-     *      @OA\Response(response="404", ref="#/components/responses/notFound"),
-     * )
      */
     public function browseStories(Campaign $campaign): Response
     {
@@ -293,18 +212,6 @@ class CampaignController extends AbstractController
 
     /**
      * @Route("/{id}/map", name="maps_list", methods={"GET"}, requirements={"id": "\d+"})
-     * @OA\Get(
-     *      path="/campaign/{id}/map",
-     *      tags={"Campaign"},
-     *      security={"bearer"},
-     *      @OA\Parameter(ref="#/components/parameters/id"),
-     *      @OA\Response(
-     *          response="200",
-     *          description="List of maps of a campaign",
-     *          @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/campaignMaps"))
-     *      ),
-     *      @OA\Response(response="404", ref="#/components/responses/notFound"),
-     * )
      */
     public function browseMaps(Campaign $campaign): Response
     {    
@@ -318,18 +225,6 @@ class CampaignController extends AbstractController
 
     /**
      * @Route("/{id}/npc", name="npc_list", methods={"GET"}, requirements={"id": "\d+"})
-     * @OA\Get(
-     *      path="/campaign/{id}/npc",
-     *      tags={"Campaign"},
-     *      security={"bearer"},
-     *      @OA\Parameter(ref="#/components/parameters/id"),
-     *      @OA\Response(
-     *          response="200",
-     *          description="List of NPCs of a campaign",
-     *          @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/campaignNPCs"))
-     *      ),
-     *      @OA\Response(response="404", ref="#/components/responses/notFound"),
-     * )
      */
     public function browseNpc(Campaign $campaign): Response
     {   
@@ -343,18 +238,6 @@ class CampaignController extends AbstractController
 
     /**
      * @Route("/{id}/character", name="character_list", methods={"GET"}, requirements={"id": "\d+"})
-     * @OA\Get(
-     *      path="/campaign/{id}/character",
-     *      tags={"Campaign"},
-     *      security={"bearer"},
-     *      @OA\Parameter(ref="#/components/parameters/id"),
-     *      @OA\Response(
-     *          response="200",
-     *          description="List of Characters of a campaign",
-     *          @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/campaignCharacters"))
-     *      ),
-     *      @OA\Response(response="404", ref="#/components/responses/notFound"),
-     * )
      */
     public function browseCharacter(Campaign $campaign): Response
     {   
