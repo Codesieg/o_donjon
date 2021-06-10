@@ -5,7 +5,6 @@ namespace App\Controller\Api\V1;
 use App\Entity\Map;
 use App\Form\MapType;
 use App\Repository\MapRepository;
-use OpenApi\Annotations as OA;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,16 +18,6 @@ class MapController extends AbstractController
 {
     /**
      * @Route("", name="browse", methods={"GET"})
-     * @OA\Get(
-     *      path="/map",
-     *      tags={"Map"},
-     *      security={"bearer"},
-     *      @OA\Response(
-     *          response="200",
-     *          description="List of maps",
-     *          @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/map"))
-     *      )
-     * )
      */
     public function browse(MapRepository $mapRepository): Response
     {   
@@ -43,18 +32,6 @@ class MapController extends AbstractController
 
     /**
      * @Route("", name="add", methods={"POST"})
-     * @OA\Post(
-     *      path="/map",
-     *      tags={"Map"},
-     *      security={"bearer"},
-     *      @OA\RequestBody(ref="#/components/requestBodies/map"),
-     *      @OA\Response(
-     *          response="200",
-     *          description="Informations of the map",
-     *          @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/mapInfo"))
-     *      ),
-     *      @OA\Response(response="404", ref="#/components/responses/notFound"),
-     * )
      */
     public function add(Request $request): Response
     {
@@ -90,18 +67,6 @@ class MapController extends AbstractController
 
     /**
      * @Route("/{id}", name="read", methods={"GET"}, requirements={"id": "\d+"})
-     * @OA\Get(
-     *      path="/map/{id}",
-     *      tags={"Map"},
-     *      security={"bearer"},
-     *      @OA\Parameter(ref="#/components/parameters/id"),
-     *      @OA\Response(
-     *          response="200",
-     *          description="Informations of the map",
-     *          @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/mapInfo"))
-     *      ),
-     *      @OA\Response(response="404", ref="#/components/responses/notFound"),
-     * )
      */
     public function read(Map $map): Response
     {   
@@ -113,19 +78,6 @@ class MapController extends AbstractController
 
     /**
      * @Route("/{id}", name="edit", methods={"PUT", "PATCH"}, requirements={"id": "\d+"})
-     * @OA\Put(
-     *      path="/map/{id}",
-     *      tags={"Map"},
-     *      security={"bearer"},
-     *      @OA\Parameter(ref="#/components/parameters/id"),
-     *      @OA\RequestBody(ref="#/components/requestBodies/map"),
-     *      @OA\Response(
-     *          response="200",
-     *          description="Informations of the map",
-     *          @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/mapInfo"))
-     *      ),
-     *      @OA\Response(response="404", ref="#/components/responses/notFound"),
-     * )
      */
     public function edit(Map $map, Request $request): Response
     {   
@@ -155,17 +107,6 @@ class MapController extends AbstractController
 
     /**
      * @Route("/{id}", name="delete", methods={"DELETE"}, requirements={"id": "\d+"})
-     * @OA\Delete(
-     *      path="/map/{id}",
-     *      tags={"Map"},
-     *      security={"bearer"},
-     *      @OA\Parameter(ref="#/components/parameters/id"),
-     *      @OA\Response(
-     *          response="204",
-     *          description="",
-     *      ),
-     *      @OA\Response(response="404", ref="#/components/responses/notFound")
-     * )
      */
     public function delete(Map $map): Response
     {   
