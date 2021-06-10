@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
-     * @Route("/story", name="story_")
+     * @Route("api/story", name="api_story_")
      */
 
 class StorieController extends AbstractController

@@ -16,7 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 /*********************BREAD***************************************************/
 
 /**
- * @Route("/campaign", name="campaign_")
+ * @Route("/api/campaign", name="api_campaign_")
  */
 class CampaignController extends AbstractController
 {
