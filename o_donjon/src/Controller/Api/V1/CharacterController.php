@@ -23,7 +23,6 @@ use App\Form\CaracteristicType;
 use App\Form\CharacterClassType;
 use App\Repository\CampaignRepository;
 use App\Repository\CharacterRepository;
-use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -41,18 +40,6 @@ class CharacterController extends AbstractController
 
     /**
      * @Route("", name="add", methods={"POST"},)
-     * @OA\Post(
-     *      path="/character",
-     *      tags={"Character"},
-     *      security={"bearer"},
-     *      @OA\RequestBody(ref="#/components/requestBodies/characterName"),
-     *      @OA\Response(
-     *          response="200",
-     *          description="Informations of the character",
-     *          @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/characterInfo"))
-     *      ),
-     *      @OA\Response(response="404", ref="#/components/responses/notFound"),
-     * )
      */
     public function add(Request $request): Response
     {
@@ -192,19 +179,6 @@ class CharacterController extends AbstractController
 
     /**
      * @Route("/{id}", name="edit", methods={"PUT"}, requirements={"id": "\d+"})
-     * @OA\Put(
-     *      path="/character/{id}",
-     *      tags={"Character"},
-     *      security={"bearer"},
-     *      @OA\Parameter(ref="#/components/parameters/id"),
-     *      @OA\RequestBody(ref="#/components/requestBodies/character"),
-     *      @OA\Response(
-     *          response="200",
-     *          description="Informations of the character",
-     *          @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/characterInfo"))
-     *      ),
-     *      @OA\Response(response="404", ref="#/components/responses/notFound"),
-     * )
      */
     public function edit(Request $request, character $character, CampaignRepository $campaignRepository): Response
     {
@@ -309,16 +283,6 @@ class CharacterController extends AbstractController
 
     /**
      * @Route("", name="browse", methods={"GET"})
-     * @OA\Get(
-     *      path="/character",
-     *      tags={"Character"},
-     *      security={"bearer"},
-     *      @OA\Response(
-     *          response="200",
-     *          description="List of characters of the user",
-     *          @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/character"))
-     *      )
-     * )
      */
     public function browse(CharacterRepository $characterRepository): Response
     {
@@ -338,18 +302,6 @@ class CharacterController extends AbstractController
 
     /**
      * @Route("/{id}", name="read", methods={"GET"}, requirements={"id": "\d+"})
-     * @OA\Get(
-     *      path="/character/{id}",
-     *      tags={"Character"},
-     *      security={"bearer"},
-     *      @OA\Parameter(ref="#/components/parameters/id"),
-     *      @OA\Response(
-     *          response="200",
-     *          description="Informations of the character",
-     *          @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/characterInfo"))
-     *      ),
-     *      @OA\Response(response="404", ref="#/components/responses/notFound"),
-     * )
      */
     public function read(Character $character): Response
     {
@@ -364,17 +316,6 @@ class CharacterController extends AbstractController
     
     /**
      * @Route("/{id}", name="delete", methods={"DELETE"}, requirements={"id": "\d+"})
-     * @OA\Delete(
-     *      path="/character/{id}",
-     *      tags={"Character"},
-     *      security={"bearer"},
-     *      @OA\Parameter(ref="#/components/parameters/id"),
-     *      @OA\Response(
-     *          response="204",
-     *          description="",
-     *      ),
-     *      @OA\Response(response="404", ref="#/components/responses/notFound")
-     * )
      */
     public function delete(Character $character): Response
     {

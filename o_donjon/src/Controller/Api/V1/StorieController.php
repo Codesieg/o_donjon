@@ -5,7 +5,6 @@ namespace App\Controller\Api\V1;
 use App\Entity\Story;
 use App\Form\StoryType;
 use App\Repository\StoryRepository;
-use OpenApi\Annotations as OA;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,16 +18,6 @@ class StorieController extends AbstractController
 {
     /**
      * @Route("", name="browse", methods={"GET"})
-     * @OA\Get(
-     *      path="/story",
-     *      tags={"Story"},
-     *      security={"bearer"},
-     *      @OA\Response(
-     *          response="200",
-     *          description="List of stories",
-     *          @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/storyInfo"))
-     *      )
-     * )
      */
     public function browse(StoryRepository $storyRepository): Response
     {   
@@ -43,18 +32,6 @@ class StorieController extends AbstractController
 
     /**
      * @Route("", name="add", methods={"POST"})
-     * @OA\Post(
-     *      path="/story",
-     *      tags={"Story"},
-     *      security={"bearer"},
-     *      @OA\RequestBody(ref="#/components/requestBodies/story"),
-     *      @OA\Response(
-     *          response="200",
-     *          description="Informations of the story",
-     *          @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/storyInfo"))
-     *      ),
-     *      @OA\Response(response="404", ref="#/components/responses/notFound"),
-     * )
      */
     public function add(Request $request): Response
     {   
@@ -89,18 +66,6 @@ class StorieController extends AbstractController
 
     /**
      * @Route("/{id}", name="read", methods={"GET"}, requirements={"id": "\d+"})
-     * @OA\Get(
-     *      path="/story/{id}",
-     *      tags={"Story"},
-     *      security={"bearer"},
-     *      @OA\Parameter(ref="#/components/parameters/id"),
-     *      @OA\Response(
-     *          response="200",
-     *          description="Informations of the story",
-     *          @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/storyInfo"))
-     *      ),
-     *      @OA\Response(response="404", ref="#/components/responses/notFound"),
-     * )
      */
     public function read(Story $story): Response
     {   
@@ -112,19 +77,6 @@ class StorieController extends AbstractController
 
     /**
      * @Route("/{id}", name="edit", methods={"PUT", "PATCH"}, requirements={"id": "\d+"})
-     * @OA\Put(
-     *      path="/story/{id}",
-     *      tags={"Story"},
-     *      security={"bearer"},
-     *      @OA\Parameter(ref="#/components/parameters/id"),
-     *      @OA\RequestBody(ref="#/components/requestBodies/story"),
-     *      @OA\Response(
-     *          response="200",
-     *          description="Informations of the story",
-     *          @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/storyInfo"))
-     *      ),
-     *      @OA\Response(response="404", ref="#/components/responses/notFound"),
-     * )
      */
     public function edit(Story $story, Request $request): Response
     {   
@@ -154,17 +106,6 @@ class StorieController extends AbstractController
 
     /**
      * @Route("/{id}", name="delete", methods={"DELETE"}, requirements={"id": "\d+"})
-     * @OA\Delete(
-     *      path="/story/{id}",
-     *      tags={"Story"},
-     *      security={"bearer"},
-     *      @OA\Parameter(ref="#/components/parameters/id"),
-     *      @OA\Response(
-     *          response="204",
-     *          description="",
-     *      ),
-     *      @OA\Response(response="404", ref="#/components/responses/notFound")
-     * )
      */
     public function delete(Story $story): Response
     {   
