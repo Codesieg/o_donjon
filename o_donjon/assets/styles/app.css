@@ -9,8 +9,10 @@ body {
 
 .background {
     background-image: url(https://www.tribality.com/wp-content/uploads/2019/04/vladimir-krisetskiy-tavern-06.jpg);
-    background-size: contain;
+    background-size: cover;
     background-attachment: fixed;
+    background-repeat: no-repeat;
+    width: 100%;
 }
 
 .big-title {
