@@ -7,21 +7,31 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\Session;
+use App\Repository\CampaignRepository;
+use App\Repository\CharacterRepository;
 
 /**
-* @Route("/player", name="player")
+* @Route("/player", name="player_")
 */
 class PlayerSpaceController extends AbstractController
 {
     /**
-     * @Route("/player", name="player")
+     * @Route("", name="home")
      */
-    public function index(): Response
+    public function index(CharacterRepository $characterRepository, CampaignRepository $campaignRepository): Response
     {
-        $session = $this->get('session');
+        // on récupère l'id de l'utilisateur
+        $userId = $this->getUser()->getId();
 
+        // on récupère les personnages associés à l'utilisateur
+        $characters = $characterRepository->findByUser($userId);
+
+        // on récupère les personnages associés à l'utilisateur
+        $campaigns = $campaignRepository->findByUser($userId);
+        
         return $this->render('player/index.html.twig', [
-            'controller_name' => 'PlayerSpaceController',
+            'characters' => $characters,
+            'campaigns' => $campaigns,
         ]);
     }
 }
