@@ -5,73 +5,94 @@
 {% block body %}
 
 <div class="background">
-    <section class="home">
+{# <aside class="position-absolute top-50 end-0">
+    <span class="d-flex align-items-center">
+        <p class="d-flex align-items-center me-2">HOME</p>
+        <img class="dot " src="{{ asset('images/dot.png') }}" alt="logo-ranger">
+    </span>
+    
+    <span class="d-flex align-self-center">
+        <p class="d-flex align-items-center me-2">LE PROJET</p>
+        <img class="dot " src="{{ asset('images/dot.png') }}" alt="logo-ranger">
+    </span>
+        
+    <span class="d-flex align-items-center">
+        <p class="d-flex me-2">LA TEAM</p>
+        <img class="dot " src="{{ asset('images/dot.png') }}" alt="logo-ranger">
+    </span>    
+</aside> #}
+    <section id="home" class="scroll">
         <div class="d-flex justify-content-center flex-column vh-100">
             <div class="d-flex flex-column align-items-center align-self-center">
-            <h1 class="fs-1 fw-bold">O' Donjon</h1>
+            <h1 class="big-title fw-bold m-4">O' Donjon</h1>
             <p class="fs-4">Y' à des dragons aussi !</p>
             <button type="button" class="btn btn-secondary">Je veux Jouer !</button>
             </div>
         </div>
     </section>
 
-    <section class="project">
-        <div class="project d-flex flex-column align-items-center vh-100">
-            <div class="d-flex flex-column align-items-center w-50">
-                <h1 class="fs-1 fw-bold ">Le Projet</h1>
-                <p class="text-center">Donjon & Dragon est un jeu de rôle qui se joue à plusieurs avec des dés.
-                </br>
-                A la base, comme son nom l'indique, il s'agissait d'explorer un donjon, créé par un joueur ou tiré d'un livre officiel, en incarnant un personnage. Une personne joue le rôle du Dungeon Master (DM) qui dirige le donjon et tous les monstres qui s'y trouvent pendant que les autres joueurs incarnent chacun un personnage.</br>
-                Au fil des ans, le jeu a pas mal évolué et s'est beaucoup complexifié. Les lieux du déroulement des parties ne se limitent plus à de simples donjons et on peut trouver des livres décrivant des épopées qui peuvent     durer plusieurs mois d'affilés !
-                </br>
-                Le but du projet est d'aider les DM et les joueurs à centraliser toutes les informations dont ils ont besoin lors d'une partie et d'y avoir accès rapidement, sans devoir garder des dizaines de feuilles volantes.</p>
+    <section id="project" class="scroll">
+        <div class="d-flex justify-content-center flex-column align-items-center vh-100">
+            <h1 class="big-title fw-bold m-4">Le Projet</h1>
+            <div class="d-flex flex-column align-items-center w-50 h-40 bg-secondary rounded-3">
+                <p class="text-center m-4 fs-5">Donjon & Dragon est un jeu de rôle qui se joue à plusieurs avec des dés.</p>
+                
+                <p class="text-center m-4 fs-5">A la base, comme son nom l'indique, il s'agissait d'explorer un donjon, créé par un joueur ou tiré d'un livre officiel, en incarnant un personnage. Une personne joue le rôle du Dungeon Master (DM) qui dirige le donjon et tous les monstres qui s'y trouvent pendant que les autres joueurs incarnent chacun un personnage.</p>
+
+                <p class="text-center m-4 fs-5">Au fil des ans, le jeu a pas mal évolué et s'est beaucoup complexifié. Les lieux du déroulement des parties ne se limitent plus à de simples donjons et on peut trouver des livres décrivant des épopées qui peuvent durer plusieurs mois d'affilés !</p>
+                
+                <p class="text-center m-4 fs-5">Le but du projet est d'aider les DM et les joueurs à centraliser toutes les informations dont ils ont besoin lors d'une partie et d'y avoir accès rapidement, sans devoir garder des dizaines de feuilles volantes.</p>
             </div>
         </div>
     </section>
 
-    <section class="team d-flex">
-        <div class="card mb-3 style=" width:="width:" 18rem;"=" 18rem;""="18rem;" "">
-            <svg xmlns="http://www.w3.org/2000/svg" class="d-block user-select-none" width="100%" height="200" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveaspectratio="xMidYMid slice" viewbox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
-                <rect width="100%" height="100%" fill="#868e96"></rect>
-                <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text>
-            </svg>
-            <div class="card-body">
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <section id="team" class="scroll">
+        <div class="d-flex justify-content-evenly align-items-center vh-100">
+            <div class="d-flex flex-column align-items-center w-25">
+                <div class="card mb-3 w-50">
+                <img src="{{ asset('images/avatar/ranger.jpg') }}" alt="logo-ranger">
+                    <div class="card-body">
+                        <p class="card-text text-center fw-bold fs-4">Nicolas Vidal</p>
+                    </div>
+                    <div class="card-body d-flex justify-content-evenly">
+                        <a href="#" class="card-link bg-secondary rounded-3 p-2">GitHub</a>
+                        <a href="#" class="card-link bg-secondary rounded-3 p-2">Linkedin</a>
+                    </div>
+                </div>
             </div>
-            <div class="card-body">
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
-            </div>
-        </div>
 
-        <div class="card mb-3 style=" width:="width:" 18rem;"=" 18rem;""="18rem;" "">
-            <svg xmlns="http://www.w3.org/2000/svg" class="d-block user-select-none" width="100%" height="200" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveaspectratio="xMidYMid slice" viewbox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
-                <rect width="100%" height="100%" fill="#868e96"></rect>
-                <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text>
-            </svg>
-            <div class="card-body">
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <div class="d-flex flex-column align-items-center w-25">
+                <div class="card mb-3 w-50">
+                    <img src="{{ asset('images/avatar/voleur.jpg') }}" alt="logo-ranger">
+                    <div class="card-body">
+                        <p class="card-text text-center fw-bold fs-4">Nael Broussard</p>
+                    </div>
+                    <div class="card-body d-flex justify-content-evenly">
+                        <a href="#" class="card-link bg-secondary rounded-3 p-2">GitHub</a>
+                        <a href="#" class="card-link bg-secondary rounded-3 p-2">Linkedin</a>
+                    </div>
+                </div>
             </div>
-            <div class="card-body">
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
-            </div>
-        </div>
 
-        <div class="card mb-3 style=" width:="width:" 18rem;"=" 18rem;""="18rem;" "">
-            <svg xmlns="http://www.w3.org/2000/svg" class="d-block user-select-none" width="100%" height="200" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveaspectratio="xMidYMid slice" viewbox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
-                <rect width="100%" height="100%" fill="#868e96"></rect>
-                <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text>
-            </svg>
-            <div class="card-body">
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <div class="d-flex flex-column align-items-center w-25">
+                <div class="card mb-3 w-50">
+                    <img src="{{ asset('images/avatar/magicienne.jpg') }}" alt="logo-ranger">
+                    <div class="card-body">
+                        <p class="card-text text-center fw-bold fs-4">Cecile Bouche</p>
+                    </div>
+                    <div class="card-body d-flex justify-content-evenly">
+                        <a href="#" class="card-link bg-secondary rounded-3 p-2">GitHub</a>
+                        <a href="#" class="card-link bg-secondary rounded-3 p-2">Linkedin</a>
+                    </div>
+                </div>
             </div>
-            <div class="card-body">
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
-            </div>
-        </div>
+
+        </div>      
     </section><!-- team -->
 </div><!-- Main -->
 
+{% endblock %}
+
+{% block javascripts %}
+{# {{ encore_entry_script_tags('scroll') }} #}
 {% endblock %}

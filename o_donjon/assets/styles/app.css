@@ -14,6 +14,14 @@ body {
     background-attachment: scroll;
 }
 
+.big-title {
+    font-size: 5em;
+}
+
+.dot {
+    width: 5%;
+}
+
 .login__container {
   width: 90%;
   margin: auto;
@@ -28,4 +36,5 @@ body {
 .login__container__comment {
   text-align: right;
 }
+
 
