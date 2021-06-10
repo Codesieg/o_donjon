@@ -30,6 +30,10 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
  * )
  */
 
+/**
+ * @Route("/Api/V1", name="api_v1_", methods={"GET"})
+ */
+
 class UserController extends AbstractController
 {
     /**
