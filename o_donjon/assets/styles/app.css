@@ -37,3 +37,9 @@ body {
 .login__container__comment {
     text-align: right;
 }
+
+/* player space */
+
+.card-img {
+    height: 50%;
+}

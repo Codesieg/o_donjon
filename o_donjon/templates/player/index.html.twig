@@ -6,22 +6,69 @@
 <div class="container" >
 
     <div class="row">
-        <h1>Espace joueur</h1>
+        <h1 class="text-center mb-3">Espace joueur</h1>
     </div>
     <div class="row">
-        <div class="col-12 col-md-6">
-            <h2>Vos campagnes</h2>
-            <div class="row">
-                <form>
+        <div class="col-12 col-lg-6">
+            <h2 class="text-center mb-3">Vos campagnes</h2>
+            <div class="row mb-3">
+                <form action="" method="post">
                     <div class="form-group">
-                        <label for="campaignId" class="form-label mt-4">Password</label>
-                        <input type="password" class="form-control" id="campaignId" placeholder="Password">
+                        <input type="text" class="form-control" id="campaignId" placeholder="Rejoindre une campagne (code d'invitation)">
                     </div>
                 </form>
             </div>
+            <div class="row mb-3">
+                <form action="" method="post">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="campaignFind" placeholder="Chercher une campagne">
+                    </div>
+                </form>
+            </div>
+            <div class="row">
+                {% for campaign in campaigns %}
+                    <div class="col-12 col-lg-6 mb-3">
+                        <div class="card bg-dark text-white">
+                            <img src="{{ asset('images/bg.campaign.jpg') }}" class="card-img" alt="image de la campagne">
+                            <div class="card-img-overlay">
+                                <h5 class="card-title">{{ campaign.name }}</h5>
+                                <p class="card-text">Créé par {{ campaign.owner.name }} le {{ campaign.createdAt|date("d/m/Y") }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
         </div>
-        <div class="col-12 col-md-6">
-            <h2>Vos personnages</h2>
+        <div class="col-12 col-lg-6">
+            <h2 class="text-center mb-3">Vos personnages</h2>
+            <div class="row mb-3">
+                <div class="col-12">
+                    <a class="btn btn-primary" type="button" href="">Créer un personnage</a>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <form action="" method="post">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="campaignFind" placeholder="Chercher un personnage">
+                    </div>
+                </form>
+            </div>
+            <div class="row">
+                {% for character in characters %}
+                    <div class="col-12 col-lg-6 mb-3">
+                        <div class="card bg-dark text-white">
+                            <img src="{{ asset('images/bg.character.jpg') }}" class="card-img" alt="image du personnage">
+                            <div class="card-img-overlay">
+                                <h5 class="card-title">{{ character.name }}</h5>
+                                <h6 class="card-subtitle">{{ character.race.name }}</h6>
+                                {% if character.campaign %}
+                                <p class="card-text">{{ character.campaign.name }}</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
 
