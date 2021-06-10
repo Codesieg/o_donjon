@@ -1,8 +1,23 @@
 body {
-    background-color: lightgray;
+  background-color: lightgray;
 }
 
 .logo {
-    width: 5%;
-    margin-right: 2%;
+  width: 5%;
+  margin-right: 2%;
+}
+
+.login__container {
+  width: 90%;
+  margin: auto;
+  margin-top: 5%;
+}
+
+.login__container__submit {
+  margin: auto;
+  margin-top: 5%;
+}
+
+.login__container__comment {
+  text-align: right;
 }
