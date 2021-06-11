@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Controller\Api\V1;
+namespace App\Controller;
 
 use App\Entity\Campaign;
 use App\Entity\User;
 use App\Form\CampaignType;
 use App\Form\UserType;
+use App\Form\RegisterType;
 use App\Repository\CampaignRepository;
 use App\Repository\UserRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -15,11 +16,52 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-/**
-* @Route("/api", name="api_")
-*/
+
 class UserController extends AbstractController
 {
+    
+    /**
+     * @Route("/user/register", name="user_register")
+     */
+    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
+    {   
+        // dd($request);
+        
+        // New user creation
+        $user = new User();
+
+        // Form creation linked to new user 
+        $form = $this->createForm(RegisterType::class, $user);
+
+        // Form handling with request
+        $form->handleRequest($request);
+        // dd($form->isValid());
+
+        // If form submitting and validating Ok, then database update 
+        if ($form->isSubmitted() && $form->isValid()) {
+            
+            // dd($form);
+            // Password encoding
+            $user->setPassword($passwordEncoder->encodePassword($user, $user->getPassword()));
+
+            // Database update
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Vous êtes enregistré. Vous pouvez maintenant vous connecter.');
+
+            return $this->redirectToRoute('app_login');
+        }
+
+        // If form submitting and validation NOT Ok, then registration form display
+        return $this->render('user/register.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    
+    }
+    
+    
     /**
      * @Route("/user", name="browse", methods={"GET"})
      */
@@ -34,46 +76,7 @@ class UserController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/login", name="add", methods={"POST"})
-     */
-    public function add(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
-    {   
-        // on créé un objet User
-        $user = new User();
-
-        // on créer un formulaire pour la classe User
-        $form = $this->createForm(UserType::class, $user, ['csrf_protection' => false]);
-
-        // on récupère les informations de la requête
-        $sentData = json_decode($request->getContent(), true);
-
-        // on envoie les informations dans le formulaire
-        $form->submit($sentData);
-
-        // si les données sont valides
-        if ($form->isValid()) {
-
-            // on récupère le mdp saisi par l'utilisateur
-            $password = $sentData['password'];
-
-            // on encode le mdp
-            $user->setPassword($passwordEncoder->encodePassword($user, $password));
-
-            // on envoie les données à la BDD
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($user);
-            $em->flush();
-            
-            // on retourne l'utilisateur créé
-            return $this->json($user, 201, [], [
-                'groups' => ['read_user'],
-            ]);
-        }
-
-        // si le formulaire n'est pas valide on retourne les erreurs
-        return $this->json($form->getErrors(true, false)->__toString(), 400);
-    }
+    
 
     /**
      * @Route("/user/{id}", name="read", methods={"GET"}, requirements={"id": "\d+"})

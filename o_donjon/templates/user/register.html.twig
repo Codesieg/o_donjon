@@ -1,0 +1,32 @@
+{% include 'assets/head.html.twig' %}
+
+{% include 'assets/navbar.home.html.twig' %}
+
+{% block body %}
+
+    <div class="login"> 
+
+        <h1 class="h3 mb-3 font-weight-normal login__title">Inscription...</h1>
+
+        <form method="post" class="login__form">
+
+                <img class="login__form__logo" src="{{ asset('images/logo_odonjon.png') }}" alt="Logo O'Donjon">
+                <div class="login__form__fields">
+                    {{ form_row(form.email) }}
+                    {{ form_row(form.name) }}
+                    {{ form_row(form.password) }}
+                    {{ form_row(form._token) }}
+                    <button class="btn btn-lg btn-secondary login__form__signin" type="submit">
+                        Valider
+                    </button>
+                </div>
+
+        </form>
+
+        <h1 class="h3 mb-3 font-weight-normal login__comment">...O'Donjon</h1>
+
+    </div>
+
+{% endblock %}
+
+{% include 'assets/script.html.twig' %}
