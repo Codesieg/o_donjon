@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
-     * @Route("/npc", name="npc_")
+     * @Route("/api/npc", name="api_npc_")
      */
 
 class NpcController extends AbstractController

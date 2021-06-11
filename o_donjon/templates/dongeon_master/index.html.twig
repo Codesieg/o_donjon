@@ -1,0 +1,54 @@
+{% include 'assets/head.html.twig' %}
+{% include 'assets/navbar.home.html.twig' %}
+
+{% block title %}Dongeon Master Room{% endblock %}
+
+{% block body %}
+
+
+<section class="d-flex flex-column mt-5">
+    <div class="new-campaign d-flex justify-content-between border-bottom border-primary mx-5">
+        <h1 class="mx-5 pb-3">Mes Campagnes</h1>
+        <div class="d-flex flex-column justify-content-center me-5"><a href="" class="btn btn-secondary">Créer une campagne</a></div>
+    </div>
+    <div class="d-flex flex-column align-items-center ">
+        <p class="fs-3 mt-4">Vous n'avez pas rejoins ou créé de campagne !</p>
+        <p>Pour rejoindre une campagne, demandez le code d'invitation à un Maitre du dongeon de vous en transmettre un.</p>
+        <a href="" class="btn btn-secondary">Créer une campagne</a>
+    </div>
+</section>
+    <section id="team" class="scroll">
+        <div class="d-flex justify-content-between align-items-center mt-5 ">
+
+            <div class="d-flex flex-column align-items-center w-50">
+                <div class="card mb-3 w-50">
+                    <img src="{{ asset('images/avatar/magicienne.jpg') }}" alt="logo-ranger">
+                    <div class="card-body">
+                        <p class="card-text text-center fw-bold">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis similique reprehenderit sapiente incidunt commodi vitae voluptatum quasi, consequuntur quo tempore aliquid facere quos dicta at soluta rem magni totam dolorum aut, dignissimos libero itaque praesentium. Veritatis porro odit tempora modi aliquid, sapiente sunt architecto quaerat illum ex a, fugit rem?</p>
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="d-flex flex-column align-items-center w-50">
+                <div class="card mb-3 w-50">
+                    <img src="{{ asset('images/avatar/magicienne.jpg') }}" alt="logo-ranger">
+                    <div class="card-body">
+                        <p class="card-text text-center fw-bold">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis similique reprehenderit sapiente incidunt commodi vitae voluptatum quasi, consequuntur quo tempore aliquid facere quos dicta at soluta rem magni totam dolorum aut, dignissimos libero itaque praesentium. Veritatis porro odit tempora modi aliquid, sapiente sunt architecto quaerat illum ex a, fugit rem?</p>
+                    </div>
+                    
+                </div>
+            </div>
+
+        <div class="d-flex flex-column align-items-center w-50">
+                <div class="card mb-3 w-50">
+                    <img src="{{ asset('images/avatar/magicienne.jpg') }}" alt="logo-ranger">
+                    <div class="card-body">
+                        <p class="card-text text-center fw-bold">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis similique reprehenderit sapiente incidunt commodi vitae voluptatum quasi, consequuntur quo tempore aliquid facere quos dicta at soluta rem magni totam dolorum aut, dignissimos libero itaque praesentium. Veritatis porro odit tempora modi aliquid, sapiente sunt architecto quaerat illum ex a, fugit rem?</p>
+                    </div>
+                    
+                </div>
+            </div>
+</div>      
+    </section>
+{% endblock %}

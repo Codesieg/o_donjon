@@ -32,7 +32,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 
 /**
-     * @Route("/character", name="character")
+     * @Route("/api/character", name="api_character_")
      * 
      */
 class CharacterController extends AbstractController

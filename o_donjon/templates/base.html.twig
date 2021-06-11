@@ -23,20 +23,20 @@
           <div class="collapse navbar-collapse" id="navbarColor02">
             <ul class="navbar-nav me-auto">
               <li class="nav-item">
-                <a class="nav-link active" href="#">Home
+                <a class="nav-link active" href="#home">Home
                   <span class="visually-hidden">(current)</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Le Projet</a>
+                <a class="nav-link" href="#project">Le Projet</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">La Team</a>
+                <a class="nav-link" href="#team">La Team</a>
               </li>
             </ul>
             <ul class="d-flex navbar-nav me-3">
               <li class="nav-item">
-                <a class="nav-link" href="#">Connexion</a>
+                <a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
               </li>
             </ul>
           </div>
@@ -46,6 +46,7 @@
     {% block body %}{% endblock %}
   </body>
 </html>
+<script src=""></script>
 {% block javascripts %}
   {{ encore_entry_script_tags('app') }}
 {% endblock %}

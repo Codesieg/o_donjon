@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
-     * @Route("/map", name="map_")
+     * @Route("/api/map", name="api_map_")
      */
 
 class MapController extends AbstractController
