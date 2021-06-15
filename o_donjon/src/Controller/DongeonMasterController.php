@@ -17,4 +17,14 @@ class DongeonMasterController extends AbstractController
             'controller_name' => 'DongeonMasterController',
         ]);
     }
+
+        /**
+     * @Route("/dm/campaigns", name="campaigns")
+     */
+    public function read(): Response
+    {
+        return $this->render('dongeon_master/read.html.twig', [
+            'controller_name' => 'DongeonMasterController',
+        ]);
+    }
 }
