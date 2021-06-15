@@ -13,9 +13,13 @@ class StoryType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('description')
+            ->add('description', CKEditorType::class, [
+                'config'      => array('uiColor' => '#ffffff'),
+                ])
             ->add('isDone')
-            ->add('report')
+            ->add('report', CKEditorType::class, [
+                'config'      => array('uiColor' => '#ffffff'),
+                ])
             // ->add('createdAt')
             // ->add('updatedAt')
             // ->add('campaign')

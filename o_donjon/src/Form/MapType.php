@@ -14,7 +14,10 @@ class MapType extends AbstractType
         $builder
             ->add('filePath')
             ->add('name')
-            ->add('description')
+            ->add('description', CKEditorType::class, [
+                'config'      => array('uiColor' => '#ffffff'),
+                ])
+
             // ->add('createdAt')
             // ->add('updatedAt')
             // ->add('campaign')
