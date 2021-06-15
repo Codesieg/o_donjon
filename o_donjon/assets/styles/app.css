@@ -92,7 +92,15 @@ body {
 /* player space */
 
 .card-subtitle {
-  font-style: italic;
+    font-style: italic;
+}
+
+
+/* Campaign */
+
+.campaign__invitation-code-icone {
+    width: 4%;
+    cursor: pointer;
 }
 
 /* connected homepage */
@@ -106,4 +114,5 @@ body {
   background-image: url("../../public/images/img-character-2.jpeg");
   background-size: cover;
 }
+
 
