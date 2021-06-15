@@ -1,0 +1,44 @@
+{% include "assets/head.html.twig" %}
+{% include "assets/navbar.connected.html.twig" %}
+
+{% block body %}
+
+<div class="container">
+
+    <div class="row">
+        <h1 class="text-center my-3">Création d'un personnage</h1>
+    </div>
+
+    <form method="post" class="login__form">
+
+        <div class="row">
+
+            <div class="col-12 col-lg-6 mb-3">
+                {{ form_widget(form.name, { 'attr': {'placeholder': 'Veuillez entrez le nom de votre personnage', 'required':'required'}})}}
+            </div>
+
+            <div class="col-12 col-lg-6 mb-3">
+                {{ form_widget(form.race.name, { 'attr': {'placeholder': 'Veuillez entrez la race de votre personnage', 'required':'required'}})}}
+            </div>
+
+            <div class="col-12 col-lg-6 mb-3">
+                {{ form_widget(form.class.name, { 'attr': {'placeholder': 'Veuillez entrez la classe de votre personnage', 'required':'required'}})}}
+            </div>
+
+            {{ form_row(form._token) }}
+
+            <div class="col-12 col-lg-6 mb-3">
+                <button class="btn btn-secondary w-100" type="submit">
+                    Créer ce personnage
+                </button>
+            </div>
+            
+        </div>
+
+    </form>
+
+</div>
+    
+{% endblock %}
+
+{% include "assets/script.html.twig" %}

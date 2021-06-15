@@ -29,7 +29,7 @@ class PlayerSpaceController extends AbstractController
         // on récupère les personnages associés à l'utilisateur
         $campaigns = $campaignRepository->findByUser($userId);
         
-        return $this->render('player/index.html.twig', [
+        return $this->render('player/home.html.twig', [
             'characters' => $characters,
             'campaigns' => $campaigns,
         ]);
