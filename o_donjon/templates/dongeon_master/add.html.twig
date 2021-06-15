@@ -1,0 +1,27 @@
+{% include 'assets/head.html.twig' %}
+{% include 'assets/navbar.dm.html.twig' %}
+
+{% block body %}
+
+<section class="d-flex flex-column mt-5">
+    <div class="campaign d-flex justify-content-between border-bottom border-primary mx-5 mb-5">
+        <h1 class="pb-3 text-secondary">Création d'une campagne</h1>
+    </div>
+        {{ form_start(form) }}
+    <div class="form-group mx-5 d-flex flex-column align-items-center">
+        <div class="form-group w-50 text-secondary">
+                <div class="mt-2">
+                    {{ form_row(form.name, { 'label': 'Nom de la campagne' }) }}
+                </div>
+                <div class="mt-2">
+                    {{ form_row(form.description, { 'label': 'Description de la campagne' }) }}
+                </div>
+                <div class="mt-2">
+                    {{ form_row(form.memo, { 'label': 'Memo de la campagne' }) }}
+                </div>
+                <button class="btn btn-lg btn-secondary login__form__signin" type="submit">Valider</button>
+        {{ form_end(form) }}
+        </div>
+    </div>
+</section>
+{% endblock %}

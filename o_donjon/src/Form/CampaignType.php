@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Campaign;
 use Symfony\Component\Form\AbstractType;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,14 +14,20 @@ class CampaignType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('description')
-            ->add('memo')
-            ->add('isArchived')
+            // ->add('isArchived')
+            ->add('description', CKEditorType::class, [
+                'config'      => array('uiColor' => '#ffffff'),
+                ])
+            ->add('memo', CKEditorType::class, [
+                'config'      => array('uiColor' => '#ffffff'),
+                ])
+            // ->add('description')
+            // ->add('memo')
             // ->add('invitationCode')
             // ->add('createdAt')
             // ->add('updatedAt')
             // ->add('owner')
-            ->add('users')
+            // ->add('users')
         ;
     }
 

@@ -8,64 +8,36 @@
 <section class="d-flex flex-column mt-5">
     <div class="new-campaign d-flex justify-content-between border-bottom border-primary mx-5">
         <h1 class="mx-5 pb-3 text-secondary">Mes Campagnes</h1>
-        <div class="d-flex flex-column justify-content-center me-5"><a href="" class="btn btn-secondary">Créer une campagne</a></div>
+        <div class="d-flex align-items-center me-5">
+        <a href="{{ path('dm_add_campaign') }}" class="btn btn-secondary me-2">Créer une campagne</a>
+        <a href="{{ path('dm_browse_archived_campaign') }}" class="btn btn-secondary">Campagnes Archivées</a>
+        </div>
     </div>
     <div class="d-flex flex-column align-items-center ">
         <p class="fs-3 mt-4 text-secondary">Vous n'avez pas rejoins ou créé de campagne !</p>
         <p class="text-secondary">Pour rejoindre une campagne, demandez le code d'invitation à un Maitre du dongeon de vous en transmettre un.</p>
-        <a href="" class="btn btn-secondary">Créer une campagne</a>
+        <a href="{{ path('dm_add_campaign') }}" class="btn btn-secondary">Créer une campagne</a>
     </div>
 </section>
     <section id="team" class="scroll">
         <div class="d-flex justify-content-evenly align-items-center mt-5 flex-wrap">
-
+{% for campaign in campaigns %}
             <div class="d-flex flex-column align-items-center w-25">
                 <div class="card mb-3 w-75">
                     <img class ="overflow-hidden" src="{{ asset('images/campaigns/campaign_1.jpg') }}" alt="logo-campaign">
                     <div class="card-body">
-                        <p class="card-text text-center fw-bold fs-3">Campagne 1</p>
-                        <p class="card-text text-center fw-bold">Créer le 20/05/2021</p>
-                        <p class="card-text text-center fw-bold">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis similique reprehenderit sapiente incidunt commodi vitae voluptatum quasi, consequuntur quo tempore aliquid facere quos dicta at soluta rem magni totam dolorum aut, dignissimos...</p>
+                        <p class="card-text text-center fw-bold fs-3">{{ campaign.name }}</p>
+                        <p class="card-text text-center fw-bold">Créer le {{ campaign.createdAt|date("m/d/Y") }}</p>
+                        <p class="card-text text-center fw-bold">{{ campaign.description }}...</p>
                     </div>
                     <div class="card-body d-flex justify-content-evenly">
-                        <a href="#" class="card-link bg-secondary rounded-3 p-2 text-decoration-none">Détails</a>
-                        <a href="#" class="card-link bg-secondary rounded-3 p-2 text-decoration-none">Archiver</a>
-                        <a href="#" class="card-link bg-secondary rounded-3 p-2 text-danger text-decoration-none">Supprimer</a>
+                        <a href="{{ path('dm_read_campaign', {'id': campaign.id}) }}" class="card-link bg-secondary rounded-3 p-2 text-decoration-none">Détails</a>
+                        <a href="{{ path('dm_archived_campaign', {'id': campaign.id}) }}" class="card-link bg-secondary rounded-3 p-2 text-decoration-none">Archiver</a>
+                        <a href="{{ path('dm_delete_campaign', {'id': campaign.id}) }}" class="card-link bg-secondary rounded-3 p-2 text-danger text-decoration-none">Supprimer</a>
                     </div>
                 </div>
             </div>
-
-            <div class="d-flex flex-column align-items-center w-25">
-                <div class="card mb-3 w-75 ">
-                    <img class ="overflow-hidden" src="{{ asset('images/campaigns/campaign_1.jpg') }}" alt="logo-campaign">
-                    <div class="card-body">
-                        <p class="card-text text-center fw-bold fs-3">Campagne 1</p>
-                        <p class="card-text text-center fw-bold">Créer le 20/05/2021</p>
-                        <p class="card-text text-center fw-bold">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis similique reprehenderit sapiente incidunt commodi vitae voluptatum quasi, consequuntur quo tempore aliquid facere quos dicta at soluta rem magni totam dolorum aut, dignissimos...</p>
-                    </div>
-                    <div class="card-body d-flex justify-content-evenly">
-                        <a href="#" class="card-link bg-secondary rounded-3 p-2 text-decoration-none">Détails</a>
-                        <a href="#" class="card-link bg-secondary rounded-3 p-2 text-decoration-none">Archiver</a>
-                        <a href="#" class="card-link bg-secondary rounded-3 p-2 text-danger text-decoration-none">Supprimer</a>
-                    </div>
-                </div>
-            </div>
-
-        <div class="d-flex flex-column align-items-center w-25">
-                <div class="card mb-3 w-75">
-                    <img class ="overflow-hidden" src="{{ asset('images/campaigns/campaign_1.jpg') }}" alt="logo-campaign">
-                    <div class="card-body">
-                        <p class="card-text text-center fw-bold fs-3">Campagne 1</p>
-                        <p class="card-text text-center fw-bold">Créer le 20/05/2021</p>
-                        <p class="card-text text-center fw-bold">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis similique reprehenderit sapiente incidunt commodi vitae voluptatum quasi, consequuntur quo tempore aliquid facere quos dicta at soluta rem magni totam dolorum aut, dignissimos...</p>
-                    </div>
-                    <div class="card-body d-flex justify-content-evenly">
-                        <a href="#" class="card-link bg-secondary rounded-3 p-2 text-decoration-none">Détails</a>
-                        <a href="#" class="card-link bg-secondary rounded-3 p-2 text-decoration-none">Archiver</a>
-                        <a href="#" class="card-link bg-secondary rounded-3 p-2 text-danger text-decoration-none">Supprimer</a>
-                    </div>
-                </div>
-            </div>
+{% endfor %}
 </div>      
     </section>
 {% endblock %}
