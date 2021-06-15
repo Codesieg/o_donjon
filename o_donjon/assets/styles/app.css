@@ -1,10 +1,10 @@
 body {
-    background-color: lightgray;
+  background-color: lightgray;
 }
 
 .logo {
-    width: 5%;
-    margin-right: 2%;
+  width: 5%;
+  margin-right: 2%;
 }
 
 .background {
@@ -72,19 +72,30 @@ body {
   .login__form {
     flex-direction: row;
   }
-} */  
+} */
 
 .big-title {
-    font-size: 5em;
+  font-size: 5em;
 }
 
 .dot {
-    width: 5%;
+  width: 5%;
 }
 
 /* player space */
 
 .card-subtitle {
-    font-style: italic;
+  font-style: italic;
 }
 
+/* connected homepage */
+
+.connected--dm {
+  background-image: url("../../public/images/img-campaign-1.png");
+  background-size: cover;
+}
+
+.connected--player {
+  background-image: url("../../public/images/img-character-2.jpeg");
+  background-size: cover;
+}
