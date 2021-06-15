@@ -20,7 +20,7 @@ class CampaignType extends AbstractType
             // ->add('createdAt')
             // ->add('updatedAt')
             // ->add('owner')
-            ->add('users')
+            // ->add('users')
         ;
     }
 
