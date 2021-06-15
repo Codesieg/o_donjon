@@ -118,4 +118,15 @@ class CharacterController extends AbstractController
         ]); 
     }
 
+    /**
+     * @Route("/{id}", name="read", methods={"GET"}, requirements={"id": "\d+"})
+     */
+    public function read(Character $character): Response
+    {   
+        
+        return $this->render('character/read.html.twig', [
+            'character' => $character,
+        ]); 
+    }
+
 }

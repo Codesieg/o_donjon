@@ -1,0 +1,414 @@
+{% include "assets/head.html.twig" %}
+{% include "assets/navbar.connected.html.twig" %}
+
+{% block body %}
+
+<div class="container">
+
+    <div class="row my-3 d-flex">
+
+        <div class="col-12 col-lg-6 mb-3">
+            <div class="card bg-dark text-white">
+                <img src="{{ asset('images/bg.character.jpg') }}" class="card-img" alt="image du personnage">
+                <div class="card-body">
+                    <h5 class="card-title">{{ character.name }}</h5>
+                    <h6 class="card-subtitle">{{ character.race.name }}</h6>
+                    {% if character.campaign %}
+                        <p class="card-text text-center">{{ character.campaign.name }}</p>
+                    {% else %}
+                        <p class="card-text text-center">Sans campagne</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-lg-6">
+            <div class="card bg-dark text-white p-3">
+                <div class="row">
+                    <div class="col-12 info-title">
+                        <h5>Statistics</h5>
+                        <div class="row mb-3">
+                            <div class="col-4">
+                                <div class="statistic p-2">
+                                    <h6>Strength</h6>
+                                    <div class="row">
+                                        <div class="col-6 icon_container">
+                                            <img src="{{ asset('icons/bodybuilder.svg') }}" class="icon m-2">
+                                        </div>
+                                        <div class="col-6 statistic_value mt-4">
+                                            {{ character.statistics.strength }}
+                                        </div>
+                                    </div>
+                                    <p class="statistic_modifier">{{ ((character.statistics.strength - 10)/2)|round(0, 'floor')}}</p>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="statistic p-2">
+                                    <h6>Dexterity</h6>
+                                    <div class="row">
+                                        <div class="col-6 icon_container">
+                                            <img src="{{ asset('icons/archery.svg') }}" class="icon m-2">
+                                        </div>
+                                        <div class="col-6 statistic_value mt-4">
+                                            {{ character.statistics.dexterity }}
+                                        </div>
+                                    </div>
+                                    <p class="statistic_modifier">{{ ((character.statistics.dexterity - 10)/2)|round(0, 'floor')}}</p>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="statistic p-2">
+                                    <h6>Consitution</h6>
+                                    <div class="row">
+                                        <div class="col-6 icon_container">
+                                            <img src="{{ asset('icons/healthcare.svg') }}" class="icon m-2">
+                                        </div>
+                                        <div class="col-6 statistic_value mt-4">
+                                            {{ character.statistics.constitution }}
+                                        </div>
+                                    </div>
+                                    <p class="statistic_modifier">{{ ((character.statistics.constitution - 10)/2)|round(0, 'floor')}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-4">
+                                <div class="statistic p-2">
+                                    <h6>Wisdom</h6>
+                                    <div class="row">
+                                        <div class="col-6 icon_container">
+                                            <img src="{{ asset('icons/wisdom.svg') }}" class="icon m-2">
+                                        </div>
+                                        <div class="col-6 statistic_value mt-4">
+                                            {{ character.statistics.wisdom }}
+                                        </div>
+                                    </div>
+                                    <p class="statistic_modifier">{{ ((character.statistics.wisdom - 10)/2)|round(0, 'floor')}}</p>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="statistic p-2">
+                                    <h6>Intelligence</h6>
+                                    <div class="row">
+                                        <div class="col-6 icon_container">
+                                            <img src="{{ asset('icons/thought.svg') }}" class="icon m-2">
+                                        </div>
+                                        <div class="col-6 statistic_value mt-4">
+                                            {{ character.statistics.intelligence }}
+                                        </div>
+                                    </div>
+                                    <p class="statistic_modifier mt-3">{{ ((character.statistics.intelligence - 10)/2)|round(0, 'floor')}}</p>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="statistic p-2">
+                                    <h6>Charisma</h6>
+                                    <div class="row">
+                                        <div class="col-6 icon_container">
+                                            <img src="{{ asset('icons/jesus.svg') }}" class="icon m-2">
+                                        </div>
+                                        <div class="col-6 statistic_value mt-4">
+                                            {{ character.statistics.charisma }}
+                                        </div>
+                                    </div>
+                                    <p class="statistic_modifier">{{ ((character.statistics.charisma - 10)/2)|round(0, 'floor')}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row my-3">
+        <div class="col-12 col-lg-6">
+            <div class="card bg-dark text-white p-3">
+                <div class="row mb-3">
+                    <div class="col-12 info-title">
+                        <h5>HP</h5>
+                        <p>{{ character.caracteristics.currentHP }} / {{ character.caracteristics.totalHP }}</p>
+                        <div class="progress">
+                            <div class="progress-bar bg-info" role="progressbar" style="width: {{ character.caracteristics.currentHP / character.caracteristics.totalHP * 100 }}%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="{{ character.caracteristics.totalHP }}"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-12 info-title">
+                        <h5>Fight</h5>
+                        <div class="row mt-3">
+                            <div class="col-3">
+                                <div class="statistic p-2">
+                                    <h6>Initiative</h6>
+                                    <div class="row">
+                                        <div class="col-6 icon_container">
+                                            <img src="{{ asset('icons/dice.svg') }}" class="icon">
+                                        </div>
+                                        <div class="col-6 statistic_value">
+                                            {{ character.initiative }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="statistic p-2">
+                                    <h6>Speed</h6>
+                                    <div class="row">
+                                        <div class="col-6 icon_container">
+                                            <img src="{{ asset('icons/speed.svg') }}" class="icon">
+                                        </div>
+                                        <div class="col-6 statistic_value">
+                                            {{ character.caracteristics.speed }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="statistic p-2">
+                                    <h6>Amor Class</h6>
+                                    <div class="row">
+                                        <div class="col-6 icon_container">
+                                            <img src="{{ asset('icons/shield.svg') }}" class="icon">
+                                        </div>
+                                        <div class="col-6 statistic_value">
+                                            {{ character.caracteristics.armorClass }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="statistic p-2">
+                                    <h6>Hit dice</h6>
+                                    <div class="row">
+                                        <div class="col-6 icon_container">
+                                            <img src="{{ asset('icons/poison.svg') }}" class="icon">
+                                        </div>
+                                        <div class="col-6 statistic_value">
+                                            {{ character.caracteristics.hitDice }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-12 info-title">
+                        <h5>Saving Throws</h5>
+                        <div class="row mt-3">
+                             <div class="col-6">
+                                <div class="statistic p-3">
+                                    <p>{{ character.caracteristics.deathSavesSuccess }} / 3</p>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: {{ character.caracteristics.deathSavesSuccess / 3 * 100 }}%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="3"></div>
+                                    </div>
+                                </div>
+                             </div>
+                             <div class="col-6">
+                                <div class="statistic p-3">
+                                    <p>{{ character.caracteristics.deathSavesFailures }} / 3</p>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-danger" role="progressbar" style="width: {{ character.caracteristics.deathSavesFailures / 3 * 100 }}%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="3"></div>
+                                    </div>
+                                </div>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-lg-6">
+            <div class="card bg-dark text-white p-3">
+                <div class="row mb-3">
+                    <div class="col-12 info-title">
+                        <h5>Saving throw</h5>
+                        <div class="row mt-3">
+                             <div class="col-4 mb-3">
+                                <div class="statistic pt-2 is-valid {% if character.savingThrowspell.strength == 1 %} statistic_ok {% else %} statistic_nok {% endif %}">
+                                    <h6>Strength</h6> 
+                                </div>
+                            </div>
+                             <div class="col-4 mb-3">
+                                <div class="statistic pt-2 is-valid {% if character.savingThrowspell.dexterity == 1 %} statistic_ok {% else %} statistic_nok {% endif %}">
+                                    <h6>Dexterity</h6> 
+                                </div>
+                            </div>
+                             <div class="col-4 mb-3">
+                                <div class="statistic pt-2 is-valid {% if character.savingThrowspell.constitution == 1 %} statistic_ok {% else %} statistic_nok {% endif %}">
+                                    <h6>Constitution</h6> 
+                                </div>
+                            </div>
+                             <div class="col-4 mb-3">
+                                <div class="statistic pt-2 is-valid {% if character.savingThrowspell.intelligence == 1 %} statistic_ok {% else %} statistic_nok {% endif %}">
+                                    <h6>Intelligence</h6> 
+                                </div>
+                            </div>
+                             <div class="col-4 mb-3">
+                                <div class="statistic pt-2 is-valid {% if character.savingThrowspell.wisdom == 1 %} statistic_ok {% else %} statistic_nok {% endif %}">
+                                    <h6>Wisdom</h6> 
+                                </div>
+                            </div>
+                             <div class="col-4 mb-3">
+                                <div class="statistic pt-2 is-valid {% if character.savingThrowspell.charisma == 1 %} statistic_ok {% else %} statistic_nok {% endif %}">
+                                    <h6>Charisma</h6> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-12 info-title">
+                        <h5>Skills</h5>
+                        <div class="row mt-3">
+                            <div class="col-4 mb-3">
+                                <div class="statistic pt-2 is-valid {% if character.skill.acrobatics == 1 %} statistic_ok {% else %} statistic_nok {% endif %}">
+                                    <h6>Acrobatics</h6> 
+                                </div>
+                            </div>
+                            <div class="col-4 mb-3">
+                                <div class="statistic pt-2 is-valid {% if character.skill.animalHandling == 1 %} statistic_ok {% else %} statistic_nok {% endif %}">
+                                    <h6>Animals</h6> 
+                                </div>
+                            </div>
+                            <div class="col-4 mb-3">
+                                <div class="statistic pt-2 is-valid {% if character.skill.arcana == 1 %} statistic_ok {% else %} statistic_nok {% endif %}">
+                                    <h6>Arcana</h6> 
+                                </div>
+                            </div>
+                            <div class="col-4 mb-3">
+                                <div class="statistic pt-2 is-valid {% if character.skill.athletics == 1 %} statistic_ok {% else %} statistic_nok {% endif %}">
+                                    <h6>Athletics</h6> 
+                                </div>
+                            </div>
+                            <div class="col-4 mb-3">
+                                <div class="statistic pt-2 is-valid {% if character.skill.deception == 1 %} statistic_ok {% else %} statistic_nok {% endif %}">
+                                    <h6>Deception</h6> 
+                                </div>
+                            </div>
+                            <div class="col-4 mb-3">
+                                <div class="statistic pt-2 is-valid {% if character.skill.history == 1 %} statistic_ok {% else %} statistic_nok {% endif %}">
+                                    <h6>History</h6> 
+                                </div>
+                            </div>
+                            <div class="col-4 mb-3">
+                                <div class="statistic pt-2 is-valid {% if character.skill.insight == 1 %} statistic_ok {% else %} statistic_nok {% endif %}">
+                                    <h6>Insight</h6> 
+                                </div>
+                            </div>
+                            <div class="col-4 mb-3">
+                                <div class="statistic pt-2 is-valid {% if character.skill.intimidation == 1 %} statistic_ok {% else %} statistic_nok {% endif %}">
+                                    <h6>Intimidation</h6> 
+                                </div>
+                            </div>
+                            <div class="col-4 mb-3">
+                                <div class="statistic pt-2 is-valid {% if character.skill.investigation == 1 %} statistic_ok {% else %} statistic_nok {% endif %}">
+                                    <h6>Investigation</h6> 
+                                </div>
+                            </div>
+                            <div class="col-4 mb-3">
+                                <div class="statistic pt-2 is-valid {% if character.skill.medecine == 1 %} statistic_ok {% else %} statistic_nok {% endif %}">
+                                    <h6>Medecine</h6> 
+                                </div>
+                            </div>
+                            <div class="col-4 mb-3">
+                                <div class="statistic pt-2 is-valid {% if character.skill.nature == 1 %} statistic_ok {% else %} statistic_nok {% endif %}">
+                                    <h6>Nature</h6> 
+                                </div>
+                            </div>
+                            <div class="col-4 mb-3">
+                                <div class="statistic pt-2 is-valid {% if character.skill.perception == 1 %} statistic_ok {% else %} statistic_nok {% endif %}">
+                                    <h6>Perception</h6> 
+                                </div>
+                            </div>
+                            <div class="col-4 mb-3">
+                                <div class="statistic pt-2 is-valid {% if character.skill.performance == 1 %} statistic_ok {% else %} statistic_nok {% endif %}">
+                                    <h6>Performance</h6> 
+                                </div>
+                            </div>
+                            <div class="col-4 mb-3">
+                                <div class="statistic pt-2 is-valid {% if character.skill.persuasion == 1 %} statistic_ok {% else %} statistic_nok {% endif %}">
+                                    <h6>Persuasion</h6> 
+                                </div>
+                            </div>
+                            <div class="col-4 mb-3">
+                                <div class="statistic pt-2 is-valid {% if character.skill.religion == 1 %} statistic_ok {% else %} statistic_nok {% endif %}">
+                                    <h6>Religion</h6> 
+                                </div>
+                            </div>
+                            <div class="col-4 mb-3">
+                                <div class="statistic pt-2 is-valid {% if character.skill.sleightOfHand == 1 %} statistic_ok {% else %} statistic_nok {% endif %}">
+                                    <h6>Sleight of hand</h6> 
+                                </div>
+                            </div>
+                            <div class="col-4 mb-3">
+                                <div class="statistic pt-2 is-valid {% if character.skill.stealth == 1 %} statistic_ok {% else %} statistic_nok {% endif %}">
+                                    <h6>Stealth</h6> 
+                                </div>
+                            </div>
+                            <div class="col-4 mb-3">
+                                <div class="statistic pt-2 is-valid {% if character.skill.survival == 1 %} statistic_ok {% else %} statistic_nok {% endif %}">
+                                    <h6>Survival</h6> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row my-3">
+        <div class="col-12">
+            <div class="card bg-dark text-white p-3">
+                <div class="info-title">
+                    <h5>Informations</h5>
+                    <div class="statistic pt-2 mb-3">
+                        <h6>Equipment</h6>
+                        <p>{{ character.equipment }}</p>
+                    </div>
+                    <div class="statistic pt-2 mb-3">
+                        <h6>Personality traits</h6>
+                        <p>{{ character.personalityTraits }}</p>
+                    </div>
+                    <div class="statistic pt-2 mb-3">
+                        <h6>Appearance</h6>
+                        <p>{{ character.appearance }}</p>
+                    </div>
+                    <div class="statistic pt-2 mb-3">
+                        <h6>Backstory</h6>
+                        <p>{{ character.backstory }}</p>
+                    </div>
+                    <div class="statistic pt-2 mb-3">
+                        <h6>Bonds</h6>
+                        <p>{{ character.bonds }}</p>
+                    </div>
+                    <div class="statistic pt-2 mb-3">
+                        <h6>Ideals</h6>
+                        <p>{{ character.ideals }}</p>
+                    </div>
+                    <div class="statistic pt-2 mb-3">
+                        <h6>Flaws</h6>
+                        <p>{{ character.flaws }}</p>
+                    </div>
+                    <div class="statistic pt-2 mb-3">
+                        <h6>Treasure</h6>
+                        <p>{{ character.treasure }}</p>
+                    </div>
+                    <div class="statistic pt-2 mb-3">
+                        <h6>Attacks & Spells</h6>
+                        <p>{{ character.attacksAndSpellcasting }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+</div>
+    
+{% endblock %}
+
+{% include "assets/script.html.twig" %}

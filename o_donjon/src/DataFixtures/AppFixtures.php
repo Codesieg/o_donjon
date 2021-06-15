@@ -814,8 +814,8 @@ class AppFixtures extends Fixture
             $caracteristic->setCurrentHP(random_int(1, 100));
             $caracteristic->setTotalHP(random_int(1, 100));
             $caracteristic->setHitDice(random_int(1, 20));
-            $caracteristic->setDeathSavesSuccess(random_int(1, 10));
-            $caracteristic->setDeathSavesFailures(random_int(1, 10));
+            $caracteristic->setDeathSavesSuccess(random_int(1, 3));
+            $caracteristic->setDeathSavesFailures(random_int(1, 3));
       
             
         }
