@@ -28,13 +28,15 @@
             <div class="row">
                 {% for campaign in campaigns %}
                     <div class="col-12 col-lg-6 mb-3">
-                        <div class="card bg-dark text-white">
-                            <img src="{{ asset('images/bg.campaign.jpg') }}" class="card-img" alt="image de la campagne">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ campaign.name }}</h5>
-                                <p class="card-text">Créé par {{ campaign.owner.name }} le {{ campaign.createdAt|date("d/m/Y") }}</p>
+                        <a class="link" href="">
+                            <div class="card bg-dark text-white">
+                                <img src="{{ asset('images/bg.campaign.jpg') }}" class="card-img" alt="image de la campagne">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ campaign.name }}</h5>
+                                    <p class="card-text">Créé par {{ campaign.owner.name }} le {{ campaign.createdAt|date("d/m/Y") }}</p>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 {% endfor %}
             </div>
@@ -56,18 +58,20 @@
             <div class="row">
                 {% for character in characters %}
                     <div class="col-12 col-lg-6 mb-3">
-                        <div class="card bg-dark text-white">
-                            <img src="{{ asset('images/bg.character.jpg') }}" class="card-img" alt="image du personnage">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ character.name }}</h5>
-                                <h6 class="card-subtitle">{{ character.race.name }}</h6>
-                                {% if character.campaign %}
-                                    <p class="card-text text-center">{{ character.campaign.name }}</p>
-                                {% else %}
-                                    <p class="card-text text-center">Sans campagne</p>
-                                {% endif %}
+                        <a class="link" href="{{ path('character_read', {'id': character.id }) }}">
+                            <div class="card bg-dark text-white">
+                                <img src="{{ asset('images/bg.character.jpg') }}" class="card-img" alt="image du personnage">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ character.name }}</h5>
+                                    <h6 class="card-subtitle">{{ character.race.name }}</h6>
+                                    {% if character.campaign %}
+                                        <p class="card-text text-center">{{ character.campaign.name }}</p>
+                                    {% else %}
+                                        <p class="card-text text-center">Sans campagne</p>
+                                    {% endif %}
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 {% endfor %}
             </div>

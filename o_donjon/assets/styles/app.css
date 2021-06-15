@@ -88,3 +88,43 @@ body {
     font-style: italic;
 }
 
+.link {
+  text-decoration: none;
+}
+
+/* Character */
+
+.icon {
+  max-width: 100%;
+}
+
+.info-title {
+  text-align: center;
+}
+
+.statistic {
+  border: 3px solid #fff;
+  border-radius: 5px;
+  margin: 0 5px;
+  padding: 3px;
+}
+
+.statistic_modifier {
+  border: 3px solid #fff;
+  border-radius: 5px;
+  margin: 3px 5px 0px;
+  padding: 3px;
+}
+
+.statistic_value {
+  font-size: 1.5em;
+}
+
+.statistic_ok {
+  border-color: #009670;
+}
+
+.statistic_nok {
+  border-color: #A22114;
+}
+
