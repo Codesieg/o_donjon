@@ -7,28 +7,28 @@
 
 <section class="d-flex flex-column mt-5">
     <div class="campaign d-flex justify-content-between border-bottom border-primary mx-5">
-        <h1 class="pb-3 text-secondary">Campagne 1</h1>
-        
+        <div>
+            <h1 class="text-secondary">{{ campaign.name }}</h1>
+                <div class="campaign__invitation-code d-flex align-items-center pb-3">
+                    <h4 class="text-secondary fw-bold me-2 align-self-center mb-0"> Code d'invitation : </h4>
+                    <p class="fs-5 me-2 text-secondary align-self-center mb-0">{{ campaign.invitationCode}}</p>
+                    <img class="campaign__invitation-code-icone" src="{{ asset('icone/copie.png') }}" alt="icone-copier">
+                </div>
+        </div>
         <div class="campaign__button d-flex">
-            <div class="d-flex flex-column justify-content-center me-5"><a href="" class="btn btn-secondary">Créer une campagne</a></div>
-            <div class="d-flex flex-column justify-content-center me-5"><a href="" class="btn btn-secondary">Modifier la campagne</a></div>
-            <div class="d-flex flex-column justify-content-center me-5"><a href="" class="btn btn-danger">Supprimer la campagne</a></div>
+            <div class="d-flex flex-column justify-content-center me-5"><a href="{{ path('dm_add_campaign') }}" class="btn btn-secondary">Créer une campagne</a></div>
+            <div class="d-flex flex-column justify-content-center me-5"><a href="{{ path('dm_edit_campaign', {'id': campaign.id}) }}" class="btn btn-secondary">Modifier la campagne</a></div>
+            <div class="d-flex flex-column justify-content-center me-5"><a href="{{ path('dm_delete_campaign', {'id': campaign.id}) }}" class="btn btn-danger">Supprimer la campagne</a></div>
         </div>
     </div>
     <div class="d-flex justify-content-center mx-5 mt-2">
         <div class="campaign__description mx-2 w-50">
             <h4 class="text-secondary fw-bold"> Déscription :</h4>
-            <p class="fs-5 mt-4 text-secondary overflow-auto h-75">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum, eaque? Omnis libero reprehenderit provident quas saepe dolor vero, dolorem voluptate. Veritatis enim necessitatibus suscipit exercitationem eum, labore illo inventore cupiditate ratione quae perspiciatis tempore soluta officia molestiae tenetur. Mollitia ea ducimus facilis recusandae, repudiandae atque ipsam reprehenderit quam quia! Laudantium maiores labore odio adipisci sit, tempora optio nostrum eum, doloremque quam enim laborum consectetur natus, perspiciatis nesciunt numquam officiis explicabo veniam. Praesentium corrupti rem perferendis temporibus ipsa vitae, aliquid dolorem, consequatur suscipit hic officia! Quae quisquam dicta minima maiores nisi nostrum necessitatibus! Ab a fugiat nemo cupiditate praesentium nihil rerum..</p>
+            <p class="fs-5 mt-4 text-secondary overflow-auto h-75">{{ campaign.description }}</p>
         </div>
         <div class="campaign__memo mx-2 w-50">
             <h4 class="text-secondary fw-bold"> Mémo :</h4>
-            <p class="fs-5 mt-4 text-secondary overflow-auto h-50 mb-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore distinctio vitae maxime cumque ipsum? Odio sapiente impedit nostrum vero quos velit esse temporibus beatae reiciendis.</p>
-            <div class="campaign__invitation-code d-flex align-items-center">
-                <h4 class="text-secondary fw-bold me-2 align-self-center mb-0"> Code d'invitation : </h4>
-                <p class="fs-5 me-2 text-secondary align-self-center mb-0">cd755d8f4</p>
-                <img class="campaign__invitation-code-icone" src="{{ asset('icone/copie.png') }}" alt="icone-copier">
-            </div>
-
+            <p class="fs-5 mt-4 text-secondary overflow-auto h-50 mb-5">{{ campaign.memo }}</p>
         </div>
     </div>
 </section>

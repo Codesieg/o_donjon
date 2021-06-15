@@ -26,12 +26,26 @@ class CampaignRepository extends ServiceEntityRepository
            ->leftJoin ('campaign.users','users') // on joint la table user à traver la table intermédiaire campaign_user
            ->where('users.id = :id') // on récupère les campagnes associées à l'ID
            ->setParameter('id', $userId); // on associe l'ID de l'utilisateur au paramètre ID
-         
+        
         $query = $qb->getQuery(); // on prépare la requête
         $results = $query->getResult(); // on lance la requête
         return $results; // on return les résultats
     }
 
+    // requête personnalisée pour récupérer les campagnes archivées d'un DM
+    public function findByIsArchived($userId)
+    {   
+        $qb = $this->createQueryBuilder('campaign') // on créer la requête pour la table campaign
+        ->leftJoin ('campaign.users','users') // on joint la table user à traver la table intermédiaire campaign_user
+        ->andWhere('users.id = :id') // on récupère les campagnes associées à l'ID
+        ->andWhere('campaign.isArchived = true')
+        ->setParameter('id', $userId); // on associe l'ID de l'utilisateur au paramètre ID
+        
+        
+        $query = $qb->getQuery(); // on prépare la requête
+        $results = $query->getResult(); // on lance la requête
+        return $results; // on return les résultats
+    }
         
     // public function findWithStats($id)
     // {
