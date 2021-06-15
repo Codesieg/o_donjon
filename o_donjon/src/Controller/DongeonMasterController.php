@@ -77,7 +77,7 @@ class DongeonMasterController extends AbstractController
 
     }
     /**
-     * @Route("/campaign/edit/{id}", name="edit_campaign", methods={"GET"}, requirements={"id" : "\d+"})
+     * @Route("/campaign/edit/{id}", name="edit_campaign",  methods={"GET", "POST"}, requirements={"id" : "\d+"})
      */
     public function edit(Campaign $campaign, Request $request): Response
     {
@@ -100,7 +100,7 @@ class DongeonMasterController extends AbstractController
     }
 
     /**
-     * @Route("/campaign/delete/{id}", name="delete_campaign", methods={"DELETE"}, requirements={"id" : "\d+"} )
+     * @Route("/campaign/delete/{id}", name="delete_campaign", methods={"GET"}, requirements={"id" : "\d+"} )
      */
     public function delete(Campaign $campaign): Response
     {

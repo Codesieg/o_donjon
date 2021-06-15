@@ -17,7 +17,7 @@ class MapType extends AbstractType
             ->add('description')
             // ->add('createdAt')
             // ->add('updatedAt')
-            ->add('campaign')
+            // ->add('campaign')
         ;
     }
 
