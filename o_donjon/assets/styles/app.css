@@ -1,86 +1,93 @@
 body {
-    background-color: lightgray;
+  background-color: lightgray;
+}
+
+.logo-link {
+    width: 90px;
 }
 
 .logo {
-    width: 5%;
-    margin-right: 2%;
+    width: 100%;
 }
 
 .background {
-  background-image: url(https://www.tribality.com/wp-content/uploads/2019/04/vladimir-krisetskiy-tavern-06.jpg);
-  background-size: cover;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  width: 100%;
+    background-image: url(https://www.tribality.com/wp-content/uploads/2019/04/vladimir-krisetskiy-tavern-06.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    width: 100%;
 }
+
 
 /* login space */
 
 .login {
-  width: 85%;
-  display: flex;
-  flex-direction: column;
-  margin: auto;
-  margin-top: 1rem;
+    width: 85%;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-top: 1rem;
 }
 
 .login__title {
-  margin-top: 1rem;
-  margin-bottom: 2rem;
-  color: #303030;
-  text-align: left;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    color: #303030;
+    text-align: left;
 }
 
 .login__form {
-  width: 90%;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
+    width: 90%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
 }
 
 .login__form__logo {
-  width: 30%;
+    width: 30%;
 }
+
 .login__form__fields {
-  width: 50%;
+    width: 50%;
 }
 
 .login__form__signin {
-  display: inline-block;
-  width: 100%;
-  margin: auto;
-  margin-top: 1rem;
+    display: inline-block;
+    width: 100%;
+    margin: auto;
+    margin-top: 1rem;
 }
 
 .login__form__signup {
-  display: inline-block;
-  width: 100%;
-  margin: auto;
-  margin-top: 1rem;
+    display: inline-block;
+    width: 100%;
+    margin: auto;
+    margin-top: 1rem;
 }
 
 .login__comment {
-  margin-top: 2rem;
-  color: #303030;
-  text-align: right;
+    margin-top: 2rem;
+    color: #303030;
+    text-align: right;
 }
+
 
 /* @media (min-width: 600px) {
   .login__form {
     flex-direction: row;
   }
-} */  
+} */
 
 .big-title {
-    font-size: 5em;
+  font-size: 5em;
 }
 
 .dot {
-    width: 5%;
+  width: 5%;
 }
+
 
 /* player space */
 
@@ -127,4 +134,24 @@ body {
 .statistic_nok {
   border-color: #A22114;
 }
+
+/* Campaign */
+
+.campaign__invitation-code-icone {
+    width: 4%;
+    cursor: pointer;
+}
+
+/* connected homepage */
+
+.connected--dm {
+  background-image: url("../../public/images/img-campaign-1.png");
+  background-size: cover;
+}
+
+.connected--player {
+  background-image: url("../../public/images/img-character-2.jpeg");
+  background-size: cover;
+}
+
 
