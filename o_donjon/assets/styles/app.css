@@ -94,3 +94,11 @@ body {
 .card-subtitle {
     font-style: italic;
 }
+
+
+/* Campaign */
+
+.campaign__invitation-code-icone {
+    width: 4%;
+    cursor: pointer;
+}
