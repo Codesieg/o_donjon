@@ -5,19 +5,19 @@
 
 <section class="d-flex flex-column mt-5">
     <div class="campaign d-flex justify-content-between border-bottom border-primary mx-5 mb-5">
-        <h1 class="pb-3 text-secondary">Ajout d'une carte</h1>
+        <h1 class="pb-3 text-secondary">Ajout d'une histoire</h1>
     </div>
         {{ form_start(form) }}
     <div class="form-group mx-5 d-flex flex-column align-items-center">
         <div class="form-group w-50 text-secondary">
                 <div class="mt-2">
-                    {{ form_row(form.name, { 'label': 'Nom de la carte' }) }}
+                    {{ form_row(form.name, { 'label': 'Nom de l\'histoire' }) }}
                 </div>
                 <div class="mt-2">
-                    {{ form_row(form.filePath, { 'label': 'Image de la carte' }) }}
+                    {{ form_row(form.report, { 'label': 'Rapport de l\'histoire' }) }}
                 </div>
                 <div class="mt-2">
-                    {{ form_row(form.description, { 'label': 'Description de la carte' }) }}
+                    {{ form_row(form.description, { 'label': 'Description de l\'histoire' }) }}
                 </div>
                 <button class="btn btn-lg btn-secondary login__form__signin" type="submit">Valider</button>
         {{ form_end(form) }}
