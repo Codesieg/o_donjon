@@ -15,10 +15,22 @@ class CharacterType extends AbstractType
         $builder
             ->add('name')
             ->add('avatar_path')
-            ->add('age')
-            ->add('initiative')
-            ->add('height')
-            ->add('weight')
+            ->add('age', null, [
+                'required'   => false,
+                'empty_data' => '0',
+            ])
+            ->add('initiative', null, [
+                'required'   => false,
+                'empty_data' => '0',
+            ])
+            ->add('height', null, [
+                'required'   => false,
+                'empty_data' => '0',
+            ])
+            ->add('weight', null, [
+                'required'   => false,
+                'empty_data' => '0',
+            ])
             ->add('eyes')
             ->add('skin')
             ->add('hair')
@@ -40,7 +52,7 @@ class CharacterType extends AbstractType
             // ->add('createdAt')
             // ->add('updatedAt')
             // ->add('user')
-            ->add('campaign')
+            // ->add('campaign')
             ->add('race', RaceType::class)
             ->add('class', CharacterClassType::class)
             ->add('caracteristics',CaracteristicType::class)

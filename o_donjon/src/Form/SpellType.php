@@ -13,10 +13,22 @@ class SpellType extends AbstractType
     {
         $builder
             ->add('spellcasting_class')
-            ->add('spell_attack_bonus')
-            ->add('spellcasting_ability')
-            ->add('spell_save_dc')
-            ->add('spells_list')
+            ->add('spell_attack_bonus', null, [
+                'required'   => false,
+                'empty_data' => '0',
+            ])
+            ->add('spellcasting_ability', null, [
+                'required'   => false,
+                'empty_data' => '0',
+            ])
+            ->add('spell_save_dc', null, [
+                'required'   => false,
+                'empty_data' => '0',
+            ])
+            ->add('spells_list', null, [
+                'required'   => false,
+                'empty_data' => '0',
+            ])
         ;
     }
 
