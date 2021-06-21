@@ -129,4 +129,11 @@ class CharacterController extends AbstractController
         ]); 
     }
 
+    public function resetCampaign(Character $character): Void
+    {
+        $character->setCampaign(null);
+
+        $this->getDoctrine()->getManager()>flush();
+    }
+
 }
