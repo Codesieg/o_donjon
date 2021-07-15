@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Campaign;
 use App\Form\CampaignType;
 use App\Repository\CampaignRepository;
+use App\Controller\CharacterController;
+use App\Repository\CharacterRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -45,7 +47,9 @@ class DongeonMasterController extends AbstractController
      */
     public function add(Request $request): Response
     {
-        // dd($request);
+
+        // on récupère l'Id de l'utilisateur connecté
+        $ownerId = $this->getUser();
         
         // New campaign creation
         $campaign = new Campaign();
@@ -60,6 +64,9 @@ class DongeonMasterController extends AbstractController
         // If form submitting and validating Ok, then database update 
         if ($form->isSubmitted() && $form->isValid()) {
             
+              // on associe l'utilisateur à la campagne en tant que DM
+            $campaign->setOwner($ownerId);
+
             // Database update
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($campaign);
@@ -81,19 +88,37 @@ class DongeonMasterController extends AbstractController
      */
     public function edit(Campaign $campaign, Request $request): Response
     {
+
+        // on récupère l'ID de l'utilisateur connecté
+        $userId = $this->getUser()->getId();
+
+        // on récupére l'ID du owner de la campagne
+        $campaignOwnerId = $campaign->getOwner()->getId();
+
+        $editingCampaign = $campaign->getId();
+        // dd($editingCampaign);
+
+         // on compare les deux ID et si ils sont différents alors on retourne une erreur
+        if ($userId != $campaignOwnerId) {
+            return  $this->addFlash('danger', 'Vous n\'étes pas autorisé à éditer la campagne ' . $campaign->getName() . ' !');;
+        }
+        
         $form = $this->createForm(CampaignType::class, $campaign);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             // On met à jour la date de dernière modification
             $campaign->setUpdatedAt(new \DateTime());
+
+             // on envoie les données à la BDD
             $this->getDoctrine()->getManager()->flush();
 
             $this->addFlash('success', 'La campagne ' . $campaign->getName() . ' a bien été <strong>modifié</strong>');
 
-            return $this->redirectToRoute('dm_home');
+            return $this->redirectToRoute('dm_read_campaign', ['id' => $editingCampaign]);
         }
 
+        // on retourne la campagne modifiée
         return $this->render('dongeon_master/edit.html.twig', [
             'form' => $form->createView(),
         ]);
@@ -102,8 +127,30 @@ class DongeonMasterController extends AbstractController
     /**
      * @Route("/campaign/delete/{id}", name="delete_campaign", methods={"GET"}, requirements={"id" : "\d+"} )
      */
-    public function delete(Campaign $campaign): Response
+    public function delete(Campaign $campaign, CharacterRepository $characterRepository, CharacterController $characterController): Response
     {
+         // on récupère l'ID de l'utilisateur connecté
+        $userId = $this->getUser()->getId();
+
+          // on récupére l'ID du owner de la campagne
+        $campaignOwnerId = $campaign->getOwner()->getId();
+
+        // on compare les deux ID et si ils sont différents alors on retourne une erreur
+        if ($userId != $campaignOwnerId) {
+            return  $this->addFlash('danger', 'Vous n\'étes pas autorisé à supprimer la campagne ' . $campaign->getName() . ' !');;
+        }
+
+        $campaignId = $campaign->getId();
+
+        // on récupère les personnages de la campagne
+        $characters = $characterRepository->findBy(array('campaign' => $campaignId));
+
+        foreach ($characters as $character) {
+            
+            $characterController->resetCampaign($character);
+        }
+    
+        // on demande à la BDD de supprimer la campagne
         $em = $this->getDoctrine()->getManager();
         $em->remove($campaign);
         $em->flush();

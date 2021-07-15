@@ -13,13 +13,15 @@
         <a href="{{ path('dm_browse_archived_campaign') }}" class="btn btn-secondary">Campagnes Archivées</a>
         </div>
     </div>
+{% if campaigns == null %}
     <div class="d-flex flex-column align-items-center ">
         <p class="fs-3 mt-4 text-secondary">Vous n'avez pas rejoins ou créé de campagne !</p>
         <p class="text-secondary">Pour rejoindre une campagne, demandez à un Maitre du dongeon de vous transmettre un code d'invitation.</p>
         <a href="{{ path('dm_add_campaign') }}" class="btn btn-secondary">Créer une campagne</a>
     </div>
+{% endif %}
 </section>
-    <section id="team" class="scroll">
+    <section id="campaigns">
         <div class="d-flex justify-content-evenly align-items-center mt-5 flex-wrap">
 {% for campaign in campaigns %}
             <div class="d-flex flex-column align-items-center w-25">
@@ -28,7 +30,7 @@
                     <div class="card-body">
                         <p class="card-text text-center fw-bold fs-3">{{ campaign.name }}</p>
                         <p class="card-text text-center fw-bold">Créer le {{ campaign.createdAt|date("m/d/Y") }}</p>
-                        <p class="card-text text-center fw-bold">{{ campaign.description }}...</p>
+                        <p class="card-text text-center fw-bold">{{ campaign.description | slice(0, 70)}}...</p>
                     </div>
                     <div class="card-body d-flex justify-content-evenly">
                         <a href="{{ path('dm_read_campaign', {'id': campaign.id}) }}" class="card-link bg-secondary rounded-3 p-2 text-decoration-none">Détails</a>
