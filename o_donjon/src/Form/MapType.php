@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Map;
 use Symfony\Component\Form\AbstractType;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -14,9 +15,7 @@ class MapType extends AbstractType
         $builder
             ->add('filePath')
             ->add('name')
-            ->add('description', CKEditorType::class, [
-                'config'      => array('uiColor' => '#ffffff'),
-                ])
+            ->add('description', CKEditorType::class)
 
             // ->add('createdAt')
             // ->add('updatedAt')

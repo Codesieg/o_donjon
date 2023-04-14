@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Story;
 use App\Form\StoryType;
+use App\Form\CKEditorType;
 use App\Repository\StoryRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,8 +21,12 @@ class StoryController extends AbstractController
      */
     public function browse(StoryRepository $storyRepository): Response
     {
+
+        $stories = $storyRepository->findAll();
+
+        dd($stories);
         return $this->render('story/index.html.twig', [
-            'stories' => $storyRepository->findAll(),
+            'stories' => $stories,
         ]);
     }
 

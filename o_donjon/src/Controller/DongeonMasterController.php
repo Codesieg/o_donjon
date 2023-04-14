@@ -7,6 +7,7 @@ use App\Form\CampaignType;
 use App\Repository\CampaignRepository;
 use App\Controller\CharacterController;
 use App\Repository\CharacterRepository;
+use App\Repository\StoryRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -25,10 +26,11 @@ class DongeonMasterController extends AbstractController
 
         // on récupère l'Id de l'utilisateur connecté
         $userId = $this->getUser()->getId();
-
+        $campaigns = $campaignRepository->findBy(array('owner' => $userId));
+        // dd($campaigns);
         return $this->render('dongeon_master/index.html.twig', [
             // on récupère les campagnes dont l'utilisateur est le DM
-            'campaigns' => $campaignRepository->findBy(array('owner' => $userId)),
+            'campaigns' => $campaigns,
         ]);
     }
 
@@ -189,4 +191,28 @@ class DongeonMasterController extends AbstractController
     ]);
 
     }
+
+    /*********************ADVANCED-REQUESTS***************************************************/
+
+    /* GET ALL STORIES OF A CAMPAIGN */
+
+    /**
+     * @Route("/campaign/story", name="stories_list", methods={"GET"}, requirements={"id": "\d+"})
+     */
+    public function browseStories(Request $request, StoryRepository $storyRepository, CampaignRepository $campaignRepository): Response
+    {
+        // $campaignId = $request->get('id');
+        
+        // $stories = $campaignRepository->findByCampaign($campaignId);
+        $campaign = $campaignRepository->findAll();
+        // dd($story);
+        // on retourne les histoires associées à la campagne
+        return $this->render('story/index.html.twig', [
+            'campaign' => $campaign,
+        ]);
+        // return $this->json($campaign, 200, [], [
+        //     'groups' => ['browse_campaign_stories'],
+        // ]);
+    }
+
 }

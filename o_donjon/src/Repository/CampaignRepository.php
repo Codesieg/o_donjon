@@ -40,8 +40,29 @@ class CampaignRepository extends ServiceEntityRepository
         ->andWhere('users.id = :id') // on récupère les campagnes associées à l'ID
         ->andWhere('campaign.isArchived = true')
         ->setParameter('id', $userId); // on associe l'ID de l'utilisateur au paramètre ID
-        
-        
+        $query = $qb->getQuery(); // on prépare la requête
+        $results = $query->getResult(); // on lance la requête
+        return $results; // on return les résultats
+    }
+
+    // // requête personnalisée pour récupérer les campagnes archivées d'un DM
+    // public function findByCampaign($campaignId)
+    // {   
+    //     $qb = $this->createQueryBuilder('story') // on créer la requête pour la table campaign
+    //     ->leftJoin ('story.campaign_id','campaign') 
+    //     ->andWhere('story.campaign_id = :id') // on récupère les campagnes associées à l'ID
+    //     ->setParameter('id', $campaignId); // on associe l'ID de l'utilisateur au paramètre ID
+    //     $query = $qb->getQuery(); // on prépare la requête
+    //     $results = $query->getResult(); // on lance la requête
+    //     return $results; // on return les résultats
+    // }
+    // requête personnalisée pour récupérer les campagnes archivées d'un DM
+    public function findByCampaign($campaignId)
+    {   
+        $qb = $this->createQueryBuilder('campaign') // on créer la requête pour la table campaign
+        ->leftJoin ('campaign.stories','stories') 
+        ->andWhere('campaign.id = :id') // on récupère les campagnes associées à l'ID
+        ->setParameter('id', $campaignId); // on associe l'ID de l'utilisateur au paramètre ID
         $query = $qb->getQuery(); // on prépare la requête
         $results = $query->getResult(); // on lance la requête
         return $results; // on return les résultats

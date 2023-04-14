@@ -17,7 +17,7 @@
 </section>
     <section id="team" class="scroll">
         <div class="d-flex justify-content-evenly align-items-center mt-5 flex-wrap">
-{% for story in stories %}
+{% for story in campaign.stories %}
             <div class="d-flex flex-column align-items-center w-25">
                 <div class="card mb-3 w-75">
                     <div class="card-body">
@@ -32,6 +32,7 @@
                 </div>
             </div>
 {% endfor %}
+{{dump(stories)}}
 </div>      
     </section>
 {% endblock %}

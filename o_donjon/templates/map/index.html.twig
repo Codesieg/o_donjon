@@ -11,10 +11,17 @@
         <a href="{{ path('dm_map_add') }}" class="btn btn-secondary me-2">Créer une carte</a>
         </div>
     </div>
-    <div class="d-flex flex-column align-items-center ">
+    {# <div class="d-flex flex-column align-items-center ">
         <p class="fs-3 mt-4 text-secondary">Vous n'avez pas encore créé de carte !</p>
         <a href="{{ path('dm_map_add') }}" class="btn btn-secondary">Créer une carte</a>
+    </div> #}
+    {% if maps == null %}
+    <div class="d-flex flex-column align-items-center ">
+        <p class="fs-3 mt-4 text-secondary">Vous n'avez pas encore créé de carte !</p>
+        <p class="text-secondary">Pour créer une carte, cliquer sur le bouton suivant :</p>
+        <a href="{{ path('dm_map_add') }}" class="btn btn-secondary">Créer une carte</a>
     </div>
+    {% endif %}
 </section>
     <section id="team" class="scroll">
         <div class="d-flex justify-content-evenly align-items-center mt-5 flex-wrap">
